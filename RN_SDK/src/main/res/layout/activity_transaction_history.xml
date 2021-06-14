@@ -32,9 +32,11 @@
 
                     <ImageButton
 
-                        android:id="@+id/imgBackOffers"
-                        android:layout_width="@dimen/_22sdp"
-                        android:layout_height="@dimen/_22sdp"
+                        android:id="@+id/imgBackTransactionHistory"
+                        android:layout_width="wrap_content"
+                        android:padding="@dimen/_5sdp"
+
+                        android:layout_height="@dimen/_30sdp"
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
                         android:layout_gravity="center_vertical"
@@ -59,6 +61,7 @@
                         android:textSize="@dimen/_16sdp" />
 
                     <TextView
+                        android:id="@+id/textPointTransactionHistory"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="0 PTS"
@@ -84,6 +87,7 @@
         app:layout_constraintBottom_toTopOf="@id/bottomNavBarLeaderboard"
 
         >
+
         <com.smarteist.autoimageslider.SliderView
             android:id="@+id/imageSliderTransactionHistory"
             android:layout_width="match_parent"
@@ -92,6 +96,7 @@
             app:sliderAnimationDuration="600"
             app:sliderAutoCycleDirection="back_and_forth"
             app:sliderAutoCycleEnabled="true"
+            android:visibility="gone"
             app:sliderIndicatorAnimationDuration="600"
             app:sliderIndicatorGravity="center_horizontal|bottom"
             app:sliderIndicatorMargin="15dp"
@@ -102,6 +107,7 @@
             app:sliderIndicatorUnselectedColor="#FFF"
             app:sliderScrollTimeInSec="1"
             app:sliderStartAutoCycle="true" />
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="@dimen/_35sdp"
@@ -111,6 +117,7 @@
             android:layout_marginHorizontal="@dimen/_10sdp"
             android:drawableStart="@drawable/ic_baseline_search_24"
             android:drawablePadding="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:textSize="@dimen/_12ssp"
             android:drawableTint="#CCCCCC"
 

@@ -1,31 +1,26 @@
 package com.example.rnsdk.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.rnsdk.Adapter.CustomExpandableListAdapter;
-import com.example.rnsdk.Adapter.HomeMenuLinkListAdapter;
 import com.example.rnsdk.Adapter.NotificationAdapter;
-import com.example.rnsdk.Adapter.OffersAdapter;
 import com.example.rnsdk.ExpandableListDataPump;
 import com.example.rnsdk.R;
+import com.example.rnsdk.Utility.Utility;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,7 +42,7 @@ public class NotificationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nitification);
+        setContentView(R.layout.activity_notification);
 
         init();
 
@@ -122,7 +117,15 @@ public class NotificationActivity extends AppCompatActivity {
     }
 
     private void init() {
-
+        if (Build.VERSION.SDK_INT >= 21) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(Utility.getColor(Utility.response.responsedata.appColor.getPhoneNotificationBar()));
+        }
+        if(Utility.response.responsedata.appColor.getPhoneNotificationBarTextColor().equals("Black")){
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
         rvNotification = findViewById(R.id.rvNotification);
 
         imgDrawer = findViewById(R.id.imgDrawerNotification);

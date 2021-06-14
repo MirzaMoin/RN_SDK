@@ -1,7 +1,6 @@
 package com.example.rnsdk.Models;
 
-
-public class RedeemCashBackChildPageDataModel{
+public class WaysToEarnChildPageDataModel {
     public String image;
     public float opacity;
     public boolean isClickable;
@@ -9,8 +8,7 @@ public class RedeemCashBackChildPageDataModel{
     public String internalLink;
     public String externalLink;
 
-
-    public RedeemCashBackChildPageDataModel(String image, float opacity, boolean isClickable, String linkType, String internalLink, String externalLink) {
+    public WaysToEarnChildPageDataModel(String image, float opacity, boolean isClickable, String linkType, String internalLink, String externalLink) {
         this.image = image;
         this.opacity = opacity;
         this.isClickable = isClickable;

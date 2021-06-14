@@ -6,8 +6,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -23,7 +26,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 public class LeaderboardActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ImageView imgFilter;
+    ImageView imgFilter,imgBackLeaderboard;
     RecyclerView rvLeader,rvFooterLeaderboard;
 
     @Override
@@ -40,12 +43,22 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void init() {
-
+        if (Build.VERSION.SDK_INT >= 21) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(Utility.getColor(Utility.response.responsedata.appColor.getPhoneNotificationBar()));
+        }
+        if(Utility.response.responsedata.appColor.getPhoneNotificationBarTextColor().equals("Black")){
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
         imgFilter = findViewById(R.id.imgCompareLeader);
         rvLeader = findViewById(R.id.rvLeaderboard);
         rvFooterLeaderboard = findViewById(R.id.rvFooterLeaderboard);
+        imgBackLeaderboard = findViewById(R.id.imgBackLeaderboard);
 
         imgFilter.setOnClickListener(this);
+        imgBackLeaderboard.setOnClickListener(this);
         setFooter();
     }
 
@@ -54,6 +67,9 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
         if(v.getId() == R.id.imgCompareLeader)
         {
             showFilterDialog();
+        }
+        else if(v.getId() == R.id.imgBackLeaderboard){
+            super.onBackPressed();
         }
     }
     private void setFooter() {

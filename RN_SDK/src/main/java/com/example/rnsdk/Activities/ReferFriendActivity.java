@@ -10,7 +10,12 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.rnsdk.Adapter.CashbackImageSliderAdapter;
 import com.example.rnsdk.Adapter.FooterAdapter;
@@ -32,7 +37,10 @@ import java.util.List;
 public class ReferFriendActivity extends AppCompatActivity implements View.OnClickListener {
 
     Toolbar toolbar;
+    ImageView imgBackReferFriend;
 
+    TextView textPointReferFriend;
+    Button btnGetInviteLink;
 
     RecyclerView rvFooterReferFriend;
     @Override
@@ -44,9 +52,24 @@ public class ReferFriendActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void init() {
+        if (Build.VERSION.SDK_INT >= 21) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(Utility.getColor(Utility.response.responsedata.appColor.getPhoneNotificationBar()));
+        }
+        if(Utility.response.responsedata.appColor.getPhoneNotificationBarTextColor().equals("Black")){
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
         toolbar = findViewById(R.id.toolbarReferFriend);
         rvFooterReferFriend = findViewById(R.id.rvFooterReferFriend);
+        imgBackReferFriend = findViewById(R.id.imgBackReferFriend);
+        btnGetInviteLink = findViewById(R.id.btnGetInviteLink);
+        textPointReferFriend = findViewById(R.id.textPointReferFriend);
 
+        textPointReferFriend.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
+
+        imgBackReferFriend.setOnClickListener(this);
 
 
 
@@ -66,6 +89,7 @@ public class ReferFriendActivity extends AppCompatActivity implements View.OnCli
 
 
             SliderView sliderView = findViewById(R.id.imageSliderReferFriend);
+            sliderView.setVisibility(View.VISIBLE);
 
             CashbackImageSliderAdapter adapter = new CashbackImageSliderAdapter(this, childPage);
 
@@ -80,6 +104,9 @@ public class ReferFriendActivity extends AppCompatActivity implements View.OnCli
             sliderView.setScrollTimeInSec(4); //set scroll delay in seconds :
             sliderView.startAutoCycle();
         }
+
+        AppColorModel color = Utility.response.responsedata.appColor;
+        btnGetInviteLink.setBackgroundColor(Utility.getColor(color.getPrimaryButtonColor()));
         setFooter();
     }
     private void setFooter() {
@@ -111,5 +138,8 @@ public class ReferFriendActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
+        if(v.getId() == R.id.imgBackReferFriend){
+            super.onBackPressed();
+        }
     }
 }

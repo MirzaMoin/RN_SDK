@@ -6,10 +6,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.rnsdk.Adapter.FooterAdapter;
 import com.example.rnsdk.Adapter.HomeMenuLinkListAdapter;
@@ -23,6 +27,7 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
     RecyclerView rvOffer,rvFooterOffers;
     LinearLayout linearHome,linearRPG,linearCashback;
     ImageView ivBack;
+    TextView textPointOffers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +45,24 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void init() {
-        rvOffer = (RecyclerView) findViewById(R.id.rvOffers);
+        if (Build.VERSION.SDK_INT >= 21) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(Utility.getColor(Utility.response.responsedata.appColor.getPhoneNotificationBar()));
+        }
+        if(Utility.response.responsedata.appColor.getPhoneNotificationBarTextColor().equals("Black")){
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
+        rvOffer =  findViewById(R.id.rvOffers);
+        textPointOffers =  findViewById(R.id.textPointOffers);
 
         ivBack = findViewById(R.id.imgBackOffers);
         rvFooterOffers = findViewById(R.id.rvFooterOffers);
 
 
-//        ivBack.setOnClickListener(this);
+        ivBack.setOnClickListener(this);
+        textPointOffers.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
 
 
         setFooter();

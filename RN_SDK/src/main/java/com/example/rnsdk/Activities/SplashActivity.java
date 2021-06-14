@@ -23,7 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SplashActivity extends AppCompatActivity implements View.OnClickListener {
+public class SplashActivity extends AppCompatActivity  {
 
     Button btnCleanButton,btnCleanLogin,btnVideoMotion,btnHome,btnProfile,btnWaystoEarn,btnRewardEntryGoal,btnRedeemCashback,btnLeaderboard,btnTransactionHistory,btnOffer,btnOfferDetail,btnTransferrPoint,btnUploadReceipt,btnReferFriends,btnContactUs,btnChangePassword,btnLocation,btnTakeSurvey;
 
@@ -51,6 +51,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
         btnLocation = findViewById(R.id.btnLocation);
         btnTakeSurvey = findViewById(R.id.btnTakeSurvey);
 
+/*
 
         btnProfile.setOnClickListener(this);
         btnProfile.setOnClickListener(this);
@@ -68,6 +69,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
         btnChangePassword.setOnClickListener(this);
         btnLocation.setOnClickListener(this);
         btnTakeSurvey.setOnClickListener(this);
+*/
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Loading...");
@@ -149,7 +151,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
 
 
     }
-
+/*
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btnProfile)
@@ -160,7 +162,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
             progressDialog.setCancelable(false);
             progressDialog.show();
 
-            /*Create handle for the RetrofitInstance interface*/
+            *//*Create handle for the RetrofitInstance interface*//*
             GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
             Call<ResponseModel> call = service.getAllData("UW5c2c0MTT43HbVcKeu54rh8Nf77Fu");
             call.enqueue(new Callback<ResponseModel>() {
@@ -257,5 +259,5 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
         }
 
 
-    }
+    }*/
 }

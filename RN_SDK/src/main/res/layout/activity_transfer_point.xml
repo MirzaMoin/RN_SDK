@@ -32,14 +32,16 @@
 
                     <ImageButton
 
-                        android:layout_width="@dimen/_22sdp"
+                        android:layout_width="wrap_content"
                         android:scaleType="fitXY"
-                        android:layout_height="@dimen/_22sdp"
+                        android:layout_height="@dimen/_30sdp"
                         android:src="@drawable/ic_baseline_arrow_back_24"
                         android:layout_gravity="center_vertical"
                         android:background="@android:color/transparent"
-                        android:id="@+id/imgBackRedeemCashback"
+                        android:id="@+id/imgBackTransferPoints"
                         android:tint="#fff"
+                        android:padding="@dimen/_5sdp"
+
                         android:layout_marginHorizontal="@dimen/_8sdp"
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true" />
@@ -58,15 +60,17 @@
                         android:layout_alignParentTop="true"
                         android:layout_weight="1"
                         />
+
                     <TextView
-                        android:layout_height="wrap_content"
+                        android:id="@+id/textPointTransferPoints"
                         android:layout_width="wrap_content"
-                        android:text="0 PTS"
-                        android:textColor="#fff"
-                        android:textSize="@dimen/_14ssp"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginEnd="@dimen/_10sdp"
-                        android:layout_marginRight="@dimen/_10sdp" />
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:text="0 PTS"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/_14ssp" />
 
 
                 </TableRow>
@@ -96,6 +100,7 @@
                 app:sliderAnimationDuration="600"
                 app:sliderAutoCycleDirection="back_and_forth"
                 app:sliderAutoCycleEnabled="true"
+                android:visibility="gone"
                 app:sliderIndicatorAnimationDuration="600"
                 app:sliderIndicatorGravity="center_horizontal|bottom"
                 app:sliderIndicatorMargin="15dp"
@@ -184,30 +189,37 @@
                 android:drawablePadding="@dimen/_10sdp"
                 android:textSize="@dimen/_12ssp"
                 />
-            <com.ebanx.swipebtn.SwipeButton
-                android:layout_marginTop="@dimen/_10sdp"
-                android:id="@+id/swipe_btn"
-                android:layout_width="match_parent"
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_10sdp"
-                app:inner_text="Slide to transfer"
-                app:inner_text_color="@android:color/white"
-                app:inner_text_size="@dimen/_12ssp"
-                app:inner_text_top_padding="@dimen/_10sdp"
-                app:inner_text_bottom_padding="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
 
-                app:inner_text_background="@drawable/shape_rounded_background"
-                app:button_image_width="@dimen/_50sdp"
-                app:button_image_disabled="@drawable/ic_baseline_arrow_forward_ios_24"
-                app:button_image_enabled="@drawable/ic_baseline_arrow_back_24"
-                app:button_left_padding="20dp"
-                app:button_right_padding="20dp"
-                app:button_top_padding="@dimen/_10sdp"
-                app:button_bottom_padding="@dimen/_10sdp"
-                app:button_background="@drawable/shape_button_background"
-                app:initial_state="disabled"
-                app:has_activate_state="true"
-                />
+                app:cardCornerRadius="@dimen/_10sdp"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+
+                >
+                <com.ebanx.swipebtn.SwipeButton
+                    android:id="@+id/swipeBtnTransferPoint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:inner_text="Slide to transfer"
+                    app:inner_text_color="@android:color/white"
+                    app:inner_text_size="@dimen/_12ssp"
+                    app:inner_text_top_padding="@dimen/_10sdp"
+                    app:inner_text_bottom_padding="@dimen/_10sdp"
+
+                    app:button_image_width="@dimen/_45sdp"
+                    app:button_image_disabled="@drawable/ic_baseline_arrow_forward_ios_24"
+                    app:button_image_enabled="@drawable/ic_baseline_arrow_back_24"
+                    app:button_left_padding="20dp"
+                    app:button_right_padding="20dp"
+                    app:button_top_padding="@dimen/_10sdp"
+                    app:button_bottom_padding="@dimen/_10sdp"
+                    app:button_background="@drawable/shape_button_background"
+                    app:initial_state="disabled"
+                    app:has_activate_state="true"
+                    />
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
     </ScrollView>

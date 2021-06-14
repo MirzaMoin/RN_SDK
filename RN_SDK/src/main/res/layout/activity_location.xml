@@ -46,15 +46,17 @@
 
                     <ImageButton
 
-                        android:id="@+id/imgBackRedeemCashback"
+                        android:id="@+id/imgBackLocation"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_22sdp"
+                        android:layout_height="@dimen/_30sdp"
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
                         android:layout_gravity="center_vertical"
                         android:layout_marginHorizontal="@dimen/_8sdp"
                         android:background="@android:color/transparent"
                         android:scaleType="fitXY"
+                        android:padding="@dimen/_5sdp"
+
                         android:src="@drawable/ic_baseline_arrow_back_24"
                         android:tint="#fff" />
 
@@ -73,6 +75,7 @@
                         android:layout_weight="1"
                         />
                     <TextView
+                        android:id="@+id/textPointLocation"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="0 PTS"

@@ -8,6 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 
 import com.example.rnsdk.Adapter.FooterAdapter;
@@ -22,11 +27,14 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCallback, View.OnClickListener {
 
     Toolbar toolbar;
     private GoogleMap mMap;
     RecyclerView rvFooterContactUs;
+    ImageView imgBackContactUs;
+    Button btnSendMessage;
+    TextView textPointContactUs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +58,23 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
     private void init() {
+        if (Build.VERSION.SDK_INT >= 21) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(Utility.getColor(Utility.response.responsedata.appColor.getPhoneNotificationBar()));
+        }
+        if(Utility.response.responsedata.appColor.getPhoneNotificationBarTextColor().equals("Black")){
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
         toolbar = findViewById(R.id.toolbarContactUs);
         rvFooterContactUs = findViewById(R.id.rvFooterContactUs);
+        imgBackContactUs = findViewById(R.id.imgBackContactUs);
+        btnSendMessage = findViewById(R.id.btnSendMessage);
+        textPointContactUs = findViewById(R.id.textPointContactUs);
+        textPointContactUs.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
 
+        imgBackContactUs.setOnClickListener(this);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             toolbar.setTitle("");
@@ -60,7 +82,8 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
 
 
         }
-
+        AppColorModel color = Utility.response.responsedata.appColor;
+        btnSendMessage.setBackgroundColor(Utility.getColor(color.getPrimaryButtonColor()));
         setFooter();
 
 
@@ -90,5 +113,12 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
         }
 
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.imgBackContactUs){
+            super.onBackPressed();
+        }
     }
 }

@@ -32,9 +32,11 @@
 
                     <ImageButton
 
-                        android:id="@+id/imgBackRedeemCashback"
+                        android:id="@+id/imgBackSurvey"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_22sdp"
+                        android:padding="@dimen/_5sdp"
+
+                        android:layout_height="@dimen/_30sdp"
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
                         android:layout_gravity="center_vertical"
@@ -63,6 +65,7 @@
                         android:layout_width="wrap_content"
                         android:text="0 PTS"
                         android:textColor="#fff"
+                        android:id="@+id/textPointSurvey"
                         android:textSize="@dimen/_14ssp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginEnd="@dimen/_10sdp"
@@ -85,6 +88,7 @@
                 app:sliderAnimationDuration="600"
                 app:sliderAutoCycleDirection="back_and_forth"
                 app:sliderAutoCycleEnabled="true"
+                android:visibility="gone"
                 app:sliderIndicatorAnimationDuration="600"
 
                 app:sliderIndicatorGravity="center_horizontal|bottom"

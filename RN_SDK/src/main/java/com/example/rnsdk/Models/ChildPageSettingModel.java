@@ -2,7 +2,7 @@ package com.example.rnsdk.Models;
 
 import java.util.List;
 
-public class ChildPageSettingModel{
+public class ChildPageSettingModel {
     public boolean isChildPageProfileEdit;
     public List<ProfileEditChildPageDataModel> profileEditChildPageData;
     public boolean isChildPageRedeemCashBack;
@@ -18,15 +18,16 @@ public class ChildPageSettingModel{
     public boolean isChildPageTakeSurvey;
     public List<TakeSurveyChildPageDataModel> takeSurveyChildPageData;
     public boolean isChildPageWte;
-    public Object wteChildPageData;
+    public List<WaysToEarnChildPageDataModel> wteChildPageData;
+
     public boolean isChildPageRpg;
-    public Object rpgChildPageData;
+    public List<RPGChildPageDataModel> rpgChildPageData;
     public boolean isChildPageChangePassword;
-    public Object changePasswordChildPageData;
+    public List<ChangePasswordChildPageDataModel>  changePasswordChildPageData;
     public boolean isChildPageTransaferPoint;
     public List<TransaferPointChildPageDataModel> transaferPointChildPageData;
 
-    public ChildPageSettingModel(boolean isChildPageProfileEdit, List<ProfileEditChildPageDataModel> profileEditChildPageData, boolean isChildPageRedeemCashBack, List<RedeemCashBackChildPageDataModel> redeemCashBackChildPageData, boolean isChildPageTransactionHistory, List<TransactionHistoryChildPageDataModel> transactionHistoryChildPageData, boolean isChildPageUploadReceipt, List<UploadReceiptChildPageDataModel> uploadReceiptChildPageData, boolean isChildPageReferFriend, List<ReferFriendChildPageDataModel> referFriendChildPageData, boolean isChildPageSocialShare, List<SocialShareChildPageDataModel> socialShareChildPageData, boolean isChildPageTakeSurvey, List<TakeSurveyChildPageDataModel> takeSurveyChildPageData, boolean isChildPageWte, Object wteChildPageData, boolean isChildPageRpg, Object rpgChildPageData, boolean isChildPageChangePassword, Object changePasswordChildPageData, boolean isChildPageTransaferPoint, List<TransaferPointChildPageDataModel> transaferPointChildPageData) {
+    public ChildPageSettingModel(boolean isChildPageProfileEdit, List<ProfileEditChildPageDataModel> profileEditChildPageData, boolean isChildPageRedeemCashBack, List<RedeemCashBackChildPageDataModel> redeemCashBackChildPageData, boolean isChildPageTransactionHistory, List<TransactionHistoryChildPageDataModel> transactionHistoryChildPageData, boolean isChildPageUploadReceipt, List<UploadReceiptChildPageDataModel> uploadReceiptChildPageData, boolean isChildPageReferFriend, List<ReferFriendChildPageDataModel> referFriendChildPageData, boolean isChildPageSocialShare, List<SocialShareChildPageDataModel> socialShareChildPageData, boolean isChildPageTakeSurvey, List<TakeSurveyChildPageDataModel> takeSurveyChildPageData, boolean isChildPageWte, List<WaysToEarnChildPageDataModel> wteChildPageData, boolean isChildPageRpg, List<RPGChildPageDataModel> rpgChildPageData, boolean isChildPageChangePassword, List<ChangePasswordChildPageDataModel> changePasswordChildPageData, boolean isChildPageTransaferPoint, List<TransaferPointChildPageDataModel> transaferPointChildPageData) {
         this.isChildPageProfileEdit = isChildPageProfileEdit;
         this.profileEditChildPageData = profileEditChildPageData;
         this.isChildPageRedeemCashBack = isChildPageRedeemCashBack;
@@ -171,11 +172,11 @@ public class ChildPageSettingModel{
         isChildPageWte = childPageWte;
     }
 
-    public Object getWteChildPageData() {
+    public List<WaysToEarnChildPageDataModel> getWteChildPageData() {
         return wteChildPageData;
     }
 
-    public void setWteChildPageData(Object wteChildPageData) {
+    public void setWteChildPageData(List<WaysToEarnChildPageDataModel> wteChildPageData) {
         this.wteChildPageData = wteChildPageData;
     }
 
@@ -187,11 +188,11 @@ public class ChildPageSettingModel{
         isChildPageRpg = childPageRpg;
     }
 
-    public Object getRpgChildPageData() {
+    public List<RPGChildPageDataModel> getRpgChildPageData() {
         return rpgChildPageData;
     }
 
-    public void setRpgChildPageData(Object rpgChildPageData) {
+    public void setRpgChildPageData(List<RPGChildPageDataModel> rpgChildPageData) {
         this.rpgChildPageData = rpgChildPageData;
     }
 
@@ -203,11 +204,11 @@ public class ChildPageSettingModel{
         isChildPageChangePassword = childPageChangePassword;
     }
 
-    public Object getChangePasswordChildPageData() {
+    public List<ChangePasswordChildPageDataModel> getChangePasswordChildPageData() {
         return changePasswordChildPageData;
     }
 
-    public void setChangePasswordChildPageData(Object changePasswordChildPageData) {
+    public void setChangePasswordChildPageData(List<ChangePasswordChildPageDataModel> changePasswordChildPageData) {
         this.changePasswordChildPageData = changePasswordChildPageData;
     }
 

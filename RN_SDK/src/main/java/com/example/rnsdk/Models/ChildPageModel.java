@@ -2,13 +2,13 @@ package com.example.rnsdk.Models;
 
 public class ChildPageModel {
     public String image;
-    public double opacity;
+    public float opacity;
     public boolean isClickable;
     public String linkType;
     public String internalLink;
     public String externalLink;
 
-    public ChildPageModel(String image, double opacity, boolean isClickable, String linkType, String internalLink, String externalLink) {
+    public ChildPageModel(String image, float opacity, boolean isClickable, String linkType, String internalLink, String externalLink) {
         this.image = image;
         this.opacity = opacity;
         this.isClickable = isClickable;
@@ -25,7 +25,7 @@ public class ChildPageModel {
         this.image = image;
     }
 
-    public double getOpacity() {
+    public float getOpacity() {
         return opacity;
     }
 

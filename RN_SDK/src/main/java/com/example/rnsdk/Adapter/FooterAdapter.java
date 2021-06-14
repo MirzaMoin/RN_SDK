@@ -41,6 +41,8 @@ public class FooterAdapter extends RecyclerView.Adapter<FooterAdapter.ViewHolder
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View listItem= layoutInflater.inflate(R.layout.content_footer, parent, false);
 
+
+
         ViewHolder viewHolder = new ViewHolder(listItem);
         return viewHolder;
     }
@@ -50,7 +52,7 @@ public class FooterAdapter extends RecyclerView.Adapter<FooterAdapter.ViewHolder
 
        holder.setIsRecyclable(false);
        FooterLinkModel footer = footerLinks.get(position);
-        HomeScreenModel home = Utility.response.responsedata.homeScreen;
+
 
         FontDrawable drawable = new FontDrawable(context, Utility.getIcon(footer.getFooterIcon()), true, false);
         holder.icFooterLinkIcon.setImageDrawable(drawable);

@@ -4,14 +4,14 @@ package com.example.rnsdk.Models;
 
 public class UploadReceiptChildPageDataModel{
     public String image;
-    public double opacity;
+    public float opacity;
     public boolean isClickable;
     public String linkType;
     public String internalLink;
     public String externalLink;
 
 
-    public UploadReceiptChildPageDataModel(String image, double opacity, boolean isClickable, String linkType, String internalLink, String externalLink) {
+    public UploadReceiptChildPageDataModel(String image, float opacity, boolean isClickable, String linkType, String internalLink, String externalLink) {
         this.image = image;
         this.opacity = opacity;
         this.isClickable = isClickable;
@@ -28,11 +28,11 @@ public class UploadReceiptChildPageDataModel{
         this.image = image;
     }
 
-    public double getOpacity() {
+    public float getOpacity() {
         return opacity;
     }
 
-    public void setOpacity(double opacity) {
+    public void setOpacity(float opacity) {
         this.opacity = opacity;
     }
 

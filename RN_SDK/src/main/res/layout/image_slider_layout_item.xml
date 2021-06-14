@@ -7,6 +7,7 @@
     <ImageView
         android:id="@+id/imgSliderCashback"
         android:layout_width="match_parent"
+        android:scaleType="centerCrop"
         android:layout_height="@dimen/_130sdp"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

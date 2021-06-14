@@ -27,14 +27,16 @@
 
                 <ImageButton
 
-                    android:layout_width="@dimen/_22sdp"
+                    android:layout_width="wrap_content"
                     android:scaleType="fitXY"
-                    android:layout_height="@dimen/_22sdp"
+                    android:layout_height="@dimen/_30sdp"
                     android:src="@drawable/ic_baseline_arrow_back_24"
                     android:layout_gravity="center_vertical"
                     android:background="@android:color/transparent"
-                    android:id="@+id/imgBackRedeemCashback"
+                    android:id="@+id/imgBackNotificationDetail"
                     android:tint="#000000"
+                    android:padding="@dimen/_5sdp"
+
                     android:layout_marginHorizontal="@dimen/_8sdp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true" />

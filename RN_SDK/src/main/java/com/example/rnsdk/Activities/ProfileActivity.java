@@ -8,10 +8,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -36,9 +41,11 @@ import java.util.List;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
     List<SliderItem> mSliderItems = new ArrayList<>();
-    RelativeLayout relLocation,relGender,relAllowEmail,relAllowSMS,relPreferMedia,relAnnProfile,relBirthdate;
-    TextView textGender,textAllowEmail,textAllowSMS,textPreferMedia,textBirthdate,textAnn;
+    RelativeLayout relLocation, relGender, relAllowEmail, relAllowSMS, relPreferMedia, relAnnProfile, relBirthdate;
+    TextView textGender, textAllowEmail, textAllowSMS, textPreferMedia, textBirthdate, textAnn,textPointProfile;
+    ImageView imgBackProfile;
 
+    Button btnSaveProfile;
     RecyclerView rvFooterProfile;
 
     @Override
@@ -51,25 +58,34 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private void init() {
 
-
-
+        if (Build.VERSION.SDK_INT >= 21) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(Utility.getColor(Utility.response.responsedata.appColor.getPhoneNotificationBar()));
+        }
+        if(Utility.response.responsedata.appColor.getPhoneNotificationBarTextColor().equals("Black")){
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
         SliderView sliderView = findViewById(R.id.imageSliderProfile);
-         rvFooterProfile = findViewById(R.id.rvFooterProfile);
+        rvFooterProfile = findViewById(R.id.rvFooterProfile);
+        btnSaveProfile = findViewById(R.id.btnSaveProfile);
+        textPointProfile = findViewById(R.id.textPointProfile);
+
+        textPointProfile.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
 
         ChildPageSettingModel childPageSettings = Utility.response.responsedata.childPageSetting;
-        if(childPageSettings.isChildPageProfileEdit()){
+        if (childPageSettings.isChildPageProfileEdit()) {
             sliderView.setVisibility(View.VISIBLE);
 
 
             List<ChildPageModel> childPage = new ArrayList<>();
-            for(ProfileEditChildPageDataModel profile : childPageSettings.profileEditChildPageData){
-                childPage.add(new ChildPageModel(profile.image,profile.opacity,profile.isClickable,profile.linkType,profile.internalLink,profile.externalLink));
+            for (ProfileEditChildPageDataModel profile : childPageSettings.profileEditChildPageData) {
+                childPage.add(new ChildPageModel(profile.image, profile.opacity, profile.isClickable, profile.linkType, profile.internalLink, profile.externalLink));
             }
 
 
-
-
-            CashbackImageSliderAdapter adapter = new CashbackImageSliderAdapter(this,childPage);
+            CashbackImageSliderAdapter adapter = new CashbackImageSliderAdapter(this, childPage);
 
             sliderView.setSliderAdapter(adapter);
 
@@ -82,18 +98,18 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             sliderView.startAutoCycle();
         }
 
-
+        imgBackProfile = findViewById(R.id.imgBackProfile);
         relLocation = findViewById(R.id.relLocationProfile);
         relGender = findViewById(R.id.relGenderProfile);
         relAllowEmail = findViewById(R.id.relAllowEmail);
         relAllowSMS = findViewById(R.id.relAllowSMS);
-        relPreferMedia= findViewById(R.id.relPreferMedia);
+        relPreferMedia = findViewById(R.id.relPreferMedia);
         textGender = findViewById(R.id.textGender);
         textAllowEmail = findViewById(R.id.textAllowEmail);
         textAllowSMS = findViewById(R.id.textAllowSMS);
         textPreferMedia = findViewById(R.id.textPreferMedia);
         relAnnProfile = findViewById(R.id.relAnnProfile);
-        relBirthdate= findViewById(R.id.relBirthdate);
+        relBirthdate = findViewById(R.id.relBirthdate);
         textBirthdate = findViewById(R.id.textBirthdate);
         textAnn = findViewById(R.id.textAnn);
 
@@ -105,28 +121,30 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         relAnnProfile.setOnClickListener(this);
         relBirthdate.setOnClickListener(this);
         textAnn.setOnClickListener(this);
+        imgBackProfile.setOnClickListener(this);
+
+        AppColorModel color = Utility.response.responsedata.appColor;
+        btnSaveProfile.setBackgroundColor(Utility.getColor(color.getPrimaryButtonColor()));
 
         setFooter();
     }
+
     private void setFooter() {
         AppColorModel appColor = Utility.response.responsedata.appColor;
 
         HomeScreenModel homeScreenModel = Utility.response.responsedata.homeScreen;
-        if(homeScreenModel.isHomePageDisplayFooter())
-        {
+        if (homeScreenModel.isHomePageDisplayFooter()) {
             rvFooterProfile.setVisibility(View.VISIBLE);
             rvFooterProfile.setBackgroundColor(Utility.getColor(appColor.getFooterBarColor()));
 
-            FooterAdapter adapter = new FooterAdapter(this,homeScreenModel.footerLinks,"profileScreen");
+            FooterAdapter adapter = new FooterAdapter(this, homeScreenModel.footerLinks, "profileScreen");
             rvFooterProfile.setHasFixedSize(true);
 
 
-            rvFooterProfile.setLayoutManager(new GridLayoutManager(this,homeScreenModel.footerLinks.size()));
+            rvFooterProfile.setLayoutManager(new GridLayoutManager(this, homeScreenModel.footerLinks.size()));
 
             rvFooterProfile.setAdapter(adapter);
-        }
-        else
-        {
+        } else {
             rvFooterProfile.setVisibility(View.GONE);
 
 
@@ -134,19 +152,15 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
 
     }
+
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.relLocationProfile){
+        if (v.getId() == R.id.relLocationProfile) {
             showLocationDialog();
-        }
-        else if(v.getId() == R.id.relAllowEmail)
-        {
-            //Creating the instance of PopupMenu
+        } else if (v.getId() == R.id.relAllowEmail) {
             PopupMenu popup = new PopupMenu(ProfileActivity.this, relAllowEmail);
-            //Inflating the Popup using xml file
             popup.getMenuInflater().inflate(R.menu.popup_menu_yes_no, popup.getMenu());
 
-            //registering popup with OnMenuItemClickListener
             popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                 public boolean onMenuItemClick(MenuItem item) {
                     textAllowEmail.setText(item.getTitle());
@@ -156,9 +170,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             });
 
             popup.show();//showing popup menu
-        }
-        else if(v.getId() == R.id.relAllowSMS)
-        {
+        } else if (v.getId() == R.id.relAllowSMS) {
             //Creating the instance of PopupMenu
             PopupMenu popup = new PopupMenu(ProfileActivity.this, relAllowSMS);
             //Inflating the Popup using xml file
@@ -174,9 +186,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             });
 
             popup.show();//showing popup menu
-        }
-        else if(v.getId() == R.id.relPreferMedia)
-        {
+        } else if (v.getId() == R.id.relPreferMedia) {
             //Creating the instance of PopupMenu
             PopupMenu popup = new PopupMenu(ProfileActivity.this, relPreferMedia);
             //Inflating the Popup using xml file
@@ -191,9 +201,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             });
 
             popup.show();//showing popup menu
-        }
-        else if(v.getId() == R.id.relGenderProfile)
-        {
+        } else if (v.getId() == R.id.relGenderProfile) {
             //Creating the instance of PopupMenu
             PopupMenu popup = new PopupMenu(ProfileActivity.this, relGender);
             //Inflating the Popup using xml file
@@ -209,39 +217,38 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             });
 
             popup.show();//showing popup menu
-        }
-        else if(v.getId() == R.id.relAnnProfile)
-        {
+        } else if (v.getId() == R.id.relAnnProfile) {
 
 
             DatePickerDialog datePickerDialog = new DatePickerDialog(ProfileActivity.this,
                     new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                            textAnn.setText(""+day+"/"+(month+1)+"/"+year);
+                            textAnn.setText("" + day + "/" + (month + 1) + "/" + year);
 
                         }
                     }, 2021, 0, 1);
 
             datePickerDialog.show();
-        }
-        else if(v.getId() == R.id.relBirthdate)
-        {
+        } else if (v.getId() == R.id.relBirthdate) {
 
 
             DatePickerDialog datePickerDialog = new DatePickerDialog(ProfileActivity.this,
                     new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                            textBirthdate.setText(""+day+"/"+(month+1)+"/"+year);
+                            textBirthdate.setText("" + day + "/" + (month + 1) + "/" + year);
 
                         }
                     }, 2021, 0, 1);
 
             datePickerDialog.show();
+        } else if (v.getId() == R.id.imgBackProfile) {
+            super.onBackPressed();
         }
     }
-    void showLocationDialog(){
+
+    void showLocationDialog() {
         // create an alert builder
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         // set the custom layout
@@ -258,7 +265,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);
     }
-
 
 
 }

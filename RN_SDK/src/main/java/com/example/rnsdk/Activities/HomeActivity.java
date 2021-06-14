@@ -17,6 +17,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
@@ -192,6 +194,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private void init() {
+        if (Build.VERSION.SDK_INT >= 21) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(Utility.getColor(Utility.response.responsedata.appColor.getPhoneNotificationBar()));
+        }
+        if(Utility.response.responsedata.appColor.getPhoneNotificationBarTextColor().equals("Black")){
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
         appColor = Utility.response.responsedata.appColor;
 
         linearDrawerHome = findViewById(R.id.linearDrawerHome);
@@ -259,6 +270,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setLayout() {
+
 
         List<FooterLinkModel> footerLink = new ArrayList<>();
         footerLink.addAll(homeScreenModel.footerLinks);
@@ -336,6 +348,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             rvFooterHome.setLayoutManager(new GridLayoutManager(this,homeScreenModel.footerLinks.size()));
 
             rvFooterHome.setAdapter(adapter);
+
         }
         else
         {
@@ -610,11 +623,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.linearCashbackHome) {
-            startActivity(new Intent(HomeActivity.this, CashbackActivity.class));
-        }
-
-        else if(id == R.id.relHomePageRibbon || id == R.id.relHomePageRibbonTop){
+        if(id == R.id.relHomePageRibbon || id == R.id.relHomePageRibbonTop){
             if(homeScreenModel.homePageRibbonLinkType.equals("internal")){
                 Utility.openNewActivity(this, homeScreenModel.getHomePageRibbonLinkInternal(), 0, "");
             }

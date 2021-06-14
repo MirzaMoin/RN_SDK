@@ -6,8 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.rnsdk.Adapter.CashbackImageSliderAdapter;
 import com.example.rnsdk.Adapter.FooterAdapter;
@@ -28,11 +33,13 @@ import com.smarteist.autoimageslider.SliderView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransactionHistoryActivity extends AppCompatActivity {
+public class TransactionHistoryActivity extends AppCompatActivity implements View.OnClickListener {
 
     List<SliderItem> mSliderItems = new ArrayList<>();
     RecyclerView rvTransactionHistory,rvFooterTransactionHistory;
 
+    TextView textPointTransactionHistory;
+    ImageView imgBackTransactionHistory;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +55,18 @@ public class TransactionHistoryActivity extends AppCompatActivity {
     }
 
     private void init() {
+        if (Build.VERSION.SDK_INT >= 21) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(Utility.getColor(Utility.response.responsedata.appColor.getPhoneNotificationBar()));
+        }
+        if(Utility.response.responsedata.appColor.getPhoneNotificationBarTextColor().equals("Black")){
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
+
+        textPointTransactionHistory = findViewById(R.id.textPointTransactionHistory);
+        textPointTransactionHistory.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
 
         ChildPageSettingModel childPageSettings = Utility.response.responsedata.childPageSetting;
 
@@ -60,6 +79,7 @@ public class TransactionHistoryActivity extends AppCompatActivity {
 
             SliderView sliderView = findViewById(R.id.imageSliderTransactionHistory);
             rvTransactionHistory = findViewById(R.id.rvTransactionHistory);
+            sliderView.setVisibility(View.VISIBLE);
 
             CashbackImageSliderAdapter adapter = new CashbackImageSliderAdapter(this, childPage);
 
@@ -75,6 +95,9 @@ public class TransactionHistoryActivity extends AppCompatActivity {
         }
 
         rvFooterTransactionHistory = findViewById(R.id.rvFooterTransactionHistory);
+        imgBackTransactionHistory = findViewById(R.id.imgBackTransactionHistory);
+
+        imgBackTransactionHistory.setOnClickListener(this);
         setFooter();
     }
     private void setFooter() {
@@ -102,5 +125,12 @@ public class TransactionHistoryActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.imgBackTransactionHistory){
+            super.onBackPressed();
+        }
     }
 }

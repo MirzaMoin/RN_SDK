@@ -177,27 +177,28 @@ public class HomeMenuLinkListAdapter extends RecyclerView.Adapter<HomeMenuLinkLi
                    holder.textMenuLink.setText(menu.menuText);
 
            }
-           holder.itemView.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
 
-                   if(menu.getMenuLinkType().equals("internal")){
-                       Utility.openNewActivity(context,menu.getMenuInternalLinkUrl(),menu.getId(),menu.getRewardProgramId());
-                   }
-                   else
-                   {
-                       Intent i = new Intent(context, WebViewActivity.class);
-                       i.putExtra("url",menu.getMenuExternalLinkUrl());
-                       i.putExtra("id",menu.getId());
-                       i.putExtra("rewardProgramId",menu.getRewardProgramId());
-
-                           context.startActivity(i);
-                       //open URL
-                   }
-
-               }
-           });
        }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(menu.getMenuLinkType().equals("internal")){
+                    Utility.openNewActivity(context,menu.getMenuInternalLinkUrl(),menu.getId(),menu.getRewardProgramId());
+                }
+                else
+                {
+                    Intent i = new Intent(context, WebViewActivity.class);
+                    i.putExtra("url",menu.getMenuExternalLinkUrl());
+                    i.putExtra("id",menu.getId());
+                    i.putExtra("rewardProgramId",menu.getRewardProgramId());
+
+                    context.startActivity(i);
+                    //open URL
+                }
+
+            }
+        });
 
 
 

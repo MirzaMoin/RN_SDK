@@ -10,8 +10,11 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.rnsdk.Adapter.CashbackImageSliderAdapter;
 import com.example.rnsdk.Adapter.FooterAdapter;
@@ -37,6 +40,7 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
      ImageView imgBack;
      LinearLayout linearRPGCashback,linearHome;
      RecyclerView rvFooterCashback;
+     TextView textPointCashback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +52,19 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void init() {
+        if (Build.VERSION.SDK_INT >= 21) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(Utility.getColor(Utility.response.responsedata.appColor.getPhoneNotificationBar()));
+        }
+        if(Utility.response.responsedata.appColor.getPhoneNotificationBarTextColor().equals("Black")){
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        }
         toolbar = findViewById(R.id.toolbarCashback);
         imgBack = findViewById(R.id.imgBackRedeemCashback);
-        linearRPGCashback = findViewById(R.id.linearRPGCashback);
-        linearHome = findViewById(R.id.linearHomeCashback);
+        textPointCashback = findViewById(R.id.textPointCashback);
+
         rvFooterCashback = findViewById(R.id.rvFooterCashback);
         imgBack.setOnClickListener(this);
 
@@ -60,6 +73,9 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
             setSupportActionBar(toolbar);
 
         }
+
+        textPointCashback.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
+
         ChildPageSettingModel childPageSettings = Utility.response.responsedata.childPageSetting;
 
         if(childPageSettings.isChildPageRedeemCashBack()) {
@@ -71,6 +87,7 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
 
             SliderView sliderView = findViewById(R.id.imageSliderCashback);
 
+            sliderView.setVisibility(View.VISIBLE);
             CashbackImageSliderAdapter adapter = new CashbackImageSliderAdapter(this, childPage);
 
             sliderView.setSliderAdapter(adapter);
@@ -116,11 +133,6 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
         if (v.getId() == R.id.imgBackRedeemCashback) {
             super.onBackPressed();
         }
-        else if (v.getId() == R.id.linearRPGCashback) {
-            startActivity(new Intent(CashbackActivity.this,RewardEntryGoalActivity.class));
-        }
-        else if (v.getId() == R.id.linearHomeCashback) {
-            startActivity(new Intent(CashbackActivity.this,HomeActivity.class));
-        }
+
     }
 }
