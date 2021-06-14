@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
+    android:paddingBottom="@dimen/_10sdp"
+    android:id="@+id/linearWaysToEarn"
+
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Multiple Ways to Earn Points"
+        android:textSize="@dimen/_16sdp"
+        android:layout_margin="@dimen/_10sdp"
+        />
+
+    <com.ms.square.android.expandabletextview.ExpandableTextView
+        android:id="@+id/expand_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        expandableTextView:animDuration="100"
+        expandableTextView:maxCollapsedLines="3"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+
+        tools:ignore="MissingClass">
+
+        <!-- simple text view  -->
+        <TextView
+            android:id="@id/expandable_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:textColor="#666666"
+            android:textSize="@dimen/_12ssp" />
+
+        <!-- expandable ImageButton -->
+        <ImageButton
+            android:id="@id/expand_collapse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_gravity="right|bottom"
+            android:background="@android:color/transparent"
+            android:layout_marginRight="@dimen/_10sdp" />
+
+    </com.ms.square.android.expandabletextview.ExpandableTextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="In the last year you have earned"
+        android:textSize="@dimen/_12ssp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_gravity="right"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="13 PTS"
+        android:textColor="#18C61F"
+        android:textSize="@dimen/_14sdp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_gravity="right"
+
+        />
+
+</LinearLayout>

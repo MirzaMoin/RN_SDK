@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.OffersDetailActivity">
+    <LinearLayout
+        android:id="@+id/linearTopOfferDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+        <androidx.appcompat.widget.Toolbar
+
+            app:contentInsetStart="0dp"
+            android:id="@+id/toolbarRPG"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            tools:targetApi="lollipop">
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:background="#59062B8A"
+                >
+
+                <TableRow>
+
+                    <ImageButton
+
+                        android:layout_width="@dimen/_22sdp"
+                        android:scaleType="fitXY"
+                        android:layout_height="@dimen/_22sdp"
+                        android:src="@drawable/ic_baseline_arrow_back_24"
+                        android:layout_gravity="center_vertical"
+                        android:background="@android:color/transparent"
+                        android:id="@+id/imgBackOfferDetail"
+                        android:tint="#fff"
+                        android:layout_marginHorizontal="@dimen/_8sdp"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Offer Detail"
+
+
+                        android:textSize="@dimen/_16sdp"
+                        android:layout_gravity="center_vertical"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="#fff"
+                        android:layout_alignParentTop="true"
+                        android:layout_weight="1"
+                        />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="0 PTS"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/_14ssp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_marginRight="@dimen/_10sdp" />
+
+
+                </TableRow>
+
+            </TableLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+    </LinearLayout>
+    <ScrollView
+        app:layout_constraintTop_toBottomOf="@+id/linearTopOfferDetail"
+
+        android:paddingBottom="@dimen/_70sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_180sdp"
+            android:background="#000"
+            >
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/image_login_bg"
+                android:scaleType="fitXY"
+                />
+
+
+
+        </RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="PG(15)"
+            android:textSize="@dimen/_14ssp"
+            android:textColor="#000"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginHorizontal="@dimen/_12sdp"
+
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Not to be combined with any other offers. One offer per table"
+            android:textSize="@dimen/_12sdp"
+            android:textColor="#000"
+
+            android:layout_margin="@dimen/_12sdp"
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_12sdp"
+            >
+            <ImageView
+                android:id="@+id/imgAward"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:src="@drawable/ic_baseline_gpp_good_24"
+                app:tint="#2179BF" />
+            <TextView
+                android:layout_toRightOf="@id/imgAward"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reward Goal"
+                android:textColor="#2179BF"
+                android:textStyle="bold"
+
+                android:textSize="@dimen/_12sdp"
+                />
+            <TextView
+                android:layout_alignParentEnd="true"
+                android:layout_marginHorizontal="@dimen/_5sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No Expiration"
+                android:textColor="#5C6063"
+                android:textStyle="bold"
+
+                android:textSize="@dimen/_12sdp"
+                android:layout_alignParentRight="true" />
+        </RelativeLayout>
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/_80sdp"
+    android:src="@drawable/image_barcode"
+    />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Demo Rewards"
+            android:textSize="@dimen/_12ssp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:textColor="#000"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_12ssp"
+            android:text="Two CityPlace Drive, 2nd Floor"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:textColor="#000"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="St. Louis MO 35464"
+            android:textSize="@dimen/_12ssp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:textColor="#000"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(314) 737-4062"
+            android:textSize="@dimen/_12ssp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:textColor="#3F51B5"
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_70sdp"
+            android:layout_margin="@dimen/_12sdp"
+            android:background="@drawable/border_background"
+            android:padding="@dimen/_5sdp"
+            >
+            <TextView
+                android:id="@+id/textinternal"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:textSize="@dimen/_12ssp"
+
+                android:layout_height="wrap_content"
+                android:text="Internal Use Only: 00000000000003"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                />
+            <TextView
+                android:layout_below="@+id/textinternal"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textSize="@dimen/_12ssp"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mobile: 828550059"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+android:layout_alignParentBottom="true"
+                android:layout_height="wrap_content"
+
+                android:textSize="@dimen/_12ssp"
+                android:text="CardID: M"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Offer ID: 2050"
+                android:layout_alignParentRight="true"
+                android:textSize="@dimen/_12ssp"
+
+                android:layout_alignParentBottom="true"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+
+    </ScrollView>
+    <LinearLayout
+        android:id="@+id/bottomNavBarHome"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#1B0A39"
+        android:orientation="horizontal">
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_weight="1"
+
+      android:padding="@dimen/_5sdp"
+      android:layout_height="wrap_content"
+      android:text="Redeem Offer"
+      android:textSize="@dimen/_12ssp"
+      android:textColor="#fff"
+      android:gravity="center"
+      />
+        <View
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:text="|"
+            android:background="#fff"
+            android:layout_gravity="center"
+
+            android:gravity="center"
+            android:textSize="@dimen/_12ssp"
+
+            android:textColor="#fff"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Print Offer"
+            android:gravity="center"
+            android:padding="@dimen/_5sdp"
+
+
+            android:layout_weight="1"
+            android:textColor="#fff"
+            />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

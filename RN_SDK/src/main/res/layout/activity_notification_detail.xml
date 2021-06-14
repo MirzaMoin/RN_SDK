@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="#D5D5D5"
+    android:layout_height="match_parent"
+    tools:context=".Activities.NotificationDetailActivity">
+    <androidx.appcompat.widget.Toolbar
+
+        app:contentInsetStart="0dp"
+        android:id="@+id/toolbarCashback"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        tools:targetApi="lollipop">
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="#fff"
+            >
+
+            <TableRow>
+
+                <ImageButton
+
+                    android:layout_width="@dimen/_22sdp"
+                    android:scaleType="fitXY"
+                    android:layout_height="@dimen/_22sdp"
+                    android:src="@drawable/ic_baseline_arrow_back_24"
+                    android:layout_gravity="center_vertical"
+                    android:background="@android:color/transparent"
+                    android:id="@+id/imgBackRedeemCashback"
+                    android:tint="#000000"
+                    android:layout_marginHorizontal="@dimen/_8sdp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+
+
+                    android:textSize="@dimen/_16sdp"
+                    android:layout_gravity="center_vertical"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#fff"
+                    android:layout_alignParentTop="true"
+                    android:layout_weight="1"
+                    />
+
+
+
+            </TableRow>
+
+        </TableLayout>
+    </androidx.appcompat.widget.Toolbar>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp"
+        android:src="@drawable/image_login_bg"
+        android:scaleType="fitXY"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="George.bruth@RqsRes"
+        android:gravity="center"
+        android:textSize="@dimen/_14ssp"
+        android:textColor="#000"
+        android:layout_margin="@dimen/_15sdp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="George"
+        android:textColor="#000"
+        android:layout_marginLeft="@dimen/_10ssp"
+        android:textSize="@dimen/_12ssp"
+        />
+</LinearLayout>

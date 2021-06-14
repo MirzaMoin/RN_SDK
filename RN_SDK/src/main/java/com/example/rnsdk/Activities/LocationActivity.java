@@ -1,0 +1,111 @@
+package com.example.rnsdk.Activities;
+
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
+
+import com.example.rnsdk.Adapter.FooterAdapter;
+import com.example.rnsdk.Models.AppColorModel;
+import com.example.rnsdk.Models.HomeScreenModel;
+import com.example.rnsdk.R;
+import com.example.rnsdk.Utility.Utility;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+
+public class LocationActivity extends FragmentActivity implements OnMapReadyCallback {
+
+    private GoogleMap mMap;
+    CardView cardLocation;
+    BottomSheetBehavior bottomSheetBehavior;
+    RecyclerView rvFooterLocation;
+
+    LinearLayout bottomsheetLocation;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_location);
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
+        cardLocation = findViewById(R.id.cardLocation);
+        bottomsheetLocation = findViewById(R.id.bottomsheetLocation);
+        rvFooterLocation = findViewById(R.id.rvFooterLocation);
+
+
+
+
+        cardLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showBottomsheet();
+            }
+        });
+        setFooter();
+
+    }
+    private void setFooter() {
+        AppColorModel appColor = Utility.response.responsedata.appColor;
+
+        HomeScreenModel homeScreenModel = Utility.response.responsedata.homeScreen;
+        if(homeScreenModel.isHomePageDisplayFooter())
+        {
+            rvFooterLocation.setVisibility(View.VISIBLE);
+            rvFooterLocation.setBackgroundColor(Utility.getColor(appColor.getFooterBarColor()));
+
+            FooterAdapter adapter = new FooterAdapter(this,homeScreenModel.footerLinks,"locations");
+            rvFooterLocation.setHasFixedSize(true);
+
+
+            rvFooterLocation.setLayoutManager(new GridLayoutManager(this,homeScreenModel.footerLinks.size()));
+
+            rvFooterLocation.setAdapter(adapter);
+        }
+        else
+        {
+            rvFooterLocation.setVisibility(View.GONE);
+
+
+        }
+
+
+    }
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        // Add a marker in Sydney and move the camera
+        LatLng sydney = new LatLng(-34, 151);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }
+    private void showBottomsheet() {
+
+        // create an alert builder
+        BottomSheetDialog dialog = new BottomSheetDialog(this);
+        // set the custom layout
+        final View customLayout = getLayoutInflater().inflate(R.layout.content_location_list, null);
+        dialog.setContentView(customLayout);
+
+        // add a button
+        // create and show the alert dialog
+        dialog.show();
+
+    }
+}

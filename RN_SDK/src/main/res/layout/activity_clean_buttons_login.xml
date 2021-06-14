@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/layoutLoginCleanButtons"
+    android:background="@drawable/image_login_bg"
+    tools:context=".Activities.LoginActivities.CleanButtonsLoginActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent">
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="THIS IS TITLE TEXT FOR LOGIN"
+        android:textSize="@dimen/_22ssp"
+
+
+android:layout_margin="@dimen/_10sdp"
+        android:textColor="#fff"
+        android:gravity="center"/>
+
+    <View
+        android:layout_width="@dimen/_130sdp"
+        android:layout_height="@dimen/_2sdp"
+        android:background="#fff"
+        android:layout_gravity="center"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="OUR FRIEND GOES OUT BETTER WE HELP THEM GO OUT MORE"
+        android:textSize="@dimen/_14ssp"
+
+
+        android:layout_margin="@dimen/_10sdp"
+        android:textColor="#fff"
+        android:gravity="center"/>
+
+    <View
+        android:layout_width="@dimen/_130sdp"
+        android:layout_height="@dimen/_2sdp"
+        android:background="#fff"
+        android:layout_gravity="center"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Become a rewards member and get perks no one else does"
+        android:textSize="@dimen/_14ssp"
+
+
+        android:layout_margin="@dimen/_10sdp"
+        android:textColor="#fff"
+        android:gravity="center"/>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#41388F"
+        android:textSize="@dimen/_10sdp"
+        android:textColor="#fff"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:paddingHorizontal="@dimen/_30sdp"
+
+        android:text="JOIN NOW" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:textSize="@dimen/_10sdp"
+android:background="#190f70"
+        android:paddingHorizontal="@dimen/_35sdp"
+        android:text="SIGN IN" />
+
+
+</LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

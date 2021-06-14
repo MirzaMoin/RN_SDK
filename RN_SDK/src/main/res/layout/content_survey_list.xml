@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/_5sdp"
+    android:orientation="horizontal"
+    >
+    <ImageView
+        android:layout_width="@dimen/_15sdp"
+        android:layout_height="@dimen/_15sdp"
+        android:src="@drawable/ic_baseline_assignment_24"
+        android:tint="#000"
+        android:layout_margin="@dimen/_2sdp"
+
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="test normal"
+        android:textColor="#000"
+        android:textSize="@dimen/_12ssp"
+        android:layout_margin="@dimen/_2sdp"/>
+
+
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_5sdp"
+
+        android:orientation="horizontal"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            >
+            <ImageView
+                android:layout_width="@dimen/_13sdp"
+                android:layout_height="@dimen/_13sdp"
+                android:src="@drawable/ic_baseline_calendar_today_24"
+                android:tint="#A6A6A6"
+                android:layout_margin="@dimen/_2sdp"
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="21 May 2021"
+                android:textColor="#A6A6A6"
+                android:textSize="@dimen/_10ssp"
+                android:layout_margin="@dimen/_2sdp"/>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="1"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <ImageView
+                android:layout_width="@dimen/_13sdp"
+                android:layout_height="@dimen/_13sdp"
+                android:src="@drawable/ic_baseline_attach_money_24"
+                android:tint="#A6A6A6"
+                android:layout_margin="@dimen/_2sdp"
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20"
+                android:textColor="#A6A6A6"
+                android:textSize="@dimen/_10ssp"
+                android:layout_marginVertical="@dimen/_2sdp"
+                />
+
+
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#A6A6A6"
+        android:layout_marginVertical="@dimen/_2sdp"
+        />
+</LinearLayout>

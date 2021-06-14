@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activities.SplashActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+
+    <Button
+        android:id="@+id/btnCleanButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Clean Buttons Login"
+        android:visibility="gone"
+ />
+
+    <Button
+        android:id="@+id/btnCleanLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Clean Login"
+        android:visibility="gone"
+
+        />
+
+    <Button
+        android:id="@+id/btnVideoMotion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Video Motion Login"
+        android:visibility="gone"
+
+        />
+
+    <Button
+        android:id="@+id/btnHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Home"
+        />
+    <Button
+        android:id="@+id/btnProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Profile"
+        />
+    <Button
+        android:id="@+id/btnWaysToEan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ways to Earn"
+        />
+    <Button
+        android:id="@+id/btnRewardsEntryGoal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rewards Entry Goal"
+        />
+    <Button
+        android:id="@+id/btnCashback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Redeem Cashback"
+        />
+    <Button
+        android:id="@+id/btnLeaderboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Leaderboard"
+        />
+    <Button
+        android:id="@+id/btnTransactionHistory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Transaction History"
+        />
+
+    <Button
+        android:id="@+id/btnOffer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Offer Screen"
+        />
+    <Button
+        android:id="@+id/btnOfferDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Offer Detail"
+        />
+    <Button
+        android:id="@+id/btnTransferPoint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Transfer Point"
+        />
+    <Button
+        android:id="@+id/btnUploadReceipt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Upload Receipt"
+        />
+    <Button
+        android:id="@+id/btnReferFriends"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Refer Friends"
+        />
+    <Button
+        android:id="@+id/btnContactUs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Contact Us"
+        />
+    <Button
+        android:id="@+id/btnChangePassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Change Password"
+        />
+        <Button
+            android:id="@+id/btnLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Location"
+            />
+        <Button
+            android:id="@+id/btnTakeSurvey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Take Survey"
+            />
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>

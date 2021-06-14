@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    >
+    <TextView
+        android:id="@+id/textClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clear"
+        android:textColor="#000"
+        android:padding="@dimen/_10sdp"
+        android:textSize="@dimen/_12ssp"
+        />
+    <TextView
+        android:id="@+id/textApply"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Apply"
+        android:textColor="#000"
+        android:padding="@dimen/_10sdp"
+        android:textSize="@dimen/_12ssp"
+
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="#E8E8E8"
+        android:layout_below="@+id/textClear"
+        />
+</RelativeLayout>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:background="@drawable/edit_text_border"
+        android:layout_marginHorizontal="@dimen/_12sdp"
+        android:layout_marginVertical="@dimen/_10sdp"
+        android:drawableStart="@drawable/ic_baseline_search_24"
+        android:drawableLeft="@drawable/ic_baseline_search_24"
+        android:drawableTint="#A1A1A1"
+        android:drawablePadding="@dimen/_10sdp"
+        android:paddingLeft="@dimen/_10sdp"
+        android:hint="Enter Name"
+        android:textSize="@dimen/_12ssp"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relMonth"
+        android:paddingHorizontal="@dimen/_14sdp"
+        android:paddingVertical="@dimen/_10sdp">
+
+        <ImageView
+            android:id="@+id/imgSpinner"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:src="@drawable/ic_baseline_calendar_today_24"
+
+            app:tint="#000" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="21 may,2021"
+            android:textColor="#000"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/imgSpinner"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:textSize="@dimen/_12ssp"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_20sdp"
+            android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+            android:layout_alignParentRight="true"
+            app:tint="#000" />
+    </RelativeLayout>
+
+
+</LinearLayout>

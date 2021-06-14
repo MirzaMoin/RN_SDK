@@ -1,0 +1,3 @@
+include ':RN_SDK'
+include ':app'
+rootProject.name = "RN_SDK"

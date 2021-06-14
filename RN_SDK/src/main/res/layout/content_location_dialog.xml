@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<EditText
+    android:id="@+id/etSearchLocation"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_40sdp"
+    android:background="#fff"
+    android:drawableLeft="@drawable/ic_baseline_search_24"
+    android:drawableTint="#9C9C9C"
+
+    android:paddingLeft="@dimen/_10sdp"
+    android:drawablePadding="@dimen/_10sdp"
+    app:layout_constraintTop_toTopOf="parent"
+    android:hint="Search categories..."
+
+    />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/linearDialog"
+        android:layout_height="@dimen/_300sdp"
+        app:layout_constraintTop_toBottomOf="@id/etSearchLocation"
+
+        >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvLocationDialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            />
+
+    </LinearLayout>
+
+    <Button
+        app:layout_constraintTop_toBottomOf="@+id/linearDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirm"
+        android:background="#2F42BF"
+        android:textColor="#fff"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

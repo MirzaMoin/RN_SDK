@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_60sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginHorizontal="@dimen/_10ssp"
+
+    >
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profileImageNotification"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_centerVertical="true"
+        app:civ_border_width="@dimen/_1sdp"
+        app:civ_border_color="#000"
+        android:src="@drawable/image_login_bg"
+        />
+    <LinearLayout
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/profileImageNotification"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/_10sdp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="George.bruth@RqsRes.in"
+            android:textSize="@dimen/_14ssp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="George"
+            android:textSize="@dimen/_12ssp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bruth"
+            android:textSize="@dimen/_10ssp"
+            />
+
+
+    </LinearLayout>
+    <ImageView
+        android:layout_width="@dimen/_14sdp"
+        android:layout_height="@dimen/_14sdp"
+        android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+        android:tint="#8C8C8C"
+        android:layout_centerVertical="true"
+
+        android:layout_alignParentRight="true"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="#989898"
+
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>
