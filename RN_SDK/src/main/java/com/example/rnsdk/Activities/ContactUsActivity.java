@@ -37,6 +37,12 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
     TextView textPointContactUs;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        setFooter();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_us);

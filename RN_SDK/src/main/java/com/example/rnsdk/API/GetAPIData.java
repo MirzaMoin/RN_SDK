@@ -1,10 +1,11 @@
 package com.example.rnsdk.API;
 
 import com.example.rnsdk.Models.ResponseModel;
+import com.example.rnsdk.Models.ResponseModelTransactionHistory;
+import com.google.gson.JsonObject;
 
 import retrofit2.Call;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -12,13 +13,23 @@ import retrofit2.http.Query;
 public interface GetAPIData {
     @GET("/api/UserAccountProfile/AppIntakeLayoutData")
     Call<ResponseModel> getAllData(
-            @Query("RPToken")String RPToken
+            @Query("RPToken") String RPToken
     );
 
-    @FormUrlEncoded
-    @POST("/api/Tablet/LogIn")
+    @GET("/api/UserAccountProfile/TransactionHistory")
+    Call<ResponseModel> getTransactionHistory(
+            @Query("RewardProgramId") String RewardProgramId,
+            @Query("ContactID") String ContactID
+    );
+
+    @GET("/api/UserProfile/Getoffers")
+    Call<ResponseModelTransactionHistory> getOffers(
+            @Query("RewardProgramID") String RewardProgramId,
+            @Query("ContactID") String ContactID
+    );
+
+    @POST("/api/UserProfile/LogIn")
     Call<ResponseModel> Login(
-            @Field("username") String username,
-            @Field("password") String password
+            @Body JsonObject jsonBody
     );
 }

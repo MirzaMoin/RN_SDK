@@ -18,16 +18,22 @@ import com.example.rnsdk.Activities.LoginActivities.VideoMotionLoginActivity;
 import com.example.rnsdk.Models.ResponseModel;
 import com.example.rnsdk.R;
 import com.example.rnsdk.Utility.Utility;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SplashActivity extends AppCompatActivity  {
+public class SplashActivity extends AppCompatActivity {
 
-    Button btnCleanButton,btnCleanLogin,btnVideoMotion,btnHome,btnProfile,btnWaystoEarn,btnRewardEntryGoal,btnRedeemCashback,btnLeaderboard,btnTransactionHistory,btnOffer,btnOfferDetail,btnTransferrPoint,btnUploadReceipt,btnReferFriends,btnContactUs,btnChangePassword,btnLocation,btnTakeSurvey;
+    Button btnCleanButton, btnCleanLogin, btnVideoMotion, btnHome, btnProfile, btnWaystoEarn, btnRewardEntryGoal, btnRedeemCashback, btnLeaderboard, btnTransactionHistory, btnOffer, btnOfferDetail, btnTransferrPoint, btnUploadReceipt, btnReferFriends, btnContactUs, btnChangePassword, btnLocation, btnTakeSurvey;
 
     ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,25 +57,6 @@ public class SplashActivity extends AppCompatActivity  {
         btnLocation = findViewById(R.id.btnLocation);
         btnTakeSurvey = findViewById(R.id.btnTakeSurvey);
 
-/*
-
-        btnProfile.setOnClickListener(this);
-        btnProfile.setOnClickListener(this);
-        btnWaystoEarn.setOnClickListener(this);
-        btnRewardEntryGoal.setOnClickListener(this);
-        btnRedeemCashback.setOnClickListener(this);
-        btnLeaderboard.setOnClickListener(this);
-        btnTransactionHistory.setOnClickListener(this);
-        btnOffer.setOnClickListener(this);
-        btnOfferDetail.setOnClickListener(this);
-        btnTransferrPoint.setOnClickListener(this);
-        btnUploadReceipt.setOnClickListener(this);
-        btnReferFriends.setOnClickListener(this);
-        btnContactUs.setOnClickListener(this);
-        btnChangePassword.setOnClickListener(this);
-        btnLocation.setOnClickListener(this);
-        btnTakeSurvey.setOnClickListener(this);
-*/
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Loading...");
@@ -84,21 +71,49 @@ public class SplashActivity extends AppCompatActivity  {
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                 progressDialog.dismiss();
-                if(response.isSuccessful())
-                {
+                Log.e("Test", "" + response.body().statusMessage);
+                if (response.isSuccessful()) {
+
 
                     ResponseModel responseModel = response.body();
                     Utility.response = responseModel;
-                    Log.e("Error",responseModel.statusMessage);
-                    btnHome.setText(Utility.response.responsedata.homeScreen.homePageHeaderMenuText);
+//                    btnHome.setText(Utility.response.responsedata.homeScreen.homePageHeaderMenuText);
 
 
-                    startActivity(new Intent(SplashActivity.this,HomeActivity.class));
-                    Toast.makeText(SplashActivity.this, ""+responseModel.statusMessage, Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    btnHome.setText("Error"+response.message());
+                    Call<ResponseModel> callLogin = service.Login(ApiJsonMap("UW5c2c0MTT43HbVcKeu54rh8Nf77Fu",
+                            "8000333022",
+                            "123456789"));
+
+
+                    callLogin.enqueue(new Callback<ResponseModel>() {
+                        @Override
+                        public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                            if (response.isSuccessful()) {
+
+                                Utility.response.responsedata.contactData = response.body().responsedata.contactData;
+                                Utility.response.responsedata.webFormData = response.body().responsedata.webFormData;
+
+                                Log.e("Test:","Response : "+response.body().responsedata.contactData.emailAddress);
+
+                                Toast.makeText(SplashActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(SplashActivity.this, HomeActivity.class));
+
+
+                            } else {
+                                Log.e("TEST", "Error: " + response.message());
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseModel> call, Throwable test) {
+
+                            Log.e("Test:::", test.getMessage().toString());
+                        }
+                    });
+
+
+                } else {
+                    btnHome.setText("Error" + response.message());
 
                 }
             }
@@ -107,13 +122,10 @@ public class SplashActivity extends AppCompatActivity  {
             public void onFailure(Call<ResponseModel> call, Throwable t) {
                 progressDialog.dismiss();
                 btnHome.setText(t.getLocalizedMessage());
-                Log.e("Error",t.getMessage());
-                Toast.makeText(SplashActivity.this, ""+t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(SplashActivity.this, "" + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
-
-
 
 
         btnCleanButton.setOnClickListener(new View.OnClickListener() {
@@ -148,116 +160,28 @@ public class SplashActivity extends AppCompatActivity  {
         });
 
 
-
-
     }
-/*
-    @Override
-    public void onClick(View v) {
-        if(v.getId() == R.id.btnProfile)
-        {
-//            startActivity(new Intent(this, ProfileActivity.class));
-            progressDialog = new ProgressDialog(this);
-            progressDialog.setTitle("Loading...");
-            progressDialog.setCancelable(false);
-            progressDialog.show();
 
-            *//*Create handle for the RetrofitInstance interface*//*
-            GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
-            Call<ResponseModel> call = service.getAllData("UW5c2c0MTT43HbVcKeu54rh8Nf77Fu");
-            call.enqueue(new Callback<ResponseModel>() {
+    private JsonObject ApiJsonMap(String RPToken, String userName, String password) {
 
-                @Override
-                public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
-                    progressDialog.dismiss();
-                    if(response.isSuccessful())
-                    {
-
-                        ResponseModel responseModel = response.body();
-                        Utility.response = responseModel;
-                        Log.e("Error",responseModel.statusMessage);
-                        btnHome.setText(Utility.response.responsedata.homeScreen.homePageHeaderMenuText);
+        JsonObject gsonObject = new JsonObject();
+        try {
+            JSONObject jsonObj_ = new JSONObject();
+            jsonObj_.put("rewardProgramToken", RPToken);
+            jsonObj_.put("userName", userName);
+            jsonObj_.put("password", password);
 
 
-                        startActivity(new Intent(SplashActivity.this,HomeActivity.class));
-                        Toast.makeText(SplashActivity.this, ""+responseModel.statusMessage, Toast.LENGTH_SHORT).show();
-                    }
-                    else
-                    {
-                        btnHome.setText("Error"+response.message());
+            JsonParser jsonParser = new JsonParser();
+            gsonObject = (JsonObject) jsonParser.parse(jsonObj_.toString());
 
-                    }
-                }
+            //print parameter
+            Log.e("Request Body:  ", "" + gsonObject);
 
-                @Override
-                public void onFailure(Call<ResponseModel> call, Throwable t) {
-                    progressDialog.dismiss();
-                    btnHome.setText(t.getLocalizedMessage());
-                    Log.e("Error",t.getMessage());
-                    Toast.makeText(SplashActivity.this, ""+t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-
-                }
-            });
-
-
-        }
-        else if(v.getId() == R.id.btnWaysToEan)
-        {
-            startActivity(new Intent(this, WaysToEarnActivity.class));
-        }
-        else if(v.getId() == R.id.btnRewardsEntryGoal)
-        {
-            startActivity(new Intent(this, RewardEntryGoalActivity.class));
-        }
-        else if(v.getId() == R.id.btnCashback)
-        {
-            startActivity(new Intent(this, CashbackActivity.class));
-        }
-        else if(v.getId() == R.id.btnLeaderboard)
-        {
-            startActivity(new Intent(this, LeaderboardActivity.class));
-        }
-        else if(v.getId() == R.id.btnTransactionHistory)
-        {
-            startActivity(new Intent(this, TransactionHistoryActivity.class));
-        }
-        else if(v.getId() == R.id.btnOffer)
-        {
-            startActivity(new Intent(this, OfferActivity.class));
-        }
-        else if(v.getId() == R.id.btnOfferDetail)
-        {
-            startActivity(new Intent(this, OffersDetailActivity.class));
-        }
-        else if(v.getId() == R.id.btnTransferPoint)
-        {
-            startActivity(new Intent(this, TransferPointActivity.class));
-        }
-        else if(v.getId() == R.id.btnUploadReceipt)
-        {
-            startActivity(new Intent(this, UploadReceiptActivity.class));
-        }
-        else if(v.getId() == R.id.btnReferFriends)
-        {
-            startActivity(new Intent(this, ReferFriendActivity.class));
-        }
-        else if(v.getId() == R.id.btnContactUs)
-        {
-            startActivity(new Intent(this, ContactUsActivity.class));
-        }
-        else if(v.getId() == R.id.btnChangePassword)
-        {
-            startActivity(new Intent(this, ChangePasswordActivity.class));
-        }
-        else if(v.getId() == R.id.btnLocation)
-        {
-            startActivity(new Intent(this, LocationActivity.class));
-        }
-        else if(v.getId() == R.id.btnTakeSurvey)
-        {
-            startActivity(new Intent(this, TakeSurveyActivity.class));
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
-
-    }*/
+        return gsonObject;
+    }
 }

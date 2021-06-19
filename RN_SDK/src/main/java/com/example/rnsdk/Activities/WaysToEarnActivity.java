@@ -41,6 +41,12 @@ public class WaysToEarnActivity extends AppCompatActivity implements View.OnClic
     TextView textPointWaysToEarn;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        setFooter();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ways_to_earn);

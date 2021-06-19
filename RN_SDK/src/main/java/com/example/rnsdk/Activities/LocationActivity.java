@@ -43,6 +43,11 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
     LinearLayout bottomsheetLocation;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        setFooter();
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);

@@ -68,26 +68,24 @@ public class FooterAdapter extends RecyclerView.Adapter<FooterAdapter.ViewHolder
                 holder.icFooterLinkIcon.setColorFilter(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarInactiveIconColor()));
 
             }
-
+        if(!currentActivity.equals(footer.getFooterInternalLinkUrl())) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    if(footer.getFooterLinkType().equals("internal")){
+                    if (footer.getFooterLinkType().equals("internal")) {
                         Utility.openNewActivity(context, footer.getFooterInternalLinkUrl(), footer.getId(), footer.getFooterInternalLinkUrl());
-                    }
-                    else
-                    {
+                    } else {
                         Intent i = new Intent(context, WebViewActivity.class);
-                        i.putExtra("url",footer.getFooterExternalLinkUrl());
-                        i.putExtra("id",footer.getId());
-                        i.putExtra("rewardProgramId",footer.getRewardProgramId());
+                        i.putExtra("url", footer.getFooterExternalLinkUrl());
+                        i.putExtra("id", footer.getId());
+                        i.putExtra("rewardProgramId", footer.getRewardProgramId());
                         context.startActivity(i);
                     }
 
                 }
             });
-
+        }
 
 
 

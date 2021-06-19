@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:ignore="MissingConstraints">
+
         <androidx.appcompat.widget.Toolbar
 
             android:id="@+id/toolbarOffer"
@@ -34,14 +35,14 @@
 
                         android:id="@+id/imgBackTransactionHistory"
                         android:layout_width="wrap_content"
-                        android:padding="@dimen/_5sdp"
-
                         android:layout_height="@dimen/_30sdp"
+
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
                         android:layout_gravity="center_vertical"
                         android:layout_marginHorizontal="@dimen/_8sdp"
                         android:background="@android:color/transparent"
+                        android:padding="@dimen/_5sdp"
                         android:scaleType="fitXY"
                         android:src="@drawable/ic_baseline_arrow_back_24"
                         android:tint="#fff" />
@@ -62,14 +63,14 @@
 
                     <TextView
                         android:id="@+id/textPointTransactionHistory"
-                        android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
-                        android:text="0 PTS"
-                        android:textColor="#fff"
-                        android:textSize="@dimen/_14ssp"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginEnd="@dimen/_10sdp"
-                        android:layout_marginRight="@dimen/_10sdp" />
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:text="0 PTS"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/_14ssp" />
 
                 </TableRow>
 
@@ -78,13 +79,15 @@
 
 
     </LinearLayout>
+
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/linearTopTransactionHistory"
-
         app:layout_constraintBottom_toTopOf="@id/bottomNavBarLeaderboard"
+
+        app:layout_constraintTop_toBottomOf="@+id/linearTopTransactionHistory"
 
         >
 
@@ -93,10 +96,10 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_130sdp"
             android:layout_marginBottom="@dimen/_10sdp"
+            android:visibility="gone"
             app:sliderAnimationDuration="600"
             app:sliderAutoCycleDirection="back_and_forth"
             app:sliderAutoCycleEnabled="true"
-            android:visibility="gone"
             app:sliderIndicatorAnimationDuration="600"
             app:sliderIndicatorGravity="center_horizontal|bottom"
             app:sliderIndicatorMargin="15dp"
@@ -109,30 +112,30 @@
             app:sliderStartAutoCycle="true" />
 
         <EditText
+            android:id="@+id/etLocationNameSearchTH"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_35sdp"
-            android:hint="Location Name"
-            android:background="@drawable/edit_text_border"
-            android:paddingLeft="@dimen/_10sdp"
             android:layout_marginHorizontal="@dimen/_10sdp"
-            android:drawableStart="@drawable/ic_baseline_search_24"
-            android:drawablePadding="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_5sdp"
-            android:textSize="@dimen/_12ssp"
+            android:background="@drawable/edit_text_border"
+            android:drawableStart="@drawable/ic_baseline_search_24"
+            android:drawableLeft="@drawable/ic_baseline_search_24"
+            android:drawablePadding="@dimen/_10sdp"
             android:drawableTint="#CCCCCC"
+            android:hint="Location Name"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
 
-            android:drawableLeft="@drawable/ic_baseline_search_24" />
+            android:paddingLeft="@dimen/_10sdp"
+
+            android:textSize="@dimen/_12ssp" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvTransactionHistory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            />
+            android:layout_marginTop="@dimen/_10sdp" />
     </LinearLayout>
-
-
-
 
 
     <LinearLayout
@@ -144,12 +147,39 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvFooterTransactionHistory"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
 
-            android:id="@+id/rvFooterTransactionHistory"
-            />
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/relImagePreview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="#74000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        >
+
+        <ImageView
+            android:id="@+id/imgPreviewClose"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/_8sdp"
+            android:src="@drawable/ic_baseline_close_24"
+            app:tint="#fff" />
+        <ImageView
+            android:id="@+id/imgPreview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            />
+            </RelativeLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

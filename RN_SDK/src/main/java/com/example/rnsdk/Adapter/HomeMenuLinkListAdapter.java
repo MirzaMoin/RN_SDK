@@ -3,6 +3,7 @@ package com.example.rnsdk.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.GradientDrawable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -41,6 +43,15 @@ public class HomeMenuLinkListAdapter extends RecyclerView.Adapter<HomeMenuLinkLi
     }
 
     @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+    @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View listItem;
@@ -58,8 +69,8 @@ public class HomeMenuLinkListAdapter extends RecyclerView.Adapter<HomeMenuLinkLi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        MenuLinkModel menu;
         holder.setIsRecyclable(false);
+        MenuLinkModel menu;
 
        if(!isFirst)
        {
@@ -84,14 +95,18 @@ public class HomeMenuLinkListAdapter extends RecyclerView.Adapter<HomeMenuLinkLi
 
 
            FontDrawable drawable = new FontDrawable(context, Utility.getIcon(menu.getIcon()), true, false);
-           holder.icMenuLinkIcon.setImageDrawable(drawable);
+           drawable.setColorFilter(Utility.getColor(home.getHomePageBottomIconColor()), PorterDuff.Mode.SCREEN);
+           Glide.with(context).load(drawable).into(holder.icMenuLinkIcon);
+
+           //.getView().setColorFilter(Utility.getColor(home.getHomePageBottomIconColor()));
+//           holder.icMenuLinkIcon.setImageDrawable(drawable);
+
+           Log.e("Color",""+ home.getHomePageBottomIconColor());
 
 
-
-           holder.icMenuLinkIcon.setColorFilter(Utility.getColor(home.getHomePageBottomIconColor()));
+//           holder.icMenuLinkIcon.setColorFilter(Utility.getColor(home.getHomePageBottomIconColor()));
            holder.cardMenuLink.setVisibility(View.VISIBLE);
            holder.cardMenuLink.setCardBackgroundColor(Utility.getColor(home.getHomePageBottomIconBackgroundColor()));
-//           holder.cardMenuLink.setBackgroundColor(Constants.getColor(home.getHomePageBottomIconBackgroundColor()));
 
            if(home.getHomePageBottomIconShape().equals("square"))
            {

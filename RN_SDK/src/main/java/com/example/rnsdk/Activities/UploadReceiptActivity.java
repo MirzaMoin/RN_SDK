@@ -57,6 +57,11 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
     AlertDialog dialogReceiptType, dialogLocation;
 
     LinearLayout linearRPGCashback, linearHome;
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setFooter();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

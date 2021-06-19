@@ -100,6 +100,7 @@ public class Utility {
       case "Change Password":
         context.startActivity(new Intent(context, ChangePasswordActivity.class));
         break;
+      case "contactUs":
       case "Contact Us":
         context.startActivity(new Intent(context, ContactUsActivity.class));
         break;
@@ -481,7 +482,7 @@ public class Utility {
       case "youtube" :
         return R.string.fa_youtube;
       case "youtube-square":
-        return R.string.fa_clock;
+        return R.string.fa_youtube_square;
 
       case "zhihu":
         return R.string.fa_zhihu;

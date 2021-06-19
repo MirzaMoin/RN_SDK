@@ -44,6 +44,11 @@ public class ReferFriendActivity extends AppCompatActivity implements View.OnCli
 
     RecyclerView rvFooterReferFriend;
     @Override
+    protected void onResume() {
+        super.onResume();
+        setFooter();
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_refer_friend);

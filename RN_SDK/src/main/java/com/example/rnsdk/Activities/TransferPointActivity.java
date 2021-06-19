@@ -39,6 +39,12 @@ public class TransferPointActivity extends AppCompatActivity implements View.OnC
     SwipeButton swipeBtnTransferPoint;
     TextView textPointTransferPoints;
     @Override
+    protected void onResume() {
+        super.onResume();
+        setFooter();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transfer_point);

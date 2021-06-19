@@ -192,8 +192,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setLayout();
+    }
 
     private void init() {
+
+        Log.e("Test",Utility.response.responsedata.contactData.emailAddress);
+
         if (Build.VERSION.SDK_INT >= 21) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -384,8 +392,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             relativeBottomListHome.setVisibility(View.VISIBLE);
 
             HomeMenuLinkListAdapter adapter = new HomeMenuLinkListAdapter(this,homeScreenModel.menuLinks,true,true);
-            rvHomeList.setHasFixedSize(true);
-
+            rvHomeList.setItemViewCacheSize(homeScreenModel.menuLinks.size());
             rvHomeList.setLayoutManager(new LinearLayoutManager(this));
             rvHomeList.setAdapter(adapter);
 

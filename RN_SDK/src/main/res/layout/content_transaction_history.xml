@@ -1,290 +1,480 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linearContentTH"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/_10sdp"
+
+    android:paddingTop="@dimen/_5sdp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="@dimen/_2sdp"
+
         >
+
         <ImageView
             android:layout_width="@dimen/_16sdp"
             android:layout_height="@dimen/_16sdp"
-            android:src="@drawable/ic_baseline_calendar_today_24"
             android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_baseline_calendar_today_24"
 
             app:tint="#8F8F8F" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date: "
             android:layout_gravity="center_vertical"
-            android:textSize="@dimen/_12ssp"
             android:layout_marginLeft="@dimen/_5sdp"
+            android:text="Date: "
             android:textColor="#000"
-android:textStyle="bold"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold"
 
             />
+
         <TextView
+            android:id="@+id/textDateTH"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:text="12 May 2021"
             android:textColor="#FF0000"
-            android:layout_gravity="center_vertical"
             android:textSize="@dimen/_12ssp"
 
             />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/linearLocationTH"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="@dimen/_2sdp"
+        android:visibility="gone"
+
         >
+
         <ImageView
             android:layout_width="@dimen/_16sdp"
             android:layout_height="@dimen/_16sdp"
-            android:src="@drawable/ic_baseline_location_on_24"
             android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_baseline_location_on_24"
 
             app:tint="#8F8F8F" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Location: "
             android:layout_gravity="center_vertical"
-            android:textSize="@dimen/_12ssp"
             android:layout_marginLeft="@dimen/_5sdp"
+            android:text="Location: "
             android:textColor="#000"
+            android:textSize="@dimen/_12ssp"
             android:textStyle="bold"
 
             />
+
         <TextView
+            android:id="@+id/textLocationTH"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:text="fsfhbjh33-njnjnczx-2jnjnkjn0nkjnkjn"
             android:textColor="#8F8F8F"
-            android:layout_gravity="center_vertical"
             android:textSize="@dimen/_12ssp"
 
             />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="@dimen/_2sdp"
-        >
+        android:padding="@dimen/_2sdp">
+
         <ImageView
             android:layout_width="@dimen/_16sdp"
             android:layout_height="@dimen/_16sdp"
-            android:src="@drawable/ic_baseline_card_giftcard_24"
             android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_baseline_card_giftcard_24"
 
             app:tint="#8F8F8F" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Point: "
             android:layout_gravity="center_vertical"
-            android:textSize="@dimen/_12ssp"
             android:layout_marginLeft="@dimen/_5sdp"
+            android:text="Point: "
             android:textColor="#000"
+            android:textSize="@dimen/_12ssp"
             android:textStyle="bold"
 
             />
+
         <TextView
+            android:id="@+id/textPointTH"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:text="+1"
             android:textColor="#4CAF50"
-            android:layout_gravity="center_vertical"
             android:textSize="@dimen/_12ssp"
 
             />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="@dimen/_2sdp"
-        >
+        android:padding="@dimen/_2sdp">
+
         <ImageView
             android:layout_width="@dimen/_16sdp"
             android:layout_height="@dimen/_16sdp"
-            android:src="@drawable/ic_baseline_credit_card_24"
             android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_baseline_credit_card_24"
 
             app:tint="#8F8F8F" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Balance: "
             android:layout_gravity="center_vertical"
-            android:textSize="@dimen/_12ssp"
             android:layout_marginLeft="@dimen/_5sdp"
+            android:text="Balance: "
             android:textColor="#000"
+            android:textSize="@dimen/_12ssp"
             android:textStyle="bold"
 
             />
+
         <TextView
+            android:id="@+id/textBalanceTH"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:text="51"
             android:textColor="#B6B6B6"
-            android:layout_gravity="center_vertical"
             android:textSize="@dimen/_12ssp"
 
             />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/linearTypeTH"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="@dimen/_2sdp"
-        >
+        android:visibility="gone">
+
         <ImageView
             android:layout_width="@dimen/_16sdp"
             android:layout_height="@dimen/_16sdp"
-            android:src="@drawable/ic_baseline_email_24"
             android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_baseline_style_24"
 
             app:tint="#8F8F8F" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Type: "
             android:layout_gravity="center_vertical"
-            android:textSize="@dimen/_12ssp"
             android:layout_marginLeft="@dimen/_5sdp"
+            android:text="Type: "
             android:textColor="#000"
+            android:textSize="@dimen/_12ssp"
             android:textStyle="bold"
 
             />
+
         <TextView
+            android:id="@+id/textTypeTH"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:text="Transaction"
             android:textColor="#000000"
-            android:layout_gravity="center_vertical"
             android:textSize="@dimen/_12ssp"
 
             />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/linearStatusTH"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="@dimen/_2sdp"
-        >
+        android:visibility="gone">
+
         <ImageView
             android:layout_width="@dimen/_16sdp"
             android:layout_height="@dimen/_16sdp"
-            android:src="@drawable/ic_baseline_email_24"
             android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_baseline_cached_24"
 
             app:tint="#8F8F8F" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Status: "
             android:layout_gravity="center_vertical"
-            android:textSize="@dimen/_12ssp"
             android:layout_marginLeft="@dimen/_5sdp"
+            android:text="Status: "
             android:textColor="#000"
+            android:textSize="@dimen/_12ssp"
             android:textStyle="bold"
 
             />
+
         <TextView
+            android:id="@+id/textTransactionStatusTH"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:text="Earned"
             android:textColor="#000000"
-            android:layout_gravity="center_vertical"
             android:textSize="@dimen/_12ssp"
 
             />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/linearTotalSpendTH"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="@dimen/_2sdp"
-        >
+        android:visibility="gone">
+
         <ImageView
             android:layout_width="@dimen/_16sdp"
             android:layout_height="@dimen/_16sdp"
-            android:src="@drawable/ic_baseline_email_24"
             android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_baseline_format_list_bulleted_24"
 
             app:tint="#8F8F8F" />
+
         <TextView
+            android:id="@+id/textTotalSpendTitleTH"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total Spend: "
             android:layout_gravity="center_vertical"
-            android:textSize="@dimen/_12ssp"
             android:layout_marginLeft="@dimen/_5sdp"
+            android:text="Total Spend: "
             android:textColor="#000"
+            android:textSize="@dimen/_12ssp"
             android:textStyle="bold"
 
             />
+
         <TextView
+            android:id="@+id/textTotalSpendTH"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:text="$1.00"
             android:textColor="#000"
-            android:layout_gravity="center_vertical"
             android:textSize="@dimen/_12ssp"
 
             />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearOfferNameTH"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/_2sdp"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="@dimen/_16sdp"
+            android:layout_height="@dimen/_16sdp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_baseline_format_list_bulleted_24"
+
+            app:tint="#8F8F8F" />
+
+        <TextView
+            android:id="@+id/textOfferNameTitleTH"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:text="Total Spend: "
+            android:textColor="#000"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold"
+
+            />
+
+        <TextView
+            android:id="@+id/textOfferNameTH"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="$1.00"
+            android:textColor="#000"
+            android:textSize="@dimen/_12ssp"
+
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearImagesTH"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/_2sdp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/_16sdp"
+                android:layout_height="@dimen/_16sdp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_baseline_image_24"
+
+                app:tint="#8F8F8F" />
+
+            <TextView
+                android:id="@+id/textImagesTitleTH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:text=""
+                android:textColor="#000"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold"
+
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardFirstTH"
+                android:layout_width="@dimen/_50sdp"
+
+                android:layout_height="@dimen/_50sdp"
+                android:visibility="gone"
+                app:cardCornerRadius="@dimen/_5sdp"
+
+
+                >
+
+                <ImageView
+                    android:id="@+id/imageFirstTH"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+
+                    android:scaleType="fitXY"
+
+                    />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardSecondTH"
+
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+
+                android:layout_marginHorizontal="@dimen/_7sdp"
+                android:visibility="gone"
+                app:cardCornerRadius="@dimen/_5sdp"
+
+                >
+
+                <ImageView
+                    android:id="@+id/imageSecondTH"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+
+                    android:scaleType="fitXY"
+
+
+                    />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+
+                android:id="@+id/cardThirdTH"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:visibility="gone"
+                app:cardCornerRadius="@dimen/_5sdp"
+
+
+                >
+
+                <ImageView
+                    android:id="@+id/imageThirdTH"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+
+                    android:scaleType="fitXY"
+
+                    />
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/linearCollExTH"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_1sdp"
-            android:background="#000"
-            android:layout_gravity="center_vertical"
-
-            android:layout_weight="1"
-            />
-     <ImageView
-         android:id="@+id/imgExpand"
-         android:layout_width="wrap_content"
-         android:layout_height="@dimen/_20sdp"
-         android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
-         android:rotation="180"
-android:layout_gravity="center_vertical"
-
-         app:tint="#000" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1sdp"
-            android:background="#000"
             android:layout_gravity="center_vertical"
-
             android:layout_weight="1"
+
+            android:background="#000" />
+
+        <ImageView
+            android:id="@+id/imgExpand"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_gravity="center_vertical"
+            android:rotation="180"
+            android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+
+            app:tint="#000" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+
+            android:background="#000"
 
             />
     </LinearLayout>
-
 
 
 </LinearLayout>

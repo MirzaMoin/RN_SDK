@@ -23,6 +23,8 @@ public class WebViewActivity extends AppCompatActivity implements View.OnClickLi
     LinearLayout linearBack,linearRefresh,linearForward;
     ImageView imgBack;
     TextView textPointWebView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
