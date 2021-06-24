@@ -5,9 +5,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -15,16 +17,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.rnsdk.API.GetAPIData;
+import com.example.rnsdk.API.RetrofitClientInstance;
 import com.example.rnsdk.Adapter.CashbackImageSliderAdapter;
 import com.example.rnsdk.Adapter.FooterAdapter;
 import com.example.rnsdk.Adapter.HomeMenuLinkListAdapter;
+import com.example.rnsdk.Adapter.TransactionHistoryAdapter;
 import com.example.rnsdk.Adapter.WaysToEarnAdapter;
 import com.example.rnsdk.Models.AppColorModel;
 import com.example.rnsdk.Models.ChildPageModel;
 import com.example.rnsdk.Models.ChildPageSettingModel;
 import com.example.rnsdk.Models.HomeScreenModel;
 import com.example.rnsdk.Models.ProfileEditChildPageDataModel;
+import com.example.rnsdk.Models.ResponseModel;
+import com.example.rnsdk.Models.ResponseModelTransactionHistory;
+import com.example.rnsdk.Models.ResponsedataModel;
 import com.example.rnsdk.Models.WaysToEarnChildPageDataModel;
+import com.example.rnsdk.Models.WaysToEarnModel;
 import com.example.rnsdk.R;
 import com.example.rnsdk.Utility.Utility;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
@@ -34,11 +43,18 @@ import com.smarteist.autoimageslider.SliderView;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.internal.Util;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class WaysToEarnActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView rvList, rvFooterUploadWaysToEarn;
     ImageView imgBackWaysToEarn;
     TextView textPointWaysToEarn;
+    ProgressDialog progressDialog;
+
 
     @Override
     protected void onResume() {
@@ -53,11 +69,8 @@ public class WaysToEarnActivity extends AppCompatActivity implements View.OnClic
 
 
         init();
+        getData();
 
-        WaysToEarnAdapter adapter = new WaysToEarnAdapter();
-        rvList.setHasFixedSize(true);
-        rvList.setLayoutManager(new LinearLayoutManager(this));
-        rvList.setAdapter(adapter);
 
 
     }
@@ -77,11 +90,12 @@ public class WaysToEarnActivity extends AppCompatActivity implements View.OnClic
         rvFooterUploadWaysToEarn = findViewById(R.id.rvFooterUploadWaysToEarn);
         imgBackWaysToEarn = findViewById(R.id.imgBackWaysToEarn);
         textPointWaysToEarn.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
+        textPointWaysToEarn.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance())+ " PTS");
 
 
         imgBackWaysToEarn.setOnClickListener(this);
 
-        SliderView sliderView = findViewById(R.id.imageWaysToEarn);
+     /*   SliderView sliderView = findViewById(R.id.imageWaysToEarn);
         ChildPageSettingModel childPageSettings = Utility.response.responsedata.childPageSetting;
         if (childPageSettings.isChildPageWte()) {
             sliderView.setVisibility(View.VISIBLE);
@@ -104,7 +118,7 @@ public class WaysToEarnActivity extends AppCompatActivity implements View.OnClic
             sliderView.setIndicatorUnselectedColor(Color.GRAY);
             sliderView.setScrollTimeInSec(4); //set scroll delay in seconds :
             sliderView.startAutoCycle();
-        }
+        }*/
 
         setFooter();
     }
@@ -138,5 +152,80 @@ public class WaysToEarnActivity extends AppCompatActivity implements View.OnClic
         if (v.getId() == R.id.imgBackWaysToEarn) {
             super.onBackPressed();
         }
+    }
+
+    private void getData() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        ResponsedataModel responseData = Utility.response.responsedata;
+
+        GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
+        Log.e("Request", "RP Token: " + Utility.RPToken +
+                ", WebFormID: " + responseData.appDetails.webFormID+
+                ", Contact ID: " + responseData.contactData.contactID);
+
+        Call<ResponseModel> call = service.getWaysToEarn(Utility.RPToken,
+                responseData.appDetails.webFormID,
+                responseData.contactData.contactID);
+        call.enqueue(new Callback<ResponseModel>() {
+
+            @Override
+            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                progressDialog.dismiss();
+                if (response.isSuccessful()) {
+
+                    if(response.body() != null)
+                    {
+                        Utility.response.responsedata.totalPoints = response.body().responsedata.getTotalPoints();
+                        Utility.response.responsedata.purchasePoints = response.body().responsedata.getPurchasePoints();
+                        Utility.response.responsedata.socialShare = response.body().responsedata.getSocialShare();
+                        Utility.response.responsedata.referFriends = response.body().responsedata.getReferFriends();
+                        Utility.response.responsedata.leaderboard = response.body().responsedata.getLeaderboard();
+                        Utility.response.responsedata.surveys = response.body().responsedata.getSurveys();
+                        Utility.response.responsedata.completeProfile = response.body().responsedata.getCompleteProfile();
+
+                        ResponsedataModel data =  Utility.response.responsedata;
+
+                        List<WaysToEarnModel> waysList = new ArrayList<>();
+                        waysList.add(data.getTotalPoints());
+                        waysList.add(data.getPurchasePoints());
+                        waysList.add(data.getSocialShare());
+                        waysList.add(data.getReferFriends());
+                        waysList.add(data.getLeaderboard());
+                        waysList.add(data.getSurveys());
+                        waysList.add(data.getCompleteProfile());
+
+
+                        WaysToEarnAdapter adapter = new WaysToEarnAdapter(WaysToEarnActivity.this,waysList);
+                        rvList.setHasFixedSize(true);
+                        rvList.setLayoutManager(new LinearLayoutManager(WaysToEarnActivity.this));
+                        rvList.setAdapter(adapter);
+
+
+
+                    }
+
+
+
+
+
+                } else {
+
+                    Log.e("Test Error: ", "" + response.message());
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModel> call, Throwable t) {
+                progressDialog.dismiss();
+                Log.e("Test Error: ", "" + t.getMessage());
+
+
+            }
+        });
     }
 }

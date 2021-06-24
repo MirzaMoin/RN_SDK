@@ -3,67 +3,70 @@ package com.example.rnsdk.Models;
 
 import java.util.List;
 
-public class HomeScreenModel{
-    public boolean homePageDisplayRibbon;
-    public boolean homePageRibbonDisplayIcon;
-    public String ribbonIcon;
-    public String homePageRibbonPosition;
-    public String homePageRibbonIcon;
-    public String homePageRibbonText;
-    public String homePageRibbonIconPosition;
-    public boolean homePageRibbonTextMarquee;
-    public String homePageRibbonTextColor;
-    public String homePageRibbonBackgroundColor;
-    public String homePageRibbonLinkType;
-    public String homePageRibbonLinkInternal;
-    public String homePageRibbonLinkExternal;
-    public String homePageTopBackgroundImage;
-    public String homePageTopBackgroundGradientStartColor;
-    public String homePageTopBackgroundGradientStopColor;
-    public String homePageTopTextLine1;
-    public boolean headerTokensCapital1;
-    public String homePageTopTextLine1Color;
-    public boolean homePageTopTextUnderLine1;
-    public String homePageTopTextUnderLine1Color;
-    public String homePageTopTextLine2;
-    public boolean headerTokensCapital2;
-    public String homePageTopTextLine2Color;
-    public boolean homePageTopTextUnderLine2;
-    public String homePageTopTextUnderLine2Color;
-    public String homePageDisplayTopButton;
-    public String homePageTopButtonText;
-    public String homePageTopButtonTextColor;
-    public String homePageTopButtonGradientStartColor;
-    public String homePageTopButtonGradientStopColor;
-    public String homePageTopButtonLinkType;
-    public String homePageTopButtonLinkInternal;
-    public String homePageTopButtonLinkExternal;
-    public String homePageBottomBackgroundImage;
-    public String homePageBottomBackgroundGradientStartColor;
-    public String homePageBottomBackgroundGradientStopColor;
-    public boolean homePageBottomDisplayIcon;
-    public boolean homePageBottomDisplayArrowIcon;
-    public String homePageBottomArrowColor;
-    public String homePageBottomTextAlign;
-    public boolean homePageDisplayFooter;
-    public String homePageBottomIconShape;
-    public String homePageBottomIconColor;
-    public String homePageBottomIconBackgroundColor;
-    public boolean homePageGridMenuLayout;
-    public String homePageBackgroundImage;
-    public String homePageBackgroundGradientStartColor;
-    public String homePageBackgroundGradientStopColor;
-    public boolean homePageTopHeader3;
-    public String homePageTopHeader3Type;
-    public String homePageTopDescriptionText;
-    public String homePageTopTextLine3Color;
+public class HomeScreenModel {
+    public String ribbonIcon,
+            homePageRibbonPosition,
+            homePageRibbonIcon,
+            homePageRibbonText,
+            homePageRibbonIconPosition,
+            homePageRibbonTextColor,
+            homePageRibbonBackgroundColor,
+            homePageRibbonLinkType,
+            homePageRibbonLinkInternal,
+            homePageRibbonLinkExternal,
+            homePageTopBackgroundImage,
+            homePageTopBackgroundGradientStartColor,
+            homePageTopBackgroundGradientStopColor,
+            homePageTopTextLine1,
+            homePageTopTextLine1Color,
+            homePageTopTextUnderLine1Color,
+            homePageTopTextLine2,
+            homePageTopTextLine2Color,
+            homePageTopTextUnderLine2Color,
+            homePageDisplayTopButton,
+            homePageTopButtonText,
+            homePageTopButtonTextColor,
+            homePageTopButtonGradientStartColor,
+            homePageTopButtonGradientStopColor,
+            homePageTopButtonLinkType,
+            homePageTopButtonLinkInternal,
+            homePageTopButtonLinkExternal,
+            homePageBottomBackgroundImage,
+            homePageBottomBackgroundGradientStartColor,
+            homePageBottomBackgroundGradientStopColor,
+            homePageBottomTextAlign,
+            homePageBottomArrowColor,
+            homePageBottomIconBackgroundColor,
+            homePageBottomIconColor,
+            homePageBottomIconShape,
+            homePageBackgroundImage,
+            homePageBackgroundGradientStartColor,
+            homePageBackgroundGradientStopColor,
+            homePageTopHeader3Type,
+            homePageTopDescriptionText,
+            homePageTopTextLine3Color,
+            homePageHeaderMenuText;
+
+
+    public boolean homePageBottomDisplayIcon,
+            homePageBottomDisplayArrowIcon,
+            homePageDisplayFooter,
+            homePageGridMenuLayout,
+            homePageTopHeader3,
+            homePageDisplayRibbon,
+            homePageRibbonDisplayIcon,
+            homePageRibbonTextMarquee,
+            headerTokensCapital1,
+            homePageTopTextUnderLine1,
+            headerTokensCapital2,
+            homePageTopTextUnderLine2,
+            homePageDisplayHeader,
+            homePageDisplayHeaderMenu,
+            homePageDisplayHeaderProfile;
+
     public List<MenuLinkModel> menuLinks;
     public List<FooterLinkModel> footerLinks;
     public HomeScreenPointsSettingsModel homeScreenPointsSettings;
-    public boolean homePageDisplayHeader;
-    public boolean homePageDisplayHeaderMenu;
-    public String homePageHeaderMenuText;
-    public boolean homePageDisplayHeaderProfile;
 
     public HomeScreenModel(boolean homePageDisplayRibbon, boolean homePageRibbonDisplayIcon, String ribbonIcon, String homePageRibbonPosition, String homePageRibbonIcon, String homePageRibbonText, String homePageRibbonIconPosition, boolean homePageRibbonTextMarquee, String homePageRibbonTextColor, String homePageRibbonBackgroundColor, String homePageRibbonLinkType, String homePageRibbonLinkInternal, String homePageRibbonLinkExternal, String homePageTopBackgroundImage, String homePageTopBackgroundGradientStartColor, String homePageTopBackgroundGradientStopColor, String homePageTopTextLine1, boolean headerTokensCapital1, String homePageTopTextLine1Color, boolean homePageTopTextUnderLine1, String homePageTopTextUnderLine1Color, String homePageTopTextLine2, boolean headerTokensCapital2, String homePageTopTextLine2Color, boolean homePageTopTextUnderLine2, String homePageTopTextUnderLine2Color, String homePageDisplayTopButton, String homePageTopButtonText, String homePageTopButtonTextColor, String homePageTopButtonGradientStartColor, String homePageTopButtonGradientStopColor, String homePageTopButtonLinkType, String homePageTopButtonLinkInternal, String homePageTopButtonLinkExternal, String homePageBottomBackgroundImage, String homePageBottomBackgroundGradientStartColor, String homePageBottomBackgroundGradientStopColor, boolean homePageBottomDisplayIcon, boolean homePageBottomDisplayArrowIcon, String homePageBottomArrowColor, String homePageBottomTextAlign, boolean homePageDisplayFooter, String homePageBottomIconShape, String homePageBottomIconColor, String homePageBottomIconBackgroundColor, boolean homePageGridMenuLayout, String homePageBackgroundImage, String homePageBackgroundGradientStartColor, String homePageBackgroundGradientStopColor, boolean homePageTopHeader3, String homePageTopHeader3Type, String homePageTopDescriptionText, String homePageTopTextLine3Color, List<MenuLinkModel> menuLinks, List<FooterLinkModel> footerLinks, HomeScreenPointsSettingsModel homeScreenPointsSettings, boolean homePageDisplayHeader, boolean homePageDisplayHeaderMenu, String homePageHeaderMenuText, boolean homePageDisplayHeaderProfile) {
         this.homePageDisplayRibbon = homePageDisplayRibbon;

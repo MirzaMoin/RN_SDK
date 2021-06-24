@@ -123,6 +123,7 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
 
         ivBack.setOnClickListener(this);
         textPointOffers.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
+        textPointOffers.setText(String.valueOf(Utility.response.responsedata.contactData.getPointBalance())+ " PTS");
 
 
         setFooter();

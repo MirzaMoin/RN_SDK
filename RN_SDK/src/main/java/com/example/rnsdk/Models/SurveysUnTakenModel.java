@@ -4,14 +4,15 @@ import java.util.Date;
 
 public class SurveysUnTakenModel {
     public String surveyTitle;
-    public Date surveySendDate;
+    public String surveySendDate;
     public String surveyID;
     public String surveySendID;
-    public Date respondDate;
+    public String respondDate;
     public int surveyPoints;
     public String surveyLink;
 
-    public SurveysUnTakenModel(String surveyTitle, Date surveySendDate, String surveyID, String surveySendID, Date respondDate, int surveyPoints, String surveyLink) {
+
+    public SurveysUnTakenModel(String surveyTitle, String surveySendDate, String surveyID, String surveySendID, String respondDate, int surveyPoints, String surveyLink) {
         this.surveyTitle = surveyTitle;
         this.surveySendDate = surveySendDate;
         this.surveyID = surveyID;
@@ -29,13 +30,7 @@ public class SurveysUnTakenModel {
         this.surveyTitle = surveyTitle;
     }
 
-    public Date getSurveySendDate() {
-        return surveySendDate;
-    }
 
-    public void setSurveySendDate(Date surveySendDate) {
-        this.surveySendDate = surveySendDate;
-    }
 
     public String getSurveyID() {
         return surveyID;
@@ -53,11 +48,20 @@ public class SurveysUnTakenModel {
         this.surveySendID = surveySendID;
     }
 
-    public Date getRespondDate() {
+
+    public String getSurveySendDate() {
+        return surveySendDate;
+    }
+
+    public void setSurveySendDate(String surveySendDate) {
+        this.surveySendDate = surveySendDate;
+    }
+
+    public String getRespondDate() {
         return respondDate;
     }
 
-    public void setRespondDate(Date respondDate) {
+    public void setRespondDate(String respondDate) {
         this.respondDate = respondDate;
     }
 

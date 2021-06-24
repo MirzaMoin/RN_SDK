@@ -51,8 +51,8 @@ public class ExpandableListDataPump {
         List<String> PROFILE = new ArrayList<String>();
         if(menu.isVisibleUpdatePassword())
             PROFILE.add("Update Profile");
-        if(menu.isVisibleChangePassword())
-            PROFILE.add("Change Password");
+        /*if(menu.isVisibleChangePassword())
+            PROFILE.add("Change Password");*/
         expandableListDetail.put("PROFILE", PROFILE);
 
 
@@ -67,10 +67,6 @@ public class ExpandableListDataPump {
         expandableListDetail.put("CONTACT", CONTACT);
 
 
-        List<String> LOGOUT = new ArrayList<String>();
-
-        if(menu.isVisibleSignOut())
-            expandableListDetail.put("LOGOUT", LOGOUT);
 
         return expandableListDetail;
     }

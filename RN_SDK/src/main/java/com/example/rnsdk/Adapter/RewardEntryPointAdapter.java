@@ -1,18 +1,32 @@
 package com.example.rnsdk.Adapter;
 
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.rnsdk.Activities.RewardEntryGoalActivity;
+import com.example.rnsdk.Models.RPGListModel;
 import com.example.rnsdk.R;
+import com.example.rnsdk.Utility.Utility;
+
+import java.util.List;
 
 public class RewardEntryPointAdapter extends RecyclerView.Adapter<RewardEntryPointAdapter.ViewHolder>{
 
-   public RewardEntryPointAdapter(){
+    Context context;
+    List<RPGListModel> lstRPG;
 
+    public RewardEntryPointAdapter(Context context, List<RPGListModel> lstRPG) {
+        this.context = context;
+        this.lstRPG = lstRPG;
     }
 
     @Override
@@ -26,18 +40,47 @@ public class RewardEntryPointAdapter extends RecyclerView.Adapter<RewardEntryPoi
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
+        RPGListModel rpg = lstRPG.get(position);
+        holder.textTitleRPG.setText(rpg.getTitle());
+        holder.textDescRPG.setText(rpg.getDetails());
+
+        holder.textDigitPointRPG.setText(String.valueOf(rpg.getPointValue()));
+        Glide.with(context).load(rpg.getImage()).into(holder.imageRPG);
+
+
+        if(rpg.isActive())
+        {
+            holder.linearPointRPG.setBackgroundColor(Utility.getColor("#1dc916ff"));
+        }
+        else
+        {
+            holder.linearPointRPG.setBackgroundColor(Utility.getColor("#999999ff"));
+
+        }
     }
 
 
     @Override
     public int getItemCount() {
-        return 5;
+        return lstRPG.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
+        LinearLayout linearPointRPG;
+        ImageView imageRPG;
+        TextView textTitleRPG,textDescRPG,textDigitPointRPG;
+
+
         public ViewHolder(View itemView) {
             super(itemView);
+
+            linearPointRPG = itemView.findViewById(R.id.linearPointRPG);
+            imageRPG = itemView.findViewById(R.id.imageRPG);
+            textTitleRPG = itemView.findViewById(R.id.textTitleRPG);
+            textDescRPG = itemView.findViewById(R.id.textDescRPG);
+            textDigitPointRPG = itemView.findViewById(R.id.textDigitPointRPG);
+
 
         }
     }

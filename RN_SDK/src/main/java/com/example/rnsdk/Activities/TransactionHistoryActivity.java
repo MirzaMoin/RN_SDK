@@ -151,6 +151,7 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
 
         textPointTransactionHistory = findViewById(R.id.textPointTransactionHistory);
         textPointTransactionHistory.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
+        textPointTransactionHistory.setText(String.valueOf(Utility.response.responsedata.contactData.getPointBalance())+ " PTS");
 
         ChildPageSettingModel childPageSettings = Utility.response.responsedata.childPageSetting;
 

@@ -40,6 +40,7 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
 
         imgback.setOnClickListener(this);
         textPointOfferDetail.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
+        textPointOfferDetail.setText(String.valueOf(Utility.response.responsedata.contactData.getPointBalance())+ " PTS");
 
 
     }

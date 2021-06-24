@@ -28,6 +28,8 @@ public class Utility {
 
   public  static ResponseModel response = new ResponseModel();
 
+  public static String RPToken = "UW5c2c0MTT43HbVcKeu54rh8Nf77Fu";
+
   public static int  getColor(String color){
 
 
@@ -490,6 +492,15 @@ public class Utility {
       default:
         return R.string.fa_clock;
     }
+  }
+
+  public static String getRoundData(double data){
+    if (data == Math.round(data)) {
+      return String.valueOf(Math.round(data));
+    } else {
+      return   String.valueOf(data);
+    }
+
   }
 
 }

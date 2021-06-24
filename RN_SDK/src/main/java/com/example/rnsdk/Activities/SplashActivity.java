@@ -71,51 +71,104 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                 progressDialog.dismiss();
-                Log.e("Test", "" + response.body().statusMessage);
-                if (response.isSuccessful()) {
+
+                    if (response.isSuccessful()) {
+                        if(response.body() != null)
+                        {
+                            Log.e("Test", "" + response.body().statusMessage);
 
 
-                    ResponseModel responseModel = response.body();
-                    Utility.response = responseModel;
-//                    btnHome.setText(Utility.response.responsedata.homeScreen.homePageHeaderMenuText);
+                            ResponseModel responseModel = response.body();
+                            Utility.response = responseModel;
 
 
-                    Call<ResponseModel> callLogin = service.Login(ApiJsonMap("UW5c2c0MTT43HbVcKeu54rh8Nf77Fu",
-                            "8000333022",
-                            "123456789"));
+                            Call<ResponseModel> callLogin = service.Login(ApiJsonMap("UW5c2c0MTT43HbVcKeu54rh8Nf77Fu",
+                                    "8000333022",
+                                    "987654321"));
 
 
-                    callLogin.enqueue(new Callback<ResponseModel>() {
-                        @Override
-                        public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
-                            if (response.isSuccessful()) {
+                            callLogin.enqueue(new Callback<ResponseModel>() {
+                                @Override
+                                public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                                    if (response.isSuccessful()) {
+                                        if (response.body().getStatusCode() == 1) {
+                                            Utility.response.responsedata.contactData = response.body().responsedata.contactData;
+                                            Utility.response.responsedata.webFormData = response.body().responsedata.webFormData;
 
-                                Utility.response.responsedata.contactData = response.body().responsedata.contactData;
-                                Utility.response.responsedata.webFormData = response.body().responsedata.webFormData;
+                                            Log.e("Test:", "Response : " + response.body().responsedata.contactData.emailAddress);
 
-                                Log.e("Test:","Response : "+response.body().responsedata.contactData.emailAddress);
 
-                                Toast.makeText(SplashActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
+                                            Call<ResponseModel> callGetContactData = service.getContactData(Utility.response.responsedata.appDetails.rewardProgramId,
+                                                    Utility.response.responsedata.contactData.getContactID()
+                                            );
+
+
+                                            callGetContactData.enqueue(new Callback<ResponseModel>() {
+                                                @Override
+                                                public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                                                    if (response.isSuccessful()) {
+
+
+                                                        Log.e("Test:", "Response : Got Contact Data");
+
+                                                        Toast.makeText(SplashActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
+                                                        startActivity(new Intent(SplashActivity.this, HomeActivity.class));
+
+
+                                                    } else {
+                                                        Log.e("TEST", "Error: " + response.message());
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onFailure(Call<ResponseModel> call, Throwable test) {
+
+                                                    Log.e("Test:::", test.getMessage().toString());
+                                                }
+                                            });
+
+
+                             /*   Toast.makeText(SplashActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(SplashActivity.this, HomeActivity.class));
 
+*/
 
-                            } else {
-                                Log.e("TEST", "Error: " + response.message());
-                            }
+                                        }
+                                        else
+                                        {
+                                            Toast.makeText(SplashActivity.this, "Username/Password may wrong", Toast.LENGTH_SHORT).show();
+                                            Log.e("Test","Response : "+response.body().getStatusMessage());
+
+                                        }
+
+
+                                    } else {
+                                        Log.e("TEST", "Error: " + response.message());
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<ResponseModel> call, Throwable test) {
+
+                                    Log.e("Test:::", test.getMessage().toString());
+                                }
+                            });
+
+                        }
+                        else
+                        {
+                            btnHome.setText("Error" + response.body());
+
                         }
 
-                        @Override
-                        public void onFailure(Call<ResponseModel> call, Throwable test) {
 
-                            Log.e("Test:::", test.getMessage().toString());
-                        }
-                    });
+                    } else {
+                        btnHome.setText("Error" + response.message());
+
+                    }
 
 
-                } else {
-                    btnHome.setText("Error" + response.message());
 
-                }
             }
 
             @Override

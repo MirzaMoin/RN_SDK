@@ -81,6 +81,7 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
         }
 
         textPointCashback.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
+        textPointCashback.setText(String.valueOf(Utility.response.responsedata.contactData.getPointBalance())+ " PTS");
 
         ChildPageSettingModel childPageSettings = Utility.response.responsedata.childPageSetting;
 

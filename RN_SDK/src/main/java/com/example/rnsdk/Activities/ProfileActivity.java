@@ -78,6 +78,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         textPointProfile = findViewById(R.id.textPointProfile);
 
         textPointProfile.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
+        textPointProfile.setText(String.valueOf(Utility.response.responsedata.contactData.getPointBalance())+ " PTS");
 
         ChildPageSettingModel childPageSettings = Utility.response.responsedata.childPageSetting;
         if (childPageSettings.isChildPageProfileEdit()) {

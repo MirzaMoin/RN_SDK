@@ -5,10 +5,12 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -16,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.rnsdk.API.GetAPIData;
+import com.example.rnsdk.API.RetrofitClientInstance;
 import com.example.rnsdk.Adapter.CashbackImageSliderAdapter;
 import com.example.rnsdk.Adapter.FooterAdapter;
 import com.example.rnsdk.Adapter.HomeMenuLinkListAdapter;
@@ -25,6 +29,7 @@ import com.example.rnsdk.Models.ChildPageModel;
 import com.example.rnsdk.Models.ChildPageSettingModel;
 import com.example.rnsdk.Models.HomeScreenModel;
 import com.example.rnsdk.Models.RPGChildPageDataModel;
+import com.example.rnsdk.Models.ResponseModel;
 import com.example.rnsdk.Models.WaysToEarnChildPageDataModel;
 import com.example.rnsdk.R;
 import com.example.rnsdk.Utility.Utility;
@@ -35,12 +40,18 @@ import com.smarteist.autoimageslider.SliderView;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class RewardEntryGoalActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView rvRPG,rvFooterRPG;
     ImageView imgBack;
     LinearLayout linearCashbackRPG,linearHome;
     TextView textPointRPG;
+    ProgressDialog progressDialog;
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -53,10 +64,8 @@ public class RewardEntryGoalActivity extends AppCompatActivity implements View.O
 
         init();
 
-        RewardEntryPointAdapter adapter = new RewardEntryPointAdapter();
-        rvRPG.setHasFixedSize(true);
-        rvRPG.setLayoutManager(new LinearLayoutManager(this));
-        rvRPG.setAdapter(adapter);
+        getData();
+
 
 
 
@@ -77,6 +86,7 @@ public class RewardEntryGoalActivity extends AppCompatActivity implements View.O
         imgBack = findViewById(R.id.imgBackRPG);
         textPointRPG = findViewById(R.id.textPointRPG);
         textPointRPG.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
+        textPointRPG.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance())+ " PTS");
 
         imgBack.setOnClickListener(this);
 
@@ -142,5 +152,53 @@ public class RewardEntryGoalActivity extends AppCompatActivity implements View.O
         if(v.getId() == R.id.imgBackRPG){
             super.onBackPressed();
         }
+    }
+
+    private void getData() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+
+        GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
+        Log.e("Request", "RP Token: " + Utility.RPToken +
+                ", Contact ID: " + Utility.response.responsedata.contactData.contactID);
+
+        Call<ResponseModel> call = service.getRPGList(Utility.RPToken
+                , Utility.response.responsedata.contactData.contactID);
+        call.enqueue(new Callback<ResponseModel>() {
+            @Override
+            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                progressDialog.dismiss();
+
+                if (response.isSuccessful()) {
+
+                    Utility.response.responsedata.lstRPG = response.body().responsedata.lstRPG;
+
+
+                    Log.e("TEST", "onResponse: "+Utility.response.responsedata.lstRPG.size() );
+
+                    RewardEntryPointAdapter adapter = new RewardEntryPointAdapter(RewardEntryGoalActivity.this,Utility.response.responsedata.lstRPG);
+                    rvRPG.setHasFixedSize(true);
+                    rvRPG.setLayoutManager(new LinearLayoutManager(RewardEntryGoalActivity.this));
+                    rvRPG.setAdapter(adapter);
+
+
+
+                } else {
+                    Log.e("TEST", "Error Sub: " + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModel> call, Throwable test) {
+                progressDialog.dismiss();
+
+                test.printStackTrace();
+                Log.e("Test", "Error Main: " + test.toString());
+            }
+        });
+
     }
 }

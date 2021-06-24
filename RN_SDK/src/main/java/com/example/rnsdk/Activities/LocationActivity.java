@@ -83,6 +83,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         cardLocation.setOnClickListener(this);
 
         textPointLocation.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
+        textPointLocation.setText(String.valueOf(Utility.response.responsedata.contactData.getPointBalance())+ " PTS");
 
 
         setFooter();

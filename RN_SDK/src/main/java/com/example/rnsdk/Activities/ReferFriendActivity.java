@@ -73,6 +73,7 @@ public class ReferFriendActivity extends AppCompatActivity implements View.OnCli
         textPointReferFriend = findViewById(R.id.textPointReferFriend);
 
         textPointReferFriend.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
+        textPointReferFriend.setText(String.valueOf(Utility.response.responsedata.contactData.getPointBalance())+ " PTS");
 
         imgBackReferFriend.setOnClickListener(this);
 

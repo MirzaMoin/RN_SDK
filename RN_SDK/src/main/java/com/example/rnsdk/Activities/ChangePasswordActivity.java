@@ -20,6 +20,8 @@ import com.example.rnsdk.Models.ChildPageSettingModel;
 import com.example.rnsdk.Models.RPGChildPageDataModel;
 import com.example.rnsdk.R;
 import com.example.rnsdk.Utility.Utility;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -31,14 +33,21 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
 
     ImageView imgBackChangePassword;
     SwipeButton swipe_btn;
+    TextInputLayout textInputLayout;
+    TextInputEditText etCurrentPasswordCP,
+            etNewPasswordCP,
+            etConfirmPasswordCP;
+
+    SwipeButton swipeBtnChangePassword;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
 
-
         init();
+
     }
 
     private void init() {
@@ -48,12 +57,16 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.setStatusBarColor(Utility.getColor(Utility.response.responsedata.appColor.getPhoneNotificationBar()));
         }
-        if(Utility.response.responsedata.appColor.getPhoneNotificationBarTextColor().equals("Black")){
+        if (Utility.response.responsedata.appColor.getPhoneNotificationBarTextColor().equals("Black")) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
 
         imgBackChangePassword = findViewById(R.id.imgBackChangePassword);
         swipe_btn = findViewById(R.id.swipe_btn);
+
+        etCurrentPasswordCP = findViewById(R.id.etCurrentPasswordCP);
+        etNewPasswordCP = findViewById(R.id.etNewPasswordCP);
+        etConfirmPasswordCP = findViewById(R.id.etConfirmPasswordCP);
 
         AppColorModel color = Utility.response.responsedata.appColor;
         imgBackChangePassword.setOnClickListener(this);
@@ -70,7 +83,6 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
             }
 
 
-
             CashbackImageSliderAdapter adapter = new CashbackImageSliderAdapter(this, childPage);
 
             sliderView.setSliderAdapter(adapter);
@@ -85,7 +97,6 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
         }
 
 
-
     }
 
     @Override
@@ -93,5 +104,6 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
         if (v.getId() == R.id.imgBackChangePassword) {
             super.onBackPressed();
         }
+
     }
 }

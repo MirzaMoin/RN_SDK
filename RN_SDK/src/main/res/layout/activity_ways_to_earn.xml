@@ -76,7 +76,7 @@
 
             </TableLayout>
         </androidx.appcompat.widget.Toolbar>
-        <com.smarteist.autoimageslider.SliderView
+       <!-- <com.smarteist.autoimageslider.SliderView
             android:id="@+id/imageWaysToEarn"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_130sdp"
@@ -96,7 +96,7 @@
             app:sliderIndicatorUnselectedColor="#FFF"
             app:sliderScrollTimeInSec="1"
             app:sliderStartAutoCycle="true" />
-
+-->
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvWaysToEarn"

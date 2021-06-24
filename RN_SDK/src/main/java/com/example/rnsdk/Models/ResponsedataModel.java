@@ -21,9 +21,21 @@ public class ResponsedataModel {
     public List<OfferListModel> offerList;
 
     public List<SurveysUnTakenModel> unTaken;
-    public List<SurveysCompletedModel> completed;
+    public List<SurveysUnTakenModel> completed;
 
-    public ResponsedataModel(LoginScreenModel logInScreen, HomeScreenModel homeScreen, AppColorModel appColor, MenuPermissionModel menuPermission, AppIntakeImagesModel appIntakeImages, AppDetailsModel appDetails, ChildPageSettingModel childPageSetting, ContactData contactData, Object webFormData, TransactionHistoryModel transactionHistoryModel, List<TransactionHistoryModel> responsedata, OfferRedeemSettingModel redeemSetting, OfferAddressDetailsModel addressDetails, OfferUserDetailsModel userDetails, List<OfferListModel> offerList, List<SurveysUnTakenModel> unTaken, List<SurveysCompletedModel> completed) {
+    public List<RPGListModel> lstRPG;
+
+
+    public WaysToEarnModel totalPoints;
+    public WaysToEarnModel purchasePoints;
+    public WaysToEarnModel socialShare;
+    public WaysToEarnModel referFriends;
+    public WaysToEarnModel leaderboard;
+    public WaysToEarnModel surveys;
+    public WaysToEarnModel completeProfile;
+
+
+    public ResponsedataModel(LoginScreenModel logInScreen, HomeScreenModel homeScreen, AppColorModel appColor, MenuPermissionModel menuPermission, AppIntakeImagesModel appIntakeImages, AppDetailsModel appDetails, ChildPageSettingModel childPageSetting, ContactData contactData, Object webFormData, TransactionHistoryModel transactionHistoryModel, List<TransactionHistoryModel> responsedata, OfferRedeemSettingModel redeemSetting, OfferAddressDetailsModel addressDetails, OfferUserDetailsModel userDetails, List<OfferListModel> offerList, List<SurveysUnTakenModel> unTaken, List<SurveysUnTakenModel> completed, List<RPGListModel> lstRPG, WaysToEarnModel totalPoints, WaysToEarnModel purchasePoints, WaysToEarnModel socialShare, WaysToEarnModel referFriends, WaysToEarnModel leaderboard, WaysToEarnModel surveys, WaysToEarnModel completeProfile) {
         this.logInScreen = logInScreen;
         this.homeScreen = homeScreen;
         this.appColor = appColor;
@@ -41,6 +53,14 @@ public class ResponsedataModel {
         this.offerList = offerList;
         this.unTaken = unTaken;
         this.completed = completed;
+        this.lstRPG = lstRPG;
+        this.totalPoints = totalPoints;
+        this.purchasePoints = purchasePoints;
+        this.socialShare = socialShare;
+        this.referFriends = referFriends;
+        this.leaderboard = leaderboard;
+        this.surveys = surveys;
+        this.completeProfile = completeProfile;
     }
 
     public LoginScreenModel getLogInScreen() {
@@ -171,11 +191,76 @@ public class ResponsedataModel {
         this.unTaken = unTaken;
     }
 
-    public List<SurveysCompletedModel> getCompleted() {
+    public List<SurveysUnTakenModel> getCompleted() {
         return completed;
     }
 
-    public void setCompleted(List<SurveysCompletedModel> completed) {
+    public void setCompleted(List<SurveysUnTakenModel> completed) {
         this.completed = completed;
+    }
+
+
+    public List<RPGListModel> getLstRPG() {
+        return lstRPG;
+    }
+
+    public void setLstRPG(List<RPGListModel> lstRPG) {
+        this.lstRPG = lstRPG;
+    }
+
+    public WaysToEarnModel getTotalPoints() {
+        return totalPoints;
+    }
+
+    public void setTotalPoints(WaysToEarnModel totalPoints) {
+        this.totalPoints = totalPoints;
+    }
+
+    public WaysToEarnModel getPurchasePoints() {
+        return purchasePoints;
+    }
+
+    public void setPurchasePoints(WaysToEarnModel purchasePoints) {
+        this.purchasePoints = purchasePoints;
+    }
+
+    public WaysToEarnModel getSocialShare() {
+        return socialShare;
+    }
+
+    public void setSocialShare(WaysToEarnModel socialShare) {
+        this.socialShare = socialShare;
+    }
+
+    public WaysToEarnModel getReferFriends() {
+        return referFriends;
+    }
+
+    public void setReferFriends(WaysToEarnModel referFriends) {
+        this.referFriends = referFriends;
+    }
+
+    public WaysToEarnModel getLeaderboard() {
+        return leaderboard;
+    }
+
+    public void setLeaderboard(WaysToEarnModel leaderboard) {
+        this.leaderboard = leaderboard;
+    }
+
+    public WaysToEarnModel getSurveys() {
+        return surveys;
+    }
+
+    public void setSurveys(WaysToEarnModel surveys) {
+        this.surveys = surveys;
+    }
+
+    public WaysToEarnModel getCompleteProfile() {
+        return completeProfile;
+    }
+
+    public void setCompleteProfile(WaysToEarnModel completeProfile) {
+        this.completeProfile = completeProfile;
     }
 }

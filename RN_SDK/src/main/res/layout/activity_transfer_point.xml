@@ -129,6 +129,7 @@
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 android:textSize="@dimen/_12sdp"/>
             <EditText
+                android:id="@+id/etPointAmountTP"
                 android:layout_width="match_parent"
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 android:layout_height="@dimen/_35sdp"
@@ -178,17 +179,20 @@
                 android:text="Enter User Details"
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 android:textSize="@dimen/_12sdp"/>
+
             <EditText
+                android:id="@+id/etUserDetailsTP"
                 android:layout_width="match_parent"
-                android:layout_marginHorizontal="@dimen/_10sdp"
                 android:layout_height="@dimen/_35sdp"
-                android:hint="Email , Mobile number or Member CardID"
+                android:layout_marginHorizontal="@dimen/_10sdp"
                 android:layout_marginVertical="@dimen/_10sdp"
-                android:paddingLeft="@dimen/_10sdp"
                 android:background="@drawable/edit_text_border"
                 android:drawablePadding="@dimen/_10sdp"
-                android:textSize="@dimen/_12ssp"
-                />
+                android:hint="Email , Mobile number or Member CardID"
+                android:paddingLeft="@dimen/_10sdp"
+
+                android:textSize="@dimen/_12ssp" />
+
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -93,6 +93,7 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
         textPointUploadReceipt = findViewById(R.id.textPointUploadReceipt);
 
         textPointUploadReceipt.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
+        textPointUploadReceipt.setText(String.valueOf(Utility.response.responsedata.contactData.getPointBalance())+ " PTS");
 
         btnSubmit.setOnClickListener(this);
         imgBack.setOnClickListener(this);
