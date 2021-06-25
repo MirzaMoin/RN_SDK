@@ -83,8 +83,8 @@ public class SplashActivity extends AppCompatActivity {
 
 
                             Call<ResponseModel> callLogin = service.Login(ApiJsonMap("UW5c2c0MTT43HbVcKeu54rh8Nf77Fu",
-                                    "8000333022",
-                                    "987654321"));
+                                    "8888888888",
+                                    "111111"));
 
 
                             callLogin.enqueue(new Callback<ResponseModel>() {

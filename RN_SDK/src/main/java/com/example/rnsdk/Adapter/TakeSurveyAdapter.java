@@ -1,6 +1,7 @@
 package com.example.rnsdk.Adapter;
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -22,6 +23,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Handler;
 
 public class TakeSurveyAdapter extends RecyclerView.Adapter<TakeSurveyAdapter.ViewHolder> {
 
@@ -92,10 +94,21 @@ public class TakeSurveyAdapter extends RecyclerView.Adapter<TakeSurveyAdapter.Vi
                 @Override
                 public void onClick(View v) {
 
+                    ProgressDialog progressDialog;
+                    progressDialog = new ProgressDialog(context);
+                    progressDialog.setTitle("Loading...");
+                    progressDialog.setCancelable(false);
+                    progressDialog.show();
                     Intent i = new Intent(context, WebViewActivity.class);
                     i.putExtra("url",survey.getSurveyLink());
                     i.putExtra("isSurvey",true);
+
                     context.startActivity(i);
+
+
+
+
+                    progressDialog.dismiss();
                 }
             });
         }

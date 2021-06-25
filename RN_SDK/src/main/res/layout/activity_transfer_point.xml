@@ -139,6 +139,7 @@
                 android:background="@drawable/edit_text_border"
                 android:drawablePadding="@dimen/_10sdp"
                 android:textSize="@dimen/_12ssp"
+                android:inputType="numberDecimal"
                 />
             <RelativeLayout
                 android:layout_width="match_parent"

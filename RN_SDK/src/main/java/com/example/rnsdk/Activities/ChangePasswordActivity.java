@@ -1,5 +1,6 @@
 package com.example.rnsdk.Activities;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
@@ -41,6 +42,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
     SwipeButton swipeBtnChangePassword;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +52,7 @@ public class ChangePasswordActivity extends AppCompatActivity implements View.On
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void init() {
         if (Build.VERSION.SDK_INT >= 21) {
             Window window = getWindow();

@@ -112,6 +112,7 @@
             app:sliderStartAutoCycle="true" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardTapRC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_10sdp"
@@ -138,6 +139,7 @@
                     android:textSize="@dimen/_12ssp"
                     />
                 <TextView
+                    android:id="@+id/textBalanceRC"
                     android:layout_width="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_height="wrap_content"
@@ -150,48 +152,67 @@
             </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Enter other amount"
-            android:layout_marginHorizontal="@dimen/_10sdp"
-            android:textSize="@dimen/_12sdp"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_marginHorizontal="@dimen/_10sdp"
-            android:layout_height="@dimen/_35sdp"
-            android:hint="Enter other amount"
-            android:textSize="@dimen/_12ssp"
-            android:layout_marginVertical="@dimen/_10sdp"
-            android:paddingLeft="@dimen/_10sdp"
-            android:drawableLeft="@drawable/ic_baseline_attach_money_24"
-            android:background="@drawable/edit_text_border"
-            android:drawableTint="#978787"
-            android:drawablePadding="@dimen/_10sdp"
-            />
-        <com.ebanx.swipebtn.SwipeButton
-            android:id="@+id/swipe_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_10sdp"
-            app:inner_text="Slide to redeem"
-            app:inner_text_color="@android:color/white"
-            app:inner_text_size="@dimen/_12ssp"
-            app:inner_text_top_padding="@dimen/_10sdp"
-            app:inner_text_bottom_padding="@dimen/_10sdp"
+            android:orientation="vertical"
+            android:id="@+id/linearAmountRC"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enter other amount"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp"/>
+            <EditText
+                android:id="@+id/etAmountRC"
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:hint="Enter other amount"
+                android:textSize="@dimen/_12ssp"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:paddingLeft="@dimen/_10sdp"
+                android:inputType="numberDecimal"
+                android:drawableLeft="@drawable/ic_baseline_attach_money_24"
+                android:background="@drawable/edit_text_border"
+                android:drawableTint="#978787"
+                android:drawablePadding="@dimen/_10sdp"
+                />
+        </LinearLayout>
 
-            app:inner_text_background="@drawable/shape_rounded_background"
-            app:button_image_width="@dimen/_50sdp"
-            app:button_image_disabled="@drawable/ic_baseline_arrow_forward_ios_24"
-            app:button_image_enabled="@drawable/ic_baseline_arrow_back_24"
-            app:button_left_padding="20dp"
-            app:button_right_padding="20dp"
-            app:button_top_padding="@dimen/_10sdp"
-            app:button_bottom_padding="@dimen/_10sdp"
-            app:button_background="@drawable/shape_button_background"
-            app:initial_state="disabled"
-            app:has_activate_state="true"
-            />
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+
+            app:cardCornerRadius="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+
+            >
+            <com.ebanx.swipebtn.SwipeButton
+                android:id="@+id/swipeBtnRC"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:inner_text="Slide to redeem"
+                app:inner_text_color="@android:color/white"
+                app:inner_text_size="@dimen/_12ssp"
+                app:inner_text_top_padding="@dimen/_10sdp"
+                app:inner_text_bottom_padding="@dimen/_10sdp"
+
+                app:button_image_width="@dimen/_45sdp"
+                app:button_image_disabled="@drawable/ic_baseline_arrow_forward_ios_24"
+                app:button_image_enabled="@drawable/ic_baseline_arrow_back_24"
+                app:button_left_padding="20dp"
+                app:button_right_padding="20dp"
+                app:button_top_padding="@dimen/_10sdp"
+                app:button_bottom_padding="@dimen/_10sdp"
+                app:button_background="@drawable/shape_button_background"
+                app:initial_state="disabled"
+                app:has_activate_state="true"
+                />
+        </androidx.cardview.widget.CardView>
+
 
     </LinearLayout>
     </ScrollView>

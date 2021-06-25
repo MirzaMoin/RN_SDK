@@ -1,7 +1,6 @@
 package com.example.rnsdk.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
@@ -11,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
@@ -19,14 +17,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.rnsdk.Models.ResponsedataModel;
 import com.example.rnsdk.R;
 import com.example.rnsdk.Utility.Utility;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.net.URL;
+
+import static com.example.rnsdk.Utility.Utility.getRoundData;
+import static com.example.rnsdk.Utility.Utility.response;
 
 public class WebViewActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -39,6 +43,8 @@ public class WebViewActivity extends AppCompatActivity implements View.OnClickLi
     boolean isSurvey = false;
     String originalUrl = "";
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,8 +73,7 @@ public class WebViewActivity extends AppCompatActivity implements View.OnClickLi
         webview.getSettings().setJavaScriptEnabled(true);
 
 
-        if(isSurvey)
-        {
+        if (isSurvey) {
             try {
                 originalUrl = expandUrl(url);
             } catch (IOException e) {
@@ -82,15 +87,13 @@ public class WebViewActivity extends AppCompatActivity implements View.OnClickLi
             public void onPageFinished(WebView view, String url1) {
                 progressDialog.dismiss();
 
-                if(isSurvey)
-                {
+                if (isSurvey) {
                     if (view.getUrl().equals(originalUrl)) {
 
                         Log.e("Test", "Loaded");
 
 
-                    }
-                    else {
+                    } else {
 
                         Log.e("TEST", "Changed URL : " + view.getUrl());
                         startActivity(new Intent(WebViewActivity.this, HomeActivity.class));
@@ -100,7 +103,6 @@ public class WebViewActivity extends AppCompatActivity implements View.OnClickLi
                 }
 
 
-
             }
 
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
@@ -108,75 +110,6 @@ public class WebViewActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
 
-
-    /*    Thread thread = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-
-                try {
-                    try {
-                        originalUrl = expandUrl(url);
-                        Log.e("Test","Loading");
-
-                        webview.setWebChromeClient(new WebChromeClient() {
-                                                       @Override
-                                                       public void onProgressChanged(WebView view, int newProgress) {
-                                                           Log.e("Test","Loaded");
-
-                                                           if (view.getUrl().equals(url)) {
-
-                                                               Log.e("Test","Loaded");
-
-
-                                                           } else {
-
-                                                               startActivity(new Intent(WebViewActivity.this, HomeActivity.class));
-                                                               finish();
-                                                               // onUrlChanged(mUrl) // url changed
-                                                           }
-                                                           super.onProgressChanged(view, newProgress);
-                                                       }
-
-
-
-                                                   }
-                        );
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                webview.setWebViewClient(new WebViewClient() {
-                    @Override
-                    public void onPageFinished(WebView view, String url1) {
-                        progressDialog.dismiss();
-
-                        if (view.getUrl().equals(originalUrl)) {
-
-                            Log.e("Test","Loaded");
-
-
-                        } else {
-
-                            Log.e("TEST","Changed URL : "+view.getUrl());
-                            startActivity(new Intent(WebViewActivity.this, HomeActivity.class));
-                            finish();
-                            // onUrlChanged(mUrl) // url changed
-                        }
-
-                    }
-                    public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                        Toast.makeText(WebViewActivity.this, description, Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
-
-        thread.start();
-*/
 
         Log.e("TEST URL", "onCreate: " + originalUrl);
 
@@ -199,15 +132,18 @@ public class WebViewActivity extends AppCompatActivity implements View.OnClickLi
         return expandedURL;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @SuppressLint("SetTextI18n")
     private void init() {
+        ResponsedataModel responseData = response.responsedata;
 
         if (Build.VERSION.SDK_INT >= 21) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.setStatusBarColor(Utility.getColor(Utility.response.responsedata.appColor.getPhoneNotificationBar()));
+            window.setStatusBarColor(Utility.getColor(responseData.appColor.getPhoneNotificationBar()));
         }
-        if (Utility.response.responsedata.appColor.getPhoneNotificationBarTextColor().equals("Black")) {
+        if (responseData.appColor.getPhoneNotificationBarTextColor().equals("Black")) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
         webview = findViewById(R.id.webview);
@@ -216,8 +152,8 @@ public class WebViewActivity extends AppCompatActivity implements View.OnClickLi
         linearForward = findViewById(R.id.linearForward);
         imgBack = findViewById(R.id.imgBackWebview);
         textPointWebView = findViewById(R.id.textPointWebView);
-        textPointWebView.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
-        textPointWebView.setText(String.valueOf(Utility.response.responsedata.contactData.getPointBalance())+ " PTS");
+        textPointWebView.setTextColor(Utility.getColor(responseData.appColor.getHeaderPointDigitColor()));
+        textPointWebView.setText(getRoundData(responseData.contactData.getPointBalance()) + " PTS");
 
 
         linearBack.setOnClickListener(this);

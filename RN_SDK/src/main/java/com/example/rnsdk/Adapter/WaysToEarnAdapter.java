@@ -7,6 +7,7 @@ import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -70,36 +71,6 @@ public class WaysToEarnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
 
-    public class ViewHolderOne extends RecyclerView.ViewHolder {
-        SliderView sliderView;
-
-        public ViewHolderOne(View itemView) {
-            super(itemView);
-            sliderView = itemView.findViewById(R.id.imageContentSliderview);
-               }
-    }
-
-    public class ViewHolderTwo extends RecyclerView.ViewHolder{
-        LinearLayout linearContent;
-
-
-        TextView textTitleWaysToEarnContent,
-                textSubTitleWaysToEarnContent,
-                textPointWaysToEarnContent;
-        ExpandableTextView expTv;
-
-        ImageView imageWaysToEarnContent;
-
-        public ViewHolderTwo(View itemView) {
-            super(itemView);
-            linearContent = itemView.findViewById(R.id.linearWaysToEarn);
-            textTitleWaysToEarnContent = itemView.findViewById(R.id.textTitleWaysToEarnContent);
-            textSubTitleWaysToEarnContent = itemView.findViewById(R.id.textSubTitleWaysToEarnContent);
-            textPointWaysToEarnContent = itemView.findViewById(R.id.textPointWaysToEarnContent);
-            imageWaysToEarnContent = itemView.findViewById(R.id.imageWaysToEarnContent);
-            expTv = (ExpandableTextView) itemView.findViewById(R.id.expand_text_view).findViewById(R.id.expand_text_view);
-        }
-    }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int position) {
@@ -144,12 +115,20 @@ public class WaysToEarnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             {
                 holder.imageWaysToEarnContent.setVisibility(View.VISIBLE);
                 Glide.with(context).load(ways.getImageURL()).into(holder.imageWaysToEarnContent);
-
+            }
+            else
+            {
+                holder.buttonRecentActivityWTE.setVisibility(View.GONE);
             }
 
             if(position % 2 == 0)
             {
-                holder.linearContent.setBackgroundColor(Color.parseColor("#D3D3D3"));
+                holder.linearContent.setBackgroundColor(Color.parseColor("#ececec"));
+            }
+            else
+            {
+                holder.linearContent.setBackgroundColor(Color.parseColor("#ffffff"));
+
             }
         }
 
@@ -160,20 +139,39 @@ public class WaysToEarnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         return waysList.size()+1;
     }
 
-  /*  public static class ViewHolder extends RecyclerView.ViewHolder {
 
-       LinearLayout linearContent;
-        // getting reference of ExpandableTextView
+    public class ViewHolderOne extends RecyclerView.ViewHolder {
+        SliderView sliderView;
+
+        public ViewHolderOne(View itemView) {
+            super(itemView);
+            sliderView = itemView.findViewById(R.id.imageContentSliderview);
+        }
+    }
+
+    public class ViewHolderTwo extends RecyclerView.ViewHolder{
+        LinearLayout linearContent;
+
+
+        TextView textTitleWaysToEarnContent,
+                textSubTitleWaysToEarnContent,
+                textPointWaysToEarnContent;
         ExpandableTextView expTv;
 
-// calling setText on the ExpandableTextView so that
-// text content will be displayed to the user
+        ImageView imageWaysToEarnContent;
 
+        Button buttonRecentActivityWTE;
 
-        public ViewHolder(View itemView) {
+        public ViewHolderTwo(View itemView) {
             super(itemView);
             linearContent = itemView.findViewById(R.id.linearWaysToEarn);
+            textTitleWaysToEarnContent = itemView.findViewById(R.id.textTitleWaysToEarnContent);
+            textSubTitleWaysToEarnContent = itemView.findViewById(R.id.textSubTitleWaysToEarnContent);
+            textPointWaysToEarnContent = itemView.findViewById(R.id.textPointWaysToEarnContent);
+            imageWaysToEarnContent = itemView.findViewById(R.id.imageWaysToEarnContent);
+            buttonRecentActivityWTE = itemView.findViewById(R.id.buttonRecentActivityWTE);
             expTv = (ExpandableTextView) itemView.findViewById(R.id.expand_text_view).findViewById(R.id.expand_text_view);
         }
-    }*/
+    }
+
 }
