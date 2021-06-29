@@ -73,7 +73,7 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
         GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
         Log.e("Request", "RP ID: " + Utility.response.responsedata.appDetails.rewardProgramId + ", Contact ID: " + Utility.response.responsedata.contactData.contactID);
         Call<ResponseModel> call =
-                service.getTransactionHistory(Utility.response.responsedata.appDetails.rewardProgramId
+                service.getOffers(Utility.response.responsedata.appDetails.rewardProgramId
                         , Utility.response.responsedata.contactData.contactID);
         call.enqueue(new Callback<ResponseModel>() {
 

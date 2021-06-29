@@ -1,5 +1,6 @@
 package com.example.rnsdk.Activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -129,14 +130,15 @@ public class TransferPointActivity extends AppCompatActivity implements View.OnC
 
                                 if (response.isSuccessful()) {
                                     if (response.body().getStatusCode() == 1) {
+                                        progressDialog.dismiss();
 
 
                                         etPointAmountTP.setText("");
                                         etUserDetailsTP.setText("");
                                         swipeBtnTransferPoint.toggleState();
 
-                                        Toast.makeText(TransferPointActivity.this, "Point Transferred", Toast.LENGTH_SHORT).show();
-
+                                        showAlertDialog("Success",response.body().getStatusMessage());
+                                        Log.e("Test",response.body().getStatusMessage());
 
 
                                         Call<ResponseModel> callGetContactData = service.getContactData(Utility.response.responsedata.appDetails.rewardProgramId,
@@ -152,7 +154,7 @@ public class TransferPointActivity extends AppCompatActivity implements View.OnC
                                                 if (response.isSuccessful()) {
 
 
-                                                    Log.e("Test:","Response : Got Contact Data");
+                                                    Log.e("Test:", "Response : Got Contact Data");
                                                     Utility.response.responsedata.contactData = response.body().responsedata.contactData;
 
 
@@ -168,20 +170,28 @@ public class TransferPointActivity extends AppCompatActivity implements View.OnC
                                             @Override
                                             public void onFailure(Call<ResponseModel> call, Throwable test) {
                                                 progressDialog.dismiss();
+                                                swipeBtnTransferPoint.toggleState();
+
 
                                                 Log.e("Test:::", test.getMessage().toString());
                                             }
                                         });
 
 
+                                    } else {
+                                        swipeBtnTransferPoint.toggleState();
 
+                                        progressDialog.dismiss();
 
+                                        Log.e("Test", response.body().getStatusMessage());
+                                        showAlertDialog("Opps...",response.body().getStatusMessage());
 
 
                                     }
 
 
                                 } else {
+                                    swipeBtnTransferPoint.toggleState();
 
                                     progressDialog.dismiss();
 
@@ -192,6 +202,8 @@ public class TransferPointActivity extends AppCompatActivity implements View.OnC
                             @Override
                             public void onFailure(Call<ResponseModel> call, Throwable test) {
                                 progressDialog.dismiss();
+                                swipeBtnTransferPoint.toggleState();
+
 
                                 Log.e("Test:::", test.getMessage().toString());
                             }
@@ -227,9 +239,8 @@ public class TransferPointActivity extends AppCompatActivity implements View.OnC
         double balance = Utility.response.responsedata.contactData.getPointBalance();
 
 
-            textPointTransferPoints.setText(Utility.getRoundData(balance) + " PTS");
+        textPointTransferPoints.setText(Utility.getRoundData(balance) + " PTS");
         etPointAmountTP.setHint(Utility.getRoundData(balance) + " PTS");
-
 
 
         AppColorModel color = Utility.response.responsedata.appColor;
@@ -317,6 +328,33 @@ public class TransferPointActivity extends AppCompatActivity implements View.OnC
         }
 
         return gsonObject;
+    }
+
+
+    void showAlertDialog(String title, String message) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        final View customLayout = getLayoutInflater().inflate(R.layout.content_alert_dialog, null);
+        builder.setView(customLayout);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        TextView textMessage, textOk, textTitle;
+        textMessage = dialog.findViewById(R.id.textMessageAlert);
+        textTitle = dialog.findViewById(R.id.textTitleAlert);
+        textOk = dialog.findViewById(R.id.textOKAlert);
+        textMessage.setText(message);
+        textTitle.setText(title);
+        textOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
     }
 
 }

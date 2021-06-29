@@ -178,7 +178,7 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
         AlertDialog dialog = builder.create();
         dialog.show();
         RecyclerView rv = dialog.findViewById(R.id.rvLocationDialog);
-        DialogListAdapter adapter = new DialogListAdapter();
+        DialogListAdapter adapter = new DialogListAdapter(UploadReceiptActivity.this, "UploadReceipt");
         rv.setHasFixedSize(true);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);

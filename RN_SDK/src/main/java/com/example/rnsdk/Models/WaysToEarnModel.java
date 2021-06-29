@@ -6,9 +6,9 @@ public class WaysToEarnModel {
     public String title;
     public String description;
     public String subtitle;
-    public int points;
+    public double points;
 
-    public WaysToEarnModel(boolean isVisible, String imageURL, String title, String description, String subtitle, int points) {
+    public WaysToEarnModel(boolean isVisible, String imageURL, String title, String description, String subtitle, double points) {
         this.isVisible = isVisible;
         this.imageURL = imageURL;
         this.title = title;
@@ -57,11 +57,11 @@ public class WaysToEarnModel {
         this.subtitle = subtitle;
     }
 
-    public int getPoints() {
+    public double getPoints() {
         return points;
     }
 
-    public void setPoints(int points) {
+    public void setPoints(double points) {
         this.points = points;
     }
 }

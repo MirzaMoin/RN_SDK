@@ -3,7 +3,6 @@ package com.example.rnsdk.Models;
 import java.util.List;
 
 public class ResponsedataModel {
-    public LoginScreenModel logInScreen;
     public HomeScreenModel homeScreen;
     public AppColorModel appColor;
     public MenuPermissionModel menuPermission;
@@ -35,8 +34,12 @@ public class ResponsedataModel {
     public WaysToEarnModel completeProfile;
 
 
-    public ResponsedataModel(LoginScreenModel logInScreen, HomeScreenModel homeScreen, AppColorModel appColor, MenuPermissionModel menuPermission, AppIntakeImagesModel appIntakeImages, AppDetailsModel appDetails, ChildPageSettingModel childPageSetting, ContactData contactData, Object webFormData, TransactionHistoryModel transactionHistoryModel, List<TransactionHistoryModel> responsedata, OfferRedeemSettingModel redeemSetting, OfferAddressDetailsModel addressDetails, OfferUserDetailsModel userDetails, List<OfferListModel> offerList, List<SurveysUnTakenModel> unTaken, List<SurveysUnTakenModel> completed, List<RPGListModel> lstRPG, WaysToEarnModel totalPoints, WaysToEarnModel purchasePoints, WaysToEarnModel socialShare, WaysToEarnModel referFriends, WaysToEarnModel leaderboard, WaysToEarnModel surveys, WaysToEarnModel completeProfile) {
-        this.logInScreen = logInScreen;
+    public LBQualificationCriteriaModel qualificationCriteria;
+    public List<LBFilterModel> filters;
+    public List<LBLeaderBoardReportModel> leaderBoardReport;
+
+    public ResponsedataModel(LoginScreenModel logInScreen, HomeScreenModel homeScreen, AppColorModel appColor, MenuPermissionModel menuPermission, AppIntakeImagesModel appIntakeImages, AppDetailsModel appDetails, ChildPageSettingModel childPageSetting, ContactData contactData, Object webFormData, TransactionHistoryModel transactionHistoryModel, List<TransactionHistoryModel> responsedata, OfferRedeemSettingModel redeemSetting, OfferAddressDetailsModel addressDetails, OfferUserDetailsModel userDetails, List<OfferListModel> offerList, List<SurveysUnTakenModel> unTaken, List<SurveysUnTakenModel> completed, List<RPGListModel> lstRPG, WaysToEarnModel totalPoints, WaysToEarnModel purchasePoints, WaysToEarnModel socialShare, WaysToEarnModel referFriends, WaysToEarnModel leaderboard, WaysToEarnModel surveys, WaysToEarnModel completeProfile, LBQualificationCriteriaModel qualificationCriteria, List<LBFilterModel> filters, List<LBLeaderBoardReportModel> leaderBoardReport) {
+
         this.homeScreen = homeScreen;
         this.appColor = appColor;
         this.menuPermission = menuPermission;
@@ -61,15 +64,11 @@ public class ResponsedataModel {
         this.leaderboard = leaderboard;
         this.surveys = surveys;
         this.completeProfile = completeProfile;
+        this.qualificationCriteria = qualificationCriteria;
+        this.filters = filters;
+        this.leaderBoardReport = leaderBoardReport;
     }
 
-    public LoginScreenModel getLogInScreen() {
-        return logInScreen;
-    }
-
-    public void setLogInScreen(LoginScreenModel logInScreen) {
-        this.logInScreen = logInScreen;
-    }
 
     public HomeScreenModel getHomeScreen() {
         return homeScreen;
@@ -262,5 +261,30 @@ public class ResponsedataModel {
 
     public void setCompleteProfile(WaysToEarnModel completeProfile) {
         this.completeProfile = completeProfile;
+    }
+
+
+    public LBQualificationCriteriaModel getQualificationCriteria() {
+        return qualificationCriteria;
+    }
+
+    public void setQualificationCriteria(LBQualificationCriteriaModel qualificationCriteria) {
+        this.qualificationCriteria = qualificationCriteria;
+    }
+
+    public List<LBFilterModel> getFilters() {
+        return filters;
+    }
+
+    public void setFilters(List<LBFilterModel> filters) {
+        this.filters = filters;
+    }
+
+    public List<LBLeaderBoardReportModel> getLeaderBoardReport() {
+        return leaderBoardReport;
+    }
+
+    public void setLeaderBoardReport(List<LBLeaderBoardReportModel> leaderBoardReport) {
+        this.leaderBoardReport = leaderBoardReport;
     }
 }

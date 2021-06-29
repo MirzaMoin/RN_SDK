@@ -39,6 +39,7 @@
         />
 </RelativeLayout>
     <EditText
+        android:id="@+id/etFilterLeader"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
         android:background="@drawable/edit_text_border"
@@ -67,6 +68,7 @@
 
             app:tint="#000" />
         <TextView
+            android:id="@+id/textDateBottomSheetLeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="21 may,2021"

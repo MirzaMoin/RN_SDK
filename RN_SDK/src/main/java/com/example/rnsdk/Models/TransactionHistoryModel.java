@@ -8,10 +8,10 @@ public class TransactionHistoryModel {
     public String type;
     public String transactionStatus;
     public String points;
-    public int balance;
+    public double balance;
     public List<TransactionHistoryChildMenuModel> childMenus;
 
-    public TransactionHistoryModel(String transactionDate, String locationName, String type, String transactionStatus, String points, int balance, List<TransactionHistoryChildMenuModel> childMenus) {
+    public TransactionHistoryModel(String transactionDate, String locationName, String type, String transactionStatus, String points, double balance, List<TransactionHistoryChildMenuModel> childMenus) {
         this.transactionDate = transactionDate;
         this.locationName = locationName;
         this.type = type;
@@ -61,11 +61,11 @@ public class TransactionHistoryModel {
         this.points = points;
     }
 
-    public int getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 

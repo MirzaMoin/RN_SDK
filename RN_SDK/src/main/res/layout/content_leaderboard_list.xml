@@ -1,69 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/_5sdp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:padding="@dimen/_5sdp">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/_5sdp"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginLeft="@dimen/_10sdp"
             android:layout_height="@dimen/_50sdp"
-            android:background="@drawable/background_leaderboard_list"
-            >
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/background_leaderboard_list">
+
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/winnerImage2"
-                android:layout_centerVertical="true"
-
+                android:id="@+id/winnerImageContentLeaderBoard"
                 android:layout_width="@dimen/_40sdp"
+
                 android:layout_height="@dimen/_40sdp"
-                android:src="@drawable/image_login_bg"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/_20sdp"
-                />
+                android:src="@drawable/image_login_bg" />
 
             <TextView
-                android:gravity="bottom"
+                android:id="@+id/textNameContentLeaderBoard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rishab Machhi"
-                android:textSize="@dimen/_12sdp"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:textColor="#000"
-                android:layout_toRightOf="@id/winnerImage2"
                 android:layout_centerVertical="true"
-                />
-            <TextView
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_toRightOf="@id/winnerImageContentLeaderBoard"
                 android:gravity="bottom"
+                android:text="Rishab Machhi"
+                android:textColor="#000"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                android:id="@+id/textPointContentLeaderBoard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0"
-                android:textSize="@dimen/_12sdp"
-                android:textColor="#000"
+                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/_20sdp"
-                android:layout_alignParentRight="true"
-                />
+                android:gravity="bottom"
+                android:text="0"
+                android:textColor="#000"
+                android:textSize="@dimen/_12sdp" />
 
         </RelativeLayout>
+
         <TextView
             android:id="@+id/textRank"
             android:layout_width="@dimen/_25sdp"
             android:layout_height="@dimen/_25sdp"
             android:background="@drawable/background_rank_leaderboard"
-            android:text="2"
-
-
-
-            android:textColor="#fff"
-            android:textSize="@dimen/_10ssp"
             android:gravity="center"
-            />
+
+
+            android:text="2"
+            android:textColor="#fff"
+            android:textSize="@dimen/_10ssp" />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

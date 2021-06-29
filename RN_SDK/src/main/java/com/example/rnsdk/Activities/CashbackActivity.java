@@ -254,6 +254,7 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
                         Log.e("Test", "Response : " + response.body().toString());
                         showAlertDialog("Success", statusMessage);
                         etAmountRC.setText("");
+                        Utility.response.responsedata.contactData.setPointBalance(responsedata.getAsJsonObject().get("reedemablePoints").getAsDouble());
                         Utility.response.responsedata.contactData.setReedemablePoints(responsedata.getAsJsonObject().get("reedemablePoints").getAsDouble());
                         textPointCashback.setText(Utility.getRoundData(responsedata.getAsJsonObject().get("reedemablePoints").getAsDouble()) + " PTS");
                         getData();

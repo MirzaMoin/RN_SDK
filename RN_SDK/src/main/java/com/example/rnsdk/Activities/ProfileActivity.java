@@ -266,7 +266,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         AlertDialog dialog = builder.create();
         dialog.show();
         RecyclerView rv = dialog.findViewById(R.id.rvLocationDialog);
-        DialogListAdapter adapter = new DialogListAdapter();
+        DialogListAdapter adapter = new DialogListAdapter(this, "Profile");
         rv.setHasFixedSize(true);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(adapter);

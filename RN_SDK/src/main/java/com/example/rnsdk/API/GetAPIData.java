@@ -17,14 +17,14 @@ public interface GetAPIData {
     );
 
     @GET("/api/UserAccountProfile/TransactionHistory")
-    Call<ResponseModel> getTransactionHistory(
+    Call<ResponseModelTransactionHistory> getTransactionHistory(
             @Query("RewardProgramId") String RewardProgramId,
             @Query("ContactID") String ContactID
     );
 
 
     @GET("/api/UserProfile/Getoffers")
-    Call<ResponseModelTransactionHistory> getOffers(
+    Call<ResponseModel> getOffers(
             @Query("RewardProgramID") String RewardProgramId,
             @Query("ContactID") String ContactID
     );
@@ -59,6 +59,19 @@ public interface GetAPIData {
     Call<JsonObject> getCashbackAmount(
             @Query("RewardProgramID") String RewardProgramID,
             @Query("ContactID") String ContactID
+    );
+
+
+    @GET("/api/UserAccountProfile/LeaderBoardScreenData")
+    Call<ResponseModel> getLeaderBoardScreenData(
+            @Query("RewardProgramID") String RewardProgramID
+    );
+
+    @GET("/api/UserAccountProfile/LeaderBoardReport")
+    Call<JsonObject> getLeaderBoardReport(
+            @Query("RewardProgramId") String RewardProgramId,
+            @Query("Month") int Month,
+            @Query("Year") int Year
     );
 
 

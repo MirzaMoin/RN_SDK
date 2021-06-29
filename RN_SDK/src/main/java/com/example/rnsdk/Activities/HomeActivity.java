@@ -297,16 +297,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private void setLayout() {
 
 
-        List<FooterLinkModel> footerLink = new ArrayList<>();
-        footerLink.addAll(homeScreenModel.footerLinks);
-        for (FooterLinkModel link : homeScreenModel.footerLinks) {
-            if (!link.isActive()) {
-                footerLink.remove(link);
-            }
-        }
-        homeScreenModel.footerLinks.clear();
-        homeScreenModel.footerLinks.addAll(footerLink);
-
 
         if (homeScreenModel.getHomePageBackgroundImage() != null) {
             Glide.with(this).load(homeScreenModel.getHomePageBackgroundImage()).into(imgBackgroundHome);
@@ -355,6 +345,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setFooter() {
 
+        List<FooterLinkModel> footerLink = new ArrayList<>();
+        footerLink.addAll(homeScreenModel.footerLinks);
+        for (FooterLinkModel link : homeScreenModel.footerLinks) {
+            if (!link.isActive()) {
+                footerLink.remove(link);
+            }
+        }
+        homeScreenModel.footerLinks.clear();
+        homeScreenModel.footerLinks.addAll(footerLink);
+
+
         if (homeScreenModel.isHomePageDisplayFooter()) {
             rvFooterHome.setVisibility(View.VISIBLE);
             rvFooterHome.setBackgroundColor(Utility.getColor(appColor.getFooterBarColor()));
@@ -362,10 +363,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             FooterAdapter adapter = new FooterAdapter(this, homeScreenModel.footerLinks, "homeScreen");
             rvFooterHome.setHasFixedSize(true);
 
+            if(homeScreenModel.footerLinks.size() > 0)
+            {
+                rvFooterHome.setLayoutManager(new GridLayoutManager(this, homeScreenModel.footerLinks.size()));
 
-            rvFooterHome.setLayoutManager(new GridLayoutManager(this, homeScreenModel.footerLinks.size()));
+                rvFooterHome.setAdapter(adapter);
 
-            rvFooterHome.setAdapter(adapter);
+            }
+
 
         } else {
             rvFooterHome.setVisibility(View.GONE);
@@ -378,10 +383,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private void getData() {
 
 
-      /*  progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Loading...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();*/
 
         GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
         Log.e("Request", "RP ID: " + Utility.response.responsedata.appDetails.rewardProgramId +
@@ -392,28 +393,25 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         call.enqueue(new Callback<ResponseModel>() {
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
-//                progressDialog.dismiss();
 
                 if (response.isSuccessful()) {
 
                     Utility.response.responsedata.unTaken = response.body().responsedata.unTaken;
                     Utility.response.responsedata.completed = response.body().responsedata.completed;
 
-//                    createTabs();
+
 
                 } else {
                     Log.e("TEST", "Error Sub: " + response.message());
-//                    createTabs();
+
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseModel> call, Throwable test) {
-//                progressDialog.dismiss();
 
                 test.printStackTrace();
                 Log.e("Test", "Error Main: " + test.toString());
-//                createTabs();
             }
         });
 

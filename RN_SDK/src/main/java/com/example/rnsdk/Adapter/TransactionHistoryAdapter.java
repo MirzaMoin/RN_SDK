@@ -83,7 +83,7 @@ public class TransactionHistoryAdapter extends RecyclerView.Adapter<TransactionH
         holder.textBalance.setText("" + history.getBalance());
         holder.textLocation.setText("" + history.getLocationName());
 
-        int point = Integer.parseInt(history.getPoints());
+        Double point = Double.parseDouble(history.getPoints());
         if (point > 0) {
             holder.textPoint.setText("+" + history.getPoints());
         } else {

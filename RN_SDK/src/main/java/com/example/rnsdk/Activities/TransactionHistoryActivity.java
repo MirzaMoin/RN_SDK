@@ -90,7 +90,7 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
 
         GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
         Log.e("Request", "RP ID: " + Utility.response.responsedata.appDetails.rewardProgramId + ", Contact ID: " + Utility.response.responsedata.contactData.contactID);
-        Call<ResponseModelTransactionHistory> call = service.getOffers(Utility.response.responsedata.appDetails.rewardProgramId
+        Call<ResponseModelTransactionHistory> call = service.getTransactionHistory(Utility.response.responsedata.appDetails.rewardProgramId
                 , Utility.response.responsedata.contactData.contactID);
         call.enqueue(new Callback<ResponseModelTransactionHistory>() {
 
