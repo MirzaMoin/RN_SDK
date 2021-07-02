@@ -51,7 +51,8 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
     List<SliderItem> mSliderItems = new ArrayList<>();
     RecyclerView rvTransactionHistory, rvFooterTransactionHistory;
 
-    TextView textPointTransactionHistory;
+    TextView textPointTransactionHistory,
+            textNoData;
     ImageView imgBackTransactionHistory,
             imgPreview,
             imgPreviewClose;
@@ -76,10 +77,7 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
         init();
 
 
-
-
     }
-
 
 
     private void getData() {
@@ -99,10 +97,10 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
                 progressDialog.dismiss();
                 if (response.isSuccessful()) {
 
-                     responseModel = response.body();
+                    responseModel = response.body();
 
 
-                    if(response.body().responsedata.size() > 0 ){
+                    if (response.body().responsedata.size() > 0) {
                         TransactionHistoryAdapter adapter =
                                 new TransactionHistoryAdapter(TransactionHistoryActivity.this,
                                         responseModel.responsedata,
@@ -112,12 +110,10 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
                         rvTransactionHistory.setHasFixedSize(true);
                         rvTransactionHistory.setLayoutManager(new LinearLayoutManager(TransactionHistoryActivity.this));
                         rvTransactionHistory.setAdapter(adapter);
+                    } else {
+                        textNoData.setVisibility(View.VISIBLE);
+                        Log.e("Test", "No Transaction Found");
                     }
-                    else
-                    {
-                        Log.e("Test","No Transaction Found");
-                    }
-
 
 
                 } else {
@@ -149,9 +145,10 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
 
+        textNoData = findViewById(R.id.textNoData);
         textPointTransactionHistory = findViewById(R.id.textPointTransactionHistory);
         textPointTransactionHistory.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
-        textPointTransactionHistory.setText(String.valueOf(Utility.response.responsedata.contactData.getPointBalance())+ " PTS");
+        textPointTransactionHistory.setText(String.valueOf(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
 
         ChildPageSettingModel childPageSettings = Utility.response.responsedata.childPageSetting;
 
@@ -200,8 +197,8 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
 
-                    filterLocation(s);
-                    Log.e("Test", "onTextChanged: "+ s.toString());
+                filterLocation(s);
+                Log.e("Test", "onTextChanged: " + s.toString());
 
 
             }
@@ -216,14 +213,14 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
 
     private void filterLocation(CharSequence s) {
         List<TransactionHistoryModel> filterData = new ArrayList<TransactionHistoryModel>();
-        for (TransactionHistoryModel history:responseModel.responsedata) {
-            if(history.locationName.toLowerCase().contains(s.toString().toLowerCase())){
-                Log.e("Test", "filterLocation: "+history.locationName);
+        for (TransactionHistoryModel history : responseModel.responsedata) {
+            if (history.locationName.toLowerCase().contains(s.toString().toLowerCase())) {
+                Log.e("Test", "filterLocation: " + history.locationName);
                 filterData.add(history);
             }
         }
-        Log.e("Test", "Filter Size"+filterData.size() );
-        if(filterData != null) {
+        Log.e("Test", "Filter Size" + filterData.size());
+        if (filterData != null) {
             TransactionHistoryAdapter adapter = new TransactionHistoryAdapter(TransactionHistoryActivity.this, filterData, relImagePreview, imgPreview, imgPreview);
             rvTransactionHistory.setHasFixedSize(true);
             rvTransactionHistory.setLayoutManager(new LinearLayoutManager(TransactionHistoryActivity.this));

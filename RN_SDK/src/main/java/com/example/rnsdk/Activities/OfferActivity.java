@@ -23,10 +23,12 @@ import com.example.rnsdk.Adapter.FooterAdapter;
 import com.example.rnsdk.Adapter.HomeMenuLinkListAdapter;
 import com.example.rnsdk.Adapter.OffersAdapter;
 import com.example.rnsdk.Adapter.TransactionHistoryAdapter;
+import com.example.rnsdk.Constants;
 import com.example.rnsdk.Models.AppColorModel;
 import com.example.rnsdk.Models.HomeScreenModel;
 import com.example.rnsdk.Models.ResponseModel;
 import com.example.rnsdk.Models.ResponseModelTransactionHistory;
+import com.example.rnsdk.Models.ResponsedataModel;
 import com.example.rnsdk.R;
 import com.example.rnsdk.Utility.Utility;
 
@@ -45,6 +47,11 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
     protected void onResume() {
         super.onResume();
         setFooter();
+        if(Constants.isOfferRedeem)
+        {
+            Constants.isOfferRedeem = false;
+            getData();
+        }
     }
 
     @Override
@@ -56,11 +63,6 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
         init();
 
         getData();
-
-        OffersAdapter adapter = new OffersAdapter(this);
-        rvOffer.setHasFixedSize(true);
-        rvOffer.setLayoutManager(new LinearLayoutManager(this));
-        rvOffer.setAdapter(adapter);
 
     }
 
@@ -79,11 +81,32 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
-                progressDialog.dismiss();
                 if (response.isSuccessful()) {
 
                     ResponseModel responseModel = response.body();
-                    Log.e("Test", "onResponse: " + responseModel.getStatusMessage());
+                    ResponsedataModel responseData = Utility.response.responsedata;
+                    responseData.offerList = responseModel.responsedata.getOfferList();
+                    responseData.addressDetails = responseModel.responsedata.getAddressDetails();
+                    responseData.userDetails = responseModel.responsedata.getUserDetails();
+                    responseData.redeemSetting = responseModel.responsedata.getRedeemSetting();
+
+                    if(responseData.redeemSetting.isAskWhereAreYou())
+                    {
+                        Log.e("Test","AskWhere is "+(responseData.redeemSetting.isAskWhereAreYou()));
+                        getLocations();
+                        setLayout();
+
+                    }
+                    else
+                    {
+                        Log.e("Test","AskWhere is "+(responseData.redeemSetting.isAskWhereAreYou()));
+                        setLayout();
+
+                        progressDialog.dismiss();
+                    }
+
+                    Log.e("Test", "onResponse: " + responseData.redeemSetting.isAskWhereAreYou());
+
 
 
                 } else {
@@ -104,6 +127,76 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
         });
     }
 
+    private void getLocations() {
+
+
+        GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
+
+        Log.e("Request GetLocationData", "RP ID: " + Utility.response.responsedata.appDetails.rewardProgramId + ", Contact ID: " + Utility.response.responsedata.contactData.contactID);
+        Call<ResponseModel> callGetLocation =
+                service.getLocationData(Utility.response.responsedata.appDetails.rewardProgramId);
+        callGetLocation.enqueue(new Callback<ResponseModel>() {
+
+            @Override
+            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                if (response.isSuccessful()) {
+                    progressDialog.dismiss();
+
+                    if(response.code() == 200)
+                    {
+                        if(response.body() != null)
+                        {
+
+                            ResponseModel responseModel = response.body();
+                            ResponsedataModel responseData = Utility.response.responsedata;
+
+                            responseData.locationData = responseModel.responsedata.getLocationData();
+
+                            Log.e("GetLocationData", "onResponse - Location List Size: " + responseModel.responsedata.locationData.size());
+
+                            setLayout();
+                        }
+
+                    }
+                    else
+                    {
+                        Log.e("GetLocationData", "Status code - Location List Size: " + response.code() );
+
+                        setLayout();
+                    }
+
+                } else {
+                    progressDialog.dismiss();
+
+                    Log.e("Test Error: ", "" + response.message());
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModel> call, Throwable t) {
+                progressDialog.dismiss();
+                Log.e("Test Error: ", "" + t.getMessage());
+
+
+            }
+        });
+    }
+
+    private void setLayout() {
+        textPointOffers.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
+        textPointOffers.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
+
+
+        OffersAdapter adapter = new OffersAdapter(this, Utility.response.responsedata.offerList);
+        rvOffer.setHasFixedSize(true);
+        rvOffer.setLayoutManager(new LinearLayoutManager(this));
+        rvOffer.setAdapter(adapter);
+
+
+    }
+
     private void init() {
         if (Build.VERSION.SDK_INT >= 21) {
             Window window = getWindow();
@@ -122,8 +215,6 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
 
 
         ivBack.setOnClickListener(this);
-        textPointOffers.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
-        textPointOffers.setText(String.valueOf(Utility.response.responsedata.contactData.getPointBalance())+ " PTS");
 
 
         setFooter();

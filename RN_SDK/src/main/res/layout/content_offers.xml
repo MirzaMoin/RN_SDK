@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_280sdp"
+    android:paddingBottom="@dimen/_3sdp"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
@@ -21,9 +22,10 @@
                 android:background="#000">
 
                 <ImageView
+                    android:id="@+id/imageOfferImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="fitXY"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/image_login_bg" />
 
                 <androidx.cardview.widget.CardView
@@ -34,22 +36,22 @@
                     app:cardCornerRadius="@dimen/_3sdp">
 
                     <Button
-                        android:id="@+id/btnPointsOffer"
+                        android:id="@+id/btnOfferImageLabel"
                         android:layout_width="@dimen/_50sdp"
                         android:layout_height="@dimen/_20sdp"
                         android:background="@drawable/background_point_button"
-                        android:text="15 PTS"
+                        android:text=""
                         android:textSize="@dimen/_10ssp" />
                 </androidx.cardview.widget.CardView>
 
                 <TextView
 
-                    android:id="@+id/textOfferNameOffer"
-                    android:layout_width="@dimen/_100sdp"
+                    android:id="@+id/textOfferTitle"
+                    android:layout_width="@dimen/_90sdp"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_alignParentBottom="true"
                     android:gravity="center"
-                    android:text="PG(15)"
+                    android:text=""
 
 
                     android:textSize="@dimen/_12sdp"
@@ -58,10 +60,11 @@
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/textOfferDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_12sdp"
-                android:text="Not to be combined with any other offers. One offer per table"
+                android:text=""
                 android:textSize="@dimen/_12sdp" />
 
             <RelativeLayout
@@ -71,29 +74,31 @@
 
                 <ImageView
                     android:id="@+id/imgAward"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:src="@drawable/ic_baseline_gpp_good_24"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:src="@drawable/ic_trophy"
                     app:tint="#2179BF" />
 
                 <TextView
+                    android:id="@+id/textOfferType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_5sdp"
                     android:layout_toRightOf="@id/imgAward"
-                    android:text="Reward Goal"
+                    android:text=" "
                     android:textColor="#2179BF"
                     android:textSize="@dimen/_12sdp"
 
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/textOfferExpire"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_marginHorizontal="@dimen/_5sdp"
-                    android:text="No Expiration"
+                    android:text=" "
                     android:textColor="#5C6063"
 
                     android:textSize="@dimen/_12sdp"

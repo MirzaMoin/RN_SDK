@@ -1,24 +1,18 @@
 package com.example.rnsdk.Models;
 
 
-public class ContactData{
+public class ContactData {
     public String contactID;
-    public double pointBalance;
-    public double reedemablePoints;
+
     public String firstName;
     public String lastName;
     public String mobilePhone;
     public String memberCardID;
     public String emailAddress;
-    public Boolean isBeaconAppLogin;
     public String profilePitcure;
-    public Boolean isRequiredPasswordChanged;
     public String contactListVisibleName;
     public String contactListName;
-
-
     public String contactListID;
-
     public String address;
     public String city;
     public String state;
@@ -32,40 +26,26 @@ public class ContactData{
     public String customFiledsValue;
     public String birthDate;
     public String anniversary;
-    public int totalSpent;
     public String lastVisitDate;
     public String familyMemberBDay;
     public String overrideTriggerID;
-    public boolean isActive;
-    public boolean isDelete;
     public String createdBy;
     public String modifiedBy;
     public String createdDate;
     public String modifiedDate;
     public String subscribeKey;
     public String subscribeDate;
-    public boolean isProfileComplete;
     public String additionalBirthDates;
     public String isAddToAutoresponder;
-    public boolean isAllowEmail;
-    public boolean isAllowSMS;
-    public boolean isAllowPostalMail;
     public String preferredMediaType;
     public String referelContactID;
-    public boolean isOverrideSent;
-    public boolean isFBUser;
     public String userName;
     public String password;
     public String listJoinDate;
-    public int qualificationPoints;
-    public boolean isAllowFacebookBonusPoints;
     public String fbUserId;
     public String fbUserAccessToken;
     public String fbTokenExpirationDate;
     public String fbMessageIndex;
-    public boolean isThankYouEmailByWeForm;
-    public boolean isImported;
-    public boolean isAfterImportShowRPG;
     public String pointBalanceAtImport;
     public String rqp;
     public String vipLevel;
@@ -73,32 +53,22 @@ public class ContactData{
     public String contactLevelExpirationWord;
     public String contactLevelExpirationTotal;
     public String vipMemberJoiningDate;
-    public boolean isVIPLevelExpired;
-    public String sharedContactID;
-    public boolean isPrimaryContact;
-    public boolean isAfterReferDoAnyTx;
     public String vipLevelColour;
+    public String sharedContactID;
     public String driverLicense;
     public String addressID;
     public String lastSentRotateNumber;
     public String smsConfirmationStatus;
-    public int limeOptionStatus;
     public String hasReferredFriendJoined;
-    public boolean isBirthdayDayEdited;
-    public boolean isAnniversaryEdited;
-    public String isNoNeedToSetAutoresponder;
-    public int signupType;
     public String signUpWebform;
-    public boolean isOptOut;
+    public String isNoNeedToSetAutoresponder;
     public String languageID;
     public String rewardProgramIDNew;
     public String address2;
     public String address3;
     public String leaderBoardName;
     public String profileCompletionPoints;
-    public boolean isAddressVerify;
     public String vistaPassword;
-    public boolean isAllowPush;
     public String gcmDeviceToken;
     public String deviceType;
     public String hubSpotId;
@@ -106,16 +76,48 @@ public class ContactData{
     public String fullName;
     public String country;
     public String countryID;
-    public int contactListPointValue;
     public String rewardProgramName;
+    public String facebookReferralPoints;
+
+    public Boolean isRequiredPasswordChanged;
+    public Boolean isBeaconAppLogin;
+    public boolean isActive;
+    public boolean isDelete;
+    public boolean isProfileComplete;
+    public boolean isAllowEmail;
+    public boolean isAllowSMS;
+    public boolean isAllowPostalMail;
+    public boolean isOverrideSent;
+    public boolean isFBUser;
+    public boolean isAllowFacebookBonusPoints;
+    public boolean isThankYouEmailByWeForm;
+    public boolean isImported;
+    public boolean isAfterImportShowRPG;
+    public boolean isVIPLevelExpired;
+    public boolean isPrimaryContact;
+    public boolean isAfterReferDoAnyTx;
+    public boolean isBirthdayDayEdited;
+    public boolean isAnniversaryEdited;
+    public boolean isOptOut;
+    public boolean isAddressVerify;
+    public boolean isAllowPush;
     public boolean isMultiTieredRewardsType;
     public boolean isPaidVIPRewardsType;
     public boolean isAllowCheckInPoints;
-    public String facebookReferralPoints;
+
+    public double pointBalance;
+    public double reedemablePoints;
+
+    public double totalSpent;
+    public double qualificationPoints;
+    public int limeOptionStatus;
+    public int signupType;
+    public int contactListPointValue;
     public int txCount;
 
 
-    public ContactData(String contactID, double pointBalance, double reedemablePoints, String firstName, String lastName, String mobilePhone, String memberCardID, String emailAddress, Boolean isBeaconAppLogin, String profilePitcure, Boolean isRequiredPasswordChanged, String contactListVisibleName, String contactListName, String contactListID, String address, String city, String state, String zipCode, String gender, String rootID, String phone, String emailFormat, String confirmationStatus, String activityStatus, String customFiledsValue, String birthDate, String anniversary, int totalSpent, String lastVisitDate, String familyMemberBDay, String overrideTriggerID, boolean isActive, boolean isDelete, String createdBy, String modifiedBy, String createdDate, String modifiedDate, String subscribeKey, String subscribeDate, boolean isProfileComplete, String additionalBirthDates, String isAddToAutoresponder, boolean isAllowEmail, boolean isAllowSMS, boolean isAllowPostalMail, String preferredMediaType, String referelContactID, boolean isOverrideSent, boolean isFBUser, String userName, String password, String listJoinDate, int qualificationPoints, boolean isAllowFacebookBonusPoints, String fbUserId, String fbUserAccessToken, String fbTokenExpirationDate, String fbMessageIndex, boolean isThankYouEmailByWeForm, boolean isImported, boolean isAfterImportShowRPG, String pointBalanceAtImport, String rqp, String vipLevel, String contactLevelExpirationDigit, String contactLevelExpirationWord, String contactLevelExpirationTotal, String vipMemberJoiningDate, boolean isVIPLevelExpired, String sharedContactID, boolean isPrimaryContact, boolean isAfterReferDoAnyTx, String vipLevelColour, String driverLicense, String addressID, String lastSentRotateNumber, String smsConfirmationStatus, int limeOptionStatus, String hasReferredFriendJoined, boolean isBirthdayDayEdited, boolean isAnniversaryEdited, String isNoNeedToSetAutoresponder, int signupType, String signUpWebform, boolean isOptOut, String languageID, String rewardProgramIDNew, String address2, String address3, String leaderBoardName, String profileCompletionPoints, boolean isAddressVerify, String vistaPassword, boolean isAllowPush, String gcmDeviceToken, String deviceType, String hubSpotId, String amountSum, String fullName, String country, String countryID, int contactListPointValue, String rewardProgramName, boolean isMultiTieredRewardsType, boolean isPaidVIPRewardsType, boolean isAllowCheckInPoints, String facebookReferralPoints, int txCount) {
+
+    public ContactData(String contactID, double pointBalance, double reedemablePoints, String firstName, String lastName, String mobilePhone, String memberCardID, String emailAddress, Boolean isBeaconAppLogin, String profilePitcure, Boolean isRequiredPasswordChanged, String contactListVisibleName, String contactListName, String contactListID, String address, String city, String state, String zipCode, String gender, String rootID, String phone, String emailFormat, String confirmationStatus, String activityStatus, String customFiledsValue, String birthDate, String anniversary, double totalSpent, String lastVisitDate, String familyMemberBDay, String overrideTriggerID, boolean isActive, boolean isDelete, String createdBy, String modifiedBy, String createdDate, String modifiedDate, String subscribeKey, String subscribeDate, boolean isProfileComplete, String additionalBirthDates, String isAddToAutoresponder, boolean isAllowEmail, boolean isAllowSMS, boolean isAllowPostalMail, String preferredMediaType, String referelContactID, boolean isOverrideSent, boolean isFBUser, String userName, String password, String listJoinDate, double qualificationPoints, boolean isAllowFacebookBonusPoints, String fbUserId, String fbUserAccessToken, String fbTokenExpirationDate, String fbMessageIndex, boolean isThankYouEmailByWeForm, boolean isImported, boolean isAfterImportShowRPG, String pointBalanceAtImport, String rqp, String vipLevel, String contactLevelExpirationDigit, String contactLevelExpirationWord, String contactLevelExpirationTotal, String vipMemberJoiningDate, boolean isVIPLevelExpired, String sharedContactID, boolean isPrimaryContact, boolean isAfterReferDoAnyTx, String vipLevelColour, String driverLicense, String addressID, String lastSentRotateNumber, String smsConfirmationStatus, int limeOptionStatus, String hasReferredFriendJoined, boolean isBirthdayDayEdited, boolean isAnniversaryEdited, String isNoNeedToSetAutoresponder, int signupType, String signUpWebform, boolean isOptOut, String languageID, String rewardProgramIDNew, String address2, String address3, String leaderBoardName, String profileCompletionPoints, boolean isAddressVerify, String vistaPassword, boolean isAllowPush, String gcmDeviceToken, String deviceType, String hubSpotId, String amountSum, String fullName, String country, String countryID, int contactListPointValue, String rewardProgramName, boolean isMultiTieredRewardsType, boolean isPaidVIPRewardsType, boolean isAllowCheckInPoints, String facebookReferralPoints, int txCount) {
         this.contactID = contactID;
         this.pointBalance = pointBalance;
         this.reedemablePoints = reedemablePoints;
@@ -442,11 +444,11 @@ public class ContactData{
         this.anniversary = anniversary;
     }
 
-    public int getTotalSpent() {
+    public double getTotalSpent() {
         return totalSpent;
     }
 
-    public void setTotalSpent(int totalSpent) {
+    public void setTotalSpent(double totalSpent) {
         this.totalSpent = totalSpent;
     }
 
@@ -642,11 +644,11 @@ public class ContactData{
         this.listJoinDate = listJoinDate;
     }
 
-    public int getQualificationPoints() {
+    public double getQualificationPoints() {
         return qualificationPoints;
     }
 
-    public void setQualificationPoints(int qualificationPoints) {
+    public void setQualificationPoints(double qualificationPoints) {
         this.qualificationPoints = qualificationPoints;
     }
 

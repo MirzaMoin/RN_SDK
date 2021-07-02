@@ -2,9 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="@dimen/_7sdp"
+
     xmlns:app="http://schemas.android.com/apk/res-auto">
 <androidx.cardview.widget.CardView
+    android:id="@+id/cardContentListDialiog"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:layout_constraintTop_toTopOf="parent"
@@ -19,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="@dimen/_10sdp"
-
+            android:paddingLeft="@dimen/_7sdp"
             android:text="Title"
             android:textColor="#000"
             android:textSize="@dimen/_14ssp" />
@@ -35,7 +36,18 @@
             android:layout_marginEnd="@dimen/_5sdp"
             android:layout_marginRight="@dimen/_5sdp"
             app:tint="#3FD345" />
+        <View
+            android:id="@+id/viewContentLocationDialog"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:visibility="gone"
+            android:background="#E3E3E3"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+
+            android:layout_below="@+id/textTitleListDialog"
+            />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

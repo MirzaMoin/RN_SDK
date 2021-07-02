@@ -83,8 +83,8 @@ public class SplashActivity extends AppCompatActivity {
 
 
                             Call<ResponseModel> callLogin = service.Login(ApiJsonMap("UW5c2c0MTT43HbVcKeu54rh8Nf77Fu",
-                                    "8888888888",
-                                    "111111"));
+                                    "8000333022",
+                                    "987654321"));
 
 
                             callLogin.enqueue(new Callback<ResponseModel>() {
@@ -123,7 +123,7 @@ public class SplashActivity extends AppCompatActivity {
                                                 @Override
                                                 public void onFailure(Call<ResponseModel> call, Throwable test) {
 
-                                                    Log.e("Test:::", test.getMessage().toString());
+                                                    Log.e("Test:::","Login : "+ test.getMessage().toString());
                                                 }
                                             });
 
@@ -137,33 +137,38 @@ public class SplashActivity extends AppCompatActivity {
                                         else
                                         {
                                             Toast.makeText(SplashActivity.this, "Username/Password may wrong", Toast.LENGTH_SHORT).show();
-                                            Log.e("Test","Response : "+response.body().getStatusMessage());
+                                            Log.e("Test","Login Response : "+response.body().getStatusMessage());
 
                                         }
 
 
                                     } else {
-                                        Log.e("TEST", "Error: " + response.message());
+                                        Log.e("TEST", "Login Error: " + response.message());
                                     }
                                 }
 
                                 @Override
                                 public void onFailure(Call<ResponseModel> call, Throwable test) {
 
-                                    Log.e("Test:::", test.getMessage().toString());
+                                    Log.e("Test:::","Login : "+ test.getMessage().toString());
                                 }
                             });
 
                         }
                         else
                         {
-                            btnHome.setText("Error" + response.body());
+                            Log.e("Test","Login : "+  response.message()
+                            );
+
+                            btnHome.setText("Login Error" + response.body());
 
                         }
 
 
                     } else {
-                        btnHome.setText("Error" + response.message());
+                        Log.e("Test","Login : "+  response.message());
+
+                        btnHome.setText("Login Error" + response.message());
 
                     }
 
@@ -175,6 +180,8 @@ public class SplashActivity extends AppCompatActivity {
             public void onFailure(Call<ResponseModel> call, Throwable t) {
                 progressDialog.dismiss();
                 btnHome.setText(t.getLocalizedMessage());
+                Log.e("Test","getAllData : "+t.getLocalizedMessage() );
+
                 Toast.makeText(SplashActivity.this, "" + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
 
             }

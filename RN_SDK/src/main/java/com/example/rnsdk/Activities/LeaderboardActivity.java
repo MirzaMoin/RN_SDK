@@ -24,7 +24,6 @@ import com.example.rnsdk.API.GetAPIData;
 import com.example.rnsdk.API.RetrofitClientInstance;
 import com.example.rnsdk.Adapter.DialogListAdapter;
 import com.example.rnsdk.Adapter.FooterAdapter;
-import com.example.rnsdk.Adapter.HomeMenuLinkListAdapter;
 import com.example.rnsdk.Adapter.LeaderboardAdapter;
 import com.example.rnsdk.Models.AppColorModel;
 import com.example.rnsdk.Models.HomeScreenModel;
@@ -37,12 +36,6 @@ import com.example.rnsdk.Utility.Utility;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -181,7 +174,7 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
         monthDialog = builder.create();
         monthDialog.show();
         RecyclerView rvList = monthDialog.findViewById(R.id.rvMonthList);
-        DialogListAdapter adapter = new DialogListAdapter(this, "Leaderboard");
+        DialogListAdapter adapter = new DialogListAdapter(this, "Leaderboard", -1);
         rvList.setLayoutManager(new LinearLayoutManager(this));
         rvList.setAdapter(adapter);
     }

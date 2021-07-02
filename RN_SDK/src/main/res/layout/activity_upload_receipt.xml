@@ -41,8 +41,8 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginHorizontal="@dimen/_8sdp"
                         android:background="@android:color/transparent"
-                        android:scaleType="fitXY"
                         android:padding="@dimen/_5sdp"
+                        android:scaleType="fitXY"
 
                         android:src="@drawable/ic_baseline_arrow_back_24"
                         android:tint="#fff" />
@@ -97,10 +97,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_130sdp"
                 android:layout_marginBottom="@dimen/_10sdp"
+                android:visibility="gone"
                 app:sliderAnimationDuration="600"
                 app:sliderAutoCycleDirection="back_and_forth"
                 app:sliderAutoCycleEnabled="true"
-                android:visibility="gone"
                 app:sliderIndicatorAnimationDuration="600"
                 app:sliderIndicatorGravity="center_horizontal|bottom"
                 app:sliderIndicatorMargin="15dp"
@@ -112,93 +112,115 @@
                 app:sliderScrollTimeInSec="1"
                 app:sliderStartAutoCycle="true" />
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etlUrSubTotalBeforeTax"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_15sdp"
                 android:layout_marginVertical="@dimen/_5sdp"
-                android:drawableStart="@drawable/ic_baseline_credit_card_24"
-                android:drawableLeft="@drawable/ic_baseline_credit_card_24"
-                android:drawablePadding="@dimen/_10sdp"
-                android:drawableTint="#939393"
-                android:hint="Display Subtotal Before Tax"
 
-                />
+                app:hintTextColor="#939393"
+                app:startIconDrawable="@drawable/ic_baseline_credit_card_24"
 
+                app:startIconTint="#939393">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etUrSubTotalBeforeTax"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
 
+                    android:textColor="#939393" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <!--     <EditText
+                     android:id="@+id/etUrSubTotalBeforeTax"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_marginHorizontal="@dimen/_15sdp"
+                     android:layout_marginVertical="@dimen/_5sdp"
+                     android:drawableStart="@drawable/ic_baseline_credit_card_24"
+                     android:drawableLeft="@drawable/ic_baseline_credit_card_24"
+                     android:drawablePadding="@dimen/_10sdp"
+                     android:drawableTint="#939393"
+                     android:hint="Display Subtotal Before Tax"
 
+                     />-->
             <RelativeLayout
                 android:id="@+id/relReceiptType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_15sdp"
-                android:layout_marginVertical="@dimen/_5sdp"
-                >
+                android:layout_marginVertical="@dimen/_10sdp">
+
                 <ImageView
                     android:id="@+id/imgReceiptType"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
                     android:src="@drawable/ic_baseline_format_list_bulleted_24"
-                    android:layout_marginLeft="@dimen/_2sdp"
                     app:tint="#939393" />
+
                 <TextView
+                    android:id="@+id/textUrReceiptType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Receipt Type"
-                    android:textSize="@dimen/_14ssp"
-                    android:textColor="#939393"
-                    android:layout_toRightOf="@+id/imgReceiptType"
                     android:layout_marginHorizontal="@dimen/_10sdp"
-                    />
+                    android:layout_toRightOf="@+id/imgReceiptType"
+                    android:text="Receipt Type"
+                    android:textColor="#939393"
+                    android:textSize="@dimen/_14ssp" />
+
                 <ImageView
                     android:layout_width="@dimen/_20sdp"
-                    android:layout_alignParentRight="true"
                     android:layout_height="@dimen/_20sdp"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:layout_alignParentRight="true"
                     android:layout_marginLeft="@dimen/_2sdp"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
                     app:tint="#939393" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
-                    android:background="#939393"
+                    android:layout_below="@+id/imgReceiptType"
                     android:layout_marginHorizontal="@dimen/_2sdp"
 
                     android:layout_marginTop="@dimen/_2sdp"
-                    android:layout_below="@+id/imgReceiptType"
-                    />
+                    android:background="#939393" />
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/relLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-android:layout_marginBottom="@dimen/_5sdp"
-                >
+                android:layout_marginBottom="@dimen/_10sdp">
+
                 <ImageView
                     android:id="@+id/imgLocation"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
                     android:src="@drawable/ic_baseline_location_on_24"
-                    android:layout_marginLeft="@dimen/_2sdp"
                     app:tint="#939393" />
+
                 <TextView
+                    android:id="@+id/textUrPrimaryLocation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_toRightOf="@+id/imgLocation"
                     android:text="Location"
                     android:textColor="#939393"
-                    android:textSize="@dimen/_14ssp"
-                    android:layout_toRightOf="@+id/imgLocation"
-                    android:layout_marginHorizontal="@dimen/_10sdp"
-                    />
+                    android:textSize="@dimen/_14ssp" />
+
                 <ImageView
                     android:layout_width="@dimen/_20sdp"
-                    android:layout_alignParentRight="true"
                     android:layout_height="@dimen/_20sdp"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:layout_alignParentRight="true"
                     android:layout_marginLeft="@dimen/_2sdp"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
                     app:tint="#939393" />
 
                 <View
@@ -212,32 +234,31 @@ android:layout_marginBottom="@dimen/_5sdp"
 
             </RelativeLayout>
 
-
             <RelativeLayout
                 android:id="@+id/relReceiptDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_5sdp"
-                >
+                android:layout_marginBottom="@dimen/_5sdp">
+
                 <ImageView
                     android:id="@+id/imgReceiptDate"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:layout_marginLeft="@dimen/_10sdp"
                     android:src="@drawable/ic_baseline_calendar_today_24"
-                    android:layout_marginLeft="@dimen/_2sdp"
                     app:tint="#939393" />
+
                 <TextView
-                    android:id="@+id/textReceiptDate"
+                    android:id="@+id/textUrReceiptDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_toRightOf="@+id/imgReceiptDate"
                     android:text="Receipt Date"
                     android:textColor="#939393"
-                    android:textSize="@dimen/_14ssp"
-                    android:layout_toRightOf="@+id/imgReceiptDate"
-                    android:layout_marginHorizontal="@dimen/_10sdp"
-                    />
+                    android:textSize="@dimen/_14ssp" />
 
 
                 <View
@@ -250,20 +271,27 @@ android:layout_marginBottom="@dimen/_5sdp"
                     android:background="#939393" />
 
             </RelativeLayout>
-            <EditText
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etlUrReceiptNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_15sdp"
-                android:layout_marginVertical="@dimen/_5sdp"
-                android:drawableStart="@drawable/ic_baseline_receipt_24"
-                android:drawableLeft="@drawable/ic_baseline_receipt_24"
-                android:drawablePadding="@dimen/_10sdp"
-                android:drawableTint="#939393"
-                android:hint="Receipt Number"
+                android:layout_marginVertical="@dimen/_2sdp"
+                app:hintTextColor="#939393"
+                app:startIconDrawable="@drawable/ic_baseline_receipt_24"
+                app:startIconTint="#939393">
 
-                />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etUrReceiptNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
 
-            <LinearLayout
+                    android:textColor="#939393" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_25sdp"
@@ -271,43 +299,75 @@ android:layout_marginBottom="@dimen/_5sdp"
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardUploadImage1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="@dimen/_70sdp"
                     android:layout_marginHorizontal="@dimen/_5sdp"
+
+
                     android:layout_marginVertical="@dimen/_5sdp"
                     android:layout_weight="1"
-                    app:cardCornerRadius="@dimen/_10sdp">
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/cardUploadImage2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="#D8D7D7">
 
                         <ImageView
+                            android:id="@+id/imageUploadImage1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="gone"
+                            android:scaleType="fitXY"
+                          />
+
+                        <ImageView
+                            android:id="@+id/imageAddImage1"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:padding="@dimen/_18sdp"
                             android:src="@drawable/ic_baseline_add_circle_outline_24"
                             app:tint="#000" />
-                    </LinearLayout>
+                    </RelativeLayout>
 
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/cardUploadImage2"
+
+                    android:layout_width="0dp"
                     android:layout_height="@dimen/_70sdp"
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_marginVertical="@dimen/_5sdp"
                     android:layout_weight="1"
-                    app:cardCornerRadius="@dimen/_10sdp">
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/cardUploadImage3"
+                    app:layout_constraintStart_toEndOf="@+id/cardUploadImage1"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="#D8D7D7">
 
                         <ImageView
+                            android:id="@+id/imageUploadImage2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            android:visibility="gone"
+                            android:scaleType="fitXY"
+                      />
+
+                        <ImageView
+                            android:id="@+id/imageAddImage2"
+
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
@@ -315,57 +375,75 @@ android:layout_marginBottom="@dimen/_5sdp"
                             android:src="@drawable/ic_baseline_add_circle_outline_24"
                             app:tint="#000" />
 
-                    </LinearLayout>
+                    </RelativeLayout>
 
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
+
+                    android:id="@+id/cardUploadImage3"
+                    android:layout_width="0dp"
                     android:layout_height="@dimen/_70sdp"
                     android:layout_marginHorizontal="@dimen/_5sdp"
+
                     android:layout_marginVertical="@dimen/_5sdp"
                     android:layout_weight="1"
-                    app:cardCornerRadius="@dimen/_10sdp">
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/cardUploadImage2"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="#D8D7D7">
 
                         <ImageView
+                            android:id="@+id/imageUploadImage3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitXY"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/imageAddImage3"
+
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
                             android:padding="@dimen/_18sdp"
                             android:src="@drawable/ic_baseline_add_circle_outline_24"
                             app:tint="#000" />
-                    </LinearLayout>
+                    </RelativeLayout>
 
                 </androidx.cardview.widget.CardView>
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="@dimen/_7sdp"
+                android:layout_gravity="center"
                 android:layout_margin="@dimen/_15sdp"
                 android:paddingHorizontal="@dimen/_25sdp"
-                android:layout_gravity="center"
+                app:cardCornerRadius="@dimen/_7sdp"
 
 
-                >  <Button
-                android:id="@+id/btnSubmitReceipt"
+                >
 
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/_35sdp"
-                android:text="Submit"
-                android:textAllCaps="false"
+                <Button
+                    android:id="@+id/btnSubmitReceipt"
 
-                android:textSize="@dimen/_12ssp"
-                android:layout_gravity="center_horizontal"
-                android:paddingHorizontal="@dimen/_50sdp"
-                android:textColor="#fff"
-                />
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingHorizontal="@dimen/_50sdp"
+
+                    android:text="Submit"
+                    android:textAllCaps="false"
+                    android:textColor="#fff"
+                    android:textSize="@dimen/_12ssp" />
 
 
             </androidx.cardview.widget.CardView>
@@ -378,13 +456,13 @@ android:layout_marginBottom="@dimen/_5sdp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
+
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvFooterUploadReceipt"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
 
-            android:id="@+id/rvFooterUploadReceipt"
-            />
+            app:layout_constraintBottom_toBottomOf="parent" />
 
 
     </LinearLayout>

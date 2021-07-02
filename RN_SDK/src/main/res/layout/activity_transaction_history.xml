@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".Activities.TransactionHistoryActivity">
 
+    <TextView
+        android:id="@+id/textNoData"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="No Transaction Found"
+        android:textSize="@dimen/_14sdp"
+
+        />
     <LinearLayout
         android:id="@+id/linearTopTransactionHistory"
         android:layout_width="match_parent"

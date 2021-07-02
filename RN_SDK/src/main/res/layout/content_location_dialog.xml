@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-<EditText
-    android:id="@+id/etSearchLocation"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/_40sdp"
-    android:background="#fff"
-    android:drawableLeft="@drawable/ic_baseline_search_24"
-    android:drawableTint="#9C9C9C"
+    android:layout_height="wrap_content">
 
-    android:paddingLeft="@dimen/_10sdp"
-    android:drawablePadding="@dimen/_10sdp"
-    app:layout_constraintTop_toTopOf="parent"
-    android:hint="Search categories..."
-
-    />
-    <LinearLayout
+    <EditText
+        android:id="@+id/etSearchLocation"
         android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:background="#EDEDED"
+        android:drawableLeft="@drawable/ic_baseline_search_24"
+        android:drawablePadding="@dimen/_10sdp"
+
+        android:drawableTint="#9C9C9C"
+
+        android:hint="Search categories..."
+        android:imeOptions="actionSearch"
+        android:maxLines="1"
+        android:inputType="text"
+        android:paddingLeft="@dimen/_10sdp"
+        app:layout_constraintTop_toTopOf="parent"
+
+       />
+
+    <LinearLayout
         android:id="@+id/linearDialog"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/_300sdp"
         app:layout_constraintTop_toBottomOf="@id/etSearchLocation"
 
@@ -35,11 +42,11 @@
     </LinearLayout>
 
     <Button
-        app:layout_constraintTop_toBottomOf="@+id/linearDialog"
+        android:id="@+id/btnConfirmLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Confirm"
         android:background="#2F42BF"
+        android:text="Confirm"
         android:textColor="#fff"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/linearDialog" />
 </androidx.constraintlayout.widget.ConstraintLayout>

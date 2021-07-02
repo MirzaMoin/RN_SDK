@@ -74,6 +74,17 @@ public interface GetAPIData {
             @Query("Year") int Year
     );
 
+    @GET("/api/UserAccountProfile/GetLocationData")
+    Call<ResponseModel> getLocationData(
+            @Query("RewardProgramId") String RewardProgramId
+    );
+
+  @GET("/api/UserProfile/UploadReceiptsScreenData")
+    Call<ResponseModel> getUploadReceiptsScreenData(
+            @Query("RewardProgramId") String RewardProgramId,
+            @Query("WebFormID") String WebFormID
+    );
+
 
     @POST("/api/UserProfile/TransferPoints")
     Call<ResponseModel> TransferPoints(
@@ -89,8 +100,18 @@ public interface GetAPIData {
     Call<ResponseModel> ContactUs(
             @Body JsonObject jsonBody
     );
-   @POST("/api/UserProfile/CashbackRedeem")
+
+    @POST("/api/UserProfile/CashbackRedeem")
     Call<JsonObject> CashbackRedeem(
+            @Body JsonObject jsonBody
+    );
+
+    @POST("/api/UserProfile/RedeemOffer")
+    Call<JsonObject> RedeemOffer(
+            @Body JsonObject jsonBody
+    );
+   @POST("/api/UserProfile/UploadReceipts")
+    Call<JsonObject> UploadReceipts(
             @Body JsonObject jsonBody
     );
 

@@ -3,6 +3,8 @@ package com.example.rnsdk.Models;
 import java.util.List;
 
 public class ResponsedataModel {
+
+    //Home Models
     public HomeScreenModel homeScreen;
     public AppColorModel appColor;
     public MenuPermissionModel menuPermission;
@@ -11,20 +13,27 @@ public class ResponsedataModel {
     public ChildPageSettingModel childPageSetting;
     public ContactData contactData;
     public Object webFormData;
+
+    //Transaction History Models
     public TransactionHistoryModel transactionHistoryModel;
     public List<TransactionHistoryModel> responsedata;
 
+
+    //Offer Models
     public OfferRedeemSettingModel redeemSetting;
     public OfferAddressDetailsModel addressDetails;
     public OfferUserDetailsModel userDetails;
     public List<OfferListModel> offerList;
 
+    //Surveys Models
     public List<SurveysUnTakenModel> unTaken;
     public List<SurveysUnTakenModel> completed;
 
+    //RPG Model
     public List<RPGListModel> lstRPG;
 
 
+    //Ways to earn models
     public WaysToEarnModel totalPoints;
     public WaysToEarnModel purchasePoints;
     public WaysToEarnModel socialShare;
@@ -34,12 +43,21 @@ public class ResponsedataModel {
     public WaysToEarnModel completeProfile;
 
 
+    //Leaderboard Models
     public LBQualificationCriteriaModel qualificationCriteria;
     public List<LBFilterModel> filters;
     public List<LBLeaderBoardReportModel> leaderBoardReport;
 
-    public ResponsedataModel(LoginScreenModel logInScreen, HomeScreenModel homeScreen, AppColorModel appColor, MenuPermissionModel menuPermission, AppIntakeImagesModel appIntakeImages, AppDetailsModel appDetails, ChildPageSettingModel childPageSetting, ContactData contactData, Object webFormData, TransactionHistoryModel transactionHistoryModel, List<TransactionHistoryModel> responsedata, OfferRedeemSettingModel redeemSetting, OfferAddressDetailsModel addressDetails, OfferUserDetailsModel userDetails, List<OfferListModel> offerList, List<SurveysUnTakenModel> unTaken, List<SurveysUnTakenModel> completed, List<RPGListModel> lstRPG, WaysToEarnModel totalPoints, WaysToEarnModel purchasePoints, WaysToEarnModel socialShare, WaysToEarnModel referFriends, WaysToEarnModel leaderboard, WaysToEarnModel surveys, WaysToEarnModel completeProfile, LBQualificationCriteriaModel qualificationCriteria, List<LBFilterModel> filters, List<LBLeaderBoardReportModel> leaderBoardReport) {
+    //Location Data
+    public List<LocationDataModel> locationData;
 
+    //Upload Receipt Model
+    public URDateDetailsModel dateDetails;
+    public List<URCategoryModel> categories;
+    public URSettingsDetailsModel settingsDetails;
+
+
+    public ResponsedataModel(HomeScreenModel homeScreen, AppColorModel appColor, MenuPermissionModel menuPermission, AppIntakeImagesModel appIntakeImages, AppDetailsModel appDetails, ChildPageSettingModel childPageSetting, ContactData contactData, Object webFormData, TransactionHistoryModel transactionHistoryModel, List<TransactionHistoryModel> responsedata, OfferRedeemSettingModel redeemSetting, OfferAddressDetailsModel addressDetails, OfferUserDetailsModel userDetails, List<OfferListModel> offerList, List<SurveysUnTakenModel> unTaken, List<SurveysUnTakenModel> completed, List<RPGListModel> lstRPG, WaysToEarnModel totalPoints, WaysToEarnModel purchasePoints, WaysToEarnModel socialShare, WaysToEarnModel referFriends, WaysToEarnModel leaderboard, WaysToEarnModel surveys, WaysToEarnModel completeProfile, LBQualificationCriteriaModel qualificationCriteria, List<LBFilterModel> filters, List<LBLeaderBoardReportModel> leaderBoardReport, List<LocationDataModel> locationData, URDateDetailsModel dateDetails, List<URCategoryModel> categories, URSettingsDetailsModel settingsDetails) {
         this.homeScreen = homeScreen;
         this.appColor = appColor;
         this.menuPermission = menuPermission;
@@ -67,8 +85,11 @@ public class ResponsedataModel {
         this.qualificationCriteria = qualificationCriteria;
         this.filters = filters;
         this.leaderBoardReport = leaderBoardReport;
+        this.locationData = locationData;
+        this.dateDetails = dateDetails;
+        this.categories = categories;
+        this.settingsDetails = settingsDetails;
     }
-
 
     public HomeScreenModel getHomeScreen() {
         return homeScreen;
@@ -286,5 +307,37 @@ public class ResponsedataModel {
 
     public void setLeaderBoardReport(List<LBLeaderBoardReportModel> leaderBoardReport) {
         this.leaderBoardReport = leaderBoardReport;
+    }
+
+    public List<LocationDataModel> getLocationData() {
+        return locationData;
+    }
+
+    public void setLocationData(List<LocationDataModel> locationData) {
+        this.locationData = locationData;
+    }
+
+    public URDateDetailsModel getDateDetails() {
+        return dateDetails;
+    }
+
+    public void setDateDetails(URDateDetailsModel dateDetails) {
+        this.dateDetails = dateDetails;
+    }
+
+    public List<URCategoryModel> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<URCategoryModel> categories) {
+        this.categories = categories;
+    }
+
+    public URSettingsDetailsModel getSettingsDetails() {
+        return settingsDetails;
+    }
+
+    public void setSettingsDetails(URSettingsDetailsModel settingsDetails) {
+        this.settingsDetails = settingsDetails;
     }
 }

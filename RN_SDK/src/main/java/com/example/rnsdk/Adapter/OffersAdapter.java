@@ -7,24 +7,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.rnsdk.Activities.OfferActivity;
 import com.example.rnsdk.Activities.OffersDetailActivity;
 import com.example.rnsdk.Models.AppColorModel;
+import com.example.rnsdk.Models.OfferListModel;
 import com.example.rnsdk.R;
 import com.example.rnsdk.Utility.Utility;
+
+import java.util.List;
 
 import okhttp3.internal.Util;
 
 public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.ViewHolder>{
 
     Context context;
-   public OffersAdapter(Context context){
+    List<OfferListModel> offerList;
+   public OffersAdapter(Context context, List<OfferListModel> offerList){
 
        this.context = context;
+       this.offerList = offerList;
     }
 
     @Override
@@ -38,19 +45,41 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
+        OfferListModel offer = offerList.get(position);
+
         AppColorModel color = Utility.response.responsedata.appColor;
 
-        holder.btnPointsOffer.setTextColor(Utility.getColor(color.getOfferTopRibbonTextColor()));
-        holder.btnPointsOffer.setBackgroundColor(Utility.getColor(color.getOfferTopRibbonColor()));
+        holder.btnOfferImageLabel.setTextColor(Utility.getColor(color.getOfferTopRibbonTextColor()));
+        holder.btnOfferImageLabel.setBackgroundColor(Utility.getColor(color.getOfferTopRibbonColor()));
 
-        holder.textOfferNameOffer.setTextColor(Utility.getColor(color.getOfferBottomRibbonTextColor()));
-        holder.textOfferNameOffer.setBackgroundColor(Utility.getColor(color.getOfferBootomRibbonColor()));
+        holder.offerTitle.setTextColor(Utility.getColor(color.getOfferBottomRibbonTextColor()));
+        holder.offerTitle.setBackgroundColor(Utility.getColor(color.getOfferBootomRibbonColor()));
+
+        holder.offerTitle.setText(offer.getOfferTitle());
+//        holder.offerTitle.setTextColor(Utility.getColor(offer.getTitleColor()));
+
+        holder.textOfferDescription.setText(offer.getOfferDescription());
+        holder.textOfferDescription.setTextColor(Utility.getColor(offer.getDescColor()));
+
+        holder.textOfferType.setText(offer.getOfferType());
+        Glide.with(context).load(offer.getOfferImage()).into(holder.imageOfferImage);
+        holder.btnOfferImageLabel.setText(offer.getOfferImagelabel());
+
+        holder.textOfferExpire.setText(offer.getOfferExpire());
+        holder.textOfferExpire.setTextColor(Utility.getColor(color.getTitleTextColor()));
+
+
+
 
 
        holder.itemView.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               context.startActivity(new Intent(context, OffersDetailActivity.class));
+               Intent i = new Intent(context,OffersDetailActivity.class);
+               i.putExtra("offerID",offer.getOfferID());
+               i.putExtra("offerSendID",offer.getOfferSendID());
+
+               context.startActivity(i);
            }
        });
     }
@@ -58,18 +87,26 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return 5;
+        return offerList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-       Button btnPointsOffer;
-       TextView textOfferNameOffer;
+       Button btnOfferImageLabel;
+       TextView offerTitle,textOfferDescription,
+               textOfferType,
+               textOfferExpire;
+
+       ImageView imageOfferImage;
         public ViewHolder(View itemView) {
             super(itemView);
 
-            btnPointsOffer = itemView.findViewById(R.id.btnPointsOffer);
-            textOfferNameOffer = itemView.findViewById(R.id.textOfferNameOffer);
+            btnOfferImageLabel = itemView.findViewById(R.id.btnOfferImageLabel);
+            offerTitle = itemView.findViewById(R.id.textOfferTitle);
+            textOfferDescription = itemView.findViewById(R.id.textOfferDescription);
+            textOfferType = itemView.findViewById(R.id.textOfferType);
+            imageOfferImage = itemView.findViewById(R.id.imageOfferImage);
+            textOfferExpire = itemView.findViewById(R.id.textOfferExpire);
 
         }
     }

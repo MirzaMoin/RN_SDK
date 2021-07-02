@@ -43,7 +43,8 @@ public class Constants {
 
     }
 
+    public  static boolean isOfferRedeem = false;
 
-
+    public static String selectedAddressID = "";
 
 }
