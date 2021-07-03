@@ -104,10 +104,6 @@ public class DialogListAdapter extends RecyclerView.Adapter<DialogListAdapter.Vi
 
                     notifyDataSetChanged();
 
-
-//                            selectedAddressID = data.getAddressId();
-//                        Constants.selectedAddressID = data.getAddressId();
-
                 }
             });
 

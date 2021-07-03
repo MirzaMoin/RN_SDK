@@ -83,12 +83,13 @@ public class TransactionHistoryAdapter extends RecyclerView.Adapter<TransactionH
         holder.textBalance.setText("" + history.getBalance());
         holder.textLocation.setText("" + history.getLocationName());
 
-        Double point = Double.parseDouble(history.getPoints());
-        if (point > 0) {
-            holder.textPoint.setText("+" + history.getPoints());
-        } else {
+
+//        Double point = Double.parseDouble(history.getPoints());
+        if (history.getPoints().charAt(0) == '-') {
             holder.textPoint.setText("" + history.getPoints());
             holder.textPoint.setTextColor(Utility.getColor("#fc1c03ff"));
+        } else {
+            holder.textPoint.setText("+" + history.getPoints());
         }
 
         holder.textStatus.setText("" + history.getTransactionStatus());

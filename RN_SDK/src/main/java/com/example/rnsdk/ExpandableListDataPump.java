@@ -34,8 +34,8 @@ public class ExpandableListDataPump {
             EARN_POINTS.add("Ways To Earn");
         if(menu.isVisibleMenuTakeSurvey())
             EARN_POINTS.add("Take Survey");
-        if(menu.isVisibleMenuReferFriends())
-            EARN_POINTS.add("Refer Friend");
+       /* if(menu.isVisibleMenuReferFriends())
+            EARN_POINTS.add("Refer Friend");*/
         if(menu.isVisibleMenuUploadReciepts())
             EARN_POINTS.add("Upload Receipt");
         expandableListDetail.put("EARN POINTS", EARN_POINTS);
@@ -47,13 +47,13 @@ public class ExpandableListDataPump {
         ACTIVITY.add("Leaderboard");
         expandableListDetail.put("ACTIVITY", ACTIVITY);
 
-
+/*
         List<String> PROFILE = new ArrayList<String>();
         if(menu.isVisibleUpdatePassword())
             PROFILE.add("Update Profile");
-        /*if(menu.isVisibleChangePassword())
-            PROFILE.add("Change Password");*/
-        expandableListDetail.put("PROFILE", PROFILE);
+        *//*if(menu.isVisibleChangePassword())
+            PROFILE.add("Change Password");*//*
+        expandableListDetail.put("PROFILE", PROFILE);*/
 
 
         List<String> CONTACT = new ArrayList<String>();

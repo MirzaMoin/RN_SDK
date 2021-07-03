@@ -4,22 +4,33 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.rnsdk.API.GetAPIData;
+import com.example.rnsdk.API.RetrofitClientInstance;
 import com.example.rnsdk.Adapter.FooterAdapter;
+import com.example.rnsdk.Adapter.LocationBottomsheetAdapter;
+import com.example.rnsdk.Adapter.OffersAdapter;
 import com.example.rnsdk.Models.AppColorModel;
 import com.example.rnsdk.Models.HomeScreenModel;
+import com.example.rnsdk.Models.ResponseModel;
+import com.example.rnsdk.Models.ResponsedataModel;
 import com.example.rnsdk.R;
 import com.example.rnsdk.Utility.Utility;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -31,6 +42,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class LocationActivity extends FragmentActivity implements OnMapReadyCallback, View.OnClickListener {
 
     private GoogleMap mMap;
@@ -41,6 +56,9 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
     TextView textPointLocation;
 
     LinearLayout bottomsheetLocation;
+    RecyclerView rvLocationBottomsheet;
+    ProgressDialog progressDialog;
+    boolean isExpanded = false;
 
     @Override
     protected void onResume() {
@@ -58,6 +76,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
 
 
         init();
+        getLocations();
 
 
     }
@@ -77,13 +96,14 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         rvFooterLocation = findViewById(R.id.rvFooterLocation);
         imgBackLocation = findViewById(R.id.imgBackLocation);
         textPointLocation = findViewById(R.id.textPointLocation);
+        rvLocationBottomsheet = findViewById(R.id.rvLocationBottomsheet);
 
 
         imgBackLocation.setOnClickListener(this);
         cardLocation.setOnClickListener(this);
 
         textPointLocation.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
-        textPointLocation.setText(String.valueOf(Utility.response.responsedata.contactData.getPointBalance())+ " PTS");
+        textPointLocation.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance())+ " PTS");
 
 
         setFooter();
@@ -119,9 +139,9 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        LatLng sydney = new LatLng(37.78825, -122.4324);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Primary Location"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
     private void showBottomsheet() {
@@ -131,13 +151,119 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         // set the custom layout
         final View customLayout = getLayoutInflater().inflate(R.layout.content_location_list, null);
         dialog.setContentView(customLayout);
+        dialog.show();
+
+        TextView textLocation = dialog.findViewById(R.id.textLocation);
+        RecyclerView rvLocation = dialog.findViewById(R.id.rvLocationBottomsheet);
+        LocationBottomsheetAdapter adapter = new LocationBottomsheetAdapter(this);
+        rvLocation.setHasFixedSize(true);
+        rvLocation.setLayoutManager(new LinearLayoutManager(this));
+        rvLocation.setAdapter(adapter);
+
+        BottomSheetDialog d = (BottomSheetDialog) dialog;
+
+        // This is gotten directly from the source of BottomSheetDialog
+        // in the wrapInBottomSheet() method
+        FrameLayout bottomSheet = (FrameLayout) d.findViewById(R.id.design_bottom_sheet);
+
+        // Right here!
+        BottomSheetBehavior.from(bottomSheet).setDraggable(false);
+        BottomSheetBehavior.from(bottomSheet)
+                .setState(BottomSheetBehavior.STATE_SETTLING);
+
+        ImageView imageExpand = dialog.findViewById(R.id.imageExpand);
+        imageExpand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BottomSheetDialog d = (BottomSheetDialog) dialog;
+
+                // This is gotten directly from the source of BottomSheetDialog
+                // in the wrapInBottomSheet() method
+                FrameLayout bottomSheet = (FrameLayout) d.findViewById(R.id.design_bottom_sheet);
+
+                // Right here!
+
+                if(isExpanded)
+                {
+                    isExpanded = false;
+                    BottomSheetBehavior.from(bottomSheet).setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    imageExpand.setRotation(-90);
+                }
+                else
+                {
+                    isExpanded = true;
+
+                    BottomSheetBehavior.from(bottomSheet)
+                            .setState(BottomSheetBehavior.STATE_EXPANDED);
+                    imageExpand.setRotation(90);
+                }
+            }
+        });
+
+
 
         // add a button
         // create and show the alert dialog
-        dialog.show();
 
     }
+    private void getLocations() {
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
+
+        Log.e("Request GetLocationData", "RP ID: " + Utility.response.responsedata.appDetails.rewardProgramId);
+        Call<ResponseModel> callGetLocation =
+                service.getLocationData(Utility.response.responsedata.appDetails.rewardProgramId);
+        callGetLocation.enqueue(new Callback<ResponseModel>() {
+
+            @Override
+            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                if (response.isSuccessful()) {
+                    progressDialog.dismiss();
+
+                    if(response.code() == 200)
+                    {
+                        if(response.body() != null)
+                        {
+
+                            ResponseModel responseModel = response.body();
+                            ResponsedataModel responseData = Utility.response.responsedata;
+
+                            responseData.locationData = responseModel.responsedata.getLocationData();
+
+                            Log.e("GetLocationData", "onResponse - Location List Size: " + responseModel.responsedata.locationData.size());
+
+                        }
+
+                    }
+                    else
+                    {
+                        Log.e("GetLocationData", "Status code - Location List Size: " + response.code() );
+
+                    }
+
+                } else {
+                    progressDialog.dismiss();
+
+                    Log.e("Test Error: ", "" + response.message());
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModel> call, Throwable t) {
+                progressDialog.dismiss();
+                Log.e("Test Error: ", "" + t.getMessage());
+
+
+            }
+        });
+    }
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.imgBackLocation){

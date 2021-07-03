@@ -357,6 +357,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/_5sdp"
                 android:text=""
+
                 android:textColor="#000"
                 android:textSize="@dimen/_12ssp"
                 android:textStyle="bold"
@@ -373,12 +374,11 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardFirstTH"
                 android:layout_width="@dimen/_50sdp"
+                android:layout_marginBottom="@dimen/_2sdp"
 
                 android:layout_height="@dimen/_50sdp"
                 android:visibility="gone"
                 app:cardCornerRadius="@dimen/_5sdp"
-
-
                 >
 
                 <ImageView
@@ -397,6 +397,7 @@
 
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="@dimen/_50sdp"
+                android:layout_marginBottom="@dimen/_2sdp"
 
                 android:layout_marginHorizontal="@dimen/_7sdp"
                 android:visibility="gone"
@@ -424,6 +425,7 @@
                 android:visibility="gone"
                 app:cardCornerRadius="@dimen/_5sdp"
 
+                android:layout_marginBottom="@dimen/_2sdp"
 
                 >
 

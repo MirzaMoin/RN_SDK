@@ -5,12 +5,12 @@ public class LocationDataModel {
     public String locationName;
     public LocationStoreAddressModel storeAddress;
     public String emailAddress;
-    public Object mobilePhone;
+    public String mobilePhone;
     public String websiteUrl;
     public String logoImage;
     public boolean isSelected;
 
-    public LocationDataModel(String addressId, String locationName, LocationStoreAddressModel storeAddress, String emailAddress, Object mobilePhone, String websiteUrl, String logoImage) {
+    public LocationDataModel(String addressId, String locationName, LocationStoreAddressModel storeAddress, String emailAddress, String mobilePhone, String websiteUrl, String logoImage) {
         this.addressId = addressId;
         this.locationName = locationName;
         this.storeAddress = storeAddress;
@@ -52,11 +52,11 @@ public class LocationDataModel {
         this.emailAddress = emailAddress;
     }
 
-    public Object getMobilePhone() {
+    public String getMobilePhone() {
         return mobilePhone;
     }
 
-    public void setMobilePhone(Object mobilePhone) {
+    public void setMobilePhone(String mobilePhone) {
         this.mobilePhone = mobilePhone;
     }
 

@@ -3,6 +3,7 @@ package com.example.rnsdk.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,60 +20,65 @@ import com.example.rnsdk.Models.HomeScreenModel;
 import com.example.rnsdk.R;
 import com.example.rnsdk.Utility.Utility;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import info.androidhive.fontawesome.FontDrawable;
 
-public class FooterAdapter extends RecyclerView.Adapter<FooterAdapter.ViewHolder>{
+public class FooterAdapter extends RecyclerView.Adapter<FooterAdapter.ViewHolder> {
 
     List<FooterLinkModel> footerLinks;
     String currentActivity;
 
     Context context;
-   public FooterAdapter(Context context, List<FooterLinkModel> footerLinks, String currentActivity){
-       this.footerLinks = footerLinks;
-       this.context = context;
 
-       this.currentActivity = currentActivity;
+    public FooterAdapter(Context context, List<FooterLinkModel> footerLinks, String currentActivity) {
+        this.footerLinks = footerLinks;
+        this.context = context;
+
+        this.currentActivity = currentActivity;
     }
 
+    @NotNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View listItem= layoutInflater.inflate(R.layout.content_footer, parent, false);
+        View listItem = layoutInflater.inflate(R.layout.content_footer, parent, false);
+        return new ViewHolder(listItem);
+    }
 
+    @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
+    }
 
-
-        ViewHolder viewHolder = new ViewHolder(listItem);
-        return viewHolder;
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-       holder.setIsRecyclable(false);
-       FooterLinkModel footer = footerLinks.get(position);
-
+        FooterLinkModel footer = footerLinks.get(position);
 
         FontDrawable drawable = new FontDrawable(context, Utility.getIcon(footer.getFooterIcon()), true, false);
         holder.icFooterLinkIcon.setImageDrawable(drawable);
 
-            holder.textFooterLink.setText(footer.getFooterText());
-            if(currentActivity.equals(footer.getFooterInternalLinkUrl())){
-                holder.textFooterLink.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarActionIconAndTextColor()));
-                holder.icFooterLinkIcon.setColorFilter(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarActionIconAndTextColor()));
-            }
-            else
-            {
-                holder.textFooterLink.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarInactiveIconColor()));
-                holder.icFooterLinkIcon.setColorFilter(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarInactiveIconColor()));
+        holder.textFooterLink.setText(footer.getFooterText());
+        if (currentActivity.equals(footer.getFooterInternalLinkUrl())) {
+            holder.textFooterLink.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarActionIconAndTextColor()));
+            holder.icFooterLinkIcon.setColorFilter(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarActionIconAndTextColor()));
 
-            }
-        if(!currentActivity.equals(footer.getFooterInternalLinkUrl())) {
+        } else {
+            holder.textFooterLink.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarInactiveIconColor()));
+            holder.icFooterLinkIcon.setColorFilter(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarInactiveIconColor()));
+        }
+        if (!currentActivity.equals(footer.getFooterInternalLinkUrl())) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     if (footer.getFooterLinkType().equals("internal")) {
                         Utility.openNewActivity(context, footer.getFooterInternalLinkUrl(), footer.getId(), footer.getFooterInternalLinkUrl());
                     } else {
@@ -82,38 +88,28 @@ public class FooterAdapter extends RecyclerView.Adapter<FooterAdapter.ViewHolder
                         i.putExtra("rewardProgramId", footer.getRewardProgramId());
                         context.startActivity(i);
                     }
-
                 }
             });
         }
-
-
-
-
     }
-
 
     @Override
     public int getItemCount() {
-
-                   return footerLinks.size();
-
-
+        return footerLinks.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-       TextView textFooterLink;
-       ImageView icFooterLinkIcon;
-       CardView cardMenuLink;
-       RelativeLayout relMenuLinkList;
+        TextView textFooterLink;
+        ImageView icFooterLinkIcon;
+        CardView cardMenuLink;
+        RelativeLayout relMenuLinkList;
+
         public ViewHolder(View itemView) {
             super(itemView);
-
             textFooterLink = itemView.findViewById(R.id.textFooterLink);
             icFooterLinkIcon = itemView.findViewById(R.id.icFooterLinkIcon);
 //            cardMenuLink = itemView.findViewById(R.id.cardMenuList);
-
 
         }
     }

@@ -4,6 +4,8 @@ import com.example.rnsdk.Models.ResponseModel;
 import com.example.rnsdk.Models.ResponseModelTransactionHistory;
 import com.google.gson.JsonObject;
 
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -114,6 +116,7 @@ public interface GetAPIData {
     Call<JsonObject> UploadReceipts(
             @Body JsonObject jsonBody
     );
-
+    @POST("/api/UserProfile/UploadReceiptsImages")
+    Call<ResponseModel> uploadReceiptImage(@Body RequestBody file);
 
 }

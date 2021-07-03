@@ -169,27 +169,31 @@
         android:id="@+id/relImagePreview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
         android:background="#74000000"
         android:clickable="true"
+        android:visibility="gone"
         android:focusable="true"
         android:focusableInTouchMode="true"
         >
 
+
+        <ImageView
+            android:id="@+id/imgPreview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+
+            />
         <ImageView
             android:id="@+id/imgPreviewClose"
             android:layout_width="@dimen/_40sdp"
             android:layout_height="@dimen/_40sdp"
             android:layout_alignParentRight="true"
             android:padding="@dimen/_8sdp"
+
             android:src="@drawable/ic_baseline_close_24"
             app:tint="#fff" />
-        <ImageView
-            android:id="@+id/imgPreview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            />
             </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
