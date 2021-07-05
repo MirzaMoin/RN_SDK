@@ -48,11 +48,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     Button btnSaveProfile;
     RecyclerView rvFooterProfile;
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setFooter();
-    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

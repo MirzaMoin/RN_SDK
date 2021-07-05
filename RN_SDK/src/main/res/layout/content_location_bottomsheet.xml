@@ -16,7 +16,7 @@
             android:layout_height="@dimen/_40sdp"
             android:layout_gravity="center"
             android:scaleType="fitXY"
-            android:src="@drawable/image_login_bg"
+            android:src="@drawable/ic_location"
 
             />
 
@@ -54,7 +54,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_email_24"
+                    android:src="@drawable/ic_baseline_location_city_24"
                     app:tint="#000" />
 
                 <TextView
@@ -78,7 +78,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_email_24"
+                    android:src="@drawable/ic_baseline_directions_24"
                     app:tint="#000" />
 
                 <TextView
@@ -102,7 +102,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_email_24"
+                    android:src="@drawable/ic_baseline_language_24"
                     app:tint="#000" />
 
                 <TextView
@@ -153,7 +153,7 @@
             android:background="#000" />
 
         <ImageView
-            android:id="@+id/imgExpand"
+            android:id="@+id/imgExpandLocation"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_20sdp"
             android:layout_gravity="center_vertical"

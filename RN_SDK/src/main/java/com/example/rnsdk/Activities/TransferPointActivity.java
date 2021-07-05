@@ -2,6 +2,7 @@ package com.example.rnsdk.Activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -62,14 +64,11 @@ public class TransferPointActivity extends AppCompatActivity implements View.OnC
     ProgressDialog progressDialog;
 
 
+    boolean isOpen = false;
+
     EditText etPointAmountTP, etUserDetailsTP;
     boolean isError = false;
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setFooter();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -218,6 +217,7 @@ public class TransferPointActivity extends AppCompatActivity implements View.OnC
     }
 
     private void init() {
+
         if (Build.VERSION.SDK_INT >= 21) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);

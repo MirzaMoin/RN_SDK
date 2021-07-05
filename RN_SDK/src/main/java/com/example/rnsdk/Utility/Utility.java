@@ -47,9 +47,7 @@ public class Utility {
   {
     switch (menuInternalLinkUrl)
     {
-      case "notificaiton":
-        context.startActivity(new Intent(context, NotificationActivity.class));
-        break;
+
       case "refereFriend":
       case "Refer Friend":
         context.startActivity(new Intent(context, ReferFriendActivity.class));
@@ -74,9 +72,6 @@ public class Utility {
       case "Upload Receipt":
         context.startActivity(new Intent(context, UploadReceiptActivity.class));
         break;
-      case "locations":
-        context.startActivity(new Intent(context, LocationActivity.class));
-        break;
       case "redeemCashback":
       case "Redeem Cashback":
         context.startActivity(new Intent(context, CashbackActivity.class));
@@ -90,6 +85,7 @@ public class Utility {
         context.startActivity(new Intent(context, RewardEntryGoalActivity.class));
         break;
       case "Transfer Points":
+      case "transferPoint":
         context.startActivity(new Intent(context, TransferPointActivity.class));
         break;
       case "takeSurvey":
@@ -97,16 +93,15 @@ public class Utility {
         context.startActivity(new Intent(context, TakeSurveyActivity.class));
         break;
       case "Transaction History":
+      case "transactionHistory":
         context.startActivity(new Intent(context, TransactionHistoryActivity.class));
-        break;
-      case "Change Password":
-        context.startActivity(new Intent(context, ChangePasswordActivity.class));
         break;
       case "contactUs":
       case "Contact Us":
         context.startActivity(new Intent(context, ContactUsActivity.class));
         break;
       case "Location":
+      case "locations":
         context.startActivity(new Intent(context, LocationActivity.class));
         break;
 

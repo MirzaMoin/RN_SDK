@@ -56,8 +56,14 @@ public class ResponsedataModel {
     public List<URCategoryModel> categories;
     public URSettingsDetailsModel settingsDetails;
 
+    //All point data
+    public double totalEarnedThisMonth;
+    public double totalReedemed;
+    public double lifeTimePoints;
+    public double pointBalance;
 
-    public ResponsedataModel(HomeScreenModel homeScreen, AppColorModel appColor, MenuPermissionModel menuPermission, AppIntakeImagesModel appIntakeImages, AppDetailsModel appDetails, ChildPageSettingModel childPageSetting, ContactData contactData, Object webFormData, TransactionHistoryModel transactionHistoryModel, List<TransactionHistoryModel> responsedata, OfferRedeemSettingModel redeemSetting, OfferAddressDetailsModel addressDetails, OfferUserDetailsModel userDetails, List<OfferListModel> offerList, List<SurveysUnTakenModel> unTaken, List<SurveysUnTakenModel> completed, List<RPGListModel> lstRPG, WaysToEarnModel totalPoints, WaysToEarnModel purchasePoints, WaysToEarnModel socialShare, WaysToEarnModel referFriends, WaysToEarnModel leaderboard, WaysToEarnModel surveys, WaysToEarnModel completeProfile, LBQualificationCriteriaModel qualificationCriteria, List<LBFilterModel> filters, List<LBLeaderBoardReportModel> leaderBoardReport, List<LocationDataModel> locationData, URDateDetailsModel dateDetails, List<URCategoryModel> categories, URSettingsDetailsModel settingsDetails) {
+
+    public ResponsedataModel(HomeScreenModel homeScreen, AppColorModel appColor, MenuPermissionModel menuPermission, AppIntakeImagesModel appIntakeImages, AppDetailsModel appDetails, ChildPageSettingModel childPageSetting, ContactData contactData, Object webFormData, TransactionHistoryModel transactionHistoryModel, List<TransactionHistoryModel> responsedata, OfferRedeemSettingModel redeemSetting, OfferAddressDetailsModel addressDetails, OfferUserDetailsModel userDetails, List<OfferListModel> offerList, List<SurveysUnTakenModel> unTaken, List<SurveysUnTakenModel> completed, List<RPGListModel> lstRPG, WaysToEarnModel totalPoints, WaysToEarnModel purchasePoints, WaysToEarnModel socialShare, WaysToEarnModel referFriends, WaysToEarnModel leaderboard, WaysToEarnModel surveys, WaysToEarnModel completeProfile, LBQualificationCriteriaModel qualificationCriteria, List<LBFilterModel> filters, List<LBLeaderBoardReportModel> leaderBoardReport, List<LocationDataModel> locationData, URDateDetailsModel dateDetails, List<URCategoryModel> categories, URSettingsDetailsModel settingsDetails, double totalEarnedThisMonth, double totalReedemed, double lifeTimePoints, double pointBalance, double notificationCount) {
         this.homeScreen = homeScreen;
         this.appColor = appColor;
         this.menuPermission = menuPermission;
@@ -89,6 +95,10 @@ public class ResponsedataModel {
         this.dateDetails = dateDetails;
         this.categories = categories;
         this.settingsDetails = settingsDetails;
+        this.totalEarnedThisMonth = totalEarnedThisMonth;
+        this.totalReedemed = totalReedemed;
+        this.lifeTimePoints = lifeTimePoints;
+        this.pointBalance = pointBalance;
     }
 
     public HomeScreenModel getHomeScreen() {
@@ -340,4 +350,38 @@ public class ResponsedataModel {
     public void setSettingsDetails(URSettingsDetailsModel settingsDetails) {
         this.settingsDetails = settingsDetails;
     }
+
+    public double getTotalEarnedThisMonth() {
+        return totalEarnedThisMonth;
+    }
+
+    public void setTotalEarnedThisMonth(double totalEarnedThisMonth) {
+        this.totalEarnedThisMonth = totalEarnedThisMonth;
+    }
+
+    public double getTotalReedemed() {
+        return totalReedemed;
+    }
+
+    public void setTotalReedemed(double totalReedemed) {
+        this.totalReedemed = totalReedemed;
+    }
+
+    public double getLifeTimePoints() {
+        return lifeTimePoints;
+    }
+
+    public void setLifeTimePoints(double lifeTimePoints) {
+        this.lifeTimePoints = lifeTimePoints;
+    }
+
+    public double getPointBalance() {
+        return pointBalance;
+    }
+
+    public void setPointBalance(double pointBalance) {
+        this.pointBalance = pointBalance;
+    }
+
+
 }

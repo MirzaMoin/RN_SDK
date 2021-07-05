@@ -10,6 +10,7 @@ public class TransactionHistoryModel {
     public String points;
     public double balance;
     public List<TransactionHistoryChildMenuModel> childMenus;
+    public boolean isExpanded;
 
     public TransactionHistoryModel(String transactionDate, String locationName, String type, String transactionStatus, String points, double balance, List<TransactionHistoryChildMenuModel> childMenus) {
         this.transactionDate = transactionDate;
@@ -75,5 +76,14 @@ public class TransactionHistoryModel {
 
     public void setChildMenus(List<TransactionHistoryChildMenuModel> childMenus) {
         this.childMenus = childMenus;
+    }
+
+
+    public boolean isExpanded() {
+        return isExpanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        isExpanded = expanded;
     }
 }

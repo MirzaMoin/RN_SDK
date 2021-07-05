@@ -46,7 +46,7 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onResume() {
         super.onResume();
-        setFooter();
+
         if(Constants.isOfferRedeem)
         {
             Constants.isOfferRedeem = false;
@@ -183,20 +183,15 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
             }
         });
     }
-
     private void setLayout() {
         textPointOffers.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
         textPointOffers.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
-
 
         OffersAdapter adapter = new OffersAdapter(this, Utility.response.responsedata.offerList);
         rvOffer.setHasFixedSize(true);
         rvOffer.setLayoutManager(new LinearLayoutManager(this));
         rvOffer.setAdapter(adapter);
-
-
     }
-
     private void init() {
         if (Build.VERSION.SDK_INT >= 21) {
             Window window = getWindow();
@@ -209,21 +204,15 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
         }
         rvOffer = findViewById(R.id.rvOffers);
         textPointOffers = findViewById(R.id.textPointOffers);
-
         ivBack = findViewById(R.id.imgBackOffers);
         rvFooterOffers = findViewById(R.id.rvFooterOffers);
 
-
         ivBack.setOnClickListener(this);
 
-
         setFooter();
-
     }
-
     private void setFooter() {
         AppColorModel appColor = Utility.response.responsedata.appColor;
-
         HomeScreenModel homeScreenModel = Utility.response.responsedata.homeScreen;
         if (homeScreenModel.isHomePageDisplayFooter()) {
             rvFooterOffers.setVisibility(View.VISIBLE);
@@ -232,24 +221,17 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
             FooterAdapter adapter = new FooterAdapter(this, homeScreenModel.footerLinks, "offer");
             rvFooterOffers.setHasFixedSize(true);
 
-
             rvFooterOffers.setLayoutManager(new GridLayoutManager(this, homeScreenModel.footerLinks.size()));
 
             rvFooterOffers.setAdapter(adapter);
         } else {
             rvFooterOffers.setVisibility(View.GONE);
-
-
         }
-
-
     }
-
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.imgBackOffers) {
             super.onBackPressed();
         }
-
     }
 }

@@ -75,6 +75,11 @@ public interface GetAPIData {
             @Query("Month") int Month,
             @Query("Year") int Year
     );
+   @GET("/api/UserAccountProfile/GetAllPoints")
+    Call<ResponseModel> getAllPoints(
+            @Query("RewardProgramId") String RewardProgramId,
+            @Query("ContactID") String ContactID
+    );
 
     @GET("/api/UserAccountProfile/GetLocationData")
     Call<ResponseModel> getLocationData(

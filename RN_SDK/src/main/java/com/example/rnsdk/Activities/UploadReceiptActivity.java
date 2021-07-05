@@ -146,11 +146,6 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
 
     LinearLayout linearRPGCashback, linearHome;
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setFooter();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,33 +155,8 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
         init();
         getData();
 
-        InputMethodManager imm = (InputMethodManager) this
-                .getSystemService(Context.INPUT_METHOD_SERVICE);
 
-        ConstraintLayout conUR = findViewById(R.id.conUR);
-        conUR.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                int heightDiff = conUR.getRootView().getHeight() - conUR.getHeight();
 
-                if (heightDiff > 100) {
-                    if(!isOpen)
-                    {
-                        isOpen = true;
-                        Log.e("MyActivity", "keyboard opened");
-                        setFooter();
-                        // Value should be less than keyboard's height
-                    }
-                } else {
-                    if(isOpen) {
-                        isOpen = false;
-                        setFooter();
-
-                        Log.e("MyActivity", "keyboard closed");
-                    }
-                }
-            }
-        });
     }
 
     private void init() {
@@ -301,7 +271,24 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
                         public void onDateSet(DatePicker datePicker, int year, int month, int day) {
 
                             sReceiptDate = "" + year + "-" + (month + 1) + "-" + day;
-                            textUrReceiptDate.setText("" + year + "-" + (month + 1) + "-" + day);
+                            String sDay,sMonth;
+                            if((month + 1) < 10)
+                            {
+                                sMonth = "0"+month;
+                            }
+                            else
+                            {
+                                sMonth = ""+month;
+                            }
+                            if(day < 10)
+                            {
+                                sDay = "0"+day;
+                            }
+                            else
+                            {
+                                sDay =""+day;
+                            }
+                            textUrReceiptDate.setText("" + year + "-" + sMonth + "-" + sDay);
 
                         }
                     }, 2021, c.getMonth(), c.getDay());

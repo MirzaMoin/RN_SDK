@@ -55,11 +55,6 @@ public class TakeSurveyActivity extends AppCompatActivity implements View.OnClic
     TabLayout tabLayout;
 
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setFooter();
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override

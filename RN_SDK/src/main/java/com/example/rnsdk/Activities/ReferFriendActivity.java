@@ -43,11 +43,7 @@ public class ReferFriendActivity extends AppCompatActivity implements View.OnCli
     Button btnGetInviteLink;
 
     RecyclerView rvFooterReferFriend;
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setFooter();
-    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

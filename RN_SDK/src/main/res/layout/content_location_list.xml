@@ -3,8 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
+    android:background="@drawable/background_location_list"
     android:padding="@dimen/_10sdp"
+
     android:id="@+id/bottomsheetLocation"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -38,7 +39,9 @@
             app:tint="#000" />
     </RelativeLayout>
 
+
     <EditText
+        android:id="@+id/etSearchLocationBottom"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_35sdp"
         android:layout_marginVertical="@dimen/_10sdp"
@@ -48,6 +51,8 @@
         android:layout_marginHorizontal="@dimen/_5sdp"
         android:drawableStart="@drawable/ic_baseline_search_24"
         android:drawablePadding="@dimen/_10sdp"
+        android:imeOptions="actionSearch"
+        android:maxLines="1"
         android:textSize="@dimen/_12ssp"
         android:drawableTint="#CCCCCC"
 
@@ -58,7 +63,15 @@
       android:id="@+id/rvLocationBottomsheet"
       android:layout_marginHorizontal="@dimen/_5sdp"
 
-      />
 
+      />
+    <TextView
+        android:id="@+id/textNoLocation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="No Location Found"
+        android:gravity="center"
+        android:visibility="gone"
+        />
 
 </LinearLayout>

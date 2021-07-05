@@ -1,6 +1,7 @@
 package com.example.rnsdk.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -61,12 +63,9 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
     EditText etLocationNameSearchTH;
     RelativeLayout relImagePreview;
 
+    boolean isOpen = false;
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setFooter();
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +109,10 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
                         rvTransactionHistory.setHasFixedSize(true);
                         rvTransactionHistory.setLayoutManager(new LinearLayoutManager(TransactionHistoryActivity.this));
                         rvTransactionHistory.setAdapter(adapter);
+
+                        Log.e("Test","History Size: "+response.body().responsedata.size());
+
+
                     } else {
                         textNoData.setVisibility(View.VISIBLE);
                         Log.e("Test", "No Transaction Found");
@@ -135,6 +138,8 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
     }
 
     private void init() {
+
+
         if (Build.VERSION.SDK_INT >= 21) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -229,6 +234,7 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
     }
 
     private void setFooter() {
+        Log.e("Test","SetFooter Called");
         AppColorModel appColor = Utility.response.responsedata.appColor;
 
         HomeScreenModel homeScreenModel = Utility.response.responsedata.homeScreen;

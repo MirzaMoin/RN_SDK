@@ -1,6 +1,7 @@
 package com.example.rnsdk.Adapter;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +20,8 @@ import com.example.rnsdk.Models.TransactionHistoryChildMenuModel;
 import com.example.rnsdk.Models.TransactionHistoryModel;
 import com.example.rnsdk.R;
 import com.example.rnsdk.Utility.Utility;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -42,21 +45,41 @@ public class TransactionHistoryAdapter extends RecyclerView.Adapter<TransactionH
         this.relImagePreview = relImagePreview;
         this.imgPreview = imgPreview;
         this.imgPreviewClose = imgPreviewClose;
+
+        for(TransactionHistoryModel data : responseModel)
+        {
+            data.setExpanded(false);
+        }
     }
 
+    @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
+    }
+
+
+
+    @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
+    }
+
+    @NotNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View listItem = layoutInflater.inflate(R.layout.content_transaction_history, parent, false);
-        ViewHolder viewHolder = new ViewHolder(listItem);
-        return viewHolder;
+        return new ViewHolder(listItem);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(@NotNull ViewHolder holder, int position) {
 
 
+        holder.setIsRecyclable(false);
         if(position % 2 != 0){
+
             holder.linearContentTH.setBackgroundColor(Utility.getColor("#99999933"));
         }
 
@@ -69,10 +92,11 @@ public class TransactionHistoryAdapter extends RecyclerView.Adapter<TransactionH
         Date date = null;
         TransactionHistoryModel history = this.responseModel.get(position);
         String dtStart = history.getTransactionDate();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-        SimpleDateFormat formatterOut = new SimpleDateFormat("dd MMM yyyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat formatterOut = new SimpleDateFormat("dd MMM yyyy");
         try {
             date = format.parse(dtStart);
+            assert date != null;
             formatterOut.format(date);
             holder.textDate.setText("" + formatterOut.format(date));
 
@@ -100,18 +124,18 @@ public class TransactionHistoryAdapter extends RecyclerView.Adapter<TransactionH
             @Override
             public void onClick(View v) {
 
-                if (holder.linearTotalSpend.getVisibility() == View.VISIBLE
-                ) {
+                if (history.isExpanded()) {
+                    history.setExpanded(false);
                     holder.linearLocation.setVisibility(View.GONE);
                     holder.linearStatus.setVisibility(View.GONE);
                     holder.linearType.setVisibility(View.GONE);
                     holder.linearTotalSpend.setVisibility(View.GONE);
                     holder.linearImagesTH.setVisibility(View.GONE);
                     holder.linearOfferNameTH.setVisibility(View.GONE);
-
                     holder.imageExpand.setRotation(180);
 
                 } else {
+                    history.setExpanded(true);
 
                     holder.linearLocation.setVisibility(View.VISIBLE);
                     holder.linearStatus.setVisibility(View.VISIBLE);

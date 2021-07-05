@@ -85,11 +85,7 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
     AlertDialog dialogSuccess;
 
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setFooter();
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

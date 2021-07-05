@@ -2,6 +2,8 @@ package com.example.rnsdk.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,10 +13,15 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,6 +36,7 @@ import com.example.rnsdk.Adapter.LocationBottomsheetAdapter;
 import com.example.rnsdk.Adapter.OffersAdapter;
 import com.example.rnsdk.Models.AppColorModel;
 import com.example.rnsdk.Models.HomeScreenModel;
+import com.example.rnsdk.Models.LocationDataModel;
 import com.example.rnsdk.Models.ResponseModel;
 import com.example.rnsdk.Models.ResponsedataModel;
 import com.example.rnsdk.R;
@@ -41,6 +49,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -59,12 +70,11 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
     RecyclerView rvLocationBottomsheet;
     ProgressDialog progressDialog;
     boolean isExpanded = false;
+    boolean isOpen = false;
+    List<LocationDataModel> originalLocations = new ArrayList<>();
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setFooter();
-    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +92,8 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
     }
 
     private void init() {
+
+
         if (Build.VERSION.SDK_INT >= 21) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -144,62 +156,124 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
-    private void showBottomsheet() {
 
+
+    private void showBottomsheet() {
+        Utility.response.responsedata.locationData.clear();
+        Utility.response.responsedata.locationData.addAll(originalLocations);
         // create an alert builder
-        BottomSheetDialog dialog = new BottomSheetDialog(this);
+        BottomSheetDialog dialog = new BottomSheetDialog(this, R.style.BottomSheetStyle);
         // set the custom layout
         final View customLayout = getLayoutInflater().inflate(R.layout.content_location_list, null);
+
         dialog.setContentView(customLayout);
+        dialog.getBehavior().setState(BottomSheetBehavior.STATE_EXPANDED);
         dialog.show();
 
+
+        ((View) customLayout.getParent()).setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
         TextView textLocation = dialog.findViewById(R.id.textLocation);
+        TextView textNoLocation = dialog.findViewById(R.id.textNoLocation);
         RecyclerView rvLocation = dialog.findViewById(R.id.rvLocationBottomsheet);
-        LocationBottomsheetAdapter adapter = new LocationBottomsheetAdapter(this);
-        rvLocation.setHasFixedSize(true);
-        rvLocation.setLayoutManager(new LinearLayoutManager(this));
-        rvLocation.setAdapter(adapter);
 
-        BottomSheetDialog d = (BottomSheetDialog) dialog;
+        if (Utility.response.responsedata.locationData.size() > 0) {
+            rvLocation.setVisibility(View.VISIBLE);
+            textNoLocation.setVisibility(View.GONE);
+            LocationBottomsheetAdapter adapter = new LocationBottomsheetAdapter(this);
+            rvLocation.setHasFixedSize(true);
+            rvLocation.setLayoutManager(new LinearLayoutManager(this));
+            rvLocation.setAdapter(adapter);
 
-        // This is gotten directly from the source of BottomSheetDialog
-        // in the wrapInBottomSheet() method
-        FrameLayout bottomSheet = (FrameLayout) d.findViewById(R.id.design_bottom_sheet);
+            BottomSheetDialog d = (BottomSheetDialog) dialog;
 
-        // Right here!
-        BottomSheetBehavior.from(bottomSheet).setDraggable(false);
-        BottomSheetBehavior.from(bottomSheet)
-                .setState(BottomSheetBehavior.STATE_SETTLING);
+            // This is gotten directly from the source of BottomSheetDialog
+            // in the wrapInBottomSheet() method
+            FrameLayout bottomSheet = (FrameLayout) d.findViewById(R.id.design_bottom_sheet);
 
-        ImageView imageExpand = dialog.findViewById(R.id.imageExpand);
-        imageExpand.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BottomSheetDialog d = (BottomSheetDialog) dialog;
+            // Right here!
+            BottomSheetBehavior.from(bottomSheet).setDraggable(false);
+            BottomSheetBehavior.from(bottomSheet)
+                    .setState(BottomSheetBehavior.STATE_SETTLING);
 
-                // This is gotten directly from the source of BottomSheetDialog
-                // in the wrapInBottomSheet() method
-                FrameLayout bottomSheet = (FrameLayout) d.findViewById(R.id.design_bottom_sheet);
+            ImageView imageExpand = dialog.findViewById(R.id.imageExpand);
+            imageExpand.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    BottomSheetDialog d = (BottomSheetDialog) dialog;
 
-                // Right here!
+                    // This is gotten directly from the source of BottomSheetDialog
+                    // in the wrapInBottomSheet() method
+                    FrameLayout bottomSheet = (FrameLayout) d.findViewById(R.id.design_bottom_sheet);
 
-                if(isExpanded)
-                {
-                    isExpanded = false;
-                    BottomSheetBehavior.from(bottomSheet).setState(BottomSheetBehavior.STATE_COLLAPSED);
-                    imageExpand.setRotation(-90);
+                    // Right here!
+
+                    if (isExpanded) {
+                        isExpanded = false;
+                        BottomSheetBehavior.from(bottomSheet).setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        imageExpand.setRotation(-90);
+                    } else {
+                        isExpanded = true;
+
+                        BottomSheetBehavior.from(bottomSheet)
+                                .setState(BottomSheetBehavior.STATE_EXPANDED);
+                        imageExpand.setRotation(90);
+                    }
                 }
-                else
-                {
-                    isExpanded = true;
+            });
 
-                    BottomSheetBehavior.from(bottomSheet)
-                            .setState(BottomSheetBehavior.STATE_EXPANDED);
-                    imageExpand.setRotation(90);
+            EditText etSearchLocationBottom = dialog.findViewById(R.id.etSearchLocationBottom);
+            etSearchLocationBottom.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
                 }
-            }
-        });
 
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    if (s.toString().isEmpty()) {
+                        Utility.response.responsedata.locationData.clear();
+                        Utility.response.responsedata.locationData.addAll(originalLocations);
+                        adapter.notifyDataSetChanged();
+                        rvLocation.setVisibility(View.VISIBLE);
+                        textNoLocation.setVisibility(View.GONE);
+
+                    } else {
+
+                        List<LocationDataModel> locations = new ArrayList<>();
+
+                        for (LocationDataModel l : originalLocations) {
+
+                            if (l.getLocationName().toLowerCase().contains(s.toString().toLowerCase())) {
+                                locations.add(l);
+                            }
+                        }
+                        Utility.response.responsedata.locationData.clear();
+                        Utility.response.responsedata.locationData.addAll(locations);
+                        adapter.notifyDataSetChanged();
+                        Log.e("Test", "Result : " + locations.size());
+                    }
+                    if(Utility.response.responsedata.locationData.size() == 0)
+                    {
+                        rvLocation.setVisibility(View.GONE);
+                        textNoLocation.setVisibility(View.VISIBLE);
+                    }
+                    else
+                    {
+                        rvLocation.setVisibility(View.VISIBLE);
+                        textNoLocation.setVisibility(View.GONE);
+                    }
+                }
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            });
+        } else
+        {
+            rvLocation.setVisibility(View.GONE);
+            textNoLocation.setVisibility(View.VISIBLE);
+        }
 
 
         // add a button
@@ -235,6 +309,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
 
                             responseData.locationData = responseModel.responsedata.getLocationData();
 
+                            originalLocations.addAll(responseData.locationData);
                             Log.e("GetLocationData", "onResponse - Location List Size: " + responseModel.responsedata.locationData.size());
 
                         }

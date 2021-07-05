@@ -46,17 +46,13 @@ import retrofit2.Response;
 
 public class RewardEntryGoalActivity extends AppCompatActivity implements View.OnClickListener {
 
-    RecyclerView rvRPG,rvFooterRPG;
+    RecyclerView rvRPG, rvFooterRPG;
     ImageView imgBack;
-    LinearLayout linearCashbackRPG,linearHome;
+    LinearLayout linearCashbackRPG, linearHome;
     TextView textPointRPG;
     ProgressDialog progressDialog;
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setFooter();
-    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,8 +61,6 @@ public class RewardEntryGoalActivity extends AppCompatActivity implements View.O
         init();
 
         getData();
-
-
 
 
     }
@@ -78,7 +72,7 @@ public class RewardEntryGoalActivity extends AppCompatActivity implements View.O
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.setStatusBarColor(Utility.getColor(Utility.response.responsedata.appColor.getPhoneNotificationBar()));
         }
-        if(Utility.response.responsedata.appColor.getPhoneNotificationBarTextColor().equals("Black")){
+        if (Utility.response.responsedata.appColor.getPhoneNotificationBarTextColor().equals("Black")) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
         rvRPG = findViewById(R.id.rvRewardEntryGoal);
@@ -86,7 +80,7 @@ public class RewardEntryGoalActivity extends AppCompatActivity implements View.O
         imgBack = findViewById(R.id.imgBackRPG);
         textPointRPG = findViewById(R.id.textPointRPG);
         textPointRPG.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
-        textPointRPG.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance())+ " PTS");
+        textPointRPG.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
 
         imgBack.setOnClickListener(this);
 
@@ -99,7 +93,6 @@ public class RewardEntryGoalActivity extends AppCompatActivity implements View.O
             for (RPGChildPageDataModel rpg : childPageSettings.rpgChildPageData) {
                 childPage.add(new ChildPageModel(rpg.image, rpg.opacity, rpg.isClickable, rpg.linkType, rpg.internalLink, rpg.externalLink));
             }
-
 
 
             CashbackImageSliderAdapter adapter = new CashbackImageSliderAdapter(this, childPage);
@@ -120,25 +113,23 @@ public class RewardEntryGoalActivity extends AppCompatActivity implements View.O
 
 
     }
+
     private void setFooter() {
         AppColorModel appColor = Utility.response.responsedata.appColor;
 
         HomeScreenModel homeScreenModel = Utility.response.responsedata.homeScreen;
-        if(homeScreenModel.isHomePageDisplayFooter())
-        {
+        if (homeScreenModel.isHomePageDisplayFooter()) {
             rvFooterRPG.setVisibility(View.VISIBLE);
             rvFooterRPG.setBackgroundColor(Utility.getColor(appColor.getFooterBarColor()));
 
-            FooterAdapter adapter = new FooterAdapter(this,homeScreenModel.footerLinks,"rpg");
+            FooterAdapter adapter = new FooterAdapter(this, homeScreenModel.footerLinks, "rpg");
             rvFooterRPG.setHasFixedSize(true);
 
 
-            rvFooterRPG.setLayoutManager(new GridLayoutManager(this,homeScreenModel.footerLinks.size()));
+            rvFooterRPG.setLayoutManager(new GridLayoutManager(this, homeScreenModel.footerLinks.size()));
 
             rvFooterRPG.setAdapter(adapter);
-        }
-        else
-        {
+        } else {
             rvFooterRPG.setVisibility(View.GONE);
 
 
@@ -149,7 +140,7 @@ public class RewardEntryGoalActivity extends AppCompatActivity implements View.O
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.imgBackRPG){
+        if (v.getId() == R.id.imgBackRPG) {
             super.onBackPressed();
         }
     }
@@ -177,13 +168,12 @@ public class RewardEntryGoalActivity extends AppCompatActivity implements View.O
                     Utility.response.responsedata.lstRPG = response.body().responsedata.lstRPG;
 
 
-                    Log.e("TEST", "onResponse: "+Utility.response.responsedata.lstRPG.size() );
+                    Log.e("TEST", "onResponse: " + Utility.response.responsedata.lstRPG.size());
 
-                    RewardEntryPointAdapter adapter = new RewardEntryPointAdapter(RewardEntryGoalActivity.this,Utility.response.responsedata.lstRPG);
+                    RewardEntryPointAdapter adapter = new RewardEntryPointAdapter(RewardEntryGoalActivity.this, Utility.response.responsedata.lstRPG);
                     rvRPG.setHasFixedSize(true);
                     rvRPG.setLayoutManager(new LinearLayoutManager(RewardEntryGoalActivity.this));
                     rvRPG.setAdapter(adapter);
-
 
 
                 } else {

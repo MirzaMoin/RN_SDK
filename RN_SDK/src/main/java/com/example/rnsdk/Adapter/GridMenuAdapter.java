@@ -7,9 +7,11 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import com.example.rnsdk.Fragments.GridLayoutOne;
 import com.example.rnsdk.Fragments.GridLayoutTwo;
 
- public class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
-    public ScreenSlidePagerAdapter(FragmentManager fm) {
+ public class GridMenuAdapter extends FragmentStatePagerAdapter {
+     int size;
+    public GridMenuAdapter(FragmentManager fm, int size) {
         super(fm);
+        this.size = size;
     }
 
     @Override
@@ -26,6 +28,14 @@ import com.example.rnsdk.Fragments.GridLayoutTwo;
 
     @Override
     public int getCount() {
-        return 2;
+
+        if(size > 6)
+        {
+            return 2;
+        }
+        else
+        {
+            return  1;
+        }
     }
 }

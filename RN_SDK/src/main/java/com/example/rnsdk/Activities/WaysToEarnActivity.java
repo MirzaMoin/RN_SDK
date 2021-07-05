@@ -56,11 +56,6 @@ public class WaysToEarnActivity extends AppCompatActivity implements View.OnClic
     ProgressDialog progressDialog;
 
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setFooter();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

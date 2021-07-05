@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.rnsdk.API.GetAPIData;
 import com.example.rnsdk.API.RetrofitClientInstance;
 import com.example.rnsdk.Activities.LoginActivities.CleanButtonsLoginActivity;
@@ -30,38 +32,18 @@ import retrofit2.Response;
 
 public class SplashActivity extends AppCompatActivity {
 
-    Button btnCleanButton, btnCleanLogin, btnVideoMotion, btnHome, btnProfile, btnWaystoEarn, btnRewardEntryGoal, btnRedeemCashback, btnLeaderboard, btnTransactionHistory, btnOffer, btnOfferDetail, btnTransferrPoint, btnUploadReceipt, btnReferFriends, btnContactUs, btnChangePassword, btnLocation, btnTakeSurvey;
 
-    ProgressDialog progressDialog;
-
+    ImageView imageSplash,
+            imageLogoSplash;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        btnCleanButton = findViewById(R.id.btnCleanButtons);
 
 
-        btnProfile = findViewById(R.id.btnProfile);
-        btnWaystoEarn = findViewById(R.id.btnWaysToEan);
-        btnRewardEntryGoal = findViewById(R.id.btnRewardsEntryGoal);
-        btnRedeemCashback = findViewById(R.id.btnCashback);
-        btnLeaderboard = findViewById(R.id.btnLeaderboard);
-        btnTransactionHistory = findViewById(R.id.btnTransactionHistory);
-        btnOffer = findViewById(R.id.btnOffer);
-        btnOfferDetail = findViewById(R.id.btnOfferDetail);
-        btnTransferrPoint = findViewById(R.id.btnTransferPoint);
-        btnUploadReceipt = findViewById(R.id.btnUploadReceipt);
-        btnReferFriends = findViewById(R.id.btnReferFriends);
-        btnContactUs = findViewById(R.id.btnContactUs);
-        btnChangePassword = findViewById(R.id.btnChangePassword);
-        btnLocation = findViewById(R.id.btnLocation);
-        btnTakeSurvey = findViewById(R.id.btnTakeSurvey);
+        imageSplash = findViewById(R.id.imageSplash);
+        imageLogoSplash = findViewById(R.id.imageLogoSplash);
 
-
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Loading...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
 
         /*Create handle for the RetrofitInstance interface*/
         GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
@@ -70,7 +52,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
-                progressDialog.dismiss();
+
 
                     if (response.isSuccessful()) {
                         if(response.body() != null)
@@ -80,6 +62,9 @@ public class SplashActivity extends AppCompatActivity {
 
                             ResponseModel responseModel = response.body();
                             Utility.response = responseModel;
+
+                            Glide.with(SplashActivity.this).load(Utility.response.responsedata.appIntakeImages.loadingImages.get(0).imageUrl).into(imageSplash);
+                            Glide.with(SplashActivity.this).load(Utility.response.responsedata.appIntakeImages.companyLogo).into(imageLogoSplash);
 
 
                             Call<ResponseModel> callLogin = service.Login(ApiJsonMap("UW5c2c0MTT43HbVcKeu54rh8Nf77Fu",
@@ -111,9 +96,41 @@ public class SplashActivity extends AppCompatActivity {
 
                                                         Log.e("Test:", "Response : Got Contact Data");
 
-                                                        Toast.makeText(SplashActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
-                                                        startActivity(new Intent(SplashActivity.this, HomeActivity.class));
 
+
+                                                        Call<ResponseModel> callGetContactData = service.getAllPoints(Utility.response.responsedata.appDetails.rewardProgramId,
+                                                                Utility.response.responsedata.contactData.getContactID()
+                                                        );
+
+
+                                                        callGetContactData.enqueue(new Callback<ResponseModel>() {
+                                                            @Override
+                                                            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                                                                if (response.isSuccessful()) {
+
+
+                                                                    Log.e("Test:", "Response : Got All Points");
+                                                                    Utility.response.responsedata.totalEarnedThisMonth = response.body().responsedata.getTotalEarnedThisMonth();
+                                                                    Utility.response.responsedata.totalReedemed = response.body().responsedata.getTotalReedemed();
+                                                                    Utility.response.responsedata.lifeTimePoints = response.body().responsedata.getLifeTimePoints();
+                                                                    Utility.response.responsedata.pointBalance = response.body().responsedata.getPointBalance();
+                                                                    Utility.response.responsedata.pointBalance = response.body().responsedata.getPointBalance();
+
+                                                                    Toast.makeText(SplashActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
+                                                                    startActivity(new Intent(SplashActivity.this, HomeActivity.class));
+
+
+                                                                } else {
+                                                                    Log.e("TEST", "Error: " + response.message());
+                                                                }
+                                                            }
+
+                                                            @Override
+                                                            public void onFailure(Call<ResponseModel> call, Throwable test) {
+
+                                                                Log.e("Test:::","Login : "+ test.getMessage().toString());
+                                                            }
+                                                        });
 
                                                     } else {
                                                         Log.e("TEST", "Error: " + response.message());
@@ -160,7 +177,6 @@ public class SplashActivity extends AppCompatActivity {
                             Log.e("Test","Login : "+  response.message()
                             );
 
-                            btnHome.setText("Login Error" + response.body());
 
                         }
 
@@ -168,7 +184,7 @@ public class SplashActivity extends AppCompatActivity {
                     } else {
                         Log.e("Test","Login : "+  response.message());
 
-                        btnHome.setText("Login Error" + response.message());
+
 
                     }
 
@@ -178,8 +194,6 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseModel> call, Throwable t) {
-                progressDialog.dismiss();
-                btnHome.setText(t.getLocalizedMessage());
                 Log.e("Test","getAllData : "+t.getLocalizedMessage() );
 
                 Toast.makeText(SplashActivity.this, "" + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
@@ -188,36 +202,6 @@ public class SplashActivity extends AppCompatActivity {
         });
 
 
-        btnCleanButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SplashActivity.this, CleanButtonsLoginActivity.class));
-            }
-        });
-
-        btnCleanLogin = findViewById(R.id.btnCleanLogin);
-        btnCleanLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SplashActivity.this, CleanLoginActivity.class));
-            }
-        });
-
-        btnVideoMotion = findViewById(R.id.btnVideoMotion);
-        btnVideoMotion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SplashActivity.this, VideoMotionLoginActivity.class));
-            }
-        });
-
-        btnHome = findViewById(R.id.btnHome);
-        btnHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SplashActivity.this, HomeActivity.class));
-            }
-        });
 
 
     }

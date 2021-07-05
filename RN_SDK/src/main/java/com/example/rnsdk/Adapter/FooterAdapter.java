@@ -61,19 +61,25 @@ public class FooterAdapter extends RecyclerView.Adapter<FooterAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
+        holder.setIsRecyclable(false);
         FooterLinkModel footer = footerLinks.get(position);
 
         FontDrawable drawable = new FontDrawable(context, Utility.getIcon(footer.getFooterIcon()), true, false);
-        holder.icFooterLinkIcon.setImageDrawable(drawable);
+
 
         holder.textFooterLink.setText(footer.getFooterText());
         if (currentActivity.equals(footer.getFooterInternalLinkUrl())) {
             holder.textFooterLink.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarActionIconAndTextColor()));
-            holder.icFooterLinkIcon.setColorFilter(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarActionIconAndTextColor()));
+//            holder.icFooterLinkIcon.setColorFilter(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarActionIconAndTextColor()));
+            drawable.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarActionIconAndTextColor()));
 
+            holder.icFooterLinkIcon.setImageDrawable(drawable);
         } else {
             holder.textFooterLink.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarInactiveIconColor()));
-            holder.icFooterLinkIcon.setColorFilter(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarInactiveIconColor()));
+//            holder.icFooterLinkIcon.setColorFilter(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarInactiveIconColor()));
+            drawable.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarInactiveIconColor()));
+
+            holder.icFooterLinkIcon.setImageDrawable(drawable);
         }
         if (!currentActivity.equals(footer.getFooterInternalLinkUrl())) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
