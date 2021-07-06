@@ -39,9 +39,11 @@ import com.example.rnsdk.Adapter.HomeMenuLinkListAdapter;
 import com.example.rnsdk.Adapter.GridMenuAdapter;
 import com.example.rnsdk.ExpandableListDataPump;
 import com.example.rnsdk.Models.AppColorModel;
+import com.example.rnsdk.Models.ContactData;
 import com.example.rnsdk.Models.FooterLinkModel;
 import com.example.rnsdk.Models.HomeScreenModel;
 import com.example.rnsdk.Models.HomeScreenPointsSettingsModel;
+import com.example.rnsdk.Models.LoginScreenModel;
 import com.example.rnsdk.Models.ResponseModel;
 import com.example.rnsdk.Models.ResponsedataModel;
 import com.example.rnsdk.R;
@@ -54,6 +56,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import info.androidhive.fontawesome.FontDrawable;
+import okhttp3.internal.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -81,7 +84,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             textHomePageDisplayPointsAvailableTop,
             textHomePageDisplayPointsThisMonthTop,
             textHomePageDisplayPointsTotalRedeemedTop,
-            homePageDisplayPointsLifetimeEarnedTop;
+            homePageDisplayPointsLifetimeEarnedTop,
+            textPrivacy,
+            textTOS;
 
     View viewHomePageTopTextUnderLine1,
             viewHomePageTopTextUnderLine2;
@@ -89,7 +94,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     ImageView imgHomePageRibbonIcon,
             imgHomePageRibbonIconTop,
             imgBackgroundHome,
-            imgTopContainer;
+            imgTopContainer,
+            imageProfileSlider;
 
     DrawerLayout drawer_layout_home;
     AppColorModel appColor;
@@ -128,6 +134,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             linearHomePageDisplayPointsLifetimeEarnedTop,
             linearDrawerHome;
     TableLayout tableLayoutHome;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -180,6 +190,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
+        expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+                                                       @Override
+                                                       public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                                                           if(groupPosition == 0)
+                                                           {
+                                                               drawerLayout.close();
+
+                                                           }
+                                                           return false;
+                                                       }
+                                                   }
+        );
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v,
@@ -221,7 +243,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     protected void onResume() {
         super.onResume();
         setLayout();
+        setTopContainer();
+        Log.e("Test","onResume");
+
     }
+
 
     private void init() {
 
@@ -239,6 +265,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         appColor = Utility.response.responsedata.appColor;
 
         linearDrawerHome = findViewById(R.id.linearDrawerHome);
+        imageProfileSlider = findViewById(R.id.imageProfileSlider);
         tableLayoutHome = findViewById(R.id.tableLayoutHome);
         imgBottomContainer = findViewById(R.id.imgBottomContainer);
         imgTopContainer = findViewById(R.id.imgTopContainer);
@@ -272,8 +299,30 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         textHomePageDisplayPointsThisMonthTop = findViewById(R.id.textHomePageDisplayPointsThisMonthTop);
         textHomePageDisplayPointsTotalRedeemedTop = findViewById(R.id.textHomePageDisplayPointsTotalRedeemedTop);
         homePageDisplayPointsLifetimeEarnedTop = findViewById(R.id.homePageDisplayPointsLifetimeEarnedTop);
+        textPrivacy = findViewById(R.id.textPrivacy);
+        textTOS = findViewById(R.id.textTOS);
+
+        textPrivacy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(HomeActivity.this, WebViewActivity.class);
+                i.putExtra("url", Utility.response.responsedata.appDetails.getPrivacyPolicyLink());
+                i.putExtra("title","Privacy Policy");
+                startActivity(i);
+            }
+        });
+
+        textTOS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(HomeActivity.this, WebViewActivity.class);
+                i.putExtra("url", Utility.response.responsedata.appDetails.getTosLink());
+                i.putExtra("title","Term of service");
 
 
+                startActivity(i);
+            }
+        });
 
 
 
@@ -342,6 +391,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         if (!homeScreenModel.isHomePageDisplayHeaderProfile()) {
             imgProfileHome.setVisibility(View.INVISIBLE);
         }
+        else
+        {
+            Glide.with(this).load(Utility.response.responsedata.contactData.profilePitcure).into(imgProfileHome);
+        }
 
         textHomePageHeaderMenuText.setTextColor(Utility.getColor(appColor.getHeaderTextColor()));
 
@@ -355,6 +408,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             toolbar.setVisibility(View.GONE);
         }
 
+        if(Utility.response.responsedata.contactData.profilePitcure != null && !Utility.response.responsedata.contactData.profilePitcure.isEmpty())
+        {
+            Glide.with(this).load(Utility.response.responsedata.contactData.profilePitcure).into(imageProfileSlider);
+        }
         setTopContainer();
         setRibbon();
         setBottomContainer();

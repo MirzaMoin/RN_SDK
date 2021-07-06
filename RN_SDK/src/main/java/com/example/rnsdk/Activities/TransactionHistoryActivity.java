@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.ProgressDialog;
+
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.rnsdk.API.GetAPIData;
 import com.example.rnsdk.API.RetrofitClientInstance;
 import com.example.rnsdk.Adapter.CashbackImageSliderAdapter;
@@ -57,11 +58,15 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
             textNoData;
     ImageView imgBackTransactionHistory,
             imgPreview,
-            imgPreviewClose;
-    ProgressDialog progressDialog;
+            imgPreviewClose,
+            imageTH,
+            imageLogoTH;
+
+
     ResponseModelTransactionHistory responseModel;
     EditText etLocationNameSearchTH;
-    RelativeLayout relImagePreview;
+    RelativeLayout relImagePreview,
+            relLoadingTH;
 
     boolean isOpen = false;
 
@@ -71,19 +76,19 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_history);
-        getData();
 
         init();
+        getData();
 
 
     }
 
 
     private void getData() {
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Loading...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+        relLoadingTH.setVisibility(View.VISIBLE);
+        Glide.with(this).load(Utility.response.responsedata.appIntakeImages.loadingImages.get(0).imageUrl).into(imageTH);
+        Glide.with(this).load(Utility.response.responsedata.appIntakeImages.companyLogo).into(imageLogoTH);
+
 
         GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
         Log.e("Request", "RP ID: " + Utility.response.responsedata.appDetails.rewardProgramId + ", Contact ID: " + Utility.response.responsedata.contactData.contactID);
@@ -93,11 +98,11 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
 
             @Override
             public void onResponse(Call<ResponseModelTransactionHistory> call, Response<ResponseModelTransactionHistory> response) {
-                progressDialog.dismiss();
+                relLoadingTH.setVisibility(View.GONE);
+
                 if (response.isSuccessful()) {
 
                     responseModel = response.body();
-
 
                     if (response.body().responsedata.size() > 0) {
                         TransactionHistoryAdapter adapter =
@@ -112,24 +117,23 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
 
                         Log.e("Test","History Size: "+response.body().responsedata.size());
 
-
                     } else {
                         textNoData.setVisibility(View.VISIBLE);
                         Log.e("Test", "No Transaction Found");
                     }
 
-
                 } else {
-
+                    Utility.showAlertDialog(TransactionHistoryActivity.this,"Oops...","Something went wrong");
                     Log.e("Test Error: ", "" + response.message());
-
 
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseModelTransactionHistory> call, Throwable t) {
-                progressDialog.dismiss();
+                relLoadingTH.setVisibility(View.GONE);
+                Utility.showAlertDialog(TransactionHistoryActivity.this,"Oops...","Something went wrong");
+
                 Log.e("Test Error: ", "" + t.getMessage());
 
 
@@ -153,7 +157,7 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
         textNoData = findViewById(R.id.textNoData);
         textPointTransactionHistory = findViewById(R.id.textPointTransactionHistory);
         textPointTransactionHistory.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
-        textPointTransactionHistory.setText(String.valueOf(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
+        textPointTransactionHistory.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
 
         ChildPageSettingModel childPageSettings = Utility.response.responsedata.childPageSetting;
 
@@ -187,10 +191,12 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
         relImagePreview = findViewById(R.id.relImagePreview);
         imgPreview = findViewById(R.id.imgPreview);
         imgPreviewClose = findViewById(R.id.imgPreviewClose);
+        relLoadingTH = findViewById(R.id.relLoadingTH);
+        imageTH = findViewById(R.id.imageTH);
+        imageLogoTH = findViewById(R.id.imageLogoTH);
 
         imgBackTransactionHistory.setOnClickListener(this);
         setFooter();
-
 
         etLocationNameSearchTH.addTextChangedListener(new TextWatcher() {
             @Override

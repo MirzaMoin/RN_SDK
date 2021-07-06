@@ -50,13 +50,16 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
             winnerImageThree,
             imgAwardOne,
             imgAwardTwo,
-            imgAwardThree;
+            imgAwardThree,
+            imageLeaderboard,
+            imageLogoLeaderboard;
     RecyclerView rvLeader, rvFooterLeaderboard;
-    ProgressDialog progressDialog;
     public static AlertDialog monthDialog;
     public static int month, year;
     public static TextView textDateBottomSheetLeader;
     LeaderboardAdapter adapter;
+
+    RelativeLayout relLoadingLeaderboard;
 
     TextView textSharesToQualify,
             textReferralToQualify,
@@ -68,7 +71,6 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
             textPointThree;
 
     RelativeLayout relOne, relTwo, relThree;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +98,9 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
         imgBackLeaderboard = findViewById(R.id.imgBackLeaderboard);
         textSharesToQualify = findViewById(R.id.textSharesToQualify);
         textReferralToQualify = findViewById(R.id.textReferralToQualify);
+        imageLeaderboard = findViewById(R.id.imageLeaderboard);
+        imageLogoLeaderboard = findViewById(R.id.imageLogoLeaderboard);
+        relLoadingLeaderboard = findViewById(R.id.relLoadingLeaderboard);
 
 
 
@@ -225,10 +230,12 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
 
 
     private void getData() {
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Loading...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+
+        relLoadingLeaderboard.setVisibility(View.VISIBLE);
+        Glide.with(this).load(Utility.response.responsedata.appIntakeImages.loadingImages.get(0).imageUrl).into(imageLeaderboard);
+        Glide.with(this).load(Utility.response.responsedata.appIntakeImages.companyLogo).into(imageLogoLeaderboard);
+
+
 
         GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
         Log.e("Request", "RP ID: " + Utility.response.responsedata.appDetails.rewardProgramId + ", Contact ID: " + Utility.response.responsedata.contactData.contactID);
@@ -239,7 +246,8 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
-                progressDialog.dismiss();
+                relLoadingLeaderboard.setVisibility(View.GONE);
+
                 if (response.isSuccessful()) {
 
                     if (response.body().getStatusCode() == 1) {
@@ -255,9 +263,10 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
 
 
                     } else {
-                        showAlertDialog("Oops...", "Something went wrong, contact support");
+                        Utility.showAlertDialog(LeaderboardActivity.this,"Oops...", "Something went wrong, contact support");
                     }
                 } else {
+                    Utility.showAlertDialog(LeaderboardActivity.this,"Oops...", "Something went wrong, contact support");
 
                     Log.e("Test Error: ", "" + response.message());
 
@@ -267,7 +276,10 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void onFailure(Call<ResponseModel> call, Throwable t) {
-                progressDialog.dismiss();
+                relLoadingLeaderboard.setVisibility(View.GONE);
+                Utility.showAlertDialog(LeaderboardActivity.this,"Oops...", "Something went wrong, contact support");
+
+
                 Log.e("Test Error: ", "" + t.getMessage());
 
 
@@ -276,10 +288,8 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void getFilterData(String searchData) {
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Loading...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+        Utility.showLoader(LeaderboardActivity.this);
+
 
         GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
         Log.e("Request", "RP ID: " + Utility.response.responsedata.appDetails.rewardProgramId + ", Contact ID: " + Utility.response.responsedata.contactData.contactID);
@@ -292,7 +302,7 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                progressDialog.dismiss();
+                Utility.dialog.dismiss();
                 if (response.isSuccessful()) {
 
                     Log.e("Test", "Array Size: " + String.valueOf(response.body().get("responsedata").getAsJsonArray().size()));
@@ -329,22 +339,20 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
                         setFooter();
 
                     } else {
-                        showAlertDialog("Oops...", "Something went wrong, contact support");
+                        Utility.showAlertDialog(LeaderboardActivity.this,"Oops...", response.message());
                     }
                 } else {
 
+                    Utility.showAlertDialog(LeaderboardActivity.this,"Oops...", "Something went wrong");
+
                     Log.e("Test Error: ", "" + response.message());
-
-
                 }
             }
-
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                progressDialog.dismiss();
+                Utility.dialog.dismiss();
+                Utility.showAlertDialog(LeaderboardActivity.this,"Oops...", "Something went wrong");
                 Log.e("Test Error: ", "" + t.getMessage());
-
-
             }
         });
     }
@@ -422,29 +430,5 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
 
     }
 
-    void showAlertDialog(String title, String message) {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        final View customLayout = getLayoutInflater().inflate(R.layout.content_alert_dialog, null);
-        builder.setView(customLayout);
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-
-        TextView textMessage, textOk, textTitle;
-        textMessage = dialog.findViewById(R.id.textMessageAlert);
-        textTitle = dialog.findViewById(R.id.textTitleAlert);
-        textOk = dialog.findViewById(R.id.textOKAlert);
-        textMessage.setText(message);
-        textTitle.setText(title);
-        textOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-
-    }
 }

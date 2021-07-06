@@ -16,8 +16,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.rnsdk.API.GetAPIData;
 import com.example.rnsdk.API.RetrofitClientInstance;
 import com.example.rnsdk.Adapter.CashbackImageSliderAdapter;
@@ -47,10 +49,13 @@ import retrofit2.Response;
 public class RewardEntryGoalActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView rvRPG, rvFooterRPG;
-    ImageView imgBack;
+    ImageView imgBack,
+            imageRPG,
+            imageLogoRPG;
+    RelativeLayout relLoadingRPG;
     LinearLayout linearCashbackRPG, linearHome;
     TextView textPointRPG;
-    ProgressDialog progressDialog;
+
 
 
     @Override
@@ -79,6 +84,12 @@ public class RewardEntryGoalActivity extends AppCompatActivity implements View.O
         rvFooterRPG = findViewById(R.id.rvFooterRPG);
         imgBack = findViewById(R.id.imgBackRPG);
         textPointRPG = findViewById(R.id.textPointRPG);
+        imageRPG = findViewById(R.id.imageRPG);
+        imageLogoRPG = findViewById(R.id.imageLogoRPG);
+        relLoadingRPG = findViewById(R.id.relLoadingRPG);
+
+
+
         textPointRPG.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
         textPointRPG.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
 
@@ -146,14 +157,16 @@ public class RewardEntryGoalActivity extends AppCompatActivity implements View.O
     }
 
     private void getData() {
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Loading...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+
+        relLoadingRPG.setVisibility(View.VISIBLE);
+        Glide.with(this).load(Utility.response.responsedata.appIntakeImages.loadingImages.get(0).imageUrl).into(imageRPG);
+        Glide.with(this).load(Utility.response.responsedata.appIntakeImages.companyLogo).into(imageLogoRPG);
+
+
 
 
         GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
-        Log.e("Request", "RP Token: " + Utility.RPToken +
+        Log.e("Request - getRPGList", "RP Token: " + Utility.RPToken +
                 ", Contact ID: " + Utility.response.responsedata.contactData.contactID);
 
         Call<ResponseModel> call = service.getRPGList(Utility.RPToken
@@ -161,14 +174,15 @@ public class RewardEntryGoalActivity extends AppCompatActivity implements View.O
         call.enqueue(new Callback<ResponseModel>() {
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
-                progressDialog.dismiss();
+                relLoadingRPG.setVisibility(View.GONE);
+
 
                 if (response.isSuccessful()) {
 
                     Utility.response.responsedata.lstRPG = response.body().responsedata.lstRPG;
 
 
-                    Log.e("TEST", "onResponse: " + Utility.response.responsedata.lstRPG.size());
+                    Log.e("Response - getRPGList", "onResponse: " + Utility.response.responsedata.lstRPG.size());
 
                     RewardEntryPointAdapter adapter = new RewardEntryPointAdapter(RewardEntryGoalActivity.this, Utility.response.responsedata.lstRPG);
                     rvRPG.setHasFixedSize(true);
@@ -177,13 +191,16 @@ public class RewardEntryGoalActivity extends AppCompatActivity implements View.O
 
 
                 } else {
+                    Utility.showAlertDialog(RewardEntryGoalActivity.this,"Oops...","Something went wrong");
                     Log.e("TEST", "Error Sub: " + response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseModel> call, Throwable test) {
-                progressDialog.dismiss();
+                relLoadingRPG.setVisibility(View.GONE);
+
+                Utility.showAlertDialog(RewardEntryGoalActivity.this,"Oops...","Something went wrong");
 
                 test.printStackTrace();
                 Log.e("Test", "Error Main: " + test.toString());

@@ -80,9 +80,9 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
             etLMobileCU,
             etLMessageCU;
 
-    ProgressDialog progressDialog;
 
-    AlertDialog dialogSuccess;
+
+
 
 
 
@@ -377,10 +377,7 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
     }
 
     private void UploadData(String fName, String lName, String email, String message, String mobile) {
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Loading...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+     Utility.showLoader(ContactUsActivity.this);
 
         GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
 
@@ -400,7 +397,7 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
         callContactUs.enqueue(new Callback<ResponseModel>() {
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
-                progressDialog.dismiss();
+             Utility.dialog.dismiss();
                 if (response.isSuccessful()) {
                     if (response.body().getStatusCode() == 1) {
 
@@ -421,23 +418,24 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
                         {
                             etMessageCU.clearFocus();
                         }
-                        showAlertDialog(response.body().getStatusMessage());
+                        Utility.showAlertDialog(ContactUsActivity.this,"Success",response.body().getStatusMessage());
 
                     } else {
+                        Utility.showAlertDialog(ContactUsActivity.this,"Oops...",response.message());
                         Log.e("Test", "Response : " + response.body().getStatusMessage());
 
                     }
 
-
                 } else {
                     Log.e("TEST", "Error: " + response.message());
+                    Utility.showAlertDialog(ContactUsActivity.this,"Oops...","Something went wrong");
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseModel> call, Throwable test) {
-                progressDialog.dismiss();
-
+               Utility.dialog.dismiss();
+                Utility.showAlertDialog(ContactUsActivity.this,"Oops...","Something went wrong");
                 Log.e("Test:::", test.getMessage().toString());
             }
         });
@@ -517,33 +515,5 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
 
 
 
-    void showAlertDialog(String message) {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        final View customLayout = getLayoutInflater().inflate(R.layout.content_alert_dialog, null);
-        builder.setView(customLayout);
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-
-        TextView textMessage,textOk;
-        textMessage = dialog.findViewById(R.id.textMessageAlert);
-        textOk = dialog.findViewById(R.id.textOKAlert);
-        textMessage.setText(message);
-        textOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-
-
-
-
-
-
-    }
 
 }

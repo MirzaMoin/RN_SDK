@@ -15,8 +15,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.rnsdk.API.GetAPIData;
 import com.example.rnsdk.API.RetrofitClientInstance;
 import com.example.rnsdk.Adapter.FooterAdapter;
@@ -39,9 +41,12 @@ import retrofit2.Response;
 public class OfferActivity extends AppCompatActivity implements View.OnClickListener {
     RecyclerView rvOffer, rvFooterOffers;
     LinearLayout linearHome, linearRPG, linearCashback;
-    ImageView ivBack;
+    ImageView ivBack,
+            imageOffers,
+            imageLogoOffers;
     TextView textPointOffers;
-    ProgressDialog progressDialog;
+
+    RelativeLayout relLoadingOffers;
 
     @Override
     protected void onResume() {
@@ -67,10 +72,11 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void getData() {
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Loading...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+        relLoadingOffers.setVisibility(View.VISIBLE);
+        Glide.with(this).load(Utility.response.responsedata.appIntakeImages.loadingImages.get(0).imageUrl).into(imageOffers);
+        Glide.with(this).load(Utility.response.responsedata.appIntakeImages.companyLogo).into(imageLogoOffers);
+
+
 
         GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
         Log.e("Request", "RP ID: " + Utility.response.responsedata.appDetails.rewardProgramId + ", Contact ID: " + Utility.response.responsedata.contactData.contactID);
@@ -101,8 +107,8 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
                     {
                         Log.e("Test","AskWhere is "+(responseData.redeemSetting.isAskWhereAreYou()));
                         setLayout();
+                        relLoadingOffers.setVisibility(View.GONE);
 
-                        progressDialog.dismiss();
                     }
 
                     Log.e("Test", "onResponse: " + responseData.redeemSetting.isAskWhereAreYou());
@@ -110,6 +116,8 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
 
 
                 } else {
+
+                    Utility.showAlertDialog(OfferActivity.this,"Oops...", "Something went wrong");
 
                     Log.e("Test Error: ", "" + response.message());
 
@@ -119,7 +127,9 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void onFailure(Call<ResponseModel> call, Throwable t) {
-                progressDialog.dismiss();
+                relLoadingOffers.setVisibility(View.GONE);
+
+                Utility.showAlertDialog(OfferActivity.this,"Oops...", "Something went wrong");
                 Log.e("Test Error: ", "" + t.getMessage());
 
 
@@ -140,7 +150,7 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                 if (response.isSuccessful()) {
-                    progressDialog.dismiss();
+                    relLoadingOffers.setVisibility(View.GONE);
 
                     if(response.code() == 200)
                     {
@@ -156,27 +166,33 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
 
                             setLayout();
                         }
+                        else
+                        {
+                            Utility.showAlertDialog(OfferActivity.this,"Oops...", "Something went wrong");
+                        }
 
                     }
                     else
                     {
+                        Utility.showAlertDialog(OfferActivity.this,"Oops...", "Something went wrong");
+
                         Log.e("GetLocationData", "Status code - Location List Size: " + response.code() );
 
                         setLayout();
                     }
 
                 } else {
-                    progressDialog.dismiss();
+                    relLoadingOffers.setVisibility(View.GONE);
 
                     Log.e("Test Error: ", "" + response.message());
-
 
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseModel> call, Throwable t) {
-                progressDialog.dismiss();
+                relLoadingOffers.setVisibility(View.GONE);
+
                 Log.e("Test Error: ", "" + t.getMessage());
 
 
@@ -206,6 +222,9 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
         textPointOffers = findViewById(R.id.textPointOffers);
         ivBack = findViewById(R.id.imgBackOffers);
         rvFooterOffers = findViewById(R.id.rvFooterOffers);
+        imageOffers = findViewById(R.id.imageOffers);
+        imageLogoOffers = findViewById(R.id.imageLogoOffers);
+        relLoadingOffers = findViewById(R.id.relLoadingOffers);
 
         ivBack.setOnClickListener(this);
 

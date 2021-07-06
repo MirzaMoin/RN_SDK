@@ -1,9 +1,19 @@
 package com.example.rnsdk.Utility;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
+
+import com.bumptech.glide.Glide;
 import com.example.rnsdk.Activities.CashbackActivity;
 import com.example.rnsdk.Activities.ChangePasswordActivity;
 import com.example.rnsdk.Activities.ContactUsActivity;
@@ -24,8 +34,11 @@ import com.example.rnsdk.Models.AppColorModel;
 import com.example.rnsdk.Models.ResponseModel;
 import com.example.rnsdk.R;
 
+import java.util.concurrent.Callable;
+
 public class Utility {
 
+  public static   Dialog dialog;
   public  static ResponseModel response = new ResponseModel();
 
   public static String RPToken = "UW5c2c0MTT43HbVcKeu54rh8Nf77Fu";
@@ -498,4 +511,45 @@ public class Utility {
 
   }
 
+  public static void showLoader(Context context){
+    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+    final View customLayout = View.inflate(context, R.layout.content_loader, null);
+    builder.setView(customLayout);
+
+    dialog = builder.create();
+    dialog.setCancelable(false);
+    dialog.show();
+    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+
+
+  }
+
+  public  static void showAlertDialog(Context context ,String title, String message) {
+
+    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+    final View customLayout = View.inflate(context, R.layout.content_alert_dialog, null);
+    builder.setView(customLayout);
+
+    AlertDialog dialog = builder.create();
+    dialog.show();
+
+    TextView textMessage, textOk, textTitle;
+    textTitle = dialog.findViewById(R.id.textTitleAlert);
+    textMessage = dialog.findViewById(R.id.textMessageAlert);
+    textOk = dialog.findViewById(R.id.textOKAlert);
+    textTitle.setText(title);
+    textMessage.setText(message);
+    textOk.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+
+        dialog.dismiss();
+      }
+    });
+
+
+  }
 }

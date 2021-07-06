@@ -14,9 +14,11 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.rnsdk.API.GetAPIData;
 import com.example.rnsdk.API.RetrofitClientInstance;
 import com.example.rnsdk.Adapter.CashbackImageSliderAdapter;
@@ -51,9 +53,13 @@ import retrofit2.Response;
 public class WaysToEarnActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView rvList, rvFooterUploadWaysToEarn;
-    ImageView imgBackWaysToEarn;
+    ImageView imgBackWaysToEarn,
+            imageWTE,
+            imageLogoWTE;
     TextView textPointWaysToEarn;
-    ProgressDialog progressDialog;
+
+    RelativeLayout relLoadingWTE;
+
 
 
 
@@ -62,11 +68,8 @@ public class WaysToEarnActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ways_to_earn);
 
-
         init();
         getData();
-
-
 
     }
 
@@ -84,36 +87,16 @@ public class WaysToEarnActivity extends AppCompatActivity implements View.OnClic
         textPointWaysToEarn = findViewById(R.id.textPointWaysToEarn);
         rvFooterUploadWaysToEarn = findViewById(R.id.rvFooterUploadWaysToEarn);
         imgBackWaysToEarn = findViewById(R.id.imgBackWaysToEarn);
+        relLoadingWTE = findViewById(R.id.relLoadingWTE);
+        imageWTE = findViewById(R.id.imageWTE);
+        imageLogoWTE = findViewById(R.id.imageLogoWTE);
         textPointWaysToEarn.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
         textPointWaysToEarn.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance())+ " PTS");
 
 
         imgBackWaysToEarn.setOnClickListener(this);
 
-     /*   SliderView sliderView = findViewById(R.id.imageWaysToEarn);
-        ChildPageSettingModel childPageSettings = Utility.response.responsedata.childPageSetting;
-        if (childPageSettings.isChildPageWte()) {
-            sliderView.setVisibility(View.VISIBLE);
 
-            List<ChildPageModel> childPage = new ArrayList<>();
-            for (WaysToEarnChildPageDataModel earn : childPageSettings.wteChildPageData) {
-                childPage.add(new ChildPageModel(earn.image, earn.opacity, earn.isClickable, earn.linkType, earn.internalLink, earn.externalLink));
-            }
-
-
-
-            CashbackImageSliderAdapter adapter = new CashbackImageSliderAdapter(this, childPage);
-
-            sliderView.setSliderAdapter(adapter);
-
-            sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM); //set indicator animation by using IndicatorAnimationType. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
-            sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
-            sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
-            sliderView.setIndicatorSelectedColor(Color.WHITE);
-            sliderView.setIndicatorUnselectedColor(Color.GRAY);
-            sliderView.setScrollTimeInSec(4); //set scroll delay in seconds :
-            sliderView.startAutoCycle();
-        }*/
 
         setFooter();
     }
@@ -150,10 +133,11 @@ public class WaysToEarnActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void getData() {
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Loading...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+
+        relLoadingWTE.setVisibility(View.VISIBLE);
+        Glide.with(this).load(Utility.response.responsedata.appIntakeImages.loadingImages.get(0).imageUrl).into(imageWTE);
+        Glide.with(this).load(Utility.response.responsedata.appIntakeImages.companyLogo).into(imageLogoWTE);
+
         ResponsedataModel responseData = Utility.response.responsedata;
 
         GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
@@ -168,7 +152,8 @@ public class WaysToEarnActivity extends AppCompatActivity implements View.OnClic
 
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
-                progressDialog.dismiss();
+                relLoadingWTE.setVisibility(View.GONE);
+
                 if (response.isSuccessful()) {
 
                     if(response.body() != null)
@@ -201,12 +186,17 @@ public class WaysToEarnActivity extends AppCompatActivity implements View.OnClic
 
 
                     }
+                    else
+                    {
+                        Utility.showAlertDialog(WaysToEarnActivity.this,"Oops...","Something went wrong");
+                    }
 
 
 
 
 
                 } else {
+                    Utility.showAlertDialog(WaysToEarnActivity.this,"Oops...","Something went wrong");
 
                     Log.e("Test Error: ", "" + response.message());
 
@@ -216,7 +206,9 @@ public class WaysToEarnActivity extends AppCompatActivity implements View.OnClic
 
             @Override
             public void onFailure(Call<ResponseModel> call, Throwable t) {
-                progressDialog.dismiss();
+                relLoadingWTE.setVisibility(View.GONE);
+                Utility.showAlertDialog(WaysToEarnActivity.this,"Oops...","Something went wrong");
+
                 Log.e("Test Error: ", "" + t.getMessage());
 
 

@@ -29,6 +29,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.rnsdk.API.GetAPIData;
 import com.example.rnsdk.API.RetrofitClientInstance;
 import com.example.rnsdk.Adapter.FooterAdapter;
@@ -63,15 +64,18 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
     CardView cardLocation;
     BottomSheetBehavior bottomSheetBehavior;
     RecyclerView rvFooterLocation;
-    ImageView imgBackLocation;
+    ImageView imgBackLocation,
+            imageLocation,
+            imageLogoLocation;
     TextView textPointLocation;
 
     LinearLayout bottomsheetLocation;
     RecyclerView rvLocationBottomsheet;
-    ProgressDialog progressDialog;
+
     boolean isExpanded = false;
     boolean isOpen = false;
     List<LocationDataModel> originalLocations = new ArrayList<>();
+    RelativeLayout relLoadingLocation;
 
 
 
@@ -109,6 +113,9 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         imgBackLocation = findViewById(R.id.imgBackLocation);
         textPointLocation = findViewById(R.id.textPointLocation);
         rvLocationBottomsheet = findViewById(R.id.rvLocationBottomsheet);
+        relLoadingLocation = findViewById(R.id.relLoadingLocation);
+        imageLocation = findViewById(R.id.imageLocation);
+        imageLogoLocation = findViewById(R.id.imageLogoLocation);
 
 
         imgBackLocation.setOnClickListener(this);
@@ -282,10 +289,11 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
     }
     private void getLocations() {
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Loading...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+        relLoadingLocation.setVisibility(View.VISIBLE);
+        Glide.with(this).load(Utility.response.responsedata.appIntakeImages.loadingImages.get(0).imageUrl).into(imageLocation);
+        Glide.with(this).load(Utility.response.responsedata.appIntakeImages.companyLogo).into(imageLogoLocation);
+
+
 
         GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
 
@@ -297,7 +305,9 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                 if (response.isSuccessful()) {
-                    progressDialog.dismiss();
+                    relLoadingLocation.setVisibility(View.GONE);
+                    cardLocation.setVisibility(View.VISIBLE);
+
 
                     if(response.code() == 200)
                     {
@@ -313,26 +323,34 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
                             Log.e("GetLocationData", "onResponse - Location List Size: " + responseModel.responsedata.locationData.size());
 
                         }
+                        else
+                        {
+                            Log.e("GetLocationData", "Status code - Location List Size: " + response.code() );
+
+                            Utility.showAlertDialog(LocationActivity.this,"Oops...",""+response.message());
+                        }
 
                     }
                     else
                     {
+                        Utility.showAlertDialog(LocationActivity.this,"Oops...","Something went wrong");
+
                         Log.e("GetLocationData", "Status code - Location List Size: " + response.code() );
 
                     }
 
                 } else {
-                    progressDialog.dismiss();
+                    relLoadingLocation.setVisibility(View.GONE);
 
+                    Utility.showAlertDialog(LocationActivity.this,"Oops...","Something went wrong");
                     Log.e("Test Error: ", "" + response.message());
-
-
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseModel> call, Throwable t) {
-                progressDialog.dismiss();
+                relLoadingLocation.setVisibility(View.GONE);
+                Utility.showAlertDialog(LocationActivity.this,"Oops...","Something went wrong");
+
                 Log.e("Test Error: ", "" + t.getMessage());
 
 

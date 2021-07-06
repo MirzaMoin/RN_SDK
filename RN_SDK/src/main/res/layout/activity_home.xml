@@ -3,8 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout_home"
-
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.HomeActivity"
@@ -666,10 +664,12 @@
         android:id="@+id/linearDrawerHome"
         android:layout_width="@dimen/_220sdp"
         android:layout_height="match_parent"
-
+        android:clickable="true"
         android:layout_gravity="left|start"
         android:orientation="vertical"
         android:paddingVertical="@dimen/_30sdp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
 
         >
 
@@ -685,11 +685,14 @@
             android:foregroundTint="#fff"
             android:indicatorEnd="?android:attr/expandableListPreferredItemIndicatorRight" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="@dimen/_75sdp"
-            android:layout_height="@dimen/_75sdp"
+        <ImageView
+            android:id="@+id/imageProfileSlider"
+            android:layout_width="@dimen/_190sdp"
+            android:layout_height="@dimen/_190sdp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/_10sdp"
+            android:padding="@dimen/_10sdp"
+            android:scaleType="fitXY"
             android:src="@drawable/image_logo" />
 
         <LinearLayout
@@ -699,16 +702,20 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/textPrivacy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="PRIVACY POLICY | "
                 android:textColor="#fff"
+                android:paddingVertical="@dimen/_5sdp"
                 android:textSize="@dimen/_12sdp" />
 
             <TextView
+                android:id="@+id/textTOS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TERMS OF SERVICE"
+                android:paddingVertical="@dimen/_5sdp"
 
                 android:textColor="#fff"
                 android:textSize="@dimen/_12sdp" />

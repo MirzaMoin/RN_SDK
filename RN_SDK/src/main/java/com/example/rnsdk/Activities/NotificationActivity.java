@@ -30,11 +30,9 @@ public class NotificationActivity extends AppCompatActivity {
 
 
     RecyclerView rvNotification;
-
     DrawerLayout drawerLayout;
-
-    ImageView imgDrawer;
     ExpandableListView expandableListView;
+    ImageView imgDrawer;
     ExpandableListAdapter expandableListAdapter;
     List<String> expandableListTitle;
     HashMap<String, List<String>> expandableListDetail;

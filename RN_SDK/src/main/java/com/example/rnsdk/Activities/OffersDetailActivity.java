@@ -95,7 +95,7 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
 
     ConstraintLayout rootLayout;
 
-    ProgressDialog progressDialog;
+
     OfferListModel currentOffer = null;
     List<LocationDataModel> originalLocations = new ArrayList<>();
 
@@ -505,10 +505,7 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void RedeemOffer(int offerID, String offerSendID, String addressID) {
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Loading...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+        Utility.showLoader(OffersDetailActivity.this);
 
         GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
 
@@ -526,7 +523,8 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
         callRedeemOffer.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                progressDialog.dismiss();
+
+                Utility.dialog.dismiss();
                 if (response.isSuccessful()) {
                     assert response.body() != null;
                     if (response.body().get("statusCode").getAsInt() == 1) {
@@ -554,8 +552,7 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable test) {
-                progressDialog.dismiss();
-
+                Utility.dialog.dismiss();
                 Log.e("Test:::", test.getMessage().toString());
             }
         });

@@ -37,10 +37,11 @@ public class WebViewActivity extends AppCompatActivity implements View.OnClickLi
     WebView webview;
     LinearLayout linearBack, linearRefresh, linearForward;
     ImageView imgBack;
-    TextView textPointWebView;
-    ProgressDialog progressDialog;
+    TextView textPointWebView,
+            textTitleWeb;
     String url = "";
     boolean isSurvey = false;
+    String title = "";
     String originalUrl = "";
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -54,14 +55,17 @@ public class WebViewActivity extends AppCompatActivity implements View.OnClickLi
         StrictMode.setThreadPolicy(policy);
         init();
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+        Utility.showLoader(this);
 
 
         url = getIntent().getStringExtra("url");
         if (getIntent().hasExtra("isSurvey")) {
             isSurvey = getIntent().getBooleanExtra("isSurvey", false);
+        }
+        if (getIntent().hasExtra("title")) {
+            title = getIntent().getStringExtra("title");
+            textTitleWeb.setText(title);
+
         }
 
         Log.e("URL: ", url);
@@ -85,8 +89,7 @@ public class WebViewActivity extends AppCompatActivity implements View.OnClickLi
         webview.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url1) {
-                progressDialog.dismiss();
-
+                Utility.dialog.dismiss();
                 if (isSurvey) {
                     if (view.getUrl().equals(originalUrl)) {
 
@@ -152,6 +155,7 @@ public class WebViewActivity extends AppCompatActivity implements View.OnClickLi
         linearForward = findViewById(R.id.linearForward);
         imgBack = findViewById(R.id.imgBackWebview);
         textPointWebView = findViewById(R.id.textPointWebView);
+        textTitleWeb = findViewById(R.id.textTitleWeb);
         textPointWebView.setTextColor(Utility.getColor(responseData.appColor.getHeaderPointDigitColor()));
         textPointWebView.setText(getRoundData(responseData.contactData.getPointBalance()) + " PTS");
 

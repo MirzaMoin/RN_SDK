@@ -61,7 +61,7 @@ public class TransferPointActivity extends AppCompatActivity implements View.OnC
     RecyclerView rvFooterTransferPoint;
     SwipeButton swipeBtnTransferPoint;
     TextView textPointTransferPoints;
-    ProgressDialog progressDialog;
+
 
 
     boolean isOpen = false;
@@ -108,35 +108,33 @@ public class TransferPointActivity extends AppCompatActivity implements View.OnC
                     }
 
                     if (!isError) {
-                        progressDialog = new ProgressDialog(TransferPointActivity.this);
-                        progressDialog.setTitle("Loading...");
-                        progressDialog.setCancelable(false);
-                        progressDialog.show();
+                        Utility.showLoader(TransferPointActivity.this);
+
                         GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
                         Log.e("Request", "RP ID: " + Utility.response.responsedata.appDetails.rewardProgramId +
                                 ", Contact ID: " + Utility.response.responsedata.contactData.contactID);
 
-                        Call<ResponseModel> callLogin = service.TransferPoints(ApiJsonMap(Utility.response.responsedata.appDetails.rewardProgramId,
+                        Call<ResponseModel> callTP = service.TransferPoints(ApiJsonMap(Utility.response.responsedata.appDetails.rewardProgramId,
                                 Utility.response.responsedata.contactData.contactID,
                                 Double.parseDouble(etPointAmountTP.getText().toString()),
                                 etUserDetailsTP.getText().toString()
                         ));
 
 
-                        callLogin.enqueue(new Callback<ResponseModel>() {
+                        callTP.enqueue(new Callback<ResponseModel>() {
                             @Override
                             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
 
                                 if (response.isSuccessful()) {
                                     if (response.body().getStatusCode() == 1) {
-                                        progressDialog.dismiss();
+                                        Utility.dialog.dismiss();
 
 
                                         etPointAmountTP.setText("");
                                         etUserDetailsTP.setText("");
                                         swipeBtnTransferPoint.toggleState();
 
-                                        showAlertDialog("Success",response.body().getStatusMessage());
+                                        Utility.showAlertDialog(TransferPointActivity.this,"Success",response.body().getStatusMessage());
                                         Log.e("Test",response.body().getStatusMessage());
 
 
@@ -148,7 +146,8 @@ public class TransferPointActivity extends AppCompatActivity implements View.OnC
                                         callGetContactData.enqueue(new Callback<ResponseModel>() {
                                             @Override
                                             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
-                                                progressDialog.dismiss();
+                                                Utility.dialog.dismiss();
+
 
                                                 if (response.isSuccessful()) {
 
@@ -161,15 +160,55 @@ public class TransferPointActivity extends AppCompatActivity implements View.OnC
                                                     textPointTransferPoints.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
 
 
+                                                    Call<ResponseModel> callGetContactData = service.getAllPoints(Utility.response.responsedata.appDetails.rewardProgramId,
+                                                            Utility.response.responsedata.contactData.getContactID()
+                                                    );
+
+
+                                                    callGetContactData.enqueue(new Callback<ResponseModel>() {
+                                                        @Override
+                                                        public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                                                            if (response.isSuccessful()) {
+
+
+                                                                Log.e("Response - getAllPoints", "Response : "+response.body());
+                                                                Utility.response.responsedata.totalEarnedThisMonth = response.body().responsedata.getTotalEarnedThisMonth();
+                                                                Utility.response.responsedata.totalReedemed = response.body().responsedata.getTotalReedemed();
+                                                                Utility.response.responsedata.lifeTimePoints = response.body().responsedata.getLifeTimePoints();
+                                                                Utility.response.responsedata.pointBalance = response.body().responsedata.getPointBalance();
+                                                                Utility.response.responsedata.pointBalance = response.body().responsedata.getPointBalance();
+
+
+
+                                                            } else {
+                                                                Log.e("Response - getAllPoints", "Response : "+ response.message());
+
+                                                            }
+                                                        }
+
+                                                        @Override
+                                                        public void onFailure(Call<ResponseModel> call, Throwable test) {
+
+                                                            Log.e("Response - getAllPoints", "Response : "+ test.getMessage().toString());
+
+                                                        }
+                                                    });
+
+
+
+
                                                 } else {
+                                                    Utility.showAlertDialog(TransferPointActivity.this,"Oops...","Something went wrong");
                                                     Log.e("TEST", "Error: " + response.message());
                                                 }
                                             }
 
                                             @Override
                                             public void onFailure(Call<ResponseModel> call, Throwable test) {
-                                                progressDialog.dismiss();
+                                                Utility.dialog.dismiss();
+
                                                 swipeBtnTransferPoint.toggleState();
+                                                Utility.showAlertDialog(TransferPointActivity.this,"Oops...","Something went wrong");
 
 
                                                 Log.e("Test:::", test.getMessage().toString());
@@ -180,10 +219,10 @@ public class TransferPointActivity extends AppCompatActivity implements View.OnC
                                     } else {
                                         swipeBtnTransferPoint.toggleState();
 
-                                        progressDialog.dismiss();
+                                        Utility.dialog.dismiss();
 
                                         Log.e("Test", response.body().getStatusMessage());
-                                        showAlertDialog("Opps...",response.body().getStatusMessage());
+                                        Utility.showAlertDialog(TransferPointActivity.this,"Opps...",response.body().getStatusMessage());
 
 
                                     }
@@ -192,7 +231,9 @@ public class TransferPointActivity extends AppCompatActivity implements View.OnC
                                 } else {
                                     swipeBtnTransferPoint.toggleState();
 
-                                    progressDialog.dismiss();
+                                    Utility.dialog.dismiss();
+
+                                    Utility.showAlertDialog(TransferPointActivity.this,"Oops...","Something went wrong");
 
                                     Log.e("TEST", "Error: " + response.message());
                                 }
@@ -200,8 +241,10 @@ public class TransferPointActivity extends AppCompatActivity implements View.OnC
 
                             @Override
                             public void onFailure(Call<ResponseModel> call, Throwable test) {
-                                progressDialog.dismiss();
+                                Utility.dialog.dismiss();
+
                                 swipeBtnTransferPoint.toggleState();
+                                Utility.showAlertDialog(TransferPointActivity.this,"Oops...","Something went wrong");
 
 
                                 Log.e("Test:::", test.getMessage().toString());
@@ -331,30 +374,6 @@ public class TransferPointActivity extends AppCompatActivity implements View.OnC
     }
 
 
-    void showAlertDialog(String title, String message) {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        final View customLayout = getLayoutInflater().inflate(R.layout.content_alert_dialog, null);
-        builder.setView(customLayout);
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-
-        TextView textMessage, textOk, textTitle;
-        textMessage = dialog.findViewById(R.id.textMessageAlert);
-        textTitle = dialog.findViewById(R.id.textTitleAlert);
-        textOk = dialog.findViewById(R.id.textOKAlert);
-        textMessage.setText(message);
-        textTitle.setText(title);
-        textOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-
-    }
 
 }

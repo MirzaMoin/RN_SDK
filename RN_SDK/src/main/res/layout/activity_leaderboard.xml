@@ -246,7 +246,6 @@
                     android:layout_below="@+id/imgAward"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="bottom"
-                    android:text="Rishab Machhi"
                     android:textColor="#fff"
                     android:textSize="@dimen/_12sdp" />
 
@@ -258,7 +257,6 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:gravity="bottom"
-                    android:text="Point: 0"
                     android:textColor="#fff"
                     android:textSize="@dimen/_12sdp" />
 
@@ -295,7 +293,6 @@
                     android:layout_below="@+id/imgAwardTwo"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="bottom"
-                    android:text="Rishab Machhi"
                     android:textColor="#fff"
                     android:textSize="@dimen/_12sdp" />
 
@@ -307,7 +304,6 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:gravity="bottom"
-                    android:text="Point: 0"
                     android:textColor="#fff"
                     android:textSize="@dimen/_12sdp" />
 
@@ -345,7 +341,6 @@
                     android:layout_below="@+id/imgAwardThree"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="bottom"
-                    android:text="Rishab Machhi"
                     android:textColor="#fff"
                     android:textSize="@dimen/_12sdp" />
 
@@ -357,7 +352,6 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:gravity="bottom"
-                    android:text="Point: 0"
                     android:textColor="#fff"
                     android:textSize="@dimen/_12sdp" />
 
@@ -392,4 +386,42 @@
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/relLoadingLeaderboard"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/linearTopOffer"
+        android:background="#000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"
+        >
+
+
+        <ImageView
+            android:id="@+id/imageLeaderboard"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+
+            />
+        <com.github.ybq.android.spinkit.SpinKitView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/spin_kit"
+            style="@style/SpinKitView.Large.DoubleBounce"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            app:SpinKit_Color="#ffffff" />
+        <ImageView
+            android:id="@+id/imageLogoLeaderboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:paddingHorizontal="@dimen/_60sdp"
+
+            />
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

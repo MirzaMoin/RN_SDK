@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
@@ -13,21 +14,25 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.ebanx.swipebtn.OnStateChangeListener;
 import com.ebanx.swipebtn.SwipeButton;
 import com.example.rnsdk.API.GetAPIData;
 import com.example.rnsdk.API.RetrofitClientInstance;
 import com.example.rnsdk.Adapter.CashbackImageSliderAdapter;
 import com.example.rnsdk.Adapter.FooterAdapter;
+import com.example.rnsdk.Adapter.RedeemCashbackAdapter;
 import com.example.rnsdk.Adapter.SliderItem;
 import com.example.rnsdk.Models.AppColorModel;
 import com.example.rnsdk.Models.ChildPageModel;
@@ -59,7 +64,9 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
 
     Toolbar toolbar;
     List<SliderItem> mSliderItems = new ArrayList<>();
-    ImageView imgBack;
+    ImageView imgBack,
+            imageCashback,
+            imageLogoCashback;
     LinearLayout linearRPGCashback, linearHome,
             linearAmountRC;
     RecyclerView rvFooterCashback;
@@ -67,11 +74,13 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
             textBalanceRC;
     EditText etAmountRC;
     SwipeButton swipeButtonRC;
-    ProgressDialog progressDialog;
+
+    RelativeLayout relLoadingCashback;
     double amount = 0;
     boolean isAllowPartialCashbackRedemption = true,
             isRequireWholeNumberRedemption = true;
 
+    RecyclerView rvCashback;
     boolean isTap = false;
 
     CardView cardTapRC;
@@ -99,6 +108,10 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
         toolbar = findViewById(R.id.toolbarCashback);
         imgBack = findViewById(R.id.imgBackRedeemCashback);
         textPointCashback = findViewById(R.id.textPointCashback);
+        relLoadingCashback = findViewById(R.id.relLoadingCashback);
+        imageCashback = findViewById(R.id.imageCashback);
+        imageLogoCashback = findViewById(R.id.imageLogoCashback);
+
 
         cardTapRC = findViewById(R.id.cardTapRC);
         rvFooterCashback = findViewById(R.id.rvFooterCashback);
@@ -106,6 +119,7 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
         etAmountRC = findViewById(R.id.etAmountRC);
         swipeButtonRC = findViewById(R.id.swipeBtnRC);
         linearAmountRC = findViewById(R.id.linearAmountRC);
+        rvCashback = findViewById(R.id.rvCashback);
         imgBack.setOnClickListener(this);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -208,33 +222,56 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
         cardTapRC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                etAmountRC.setText(String.valueOf(amount));
                 isTap = true;
             }
         });
 
+
+    }
+
+    private void setCashbackSuggetion() {
+
+        ArrayList<String> list = new ArrayList<>();
+        double finalValue = amount / 5;
+        double newValue = finalValue;
+        for(int i = 0;i<5;i++)
+        {
+
+                list.add(Utility.getRoundData(finalValue));
+                Log.e("TEST",""+Utility.getRoundData(finalValue));
+                finalValue += newValue;
+
+        }
+
+        RedeemCashbackAdapter adapter = new RedeemCashbackAdapter(this,list);
+        rvCashback.setHasFixedSize(true);
+
+
+        rvCashback.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+
+        rvCashback.setAdapter(adapter);
     }
 
     private void makeCashback(String otherAmount) {
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Loading...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+
+       Utility.showLoader(CashbackActivity.this);
 
         GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
 
         ResponsedataModel responseData = Utility.response.responsedata;
 
-        Call<JsonObject> callContactUs = service.CashbackRedeem(ApiJsonMap(responseData.appDetails.rewardProgramId,
+        Call<JsonObject> callCashbackRedeem = service.CashbackRedeem(ApiJsonMap(responseData.appDetails.rewardProgramId,
                 responseData.appDetails.webFormID,
                 responseData.contactData.contactID,
                 Double.parseDouble(otherAmount)
         ));
 
 
-        callContactUs.enqueue(new Callback<JsonObject>() {
+        callCashbackRedeem.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                progressDialog.dismiss();
+                Utility.dialog.dismiss();
                 if (response.isSuccessful()) {
                     swipeButtonRC.toggleState();
                     Log.e("Test", response.body().toString());
@@ -246,17 +283,19 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
                     if (statusCode == 1) {
 
                         Log.e("Test", "Response : " + response.body().toString());
-                        showAlertDialog("Success", statusMessage);
+                        Utility.showAlertDialog(CashbackActivity.this,"Success", statusMessage);
                         etAmountRC.setText("");
                         Utility.response.responsedata.contactData.setPointBalance(responsedata.getAsJsonObject().get("reedemablePoints").getAsDouble());
                         Utility.response.responsedata.contactData.setReedemablePoints(responsedata.getAsJsonObject().get("reedemablePoints").getAsDouble());
                         textPointCashback.setText(Utility.getRoundData(responsedata.getAsJsonObject().get("reedemablePoints").getAsDouble()) + " PTS");
+
+
                         getData();
 
                     } else {
                         Log.e("Test", "Response : " + response.body().toString());
 
-                        showAlertDialog("Oh no...", statusMessage);
+                        Utility.showAlertDialog(CashbackActivity.this,"Oh no...", statusMessage);
 
                     }
 
@@ -267,7 +306,8 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable test) {
-                progressDialog.dismiss();
+                Utility.dialog.dismiss();
+
 
                 Log.e("Test:::", test.getMessage().toString());
             }
@@ -307,10 +347,12 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void getData() {
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Loading...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+
+
+
+        relLoadingCashback.setVisibility(View.VISIBLE);
+        Glide.with(this).load(Utility.response.responsedata.appIntakeImages.loadingImages.get(0).imageUrl).into(imageCashback);
+        Glide.with(this).load(Utility.response.responsedata.appIntakeImages.companyLogo).into(imageLogoCashback);
 
         GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
         Log.e("Request", "RP ID: " + Utility.response.responsedata.appDetails.rewardProgramId + ", Contact ID: " + Utility.response.responsedata.contactData.contactID);
@@ -321,27 +363,63 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
 
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                progressDialog.dismiss();
+                relLoadingCashback.setVisibility(View.GONE);
+
+
                 if (response.isSuccessful()) {
 
                     JsonElement responseModel = response.body().get("responsedata");
                     Log.e("Response: ", "" + String.valueOf(responseModel.getAsJsonObject().get("amount")));
                     amount = responseModel.getAsJsonObject().get("amount").getAsDouble();
-
                     textBalanceRC.setText("$ " + String.valueOf(Utility.getRoundData(amount)));
                     isAllowPartialCashbackRedemption = responseModel.getAsJsonObject().get("isAllowPartialCashbackRedemption").getAsBoolean();
                     isRequireWholeNumberRedemption = responseModel.getAsJsonObject().get("isRequireWholeNumberRedemption").getAsBoolean();
+                    setCashbackSuggetion();
 
                     if (!isAllowPartialCashbackRedemption) {
                         linearAmountRC.setVisibility(View.GONE);
                     }
 
+                    Call<ResponseModel> callGetContactData = service.getAllPoints(Utility.response.responsedata.appDetails.rewardProgramId,
+                            Utility.response.responsedata.contactData.getContactID()
+                    );
+
+
+                    callGetContactData.enqueue(new Callback<ResponseModel>() {
+                        @Override
+                        public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                            if (response.isSuccessful()) {
+
+
+                                Log.e("Response - getAllPoints", "Response : "+response.body());
+                                Utility.response.responsedata.totalEarnedThisMonth = response.body().responsedata.getTotalEarnedThisMonth();
+                                Utility.response.responsedata.totalReedemed = response.body().responsedata.getTotalReedemed();
+                                Utility.response.responsedata.lifeTimePoints = response.body().responsedata.getLifeTimePoints();
+                                Utility.response.responsedata.pointBalance = response.body().responsedata.getPointBalance();
+                                Utility.response.responsedata.pointBalance = response.body().responsedata.getPointBalance();
+
+
+
+                            } else {
+                                Log.e("Response - getAllPoints", "Response : "+ response.message());
+
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseModel> call, Throwable test) {
+
+                            Log.e("Response - getAllPoints", "Response : "+ test.getMessage().toString());
+
+                        }
+                    });
 
                     Log.e("Test", "Response: " + response.body());
 
 
                 } else {
 
+                    Utility.showAlertDialog(CashbackActivity.this,"Oops...","Something went wrong");
                     Log.e("Test Error: ", "" + response.message());
 
 
@@ -350,12 +428,16 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                progressDialog.dismiss();
+                relLoadingCashback.setVisibility(View.GONE);
+
                 Log.e("Test Error: ", "" + t.getMessage());
+                Utility.showAlertDialog(CashbackActivity.this,"Oops...","Something went wrong");
+
 
 
             }
         });
+
     }
 
     private JsonObject ApiJsonMap(String rewardProgramID, String webFormID, String contactID, double cashbackAmount
@@ -383,29 +465,5 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
         return gsonObject;
     }
 
-    void showAlertDialog(String title, String message) {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        final View customLayout = getLayoutInflater().inflate(R.layout.content_alert_dialog, null);
-        builder.setView(customLayout);
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-
-        TextView textMessage, textOk, textTitle;
-        textMessage = dialog.findViewById(R.id.textMessageAlert);
-        textTitle = dialog.findViewById(R.id.textTitleAlert);
-        textOk = dialog.findViewById(R.id.textOKAlert);
-        textMessage.setText(message);
-        textTitle.setText(title);
-        textOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-
-
-    }
 }
