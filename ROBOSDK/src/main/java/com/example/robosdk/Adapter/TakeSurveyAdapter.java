@@ -45,7 +45,7 @@ public class TakeSurveyAdapter extends RecyclerView.Adapter<TakeSurveyAdapter.Vi
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        SurveysUnTakenModel survey = surveyList.get(position);
+        final SurveysUnTakenModel survey = surveyList.get(position);
 
         if(isTaken)
         {

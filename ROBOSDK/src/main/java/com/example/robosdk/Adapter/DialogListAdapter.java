@@ -55,10 +55,10 @@ public class DialogListAdapter extends RecyclerView.Adapter<DialogListAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
 
         if (activity.equals("Leaderboard")) {
-            LBFilterModel data = Utility.response.responsedata.filters.get(position);
+            final LBFilterModel data = Utility.response.responsedata.filters.get(position);
             holder.textTitleListDialog.setText(data.getDisplay());
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -72,7 +72,7 @@ public class DialogListAdapter extends RecyclerView.Adapter<DialogListAdapter.Vi
 
         }
         else if (activity.equals("Location")) {
-            LocationDataModel data = Utility.response.responsedata.locationData.get(position);
+            final LocationDataModel data = Utility.response.responsedata.locationData.get(position);
             holder.textTitleListDialog.setText(data.getLocationName());
             holder.viewContentLocationDialog.setVisibility(View.VISIBLE);
             if(data.isSelected())
@@ -110,7 +110,7 @@ public class DialogListAdapter extends RecyclerView.Adapter<DialogListAdapter.Vi
         }
         else if(activity.equals("URReceipt"))
         {
-            URCategoryModel data = Utility.response.responsedata.categories.get(position);
+            final URCategoryModel data = Utility.response.responsedata.categories.get(position);
             holder.textTitleListDialog.setText(data.getName());
             holder.viewContentLocationDialog.setVisibility(View.VISIBLE);
             if(data.isSelected())
@@ -146,7 +146,7 @@ public class DialogListAdapter extends RecyclerView.Adapter<DialogListAdapter.Vi
         else if(activity.equals("URLocation"))
         {
 
-            URAddressModel data = Utility.response.responsedata.categories.get(selectedReceiptIndex).addresses.get(position);
+            final URAddressModel data = Utility.response.responsedata.categories.get(selectedReceiptIndex).addresses.get(position);
             holder.textTitleListDialog.setText(data.getLocationName());
             holder.viewContentLocationDialog.setVisibility(View.VISIBLE);
             if(data.isSelected())

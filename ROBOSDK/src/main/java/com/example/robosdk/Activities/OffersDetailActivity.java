@@ -180,7 +180,7 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
             }
         }
         AppColorModel color = Utility.response.responsedata.appColor;
-        OfferUserDetailsModel userDetails = Utility.response.responsedata.getUserDetails();
+        final OfferUserDetailsModel userDetails = Utility.response.responsedata.getUserDetails();
 
 
         Glide.with(this).load(currentOffer.getOfferImage()).into(imageOfferImageDetail);
@@ -210,7 +210,7 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
         textWebsiteURL.setTextColor(Utility.getColor(color.getLocationsLinkColor()));
 
 
-        OfferAddressDetailsModel addressDetails = Utility.response.responsedata.getAddressDetails();
+        final OfferAddressDetailsModel addressDetails = Utility.response.responsedata.getAddressDetails();
 
         textNameDetail.setText(addressDetails.getName());
         textAddressDetail.setText(addressDetails.getAddress());
@@ -362,14 +362,14 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
 //        imageView.setImageBitmap(b);
     }
 
-    void showAlertDialog(String message, int offerID, String offerSendID, String addressID) {
+    void showAlertDialog(String message, final int offerID, final String offerSendID, final String addressID) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         final View customLayout = getLayoutInflater().inflate(R.layout.content_alert_dialog, null);
         builder.setView(customLayout);
 
-        AlertDialog dialog = builder.create();
+        final AlertDialog dialog = builder.create();
         dialog.setCancelable(false);
         dialog.show();
 
@@ -427,14 +427,14 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
 
     }
 
-    private void showLocationDialog(int offerID, String offerSendID) {
+    private void showLocationDialog(final int offerID, final String offerSendID) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         final View customLayout = getLayoutInflater().inflate(R.layout.content_location_dialog, null);
         builder.setView(customLayout);
 
-        AlertDialog dialog = builder.create();
+        final AlertDialog dialog = builder.create();
         dialog.setCancelable(false);
         dialog.show();
 

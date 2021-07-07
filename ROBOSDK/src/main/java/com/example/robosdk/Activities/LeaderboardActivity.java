@@ -184,7 +184,7 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
     private void showFilterDialog() {
 
         // create an alert builder
-        BottomSheetDialog dialog = new BottomSheetDialog(this);
+        final BottomSheetDialog dialog = new BottomSheetDialog(this);
         // set the custom layout
         final View customLayout = getLayoutInflater().inflate(R.layout.content_bottomsheet_leaderboard, null);
         dialog.setContentView(customLayout);
@@ -195,7 +195,7 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
         textDateBottomSheetLeader = dialog.findViewById(R.id.textDateBottomSheetLeader);
         TextView textApply = dialog.findViewById(R.id.textApply);
         TextView textClear = dialog.findViewById(R.id.textClear);
-        EditText etFilterLeader = dialog.findViewById(R.id.etFilterLeader);
+        final EditText etFilterLeader = dialog.findViewById(R.id.etFilterLeader);
 
 
         textApply.setOnClickListener(new View.OnClickListener() {
@@ -290,7 +290,7 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
         });
     }
 
-    private void getFilterData(String searchData) {
+    private void getFilterData(final String searchData) {
         Utility.showLoader(LeaderboardActivity.this);
 
 

@@ -50,9 +50,9 @@ public class LocationBottomsheetAdapter extends RecyclerView.Adapter<LocationBot
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.imgExpandLocation.setRotation(0);
-        LocationDataModel data = Utility.response.responsedata.locationData.get(position);
+        final LocationDataModel data = Utility.response.responsedata.locationData.get(position);
 
         String address = "";
         if (data.storeAddress.getAddress() != null && !data.storeAddress.getAddress().isEmpty()) {

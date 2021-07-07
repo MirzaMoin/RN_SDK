@@ -42,7 +42,7 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        OfferListModel offer = offerList.get(position);
+        final OfferListModel offer = offerList.get(position);
 
         AppColorModel color = Utility.response.responsedata.appColor;
 

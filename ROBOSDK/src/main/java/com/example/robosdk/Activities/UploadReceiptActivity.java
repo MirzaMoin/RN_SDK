@@ -485,19 +485,19 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
         builder.setView(customLayout);
         // add a button
         // create and show the alert dialog
-        AlertDialog dialog = builder.create();
+        final AlertDialog dialog = builder.create();
         dialog.show();
         Button btnConfirmLocation = dialog.findViewById(R.id.btnConfirmLocation);
         RecyclerView rv = dialog.findViewById(R.id.rvLocationDialog);
         EditText etSearchLocation = dialog.findViewById(R.id.etSearchLocation);
 
         if (isLocation) {
-            DialogListAdapter adapter = new DialogListAdapter(UploadReceiptActivity.this, "URLocation", sReceiptTypeIndex);
+            final DialogListAdapter adapter = new DialogListAdapter(UploadReceiptActivity.this, "URLocation", sReceiptTypeIndex);
             rv.setHasFixedSize(true);
             rv.setLayoutManager(new LinearLayoutManager(this));
             rv.setAdapter(adapter);
 
-            List<URAddressModel> originalLocations = new ArrayList<>();
+            final List<URAddressModel> originalLocations = new ArrayList<>();
             originalLocations.addAll(Utility.response.responsedata.categories.get(sReceiptTypeIndex).addresses);
 
             etSearchLocation.addTextChangedListener(new TextWatcher() {
@@ -563,14 +563,14 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
             });
 
         } else {
-            DialogListAdapter adapter = new DialogListAdapter(UploadReceiptActivity.this, "URReceipt", -1);
+            final DialogListAdapter adapter = new DialogListAdapter(UploadReceiptActivity.this, "URReceipt", -1);
             rv.setHasFixedSize(true);
             rv.setLayoutManager(new LinearLayoutManager(this));
             rv.setAdapter(adapter);
 
             etSearchLocation.setHint("Search category");
 
-            List<URCategoryModel> originalCategories = new ArrayList<>();
+            final List<URCategoryModel> originalCategories = new ArrayList<>();
             originalCategories.addAll(Utility.response.responsedata.categories);
 
             etSearchLocation.addTextChangedListener(new TextWatcher() {

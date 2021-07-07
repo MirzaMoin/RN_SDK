@@ -39,7 +39,7 @@ public class RedeemCashbackAdapter extends RecyclerView.Adapter<RedeemCashbackAd
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
 
 
        holder.textTitle.setText(list.get(position));

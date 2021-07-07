@@ -60,7 +60,7 @@ public class FooterAdapter extends RecyclerView.Adapter<FooterAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         holder.setIsRecyclable(false);
-        FooterLinkModel footer = footerLinks.get(position);
+        final FooterLinkModel footer = footerLinks.get(position);
 
         FontDrawable drawable = new FontDrawable(context, Utility.getIcon(footer.getFooterIcon()), true, false);
 

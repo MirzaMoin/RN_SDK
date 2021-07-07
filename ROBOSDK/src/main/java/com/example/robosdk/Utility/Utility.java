@@ -524,7 +524,7 @@ public class Utility {
     final View customLayout = View.inflate(context, R.layout.content_alert_dialog, null);
     builder.setView(customLayout);
 
-    AlertDialog dialog = builder.create();
+    final AlertDialog dialog = builder.create();
     dialog.show();
 
     TextView textMessage, textOk, textTitle;

@@ -74,7 +74,7 @@ public class TransactionHistoryAdapter extends RecyclerView.Adapter<TransactionH
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NotNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NotNull final ViewHolder holder, int position) {
 
 
         holder.setIsRecyclable(false);
@@ -90,7 +90,7 @@ public class TransactionHistoryAdapter extends RecyclerView.Adapter<TransactionH
             }
         });
         Date date = null;
-        TransactionHistoryModel history = this.responseModel.get(position);
+        final TransactionHistoryModel history = this.responseModel.get(position);
         String dtStart = history.getTransactionDate();
         @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         @SuppressLint("SimpleDateFormat") SimpleDateFormat formatterOut = new SimpleDateFormat("dd MMM yyyy");
@@ -128,7 +128,7 @@ public class TransactionHistoryAdapter extends RecyclerView.Adapter<TransactionH
             holder.linearStatus.setVisibility(View.VISIBLE);
             holder.linearType.setVisibility(View.VISIBLE);
 
-            for (TransactionHistoryChildMenuModel s : history.childMenus) {
+            for (final TransactionHistoryChildMenuModel s : history.childMenus) {
                 if (s.getImages() != null) {
                     holder.textImagesTitleTH.setText(s.getName());
                     holder.linearImagesTH.setVisibility(View.VISIBLE);
@@ -226,7 +226,7 @@ public class TransactionHistoryAdapter extends RecyclerView.Adapter<TransactionH
                     holder.linearStatus.setVisibility(View.VISIBLE);
                     holder.linearType.setVisibility(View.VISIBLE);
 
-                    for (TransactionHistoryChildMenuModel s : history.childMenus) {
+                    for (final TransactionHistoryChildMenuModel s : history.childMenus) {
                         if (s.getImages() != null) {
                             holder.textImagesTitleTH.setText(s.getName());
                             holder.linearImagesTH.setVisibility(View.VISIBLE);

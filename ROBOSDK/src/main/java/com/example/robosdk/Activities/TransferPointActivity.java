@@ -106,7 +106,7 @@ public class TransferPointActivity extends AppCompatActivity implements View.OnC
                     if (!isError) {
                         Utility.showLoader(TransferPointActivity.this);
 
-                        GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
+                        final GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
                         Log.e("Request", "RP ID: " + Utility.response.responsedata.appDetails.rewardProgramId +
                                 ", Contact ID: " + Utility.response.responsedata.contactData.contactID);
 

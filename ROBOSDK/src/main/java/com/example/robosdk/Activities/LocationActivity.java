@@ -164,7 +164,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         Utility.response.responsedata.locationData.clear();
         Utility.response.responsedata.locationData.addAll(originalLocations);
         // create an alert builder
-        BottomSheetDialog dialog = new BottomSheetDialog(this, R.style.BottomSheetStyle);
+        final BottomSheetDialog dialog = new BottomSheetDialog(this, R.style.BottomSheetStyle);
         // set the custom layout
         final View customLayout = getLayoutInflater().inflate(R.layout.content_location_list, null);
 
@@ -175,13 +175,13 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
 
         ((View) customLayout.getParent()).setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
         TextView textLocation = dialog.findViewById(R.id.textLocation);
-        TextView textNoLocation = dialog.findViewById(R.id.textNoLocation);
-        RecyclerView rvLocation = dialog.findViewById(R.id.rvLocationBottomsheet);
+        final TextView textNoLocation = dialog.findViewById(R.id.textNoLocation);
+        final RecyclerView rvLocation = dialog.findViewById(R.id.rvLocationBottomsheet);
 
         if (Utility.response.responsedata.locationData.size() > 0) {
             rvLocation.setVisibility(View.VISIBLE);
             textNoLocation.setVisibility(View.GONE);
-            LocationBottomsheetAdapter adapter = new LocationBottomsheetAdapter(this,LocationActivity.this);
+            final LocationBottomsheetAdapter adapter = new LocationBottomsheetAdapter(this,LocationActivity.this);
             rvLocation.setHasFixedSize(true);
             rvLocation.setLayoutManager(new LinearLayoutManager(this));
             rvLocation.setAdapter(adapter);
@@ -197,7 +197,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
             BottomSheetBehavior.from(bottomSheet)
                     .setState(BottomSheetBehavior.STATE_SETTLING);
 
-            ImageView imageExpand = dialog.findViewById(R.id.imageExpand);
+            final ImageView imageExpand = dialog.findViewById(R.id.imageExpand);
             imageExpand.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -41,7 +41,7 @@ public class CashbackImageSliderAdapter extends
     @Override
     public void onBindViewHolder(SliderAdapterVH viewHolder, final int position) {
 
-        ChildPageModel child = mSliderItems.get(position);
+        final ChildPageModel child = mSliderItems.get(position);
 
         Glide.with(viewHolder.itemView)
                 .load(child.getImage())

@@ -49,7 +49,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private void callAPI() {
         /*Create handle for the RetrofitInstance interface*/
-        GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
+        final GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
         Call<ResponseModel> call = service.getAllData("UW5c2c0MTT43HbVcKeu54rh8Nf77Fu");
         call.enqueue(new Callback<ResponseModel>() {
 

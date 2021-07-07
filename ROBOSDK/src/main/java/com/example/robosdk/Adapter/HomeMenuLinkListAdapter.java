@@ -69,7 +69,7 @@ public class HomeMenuLinkListAdapter extends RecyclerView.Adapter<HomeMenuLinkLi
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.setIsRecyclable(false);
-        MenuLinkModel menu;
+        final MenuLinkModel menu;
 
        if(!isFirst)
        {
