@@ -1,9 +1,14 @@
 package com.example.rnsdk.Adapter;
 
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +18,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -21,6 +29,7 @@ import com.example.rnsdk.Models.LocationDataModel;
 import com.example.rnsdk.Models.TransactionHistoryChildMenuModel;
 import com.example.rnsdk.Models.TransactionHistoryModel;
 import com.example.rnsdk.R;
+import com.example.rnsdk.Utility.PermissionUtils;
 import com.example.rnsdk.Utility.Utility;
 
 import java.text.ParseException;
@@ -34,10 +43,12 @@ import static android.content.ContentValues.TAG;
 public class LocationBottomsheetAdapter extends RecyclerView.Adapter<LocationBottomsheetAdapter.ViewHolder> {
 
     Context context;
+    Activity activity;
 
 
-    public LocationBottomsheetAdapter(Context context) {
+    public LocationBottomsheetAdapter(Context context, Activity activity) {
         this.context = context;
+        this.activity = activity;
 
     }
 
@@ -80,9 +91,7 @@ public class LocationBottomsheetAdapter extends RecyclerView.Adapter<LocationBot
         }
         if (data.getLogoImage() != null && data.getLogoImage() != null) {
             Glide.with(context).load(data.getLogoImage()).into(holder.imageLocationBottom);
-        }
-        else
-        {
+        } else {
             Glide.with(context).load(R.drawable.ic_location).into(holder.imageLocationBottom);
 
         }
@@ -109,31 +118,35 @@ public class LocationBottomsheetAdapter extends RecyclerView.Adapter<LocationBot
                         holder.linearURL.setVisibility(View.VISIBLE);
                         holder.textURLLocationBottom.setText(data.getWebsiteUrl());
                         holder.textURLLocationBottom.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getLocationsLinkColor()));
+                        holder.textURLLocationBottom.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent i = new Intent(Intent.ACTION_VIEW);
+                                i.setData(Uri.parse(data.getWebsiteUrl()));
+                                context.startActivity(i);
+                            }
+                        });
                     }
                     if (data.getMobilePhone() != null && !data.getMobilePhone().isEmpty()) {
                         holder.linearPhone.setVisibility(View.VISIBLE);
                         holder.textPhoneBottom.setText(data.getMobilePhone());
                         holder.textPhoneBottom.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getLocationsLinkColor()));
-
+                        holder.textPhoneBottom.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                checkPhonePermission(data.getMobilePhone());
+                            }
+                        });
                     }
-
-
-
-                }
-                else
-                {
+                } else {
                     holder.linearDirection.setVisibility(View.GONE);
                     holder.linearURL.setVisibility(View.GONE);
                     holder.linearPhone.setVisibility(View.GONE);
                     holder.imgExpandLocation.setRotation(0);
 
                 }
-
             }
         });
-
-
-
     }
 
 
@@ -177,4 +190,52 @@ public class LocationBottomsheetAdapter extends RecyclerView.Adapter<LocationBot
 
         }
     }
+
+    private static final int PHONE_PERMISSION_REQUEST_CODE = 888;
+
+
+    protected void checkPhonePermission(String mobilePhone) {
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager
+                .PERMISSION_GRANTED) {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (PermissionUtils.neverAskAgainSelected(activity, Manifest.permission.CALL_PHONE)) {
+                    displayNeverAskAgainDialog();
+                } else {
+                    ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.CALL_PHONE},
+                            PHONE_PERMISSION_REQUEST_CODE);
+                }
+            }
+        } else {
+            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + mobilePhone));
+            context.startActivity(intent);
+
+        }
+    }
+
+    private void displayNeverAskAgainDialog() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+
+        builder.setMessage("We need phone permission for performing necessary task. Please permit the permission through "
+                + "Settings screen.\n\nSelect Permissions -> Enable permission");
+
+
+        builder.setCancelable(false);
+        builder.setPositiveButton("Permit Manually", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                Intent intent = new Intent();
+                intent.setAction(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                Uri uri = Uri.fromParts("package", context.getPackageName(), null);
+                intent.setData(uri);
+                context.startActivity(intent);
+                activity.finish();
+            }
+        });
+        builder.setNegativeButton("Cancel", null);
+        builder.show();
+    }
+
 }

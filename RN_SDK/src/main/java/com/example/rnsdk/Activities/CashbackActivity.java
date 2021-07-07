@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -72,7 +73,7 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
     RecyclerView rvFooterCashback;
     TextView textPointCashback,
             textBalanceRC;
-    EditText etAmountRC;
+    public static EditText etAmountRC;
     SwipeButton swipeButtonRC;
 
     RelativeLayout relLoadingCashback;
@@ -81,6 +82,7 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
             isRequireWholeNumberRedemption = true;
 
     RecyclerView rvCashback;
+    TableLayout tableLayoutCashback;
     boolean isTap = false;
 
     CardView cardTapRC;
@@ -92,6 +94,10 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cashback);
         init();
+        relLoadingCashback.setVisibility(View.VISIBLE);
+        Glide.with(this).load(Utility.response.responsedata.appIntakeImages.loadingImages.get(0).imageUrl).into(imageCashback);
+        Glide.with(this).load(Utility.response.responsedata.appIntakeImages.companyLogo).into(imageLogoCashback);
+
         getData();
     }
 
@@ -111,6 +117,9 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
         relLoadingCashback = findViewById(R.id.relLoadingCashback);
         imageCashback = findViewById(R.id.imageCashback);
         imageLogoCashback = findViewById(R.id.imageLogoCashback);
+        tableLayoutCashback = findViewById(R.id.tableLayoutCashback);
+
+        tableLayoutCashback.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
 
 
         cardTapRC = findViewById(R.id.cardTapRC);
@@ -222,7 +231,7 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
         cardTapRC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                etAmountRC.setText(String.valueOf(amount));
+                etAmountRC.setText(Utility.getRoundData(amount));
                 isTap = true;
             }
         });
@@ -232,25 +241,30 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
 
     private void setCashbackSuggetion() {
 
-        ArrayList<String> list = new ArrayList<>();
-        double finalValue = amount / 5;
-        double newValue = finalValue;
-        for(int i = 0;i<5;i++)
+        if(isAllowPartialCashbackRedemption)
         {
+            rvCashback.setVisibility(View.VISIBLE);
+            ArrayList<String> list = new ArrayList<>();
+            double finalValue = amount / 5;
+            double newValue = finalValue;
+            for(int i = 0;i<5;i++)
+            {
 
-                list.add(Utility.getRoundData(finalValue));
-                Log.e("TEST",""+Utility.getRoundData(finalValue));
+                list.add(Utility.getRoundData(Math.round(finalValue)));
+                Log.e("TEST",String.valueOf(Math.floor(finalValue)));
                 finalValue += newValue;
 
+            }
+
+            RedeemCashbackAdapter adapter = new RedeemCashbackAdapter(this,list);
+            rvCashback.setHasFixedSize(true);
+
+
+            rvCashback.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+
+            rvCashback.setAdapter(adapter);
         }
 
-        RedeemCashbackAdapter adapter = new RedeemCashbackAdapter(this,list);
-        rvCashback.setHasFixedSize(true);
-
-
-        rvCashback.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-
-        rvCashback.setAdapter(adapter);
     }
 
     private void makeCashback(String otherAmount) {
@@ -350,9 +364,6 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
 
 
 
-        relLoadingCashback.setVisibility(View.VISIBLE);
-        Glide.with(this).load(Utility.response.responsedata.appIntakeImages.loadingImages.get(0).imageUrl).into(imageCashback);
-        Glide.with(this).load(Utility.response.responsedata.appIntakeImages.companyLogo).into(imageLogoCashback);
 
         GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
         Log.e("Request", "RP ID: " + Utility.response.responsedata.appDetails.rewardProgramId + ", Contact ID: " + Utility.response.responsedata.contactData.contactID);

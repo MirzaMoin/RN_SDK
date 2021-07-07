@@ -26,6 +26,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -95,6 +96,8 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
 
     ConstraintLayout rootLayout;
 
+    TableLayout tableLayoutOfferDetails;
+
 
     OfferListModel currentOffer = null;
     List<LocationDataModel> originalLocations = new ArrayList<>();
@@ -142,6 +145,8 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
         textBusinessPhone = findViewById(R.id.textBusinessPhone);
         textWebsiteURL = findViewById(R.id.textWebsiteURL);
         imageBarcode = findViewById(R.id.imageBarcode);
+        tableLayoutOfferDetails = findViewById(R.id.tableLayoutOfferDetails);
+        tableLayoutOfferDetails.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
 
 
         imgback.setOnClickListener(this);

@@ -1,16 +1,22 @@
 package com.example.rnsdk.Activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -26,6 +32,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +48,7 @@ import com.example.rnsdk.Models.LocationDataModel;
 import com.example.rnsdk.Models.ResponseModel;
 import com.example.rnsdk.Models.ResponsedataModel;
 import com.example.rnsdk.R;
+import com.example.rnsdk.Utility.PermissionUtils;
 import com.example.rnsdk.Utility.Utility;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -77,7 +85,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
     List<LocationDataModel> originalLocations = new ArrayList<>();
     RelativeLayout relLoadingLocation;
 
-
+    TableLayout tableLayoutLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +124,8 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         relLoadingLocation = findViewById(R.id.relLoadingLocation);
         imageLocation = findViewById(R.id.imageLocation);
         imageLogoLocation = findViewById(R.id.imageLogoLocation);
+        tableLayoutLocation = findViewById(R.id.tableLayoutLocation);
+        tableLayoutLocation.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
 
 
         imgBackLocation.setOnClickListener(this);
@@ -186,7 +196,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         if (Utility.response.responsedata.locationData.size() > 0) {
             rvLocation.setVisibility(View.VISIBLE);
             textNoLocation.setVisibility(View.GONE);
-            LocationBottomsheetAdapter adapter = new LocationBottomsheetAdapter(this);
+            LocationBottomsheetAdapter adapter = new LocationBottomsheetAdapter(this,LocationActivity.this);
             rvLocation.setHasFixedSize(true);
             rvLocation.setLayoutManager(new LinearLayoutManager(this));
             rvLocation.setAdapter(adapter);

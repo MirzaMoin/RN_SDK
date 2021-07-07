@@ -14,6 +14,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +44,8 @@ public class WebViewActivity extends AppCompatActivity implements View.OnClickLi
     boolean isSurvey = false;
     String title = "";
     String originalUrl = "";
+
+    TableLayout tableLayoutWeb;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @SuppressLint("SetJavaScriptEnabled")
@@ -149,6 +152,9 @@ public class WebViewActivity extends AppCompatActivity implements View.OnClickLi
         if (responseData.appColor.getPhoneNotificationBarTextColor().equals("Black")) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
+        tableLayoutWeb = findViewById(R.id.tableLayoutWeb);
+        tableLayoutWeb.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
+
         webview = findViewById(R.id.webview);
         linearBack = findViewById(R.id.linearBack);
         linearRefresh = findViewById(R.id.linearRefresh);

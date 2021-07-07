@@ -15,6 +15,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,7 +61,7 @@ public class WaysToEarnActivity extends AppCompatActivity implements View.OnClic
 
     RelativeLayout relLoadingWTE;
 
-
+    TableLayout tableLayoutWTE;
 
 
     @Override
@@ -84,6 +85,9 @@ public class WaysToEarnActivity extends AppCompatActivity implements View.OnClic
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
         rvList = findViewById(R.id.rvWaysToEarn);
+        tableLayoutWTE = findViewById(R.id.tableLayoutWTE);
+        tableLayoutWTE.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
+
         textPointWaysToEarn = findViewById(R.id.textPointWaysToEarn);
         rvFooterUploadWaysToEarn = findViewById(R.id.rvFooterUploadWaysToEarn);
         imgBackWaysToEarn = findViewById(R.id.imgBackWaysToEarn);

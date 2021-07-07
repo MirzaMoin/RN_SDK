@@ -22,7 +22,7 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
     private Context context;
     private List<String> expandableListTitle;
     private HashMap<String, List<String>> expandableListDetail;
-
+    ImageView imageExpand;
     public CustomExpandableListAdapter(Context context, List<String> expandableListTitle,
                                        HashMap<String, List<String>> expandableListDetail) {
         this.context = context;
@@ -86,6 +86,7 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
         return listPosition;
     }
 
+
     @Override
     public View getGroupView(int listPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
@@ -97,6 +98,20 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
         }
         TextView listTitleTextView = (TextView) convertView
                 .findViewById(R.id.listTitle);
+        imageExpand = convertView.findViewById(R.id.imageExpand);
+
+        if(listPosition == 0)
+        {
+            imageExpand.setVisibility(View.GONE);
+        }
+        if(isExpanded)
+        {
+            imageExpand.setRotation(-90);
+        }
+        else
+        {
+            imageExpand.setRotation(90);
+        }
         listTitleTextView.setTypeface(null, Typeface.BOLD);
         listTitleTextView.setText(listTitle);
         return convertView;

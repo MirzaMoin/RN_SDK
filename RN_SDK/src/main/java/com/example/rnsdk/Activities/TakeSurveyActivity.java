@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -53,6 +54,8 @@ public class TakeSurveyActivity extends AppCompatActivity implements View.OnClic
 
     ResponsedataModel responseData;
     TabLayout tabLayout;
+
+    TableLayout tableLayoutSurveys;
 
 
 
@@ -107,6 +110,8 @@ public class TakeSurveyActivity extends AppCompatActivity implements View.OnClic
         imgBackSurvey = findViewById(R.id.imgBackSurvey);
         textPointSurvey = findViewById(R.id.textPointSurvey);
         mPager = findViewById(R.id.viewPagerTakeSurvey);
+        tableLayoutSurveys = findViewById(R.id.tableLayoutSurveys);
+        tableLayoutSurveys.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
 
         textPointSurvey.setTextColor(Utility.getColor(responseData.appColor.getHeaderPointDigitColor()));
         textPointSurvey.setText(Utility.getRoundData(responseData.contactData.getPointBalance())+ " PTS");

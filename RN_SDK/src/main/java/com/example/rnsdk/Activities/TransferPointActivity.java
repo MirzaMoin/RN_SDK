@@ -19,6 +19,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,6 +69,8 @@ public class TransferPointActivity extends AppCompatActivity implements View.OnC
 
     EditText etPointAmountTP, etUserDetailsTP;
     boolean isError = false;
+
+    TableLayout tableLayoutTP;
 
 
     @Override
@@ -275,6 +278,9 @@ public class TransferPointActivity extends AppCompatActivity implements View.OnC
         swipeBtnTransferPoint = findViewById(R.id.swipeBtnTransferPoint);
         textPointTransferPoints = findViewById(R.id.textPointTransferPoints);
         etPointAmountTP = findViewById(R.id.etPointAmountTP);
+        tableLayoutTP = findViewById(R.id.tableLayoutTP);
+        tableLayoutTP.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
+
         etUserDetailsTP = findViewById(R.id.etUserDetailsTP);
         textPointTransferPoints.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
 

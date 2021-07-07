@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -48,6 +49,7 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
 
     RelativeLayout relLoadingOffers;
 
+    TableLayout tableLayoutOffer;
     @Override
     protected void onResume() {
         super.onResume();
@@ -225,6 +227,8 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
         imageOffers = findViewById(R.id.imageOffers);
         imageLogoOffers = findViewById(R.id.imageLogoOffers);
         relLoadingOffers = findViewById(R.id.relLoadingOffers);
+        tableLayoutOffer = findViewById(R.id.tableLayoutOffer);
+        tableLayoutOffer.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
 
         ivBack.setOnClickListener(this);
 

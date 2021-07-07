@@ -46,7 +46,7 @@ public class TransactionHistoryAdapter extends RecyclerView.Adapter<TransactionH
         this.imgPreview = imgPreview;
         this.imgPreviewClose = imgPreviewClose;
 
-        for(TransactionHistoryModel data : responseModel)
+        for(TransactionHistoryModel data : this.responseModel)
         {
             data.setExpanded(false);
         }
@@ -120,6 +120,88 @@ public class TransactionHistoryAdapter extends RecyclerView.Adapter<TransactionH
         holder.textType.setText("" + history.getType());
 
 
+        if(history.isExpanded())
+        {
+
+
+            holder.linearLocation.setVisibility(View.VISIBLE);
+            holder.linearStatus.setVisibility(View.VISIBLE);
+            holder.linearType.setVisibility(View.VISIBLE);
+
+            for (TransactionHistoryChildMenuModel s : history.childMenus) {
+                if (s.getImages() != null) {
+                    holder.textImagesTitleTH.setText(s.getName());
+                    holder.linearImagesTH.setVisibility(View.VISIBLE);
+                    if (s.getImages().size() == 1) {
+                        holder.cardFirstTH.setVisibility(View.VISIBLE);
+                        Glide.with(context).load(s.getImages().get(0)).into(holder.imageFirstTH);
+                    } else if (s.getImages().size() == 2) {
+                        holder.cardFirstTH.setVisibility(View.VISIBLE);
+                        Glide.with(context).load(s.getImages().get(0)).into(holder.imageFirstTH);
+
+                        holder.cardSecondTH.setVisibility(View.VISIBLE);
+                        Glide.with(context).load(s.getImages().get(1)).into(holder.imageSecondTH);
+
+                        Log.e(TAG, "Image First: " + s.getImages().get(0) + "Image Second: " + s.getImages().get(1));
+                    } else if (s.getImages().size() == 3) {
+                        holder.cardFirstTH.setVisibility(View.VISIBLE);
+                        Glide.with(context).load(s.getImages().get(0)).into(holder.imageFirstTH);
+
+
+                        holder.cardSecondTH.setVisibility(View.VISIBLE);
+                        Glide.with(context).load(s.getImages().get(1)).into(holder.imageSecondTH);
+
+                        holder.cardThirdTH.setVisibility(View.VISIBLE);
+                        Glide.with(context).load(s.getImages().get(2)).into(holder.imageThirdTH);
+                    }
+
+
+
+                } else {
+                    if (s.getName().equals("Total Spent")) {
+                        holder.linearTotalSpend.setVisibility(View.VISIBLE);
+
+                        holder.textTotalSpendTitleTH.setText(s.getName() + ": ");
+                        holder.textTotalSpend.setText(s.getStringValue());
+                    }
+                    if (s.getName().equals("Offer Name")) {
+                        holder.linearOfferNameTH.setVisibility(View.VISIBLE);
+
+                        holder.textOfferNameTitleTH.setText(s.getName() + ": ");
+                        holder.textOfferNameTH.setText(s.getStringValue());
+                    }
+                }
+
+                holder.imageFirstTH.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        relImagePreview.setVisibility(View.VISIBLE);
+                        Glide.with(context).load(s.getImages().get(0)).into(imgPreview);
+                    }
+                });
+                holder.imageSecondTH.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        relImagePreview.setVisibility(View.VISIBLE);
+                        Glide.with(context).load(s.getImages().get(1)).into(imgPreview);
+                    }
+                });
+                holder.imageThirdTH.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        relImagePreview.setVisibility(View.VISIBLE);
+                        Glide.with(context).load(s.getImages().get(2)).into(imgPreview);
+                    }
+                });
+
+            }
+
+            holder.imageExpand.setRotation(0);
+        }
+
+
+
+
         holder.linearCollEx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,7 +217,10 @@ public class TransactionHistoryAdapter extends RecyclerView.Adapter<TransactionH
                     holder.imageExpand.setRotation(180);
 
                 } else {
+
                     history.setExpanded(true);
+
+
 
                     holder.linearLocation.setVisibility(View.VISIBLE);
                     holder.linearStatus.setVisibility(View.VISIBLE);

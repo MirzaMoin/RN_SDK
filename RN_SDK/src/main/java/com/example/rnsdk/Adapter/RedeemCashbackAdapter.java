@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.rnsdk.Activities.CashbackActivity;
 import com.example.rnsdk.Models.LBLeaderBoardReportModel;
 import com.example.rnsdk.R;
 
@@ -44,8 +45,14 @@ public class RedeemCashbackAdapter extends RecyclerView.Adapter<RedeemCashbackAd
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-       holder.textTitle.setText(list.get(position));
 
+       holder.textTitle.setText(list.get(position));
+       holder.textTitle.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               CashbackActivity.etAmountRC.setText(list.get(position));
+           }
+       });
 
     }
 

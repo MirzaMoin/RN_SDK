@@ -21,6 +21,7 @@
             android:layout_height="?android:attr/actionBarSize"
             tools:targetApi="lollipop">
             <TableLayout
+                android:id="@+id/tableLayoutWTE"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"

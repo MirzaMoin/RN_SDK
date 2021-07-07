@@ -198,6 +198,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                                                                drawerLayout.close();
 
                                                            }
+
                                                            return false;
                                                        }
                                                    }
@@ -231,6 +232,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onGroupExpand(int groupPosition) {
+                Log.e("Test","Expanded");
+
+                ImageView image = drawerLayout.findViewById(R.id.imageExpand);
+                image.setRotation(-90);
+
                 if (groupPosition != previousItem)
                     expandableListView.collapseGroup(previousItem);
                 previousItem = groupPosition;

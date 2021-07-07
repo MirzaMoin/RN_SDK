@@ -25,24 +25,24 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-
             android:orientation="vertical">
 
 
             <androidx.appcompat.widget.Toolbar
 
                 android:id="@+id/toolbarHome"
-                android:layout_width="match_parent"
-
-                android:layout_height="wrap_content"
                 app:contentInsetStart="0dp"
                 app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
                 tools:targetApi="lollipop">
 
                 <TableLayout
                     android:id="@+id/tableLayoutHome"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+
                     android:orientation="horizontal">
 
                     <TableRow>
@@ -291,7 +291,7 @@
                         android:layout_alignParentRight="true"
                         android:padding="@dimen/_3sdp"
 
-                        android:tint="#000" />
+                        app:tint="#000" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -576,9 +576,9 @@
                 android:layout_alignParentRight="true"
                 android:padding="@dimen/_3sdp"
                 android:src="@drawable/ic_baseline_share_24"
-                android:tint="#000"
 
-                android:visibility="gone" />
+                android:visibility="gone"
+                app:tint="#000" />
         </RelativeLayout>
 
 
@@ -683,7 +683,9 @@
             android:divider="@android:color/darker_gray"
             android:dividerHeight="0.5dp"
             android:foregroundTint="#fff"
-            android:indicatorEnd="?android:attr/expandableListPreferredItemIndicatorRight" />
+
+
+            />
 
         <ImageView
             android:id="@+id/imageProfileSlider"

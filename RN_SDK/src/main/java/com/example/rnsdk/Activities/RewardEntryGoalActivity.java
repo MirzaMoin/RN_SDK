@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -56,6 +57,7 @@ public class RewardEntryGoalActivity extends AppCompatActivity implements View.O
     LinearLayout linearCashbackRPG, linearHome;
     TextView textPointRPG;
 
+    TableLayout tableLayoutRPG;
 
 
     @Override
@@ -87,8 +89,10 @@ public class RewardEntryGoalActivity extends AppCompatActivity implements View.O
         imageRPG = findViewById(R.id.imageRPG);
         imageLogoRPG = findViewById(R.id.imageLogoRPG);
         relLoadingRPG = findViewById(R.id.relLoadingRPG);
+        tableLayoutRPG = findViewById(R.id.tableLayoutRPG);
 
 
+        tableLayoutRPG.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
 
         textPointRPG.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
         textPointRPG.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");

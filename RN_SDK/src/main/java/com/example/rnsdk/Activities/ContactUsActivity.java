@@ -20,6 +20,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -80,6 +81,8 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
             etLMobileCU,
             etLMessageCU;
 
+    TableLayout tableLayoutContactUs;
+
 
 
 
@@ -135,7 +138,9 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
         etLEmailCU = findViewById(R.id.etLEmailCU);
         etLMobileCU = findViewById(R.id.etLMobileCU);
         etLMessageCU = findViewById(R.id.etLMessageCU);
+        tableLayoutContactUs = findViewById(R.id.tableLayoutContactUs);
 
+        tableLayoutContactUs.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
 
         btnSendMessage = findViewById(R.id.btnSendMessage);
         textPointContactUs = findViewById(R.id.textPointContactUs);

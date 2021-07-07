@@ -17,6 +17,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -72,6 +73,8 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
 
     RelativeLayout relOne, relTwo, relThree;
 
+    TableLayout tableLayoutLeaderboard;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,9 +104,10 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
         imageLeaderboard = findViewById(R.id.imageLeaderboard);
         imageLogoLeaderboard = findViewById(R.id.imageLogoLeaderboard);
         relLoadingLeaderboard = findViewById(R.id.relLoadingLeaderboard);
+        tableLayoutLeaderboard = findViewById(R.id.tableLayoutLeaderboard);
 
 
-
+        tableLayoutLeaderboard.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
 
         winnerImage = findViewById(R.id.winnerImage);
         imgAwardOne = findViewById(R.id.imgAward);

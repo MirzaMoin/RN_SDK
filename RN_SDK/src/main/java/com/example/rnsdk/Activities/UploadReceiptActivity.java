@@ -45,6 +45,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -113,6 +114,8 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
             imageAddImage3,
             imageUR,
             imageLogoUR;
+
+    TableLayout tableLayoutTP;
 
     String image1 = "", image2 = "", image3 = "";
     Button btnSubmit;
@@ -189,6 +192,8 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
         relLoadingUR = findViewById(R.id.relLoadingUR);
         imageUR = findViewById(R.id.imageUR);
         imageLogoUR = findViewById(R.id.imageLogoUR);
+        tableLayoutTP = findViewById(R.id.tableLayoutTP);
+        tableLayoutTP.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
 
         textPointUploadReceipt = findViewById(R.id.textPointUploadReceipt);
         etUrSubTotalBeforeTax = findViewById(R.id.etUrSubTotalBeforeTax);
@@ -416,54 +421,7 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
         builder.show();
     }
 
-    protected boolean checkPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED) {
 
-            // Do something, when permissions not granted
-            if (ActivityCompat.shouldShowRequestPermissionRationale(
-                    this, Manifest.permission.CAMERA)) {
-                // If we should give explanation of requested permissions
-
-                // Show an alert dialog here with request explanation
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage("Camera permission is required");
-                builder.setTitle("Please grant camera permissions");
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        ActivityCompat.requestPermissions(
-                                UploadReceiptActivity.this,
-                                new String[]{
-                                        Manifest.permission.CAMERA,
-                                },
-                                MY_PERMISSIONS_REQUEST_CODE
-                        );
-                    }
-                });
-                builder.setNeutralButton("Cancel", null);
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            } else {
-                // Directly request for required permissions, without explanation
-                ActivityCompat.requestPermissions(
-                        this,
-                        new String[]{
-                                Manifest.permission.CAMERA
-                        },
-                        MY_PERMISSIONS_REQUEST_CODE
-                );
-            }
-            return false;
-        } else {
-            // Do something, when permissions are already granted
-            Log.e("Test","Permissions already granted");
-
-            Toast.makeText(this, "Permissions already granted", Toast.LENGTH_SHORT).show();
-            return true;
-
-        }
-    }
 
     private void validate() {
         Boolean isSubTotalBeforeTaxError = false,

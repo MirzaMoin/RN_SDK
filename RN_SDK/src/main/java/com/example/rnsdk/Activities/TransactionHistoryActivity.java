@@ -20,6 +20,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -67,6 +68,8 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
     EditText etLocationNameSearchTH;
     RelativeLayout relImagePreview,
             relLoadingTH;
+
+    TableLayout tableLayoutTH;
 
     boolean isOpen = false;
 
@@ -154,7 +157,10 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
 
+        tableLayoutTH = findViewById(R.id.tableLayoutTH);
         textNoData = findViewById(R.id.textNoData);
+        tableLayoutTH.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
+
         textPointTransactionHistory = findViewById(R.id.textPointTransactionHistory);
         textPointTransactionHistory.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
         textPointTransactionHistory.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
