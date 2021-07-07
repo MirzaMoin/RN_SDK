@@ -50,11 +50,10 @@
         android:layout_width="@dimen/_14sdp"
         android:layout_height="@dimen/_14sdp"
         android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-        android:tint="#8C8C8C"
         android:layout_centerVertical="true"
 
         android:layout_alignParentRight="true"
-        />
+        app:tint="#8C8C8C" />
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp"

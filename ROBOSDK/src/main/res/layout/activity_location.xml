@@ -124,9 +124,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_baseline_menu_24"
-            android:tint="#000"
             android:padding="@dimen/_6sdp"
-            />
+            app:tint="#000" />
     </androidx.cardview.widget.CardView>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
