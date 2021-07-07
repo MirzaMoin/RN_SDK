@@ -1,4 +1,4 @@
-package com.example.rn_sdk;
+package com.example.roborewards_sdk;
 
 import org.junit.Test;
 

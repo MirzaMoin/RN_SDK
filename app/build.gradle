@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.example.rn_sdk"
+        applicationId "com.example.roborewards_sdk"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
