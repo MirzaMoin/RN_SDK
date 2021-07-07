@@ -109,6 +109,6 @@
     <orderEntry type="library" name="Gradle: androidx.annotation:annotation-experimental:1.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.intuit.sdp:sdp-android:1.0.6@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.intuit.ssp:ssp-android:1.0.6@aar" level="project" />
-    <orderEntry type="module" module-name="RN_SDK.RN_SDK" />
+    <orderEntry type="module" module-name="RN_SDK.ROBOSDK" />
   </component>
 </module>

@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/RN_SDK.iml" filepath="$PROJECT_DIR$/.idea/modules/RN_SDK.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RN_SDK/RN_SDK.RN_SDK.iml" filepath="$PROJECT_DIR$/.idea/modules/RN_SDK/RN_SDK.RN_SDK.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RN_SDK/RN_SDK.ROBOSDK.iml" filepath="$PROJECT_DIR$/.idea/modules/RN_SDK/RN_SDK.ROBOSDK.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/RN_SDK.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/RN_SDK.app.iml" />
     </modules>
   </component>
