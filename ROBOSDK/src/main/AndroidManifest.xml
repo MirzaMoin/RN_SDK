@@ -22,7 +22,7 @@
         <activity
             android:name="com.example.robosdk.Activities.LocationActivity"
             android:label="@string/title_activity_location" />
-        <activity android:name="com.example.robosdk.Activities.NotificationDetailActivity" />
+        <activity android:name="com.example.robosdk.Activities.NotificationDetailActivity"  />
         <activity android:name="com.example.robosdk.Activities.NotificationActivity" />
         <activity android:name="com.example.robosdk.Activities.TransactionHistoryActivity" />
         <activity android:name="com.example.robosdk.Activities.ProfileActivity" />
