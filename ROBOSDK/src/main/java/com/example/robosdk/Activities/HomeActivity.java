@@ -138,10 +138,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.MasterTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
 
         homeScreenModel = Utility.response.responsedata.homeScreen;
         init();

@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <application android:requestLegacyExternalStorage="true">
+    <application android:requestLegacyExternalStorage="true" android:theme="@style/Theme.Design.Light.NoActionBar">
         <activity android:name="com.example.robosdk.Activities.WebViewActivity"></activity>
         <activity android:name="com.example.robosdk.Activities.TakeSurveyActivity" />
 
