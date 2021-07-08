@@ -62,6 +62,8 @@ public class TakeSurveyActivity extends AppCompatActivity implements View.OnClic
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.myLibTheme);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_survey);
 

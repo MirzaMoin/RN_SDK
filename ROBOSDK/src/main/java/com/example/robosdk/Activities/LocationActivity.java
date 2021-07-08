@@ -74,6 +74,8 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.myLibTheme);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.

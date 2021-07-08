@@ -50,6 +50,8 @@ public class WebViewActivity extends AppCompatActivity implements View.OnClickLi
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.myLibTheme);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();

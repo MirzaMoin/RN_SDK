@@ -86,6 +86,8 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.myLibTheme);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_us);
 

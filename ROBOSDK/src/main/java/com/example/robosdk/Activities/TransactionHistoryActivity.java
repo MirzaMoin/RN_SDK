@@ -75,6 +75,8 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.myLibTheme);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_history);
 

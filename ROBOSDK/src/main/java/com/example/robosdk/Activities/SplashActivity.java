@@ -32,6 +32,7 @@ public class SplashActivity extends AppCompatActivity {
     int errorCount = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.myLibTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 

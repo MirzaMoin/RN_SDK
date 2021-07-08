@@ -104,6 +104,8 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.myLibTheme);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offers_detail);
 
