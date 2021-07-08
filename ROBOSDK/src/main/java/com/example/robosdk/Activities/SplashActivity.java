@@ -39,7 +39,12 @@ public class SplashActivity extends AppCompatActivity {
         imageSplash = findViewById(R.id.imageSplash);
         imageLogoSplash = findViewById(R.id.imageLogoSplash);
 
-        callAPI();
+        Intent i = getIntent();
+        String token = i.getStringExtra("RPToken");
+        String username = i.getStringExtra("username");
+        String password = i.getStringExtra("password");
+
+        callAPI(token,username,password);
 
 
 
@@ -47,10 +52,10 @@ public class SplashActivity extends AppCompatActivity {
 
     }
 
-    private void callAPI() {
+    private void callAPI(final String token, final String username, final String password) {
         /*Create handle for the RetrofitInstance interface*/
         final GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
-        Call<ResponseModel> call = service.getAllData("UW5c2c0MTT43HbVcKeu54rh8Nf77Fu");
+        Call<ResponseModel> call = service.getAllData(token);
         call.enqueue(new Callback<ResponseModel>() {
 
             @Override
@@ -70,9 +75,9 @@ public class SplashActivity extends AppCompatActivity {
                         Glide.with(SplashActivity.this).load(Utility.response.responsedata.appIntakeImages.companyLogo).into(imageLogoSplash);
 
 
-                        Call<ResponseModel> callLogin = service.Login(ApiJsonMap("UW5c2c0MTT43HbVcKeu54rh8Nf77Fu",
-                                "8000333022",
-                                "987654321"));
+                        Call<ResponseModel> callLogin = service.Login(ApiJsonMap(token,
+                                username,
+                                password));
 
 
                         callLogin.enqueue(new Callback<ResponseModel>() {
@@ -181,7 +186,7 @@ public class SplashActivity extends AppCompatActivity {
                                 }
                                 else
                                 {
-                                    callAPI();
+                                    callAPI(token, username, password);
 
                                     errorCount++;
                                 }
