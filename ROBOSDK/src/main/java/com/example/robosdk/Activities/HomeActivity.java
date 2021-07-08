@@ -138,6 +138,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.MasterTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
@@ -356,6 +357,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         imgDrawer = findViewById(R.id.imgDrawer);
         mPager = (ViewPager) findViewById(R.id.viewPagerHome);
         rvHomeList = (RecyclerView) findViewById(R.id.rvHomeMenuLink);
+
 
       /*  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             toolbar.setTitle("");
