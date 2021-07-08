@@ -27,8 +27,8 @@
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7">
-    <output url="file://$MODULE_DIR$/../../../RN_SDK/build/intermediates/javac/debug/classes" />
-    <output-test url="file://$MODULE_DIR$/../../../RN_SDK/build/intermediates/javac/debugUnitTest/classes" />
+    <output url="file://$MODULE_DIR$/../../../ROBOSDK/build/intermediates/javac/debug/classes" />
+    <output-test url="file://$MODULE_DIR$/../../../ROBOSDK/build/intermediates/javac/debugUnitTest/classes" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../ROBOSDK">
       <sourceFolder url="file://$MODULE_DIR$/../../../ROBOSDK/src/main/java" isTestSource="false" />
