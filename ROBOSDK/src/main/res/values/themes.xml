@@ -9,14 +9,15 @@
         <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
     <style name="myLibTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <item name="colorPrimary">#FF6200EE</item>
+       <!-- <item name="colorPrimary">#FF6200EE</item>
         <item name="colorPrimaryVariant">#FF3700B3</item>
         <item name="colorOnPrimary">#FFFFFFFF</item>
-        <!-- Secondary brand color. -->
+        &lt;!&ndash; Secondary brand color. &ndash;&gt;
         <item name="colorSecondary">#FF03DAC5</item>
         <item name="colorSecondaryVariant">#FF3700B3</item>
-        <item name="colorOnSecondary">#FF6200EE</item>
-
+        <item name="colorOnSecondary">#FF6200EE</item>-->
+        <!-- Status bar color. -->
+        <!-- Customize your theme here. -->
     </style>
     <style name="CustomTheme" parent="Theme.AppCompat.Light">
 
