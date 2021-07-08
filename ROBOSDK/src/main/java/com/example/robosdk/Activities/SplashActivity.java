@@ -123,7 +123,7 @@ public class SplashActivity extends AppCompatActivity {
                                                                 Utility.response.responsedata.pointBalance = response.body().responsedata.getPointBalance();
 
                                                                 startActivity(new Intent(SplashActivity.this, HomeActivity.class));
-
+                                                                finish();
 
                                                             } else {
                                                                 Log.e("Response - getAllPoints", "Response : "+ response.message());

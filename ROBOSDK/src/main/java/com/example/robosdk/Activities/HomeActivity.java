@@ -357,12 +357,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         mPager = (ViewPager) findViewById(R.id.viewPagerHome);
         rvHomeList = (RecyclerView) findViewById(R.id.rvHomeMenuLink);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+      /*  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             toolbar.setTitle("");
             setSupportActionBar(toolbar);
 
 
-        }
+        }*/
 
         setLayout();
 
