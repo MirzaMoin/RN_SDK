@@ -26,16 +26,15 @@ import retrofit2.Response;
 
 public class SplashActivity extends AppCompatActivity {
 
-
     ImageView imageSplash,
             imageLogoSplash;
     int errorCount = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.myLibTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
 
         imageSplash = findViewById(R.id.imageSplash);
         imageLogoSplash = findViewById(R.id.imageLogoSplash);
@@ -45,11 +44,7 @@ public class SplashActivity extends AppCompatActivity {
         String username = i.getStringExtra("username");
         String password = i.getStringExtra("password");
 
-        callAPI(token,username,password);
-
-
-
-
+        callAPI(token, username, password);
 
     }
 
@@ -64,8 +59,7 @@ public class SplashActivity extends AppCompatActivity {
 
 
                 if (response.isSuccessful()) {
-                    if(response.body() != null)
-                    {
+                    if (response.body() != null) {
                         Log.e("Response - getAllData", "" + response.body().statusMessage);
 
 
@@ -103,7 +97,7 @@ public class SplashActivity extends AppCompatActivity {
                                                 if (response.isSuccessful()) {
 
 
-                                                    Log.e("Response-getContactData", "Response : "+response.body());
+                                                    Log.e("Response-getContactData", "Response : " + response.body());
 
                                                     Call<ResponseModel> callGetContactData = service.getAllPoints(Utility.response.responsedata.appDetails.rewardProgramId,
                                                             Utility.response.responsedata.contactData.getContactID()
@@ -116,7 +110,7 @@ public class SplashActivity extends AppCompatActivity {
                                                             if (response.isSuccessful()) {
 
 
-                                                                Log.e("Response - getAllPoints", "Response : "+response.body());
+                                                                Log.e("Response - getAllPoints", "Response : " + response.body());
                                                                 Utility.response.responsedata.totalEarnedThisMonth = response.body().responsedata.getTotalEarnedThisMonth();
                                                                 Utility.response.responsedata.totalReedemed = response.body().responsedata.getTotalReedemed();
                                                                 Utility.response.responsedata.lifeTimePoints = response.body().responsedata.getLifeTimePoints();
@@ -127,23 +121,23 @@ public class SplashActivity extends AppCompatActivity {
                                                                 finish();
 
                                                             } else {
-                                                                Log.e("Response - getAllPoints", "Response : "+ response.message());
-                                                                Utility.showAlertDialog(SplashActivity.this,"Oops...","Something went wrong");
+                                                                Log.e("Response - getAllPoints", "Response : " + response.message());
+                                                                Utility.showAlertDialog(SplashActivity.this, "Oops...", "Something went wrong");
 
                                                             }
                                                         }
 
                                                         @Override
                                                         public void onFailure(Call<ResponseModel> call, Throwable test) {
-                                                            Utility.showAlertDialog(SplashActivity.this,"Oops...","Something went wrong");
+                                                            Utility.showAlertDialog(SplashActivity.this, "Oops...", "Something went wrong");
 
-                                                            Log.e("Response - getAllPoints", "Response : "+ test.getMessage().toString());
+                                                            Log.e("Response - getAllPoints", "Response : " + test.getMessage().toString());
 
                                                         }
                                                     });
 
                                                 } else {
-                                                    Utility.showAlertDialog(SplashActivity.this,"Oops...","Something went wrong");
+                                                    Utility.showAlertDialog(SplashActivity.this, "Oops...", "Something went wrong");
 
                                                     Log.e("Response-getContactData", "Error: " + response.message());
                                                 }
@@ -151,28 +145,21 @@ public class SplashActivity extends AppCompatActivity {
 
                                             @Override
                                             public void onFailure(Call<ResponseModel> call, Throwable test) {
-                                                Utility.showAlertDialog(SplashActivity.this,"Oops...","Something went wrong");
-                                                Log.e("Response-getContactData", "Error: " +  test.getMessage().toString());
+                                                Utility.showAlertDialog(SplashActivity.this, "Oops...", "Something went wrong");
+                                                Log.e("Response-getContactData", "Error: " + test.getMessage().toString());
 
                                             }
                                         });
 
 
-                             /*   Toast.makeText(SplashActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(SplashActivity.this, HomeActivity.class));
-
-*/
-
-                                    }
-                                    else
-                                    {
-                                        Utility.showAlertDialog(SplashActivity.this,"Oops...",response.message());
-                                        Log.e("Test","Login Response : "+response.body().getStatusMessage());
+                                    } else {
+                                        Utility.showAlertDialog(SplashActivity.this, "Oops...", response.body().getStatusMessage());
+                                        Log.e("Test", "Login Response : " + response.body().getStatusMessage());
                                     }
 
 
                                 } else {
-                                    Utility.showAlertDialog(SplashActivity.this,"Oops...","Something went wrong");
+                                    Utility.showAlertDialog(SplashActivity.this, "Oops...", "Something went wrong");
 
                                     Log.e("TEST", "Login Error: " + response.message());
                                 }
@@ -180,27 +167,22 @@ public class SplashActivity extends AppCompatActivity {
 
                             @Override
                             public void onFailure(Call<ResponseModel> call, Throwable error) {
-                                if(errorCount > 2)
-                                {
-                                    Utility.showAlertDialog(SplashActivity.this,"Oops...","Something went wrong");
+                                if (errorCount > 2) {
+                                    Utility.showAlertDialog(SplashActivity.this, "Oops...", "Something went wrong");
 
-                                }
-                                else
-                                {
-                                    callAPI("token", "username", "password");
+                                } else {
+                                    callAPI(token, username, password);
 
                                     errorCount++;
                                 }
 
 //                                Utility.showAlertDialog(SplashActivity.this,"Oops...","Something went wrong");
-                                Log.e("Test:::","Login : "+ error.getMessage().toString());
+                                Log.e("Test:::", "Login : " + error.getMessage().toString());
                             }
                         });
 
-                    }
-                    else
-                    {
-                        Log.e("Test","Login : "+  response.message()
+                    } else {
+                        Log.e("Test", "Login : " + response.message()
                         );
 
 
@@ -208,19 +190,17 @@ public class SplashActivity extends AppCompatActivity {
 
 
                 } else {
-                    Log.e("Test","Login : "+  response.message());
-
+                    Log.e("Test", "Login : " + response.message());
 
 
                 }
-
 
 
             }
 
             @Override
             public void onFailure(Call<ResponseModel> call, Throwable t) {
-                Log.e("Test","getAllData : "+t.getLocalizedMessage() );
+                Log.e("Test", "getAllData : " + t.getLocalizedMessage());
 
                 Toast.makeText(SplashActivity.this, "" + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
 
