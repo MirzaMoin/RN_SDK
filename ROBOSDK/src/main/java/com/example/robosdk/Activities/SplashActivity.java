@@ -45,9 +45,9 @@ public class SplashActivity extends AppCompatActivity {
 
 
         Intent i = getIntent();
-        String token = i.getStringExtra("RPToken");
-        String username =i.getStringExtra("username");
-        String password = i.getStringExtra("password");
+        String token = "UW5c2c0MTT43HbVcKeu54rh8Nf77Fu"; //i.getStringExtra("RPToken");
+        String username ="8000333022";// i.getStringExtra("username");
+        String password ="123456789"; // i.getStringExtra("password");
 
         callAPI(token, username, password);
 

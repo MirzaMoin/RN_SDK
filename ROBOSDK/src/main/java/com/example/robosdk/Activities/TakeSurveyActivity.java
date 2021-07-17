@@ -180,12 +180,15 @@ public class TakeSurveyActivity extends AppCompatActivity implements View.OnClic
             rvFooterTakeSurvey.setHasFixedSize(true);
 
 
-            rvFooterTakeSurvey.setLayoutManager(new GridLayoutManager(this, homeScreenModel.footerLinks.size()));
+            if(homeScreenModel.footerLinks != null  &&  homeScreenModel.footerLinks.size() > 0)
+            {
+                rvFooterTakeSurvey.setLayoutManager(new GridLayoutManager(this, homeScreenModel.footerLinks.size()));
 
-            rvFooterTakeSurvey.setAdapter(adapter);
+                rvFooterTakeSurvey.setAdapter(adapter);
+            }
+
         } else {
             rvFooterTakeSurvey.setVisibility(View.GONE);
-
 
         }
 
@@ -225,7 +228,15 @@ public class TakeSurveyActivity extends AppCompatActivity implements View.OnClic
 
         @Override
         public int getCount() {
-            return mFragmentList.size();
+
+            if(mFragmentList != null && mFragmentList.size() > 0)
+            {
+                return mFragmentList.size();
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         public void addFrag(Fragment fragment, String title) {

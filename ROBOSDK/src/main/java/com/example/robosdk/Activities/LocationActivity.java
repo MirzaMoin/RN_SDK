@@ -171,7 +171,6 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         final View customLayout = getLayoutInflater().inflate(R.layout.content_location_list, null);
 
         dialog.setContentView(customLayout);
-        dialog.getBehavior().setState(BottomSheetBehavior.STATE_EXPANDED);
         dialog.show();
 
 

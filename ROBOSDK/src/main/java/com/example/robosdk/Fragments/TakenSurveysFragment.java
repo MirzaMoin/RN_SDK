@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.robosdk.Adapter.TakeSurveyAdapter;
 import com.example.robosdk.Models.SurveysUnTakenModel;
@@ -23,6 +24,7 @@ public class TakenSurveysFragment extends Fragment {
 
 
     RecyclerView rvFragmentTakenSurvey;
+    TextView textNoSurveyFoundTaken;
 
 
     @Override
@@ -34,21 +36,30 @@ public class TakenSurveysFragment extends Fragment {
 
         List<SurveysUnTakenModel> survey = Utility.response.responsedata.getCompleted();
 
+        if(survey != null && survey.size() > 0)
+        {
 
-        TakeSurveyAdapter adapter = new TakeSurveyAdapter(getContext(), survey, true);
-        rvFragmentTakenSurvey.setHasFixedSize(true);
+            TakeSurveyAdapter adapter = new TakeSurveyAdapter(getContext(), survey, true);
+            rvFragmentTakenSurvey.setHasFixedSize(true);
 
 
-        rvFragmentTakenSurvey.setLayoutManager(new LinearLayoutManager(getContext()));
+            rvFragmentTakenSurvey.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        rvFragmentTakenSurvey.setAdapter(adapter);
+            rvFragmentTakenSurvey.setAdapter(adapter);
+            textNoSurveyFoundTaken.setVisibility(View.GONE);
 
+        }
+        else
+        {
+            textNoSurveyFoundTaken.setVisibility(View.VISIBLE);
+        }
 
         return view;
     }
 
     private void init(View view) {
         rvFragmentTakenSurvey = view.findViewById(R.id.rvFragmentTakenSurvey);
+        textNoSurveyFoundTaken = view.findViewById(R.id.textNoSurveyFoundTaken);
 
     }
 }
