@@ -1,11 +1,15 @@
 package com.example.robosdk.Activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -39,9 +43,10 @@ public class SplashActivity extends AppCompatActivity {
         imageSplash = findViewById(R.id.imageSplash);
         imageLogoSplash = findViewById(R.id.imageLogoSplash);
 
+
         Intent i = getIntent();
         String token = i.getStringExtra("RPToken");
-        String username = i.getStringExtra("username");
+        String username =i.getStringExtra("username");
         String password = i.getStringExtra("password");
 
         callAPI(token, username, password);
@@ -153,7 +158,9 @@ public class SplashActivity extends AppCompatActivity {
 
 
                                     } else {
-                                        Utility.showAlertDialog(SplashActivity.this, "Oops...", response.body().getStatusMessage());
+
+                                       showAlertDialog(SplashActivity.this, "Oops...", response.body().getStatusMessage());
+
                                         Log.e("Test", "Login Response : " + response.body().getStatusMessage());
                                     }
 
@@ -209,6 +216,34 @@ public class SplashActivity extends AppCompatActivity {
 
 
     }
+    public void showAlertDialog(final Context context, String title, String message) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+        final View customLayout = View.inflate(context, R.layout.content_alert_dialog, null);
+        builder.setView(customLayout);
+
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+
+        TextView textMessage, textOk, textTitle;
+        textTitle = dialog.findViewById(R.id.textTitleAlert);
+        textMessage = dialog.findViewById(R.id.textMessageAlert);
+        textOk = dialog.findViewById(R.id.textOKAlert);
+        textTitle.setText(title);
+        textMessage.setText(message);
+        textOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dialog.dismiss();
+                finish();
+            }
+        });
+
+
+    }
+
 
     private JsonObject ApiJsonMap(String RPToken, String userName, String password) {
 
@@ -233,3 +268,4 @@ public class SplashActivity extends AppCompatActivity {
         return gsonObject;
     }
 }
+
