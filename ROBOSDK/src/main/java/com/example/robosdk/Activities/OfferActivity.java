@@ -86,32 +86,43 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
-                if (response.isSuccessful()) {
-
-                    ResponseModel responseModel = response.body();
-                    ResponsedataModel responseData = Utility.response.responsedata;
-                    responseData.offerList = responseModel.responsedata.getOfferList();
-                    responseData.addressDetails = responseModel.responsedata.getAddressDetails();
-                    responseData.userDetails = responseModel.responsedata.getUserDetails();
-                    responseData.redeemSetting = responseModel.responsedata.getRedeemSetting();
-
-                    if(responseData.redeemSetting.isAskWhereAreYou())
+                if (response.isSuccessful() && response.body() != null) {
+                    if(response.body().statusCode == 1)
                     {
-                        Log.e("Test","AskWhere is "+(responseData.redeemSetting.isAskWhereAreYou()));
-                        getLocations();
-                        setLayout();
+                        ResponseModel responseModel = response.body();
+                        ResponsedataModel responseData = Utility.response.responsedata;
+                        responseData.offerList = responseModel.responsedata.getOfferList();
+                        responseData.addressDetails = responseModel.responsedata.getAddressDetails();
+                        responseData.userDetails = responseModel.responsedata.getUserDetails();
+                        responseData.redeemSetting = responseModel.responsedata.getRedeemSetting();
+
+                        if(responseData.redeemSetting.isAskWhereAreYou())
+                        {
+                            Log.e("Test","AskWhere is "+(responseData.redeemSetting.isAskWhereAreYou()));
+                            getLocations();
+                            setLayout();
+
+                        }
+                        else
+                        {
+                            Log.e("Test","AskWhere is "+(responseData.redeemSetting.isAskWhereAreYou()));
+                            setLayout();
+
+                            relLoadingOffers.setVisibility(View.GONE);
+
+                        }
+
+                        Log.e("Test", "onResponse: " + responseData.redeemSetting.isAskWhereAreYou());
+
+
 
                     }
                     else
                     {
-                        Log.e("Test","AskWhere is "+(responseData.redeemSetting.isAskWhereAreYou()));
-                        setLayout();
                         relLoadingOffers.setVisibility(View.GONE);
 
+                        Utility.showAlertDialog(OfferActivity.this,"Oops...", response.body().statusMessage);
                     }
-
-                    Log.e("Test", "onResponse: " + responseData.redeemSetting.isAskWhereAreYou());
-
 
 
                 } else {

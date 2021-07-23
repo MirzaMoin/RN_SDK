@@ -26,10 +26,6 @@ public class Constants {
                         R.drawable.ic_baseline_card_giftcard_24,
                 },
                 {
-                        R.drawable.ic_baseline_person_24,
-                        R.drawable.ic_baseline_lock_24,
-                },
-                {
                         R.drawable.ic_baseline_local_phone_24,
                         R.drawable.ic_baseline_location_on_24,
                         R.drawable.ic_menu_manage

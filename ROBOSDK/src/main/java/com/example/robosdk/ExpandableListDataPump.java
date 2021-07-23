@@ -62,8 +62,8 @@ public class ExpandableListDataPump {
 
         if(menu.isVisibleMenuLocation())
             CONTACT.add("Location");
-        if(menu.isVisibleMenuAppointment())
-            CONTACT.add("Appointment");
+     /*   if(menu.isVisibleMenuAppointment())
+            CONTACT.add("Appointment");*/
         expandableListDetail.put("CONTACT", CONTACT);
 
 

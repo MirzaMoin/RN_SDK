@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.robosdk.API.GetAPIData;
@@ -68,7 +69,8 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
             textNameTwo,
             textPointTwo,
             textNameThree,
-            textPointThree;
+            textPointThree,
+            textNoWinnerFound;
 
     RelativeLayout relOne, relTwo, relThree;
 
@@ -106,6 +108,7 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
         imageLogoLeaderboard = findViewById(R.id.imageLogoLeaderboard);
         relLoadingLeaderboard = findViewById(R.id.relLoadingLeaderboard);
         tableLayoutLeaderboard = findViewById(R.id.tableLayoutLeaderboard);
+        textNoWinnerFound = findViewById(R.id.textNoWinnerFound);
 
 
         tableLayoutLeaderboard.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
@@ -137,7 +140,17 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.imgCompareLeader) {
-            showFilterDialog();
+
+            ResponsedataModel responsedata = Utility.response.responsedata;
+            if(responsedata.leaderBoardReport != null){
+                showFilterDialog();
+            }
+            else
+            {
+                Toast.makeText(this, "No Winner Found", Toast.LENGTH_SHORT).show();
+            }
+
+
         } else if (v.getId() == R.id.imgBackLeaderboard) {
             super.onBackPressed();
         }
@@ -253,7 +266,7 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                 relLoadingLeaderboard.setVisibility(View.GONE);
 
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
 
                     if (response.body().getStatusCode() == 1) {
                         ResponsedataModel responsedata = Utility.response.responsedata;
@@ -308,14 +321,17 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 Utility.dialog.dismiss();
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
 
                     Log.e("Test", "Array Size: " + String.valueOf(response.body().get("responsedata").getAsJsonArray().size()));
 
 
                     if (response.body().get("statusCode").getAsInt() == 1) {
                         ResponsedataModel responsedata = Utility.response.responsedata;
-                        responsedata.leaderBoardReport.clear();
+                        if(responsedata.leaderBoardReport != null)
+                        {
+                            responsedata.leaderBoardReport.clear();
+                        }
 
                         for (JsonElement model : response.body().get("responsedata").getAsJsonArray()) {
                             int rank = model.getAsJsonObject().get("rank").getAsInt();
@@ -329,18 +345,34 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
 
                             if(rank <= 3)
                             {
-                                responsedata.leaderBoardReport.add(modelData);
+                                if(responsedata.leaderBoardReport != null)
+                                {
+                                    responsedata.leaderBoardReport.add(modelData);
+
+                                }
                             }
                             else if (!searchData.isEmpty()) {
                                 String name = model.getAsJsonObject().get("fullName").getAsString().toLowerCase();
                                 if (name.contains(searchData.toLowerCase())) {
-                                    responsedata.leaderBoardReport.add(modelData);
+                                    if(responsedata.leaderBoardReport != null)
+                                    {
+                                        responsedata.leaderBoardReport.add(modelData);
+
+                                    }
                                 }
                             } else {
-                                responsedata.leaderBoardReport.add(modelData);
+                                if(responsedata.leaderBoardReport != null)
+                                {
+                                    responsedata.leaderBoardReport.add(modelData);
+
+                                }
                             }
                         }
+                        if(adapter != null)
+                        {
                         adapter.notifyDataSetChanged();
+
+                        }
                         setFooter();
 
                     } else {
@@ -365,73 +397,82 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
     @SuppressLint("SetTextI18n")
     private void setLayout() {
         ResponsedataModel responsedata = Utility.response.responsedata;
+if(responsedata.leaderBoardReport != null)
+{
+    if (responsedata.leaderBoardReport.size() > 3) {
+        adapter = new LeaderboardAdapter(this, responsedata.leaderBoardReport);
+        rvLeader.setHasFixedSize(true);
+        rvLeader.setLayoutManager(new LinearLayoutManager(this));
+        rvLeader.setAdapter(adapter);
+    }
+    textSharesToQualify.setText("Required " + String.valueOf(responsedata.qualificationCriteria.getSharesToQualify() == 0 ? 2 : responsedata.qualificationCriteria.getSharesToQualify()));
+    textReferralToQualify.setText("Required " + String.valueOf(responsedata.qualificationCriteria.getReferralToQualify() == 0 ? 2 :responsedata.qualificationCriteria.getReferralToQualify()));
 
-        if (responsedata.leaderBoardReport.size() > 3) {
-             adapter = new LeaderboardAdapter(this, responsedata.leaderBoardReport);
-            rvLeader.setHasFixedSize(true);
-            rvLeader.setLayoutManager(new LinearLayoutManager(this));
-            rvLeader.setAdapter(adapter);
-        }
+    if (responsedata.leaderBoardReport.size() == 0) {
+        relOne.setVisibility(View.GONE);
+        relTwo.setVisibility(View.GONE);
+        relThree.setVisibility(View.GONE);
+    }
+    else if (responsedata.leaderBoardReport.size() == 1) {
+        textName.setText(responsedata.leaderBoardReport.get(0).getFullName());
+        textPoint.setText("Point: " + String.valueOf(responsedata.leaderBoardReport.get(0).getTotalPoints()));
+        relTwo.setVisibility(View.GONE);
+        relThree.setVisibility(View.GONE);
+        relOne.setVisibility(View.VISIBLE);
 
-        textSharesToQualify.setText("Required " + String.valueOf(responsedata.qualificationCriteria.getSharesToQualify() == 0 ? 2 : responsedata.qualificationCriteria.getSharesToQualify()));
-        textReferralToQualify.setText("Required " + String.valueOf(responsedata.qualificationCriteria.getReferralToQualify() == 0 ? 2 :responsedata.qualificationCriteria.getReferralToQualify()));
+        Glide.with(this).load(responsedata.leaderBoardReport.get(0).getProfilePitcure()).into(winnerImage);
 
-        if (responsedata.leaderBoardReport.size() == 0) {
-            relOne.setVisibility(View.GONE);
-            relTwo.setVisibility(View.GONE);
-            relThree.setVisibility(View.GONE);
-        }
-        else if (responsedata.leaderBoardReport.size() == 1) {
-            textName.setText(responsedata.leaderBoardReport.get(0).getFullName());
-            textPoint.setText("Point: " + String.valueOf(responsedata.leaderBoardReport.get(0).getTotalPoints()));
-            relTwo.setVisibility(View.GONE);
-            relThree.setVisibility(View.GONE);
+    }
+    else if (responsedata.leaderBoardReport.size() == 2) {
+        textNameThree.setText(responsedata.leaderBoardReport.get(0).getFullName());
+        textPointThree.setText("Point: " + String.valueOf(responsedata.leaderBoardReport.get(0).getTotalPoints()));
+        Glide.with(this).load(responsedata.leaderBoardReport.get(0).getProfilePitcure()).into(winnerImageThree);
+        Glide.with(this).load(R.drawable.first_winner).into(imgAwardThree);
 
-            Glide.with(this).load(responsedata.leaderBoardReport.get(0).getProfilePitcure()).into(winnerImage);
-
-        }
-        else if (responsedata.leaderBoardReport.size() == 2) {
-            textNameThree.setText(responsedata.leaderBoardReport.get(0).getFullName());
-            textPointThree.setText("Point: " + String.valueOf(responsedata.leaderBoardReport.get(0).getTotalPoints()));
-            Glide.with(this).load(responsedata.leaderBoardReport.get(0).getProfilePitcure()).into(winnerImageThree);
-            Glide.with(this).load(R.drawable.first_winner).into(imgAwardThree);
-
-            RelativeLayout.LayoutParams relativeParams = (RelativeLayout.LayoutParams)relThree.getLayoutParams();
-            relativeParams.rightMargin=200;
-            relativeParams.topMargin=50;
-            relThree.setLayoutParams(relativeParams);
-
-
-
-            textNameTwo.setText(responsedata.leaderBoardReport.get(1).getFullName());
-            textPointTwo.setText("Point: " + String.valueOf(responsedata.leaderBoardReport.get(1).getTotalPoints()));
-            Glide.with(this).load(responsedata.leaderBoardReport.get(1).getProfilePitcure()).into(winnerImageTwo);
-
-            RelativeLayout.LayoutParams relativeParams2 = (RelativeLayout.LayoutParams)relTwo.getLayoutParams();
-            relativeParams2.leftMargin=200;
-            relativeParams2.topMargin=50;
-            relTwo.setLayoutParams(relativeParams2);
+        RelativeLayout.LayoutParams relativeParams = (RelativeLayout.LayoutParams)relThree.getLayoutParams();
+        relativeParams.rightMargin=200;
+        relativeParams.topMargin=50;
+        relThree.setLayoutParams(relativeParams);
 
 
-            relOne.setVisibility(View.GONE);
-        }
-        else if (responsedata.leaderBoardReport.size() > 2) {
-            textName.setText(responsedata.leaderBoardReport.get(0).getFullName());
-            textPoint.setText("Point: " + String.valueOf(responsedata.leaderBoardReport.get(0).getTotalPoints()));
-            Glide.with(this).load(responsedata.leaderBoardReport.get(0).getProfilePitcure()).into(winnerImage);
+
+        textNameTwo.setText(responsedata.leaderBoardReport.get(1).getFullName());
+        textPointTwo.setText("Point: " + String.valueOf(responsedata.leaderBoardReport.get(1).getTotalPoints()));
+        Glide.with(this).load(responsedata.leaderBoardReport.get(1).getProfilePitcure()).into(winnerImageTwo);
+
+        RelativeLayout.LayoutParams relativeParams2 = (RelativeLayout.LayoutParams)relTwo.getLayoutParams();
+        relativeParams2.leftMargin=200;
+        relativeParams2.topMargin=50;
+        relTwo.setLayoutParams(relativeParams2);
 
 
-            textNameTwo.setText(responsedata.leaderBoardReport.get(1).getFullName());
-            textPointTwo.setText("Point: " + String.valueOf(responsedata.leaderBoardReport.get(1).getTotalPoints()));
-            Glide.with(this).load(responsedata.leaderBoardReport.get(1).getProfilePitcure()).into(winnerImageTwo);
+        relOne.setVisibility(View.GONE);
+        relThree.setVisibility(View.VISIBLE);
+        relTwo.setVisibility(View.VISIBLE);
+    }
+    else if (responsedata.leaderBoardReport.size() > 2) {
+        textName.setText(responsedata.leaderBoardReport.get(0).getFullName());
+        textPoint.setText("Point: " + String.valueOf(responsedata.leaderBoardReport.get(0).getTotalPoints()));
+        Glide.with(this).load(responsedata.leaderBoardReport.get(0).getProfilePitcure()).into(winnerImage);
 
 
-            textNameThree.setText(responsedata.leaderBoardReport.get(2).getFullName());
-            textPointThree.setText("Point: " + String.valueOf(responsedata.leaderBoardReport.get(2).getTotalPoints()));
-            Glide.with(this).load(responsedata.leaderBoardReport.get(2).getProfilePitcure()).into(winnerImageThree);
+        textNameTwo.setText(responsedata.leaderBoardReport.get(1).getFullName());
+        textPointTwo.setText("Point: " + String.valueOf(responsedata.leaderBoardReport.get(1).getTotalPoints()));
+        Glide.with(this).load(responsedata.leaderBoardReport.get(1).getProfilePitcure()).into(winnerImageTwo);
 
 
-        }
+        textNameThree.setText(responsedata.leaderBoardReport.get(2).getFullName());
+        textPointThree.setText("Point: " + String.valueOf(responsedata.leaderBoardReport.get(2).getTotalPoints()));
+        Glide.with(this).load(responsedata.leaderBoardReport.get(2).getProfilePitcure()).into(winnerImageThree);
+
+
+    }
+}
+else
+{
+    textNoWinnerFound.setVisibility(View.VISIBLE);
+}
+
 
     }
 
