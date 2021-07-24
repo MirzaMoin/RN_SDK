@@ -46,24 +46,17 @@ import java.util.List;
 public class TakeSurveyActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView textPointSurvey;
-
     RecyclerView rvFooterTakeSurvey;
     ImageView imgBackSurvey;
-
     private ViewPager mPager;
-
     ResponsedataModel responseData;
     TabLayout tabLayout;
-
     TableLayout tableLayoutSurveys;
-
-
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.myLibTheme);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_survey);
 
@@ -84,7 +77,6 @@ public class TakeSurveyActivity extends AppCompatActivity implements View.OnClic
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
         ChildPageSettingModel childPageSettings = responseData.childPageSetting;
-
         if (childPageSettings.isChildPageTakeSurvey()) {
             List<ChildPageModel> childPage = new ArrayList<>();
             for (TakeSurveyChildPageDataModel survey : childPageSettings.takeSurveyChildPageData) {
@@ -106,29 +98,21 @@ public class TakeSurveyActivity extends AppCompatActivity implements View.OnClic
             sliderView.setScrollTimeInSec(4); //set scroll delay in seconds :
             sliderView.startAutoCycle();
         }
-
         rvFooterTakeSurvey = findViewById(R.id.rvFooterTakeSurvey);
-
         imgBackSurvey = findViewById(R.id.imgBackSurvey);
         textPointSurvey = findViewById(R.id.textPointSurvey);
         mPager = findViewById(R.id.viewPagerTakeSurvey);
         tableLayoutSurveys = findViewById(R.id.tableLayoutSurveys);
         tableLayoutSurveys.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
-
         textPointSurvey.setTextColor(Utility.getColor(responseData.appColor.getHeaderPointDigitColor()));
         textPointSurvey.setText(Utility.getRoundData(responseData.contactData.getPointBalance())+ " PTS");
-
-
         imgBackSurvey.setOnClickListener(this);
-        setFooter();
+        Utility.setFooter(TakeSurveyActivity.this,rvFooterTakeSurvey,"takeSurvey");
         createTabs();
-//        getData();
-
     }
 
     private void createTabs() {
         createViewPager(mPager);
-
         tabLayout = findViewById(R.id.tabs);
         TakeSurveyPagerAdapter pagerAdapter = new TakeSurveyPagerAdapter(getSupportFragmentManager(), this);
         mPager.setAdapter(pagerAdapter);
@@ -144,78 +128,37 @@ public class TakeSurveyActivity extends AppCompatActivity implements View.OnClic
                 View view = tab.getCustomView();
                 assert view != null;
                 TextView tv = view.findViewById(R.id.textTitleTabBar);
-
                 tv.setBackgroundColor(Utility.getColor("#14538eff"));
                 tv.setTextColor(Utility.getColor("#ffffffff"));
             }
-
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
                 View view = tab.getCustomView();
                 assert view != null;
                 TextView tv = view.findViewById(R.id.textTitleTabBar);
-
                 tv.setTextColor(Utility.getColor("#14538eff"));
                 tv.setBackgroundColor(Utility.getColor("#ffffffff"));
-
             }
-
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
-
     }
-
-    private void setFooter() {
-        AppColorModel appColor = responseData.appColor;
-
-        HomeScreenModel homeScreenModel = responseData.homeScreen;
-        if (homeScreenModel.isHomePageDisplayFooter()) {
-            rvFooterTakeSurvey.setVisibility(View.VISIBLE);
-            rvFooterTakeSurvey.setBackgroundColor(Utility.getColor(appColor.getFooterBarColor()));
-
-            FooterAdapter adapter = new FooterAdapter(this, homeScreenModel.footerLinks, "takeSurvey");
-            rvFooterTakeSurvey.setHasFixedSize(true);
-
-
-            if(homeScreenModel.footerLinks != null  &&  homeScreenModel.footerLinks.size() > 0)
-            {
-                rvFooterTakeSurvey.setLayoutManager(new GridLayoutManager(this, homeScreenModel.footerLinks.size()));
-
-                rvFooterTakeSurvey.setAdapter(adapter);
-            }
-
-        } else {
-            rvFooterTakeSurvey.setVisibility(View.GONE);
-
-        }
-
-
-    }
-
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.imgBackSurvey) {
             super.onBackPressed();
         }
-
     }
-
-
-
     private void createViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new UnTakenSurveysFragment(), "Tab 1");
         adapter.addFrag(new TakenSurveysFragment(), "Tab 2");
         viewPager.setAdapter(adapter);
     }
-
     static class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
-
         public ViewPagerAdapter(FragmentManager manager) {
             super(manager);
         }
@@ -228,7 +171,6 @@ public class TakeSurveyActivity extends AppCompatActivity implements View.OnClic
 
         @Override
         public int getCount() {
-
             if(mFragmentList != null && mFragmentList.size() > 0)
             {
                 return mFragmentList.size();
@@ -238,16 +180,13 @@ public class TakeSurveyActivity extends AppCompatActivity implements View.OnClic
                 return 0;
             }
         }
-
         public void addFrag(Fragment fragment, String title) {
             mFragmentList.add(fragment);
             mFragmentTitleList.add(title);
         }
-
         @Override
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
         }
-
     }
 }

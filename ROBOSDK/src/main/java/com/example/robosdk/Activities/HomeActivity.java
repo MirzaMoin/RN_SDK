@@ -132,10 +132,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             linearDrawerHome;
     TableLayout tableLayoutHome;
 
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.myLibTheme);
@@ -144,12 +140,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         homeScreenModel = Utility.response.responsedata.homeScreen;
         init();
-
         getData();
-
-
     }
-
 
     private void initNavigationDrawer() {
 
@@ -157,15 +149,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
                 drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout_home);
-
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
-
-
         expandableListView = findViewById(R.id.expandableListView);
-
-
         expandableListView.setBackgroundColor(Utility.getColor(appColor.getMenuBackgroundColor()));
         linearDrawerHome.setBackgroundColor(Utility.getColor(appColor.getMenuBackgroundColor()));
         expandableListDetail = ExpandableListDataPump.getData();
@@ -241,20 +228,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
         setLayout();
         setTopContainer();
-        Log.e("Test","onResume");
-
     }
-
 
     private void init() {
 
-        Log.e("Test", Utility.response.responsedata.contactData.emailAddress);
+        Log.e("Home", Utility.response.responsedata.contactData.emailAddress);
 
         if (Build.VERSION.SDK_INT >= 21) {
             Window window = getWindow();
@@ -281,7 +264,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         textHomePageDisplayPointsThisMonthTextTop = findViewById(R.id.textHomePageDisplayPointsThisMonthTextTop);
         textHomePageDisplayPointsTotalRedeemedTextTop = findViewById(R.id.textHomePageDisplayPointsTotalRedeemedTextTop);
         homePageDisplayPointsLifetimeEarnedTextTop = findViewById(R.id.homePageDisplayPointsLifetimeEarnedTextTop);
-
 
         linearHomePageDisplayPointsAvailable = findViewById(R.id.linearHomePageDisplayPointsAvailable);
         linearHomePageDisplayPointsThisMonth = findViewById(R.id.linearHomePageDisplayPointsThisMonth);
@@ -321,13 +303,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 Intent i = new Intent(HomeActivity.this, WebViewActivity.class);
                 i.putExtra("url", Utility.response.responsedata.appDetails.getTosLink());
                 i.putExtra("title","Term of service");
-
-
                 startActivity(i);
             }
         });
-
-
 
         textHomePageHeaderMenuText = findViewById(R.id.textHomePageHeaderMenuText);
         linearPointHome = findViewById(R.id.linearPointHome);
@@ -354,24 +332,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         linearPointHomeTop = findViewById(R.id.linearPointHomeTop);
         toolbar = findViewById(R.id.toolbarHome);
         imgDrawer = findViewById(R.id.imgDrawer);
-        mPager = (ViewPager) findViewById(R.id.viewPagerHome);
-        rvHomeList = (RecyclerView) findViewById(R.id.rvHomeMenuLink);
-
-
-      /*  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            toolbar.setTitle("");
-            setSupportActionBar(toolbar);
-
-
-        }*/
+        mPager = findViewById(R.id.viewPagerHome);
+        rvHomeList = findViewById(R.id.rvHomeMenuLink);
 
         setLayout();
 
     }
 
     private void setLayout() {
-
-
 
         if (homeScreenModel.getHomePageBackgroundImage() != null) {
             Glide.with(this).load(homeScreenModel.getHomePageBackgroundImage()).into(imgBackgroundHome);
@@ -386,8 +354,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             //apply the button background to newly created drawable gradient
             drawer_layout_home.setBackground(gd);
         }
-
-
         if (!homeScreenModel.isHomePageDisplayHeaderMenu()) {
             imgDrawer.setVisibility(View.INVISIBLE);
             textHomePageHeaderMenuText.setVisibility(View.INVISIBLE);
@@ -401,7 +367,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         textHomePageHeaderMenuText.setTextColor(Utility.getColor(appColor.getHeaderTextColor()));
-
 
         textHomePageHeaderMenuText.setText(homeScreenModel.getHomePageHeaderMenuText());
 
@@ -419,53 +384,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         setTopContainer();
         setRibbon();
         setBottomContainer();
-        setFooter();
+
+        Utility.setFooter(HomeActivity.this,rvFooterHome,"homeScreen");
 
         initNavigationDrawer();
-
     }
 
-
-    private void setFooter() {
-
-        List<FooterLinkModel> footerLink = new ArrayList<>();
-        footerLink.addAll(homeScreenModel.footerLinks);
-        for (FooterLinkModel link : homeScreenModel.footerLinks) {
-            if (!link.isActive()) {
-                footerLink.remove(link);
-            }
-        }
-        homeScreenModel.footerLinks.clear();
-        homeScreenModel.footerLinks.addAll(footerLink);
-
-
-        if (homeScreenModel.isHomePageDisplayFooter()) {
-            rvFooterHome.setVisibility(View.VISIBLE);
-            rvFooterHome.setBackgroundColor(Utility.getColor(appColor.getFooterBarColor()));
-
-            FooterAdapter adapter = new FooterAdapter(this, homeScreenModel.footerLinks, "homeScreen");
-            rvFooterHome.setHasFixedSize(true);
-
-            if(homeScreenModel.footerLinks.size() > 0)
-            {
-                rvFooterHome.setLayoutManager(new GridLayoutManager(this, homeScreenModel.footerLinks.size()));
-
-                rvFooterHome.setAdapter(adapter);
-
-            }
-
-
-        } else {
-            rvFooterHome.setVisibility(View.GONE);
-
-
-        }
-
-
-    }
     private void getData() {
-
-
 
         GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
         Log.e("Request", "RP ID: " + Utility.response.responsedata.appDetails.rewardProgramId +
@@ -482,22 +407,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     Utility.response.responsedata.unTaken = response.body().responsedata.unTaken;
                     Utility.response.responsedata.completed = response.body().responsedata.completed;
 
-
-
                 } else {
-                    Log.e("TEST", "Error Sub: " + response.message());
-
+                    Log.e("Home", "Error Sub: " + response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseModel> call, Throwable test) {
-
                 test.printStackTrace();
-                Log.e("Test", "Error Main: " + test.toString());
+                Log.e("Home", "Error Main: " + test.toString());
             }
         });
-
     }
 
     private void setBottomContainer() {
@@ -505,14 +425,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         if (homeScreenModel.getHomePageBottomBackgroundImage() != null) {
             Glide.with(this).load(homeScreenModel.getHomePageBottomBackgroundImage()).into(imgBottomContainer);
         }
-
         pagerAdapter = new GridMenuAdapter(getSupportFragmentManager(), homeScreenModel.menuLinks.size());
         mPager.setAdapter(pagerAdapter);
-
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayoutHome);
+        TabLayout tabLayout = findViewById(R.id.tablayoutHome);
         tabLayout.setupWithViewPager(mPager, true);
-//homeScreenModel.isHomePageGridMenuLayout()
+
         if (homeScreenModel.isHomePageGridMenuLayout()) {
             relativeBottomGridHome.setVisibility(View.VISIBLE);
             relativeBottomListHome.setVisibility(View.GONE);
@@ -524,7 +441,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             rvHomeList.setItemViewCacheSize(homeScreenModel.menuLinks.size());
             rvHomeList.setLayoutManager(new LinearLayoutManager(this));
             rvHomeList.setAdapter(adapter);
-
         }
 
         int[] colors = {Utility.getColor(homeScreenModel.getHomePageBottomBackgroundGradientStartColor()),
@@ -536,12 +452,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         //apply the button background to newly created drawable gradient
         relBottomContainer.setBackground(gd);
-
-
     }
 
     private void setRibbon() {
-
         //Ribbon layout set
         if (homeScreenModel.isHomePageDisplayRibbon()) {
 
@@ -553,7 +466,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 imgHomePageRibbonIcon.setImageDrawable(drawable);
                 imgHomePageRibbonIcon.setImageDrawable(drawable);
 
-
                 if (homeScreenModel.getHomePageRibbonIconPosition().equals("Left")) {
                     RelativeLayout.LayoutParams params =
                             new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
@@ -561,7 +473,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     params.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
                     imgHomePageRibbonIcon.setLayoutParams(params);
                     imgHomePageRibbonIconTop.setLayoutParams(params);
-
                 }
             }
             textHomePageRibbonText.setText(homeScreenModel.getHomePageRibbonText());
@@ -571,18 +482,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             textHomePageRibbonTextTop.setTextColor(Utility.getColor(homeScreenModel.getHomePageRibbonTextColor()));
 
             if (homeScreenModel.isHomePageRibbonTextMarquee()) {
-
                 textHomePageRibbonText.setEllipsize(TextUtils.TruncateAt.MARQUEE);
                 String blank = "                                ";
                 textHomePageRibbonText.setText(blank + homeScreenModel.getHomePageRibbonText()+blank);
                 textHomePageRibbonTextTop.setText(blank+ homeScreenModel.getHomePageRibbonText()+blank);
                 textHomePageRibbonText.setSingleLine(true);
                 textHomePageRibbonTextTop.setSingleLine(true);
-
                 textHomePageRibbonText.setSelected(true);
                 textHomePageRibbonTextTop.setSelected(true);
             }
-
 
             relHomePageRibbon.setBackgroundColor(Utility.getColor(homeScreenModel.getHomePageRibbonBackgroundColor()));
             relHomePageRibbonTop.setBackgroundColor(Utility.getColor(homeScreenModel.getHomePageRibbonBackgroundColor()));
@@ -594,18 +502,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 relHomePageRibbon.setVisibility(View.VISIBLE);
             } else {
                 relHomePageRibbonTop.setVisibility(View.VISIBLE);
-
             }
 
             relHomePageRibbon.setOnClickListener(this);
             relHomePageRibbonTop.setOnClickListener(this);
         }
-
     }
 
     private void setTopContainer() {
-
-
         if (homeScreenModel.getHomePageTopBackgroundImage() != null) {
             Glide.with(this).load(homeScreenModel.getHomePageTopBackgroundImage()).into(imgTopContainer);
         }
@@ -630,7 +534,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 textHomePageTopDescriptionText.setVisibility(View.VISIBLE);
                 textHomePageTopDescriptionText.setText(homeScreenModel.getHomePageTopDescriptionText());
                 textHomePageTopDescriptionText.setTextColor(Utility.getColor(homeScreenModel.getHomePageTopTextLine3Color()));
-
             } else {
                 btnHomePageHeader3.setVisibility(View.VISIBLE);
                 btnHomePageHeader3.setText(homeScreenModel.getHomePageTopButtonText());
@@ -646,23 +549,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 //apply the button background to newly created drawable gradient
                 btnHomePageHeader3.setBackground(gd);
                 btnHomePageHeader3.setOnClickListener(this);
-
-
             }
-
         }
 
         if (homeScreenModel.isHomePageTopTextUnderLine1()) {
             viewHomePageTopTextUnderLine1.setVisibility(View.VISIBLE);
             viewHomePageTopTextUnderLine1.setBackgroundColor(Utility.getColor(homeScreenModel.getHomePageTopTextUnderLine1Color()));
-
         }
         if (homeScreenModel.isHomePageTopTextUnderLine2()) {
             viewHomePageTopTextUnderLine2.setVisibility(View.VISIBLE);
             viewHomePageTopTextUnderLine2.setBackgroundColor(Utility.getColor(homeScreenModel.getHomePageTopTextUnderLine2Color()));
-
         }
-
         HomeScreenPointsSettingsModel homeScreenSetting = homeScreenModel.homeScreenPointsSettings;
 
         ResponsedataModel data = Utility.response.responsedata;
@@ -686,19 +583,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 textHomePageDisplayPointsAvailableText.setTextColor(Utility.getColor(homeScreenSetting.getHomePageDisplayPointsTextColor()));
                 textHomePageDisplayPointsAvailable.setTextColor(Utility.getColor(homeScreenSetting.getHomePageDisplayPointsTextColor()));
                 textHomePageDisplayPointsAvailable.setText(String.valueOf(data.getPointBalance()));
-
-
                 textHomePageDisplayPointsAvailableTop.setText(String.valueOf(data.getPointBalance()));
                 linearHomePageDisplayPointsAvailableTop.setVisibility(View.VISIBLE);
                 textHomePageDisplayPointsAvailableTextTop.setText(homeScreenSetting.getHomePageDisplayPointsAvailableText());
                 textHomePageDisplayPointsAvailableTop.setText(homeScreenSetting.getHomePageDisplayPointsAvailableText());
                 textHomePageDisplayPointsAvailableTop.setTextColor(Utility.getColor(homeScreenSetting.getHomePageDisplayPointsTextColor()));
-
-
             } else {
                 linearHomePageDisplayPointsAvailable.setVisibility(View.GONE);
                 linearHomePageDisplayPointsAvailableTop.setVisibility(View.GONE);
-
             }
             if (homeScreenSetting.isHomePageDisplayPointsThisMonth()) {
                 linearHomePageDisplayPointsThisMonth.setVisibility(View.VISIBLE);
@@ -706,7 +598,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 textHomePageDisplayPointsThisMonthText.setTextColor(Utility.getColor(homeScreenSetting.getHomePageDisplayPointsTextColor()));
                 textHomePageDisplayPointsThisMonth.setTextColor(Utility.getColor(homeScreenSetting.getHomePageDisplayPointsTextColor()));
                 textHomePageDisplayPointsThisMonth.setText(String.valueOf(data.getTotalEarnedThisMonth()));
-
                 linearHomePageDisplayPointsThisMonthTop.setVisibility(View.VISIBLE);
                 textHomePageDisplayPointsThisMonthTextTop.setText(homeScreenSetting.getHomePageDisplayPointsThisMonthText());
                 textHomePageDisplayPointsThisMonthTextTop.setTextColor(Utility.getColor(homeScreenSetting.getHomePageDisplayPointsTextColor()));
@@ -715,7 +606,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             } else {
                 linearHomePageDisplayPointsThisMonth.setVisibility(View.GONE);
                 linearHomePageDisplayPointsThisMonthTop.setVisibility(View.GONE);
-
             }
             if (homeScreenSetting.isHomePageDisplayPointsTotalRedeemed()) {
                 linearHomePageDisplayPointsTotalRedeemed.setVisibility(View.VISIBLE);
@@ -723,18 +613,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 textHomePageDisplayPointsTotalRedeemedText.setTextColor(Utility.getColor(homeScreenSetting.getHomePageDisplayPointsTextColor()));
                 textHomePageDisplayPointsTotalRedeemed.setTextColor(Utility.getColor(homeScreenSetting.getHomePageDisplayPointsTextColor()));
                 textHomePageDisplayPointsTotalRedeemed.setText(String.valueOf(data.getTotalReedemed()));
-
                 linearHomePageDisplayPointsTotalRedeemedTop.setVisibility(View.VISIBLE);
                 textHomePageDisplayPointsTotalRedeemedTextTop.setText(homeScreenSetting.getHomePageDisplayPointsTotalRedeemedText());
                 textHomePageDisplayPointsTotalRedeemedTextTop.setTextColor(Utility.getColor(homeScreenSetting.getHomePageDisplayPointsTextColor()));
                 textHomePageDisplayPointsTotalRedeemedTop.setTextColor(Utility.getColor(homeScreenSetting.getHomePageDisplayPointsTextColor()));
                 textHomePageDisplayPointsTotalRedeemedTop.setText(String.valueOf(data.getTotalReedemed()));
-
-
             } else {
                 linearHomePageDisplayPointsTotalRedeemed.setVisibility(View.GONE);
                 linearHomePageDisplayPointsTotalRedeemedTop.setVisibility(View.GONE);
-
             }
             if (homeScreenSetting.isHomePageDisplayPointsLifetimeEarned()) {
                 linearHomePageDisplayPointsLifetimeEarned.setVisibility(View.VISIBLE);
@@ -742,21 +628,15 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 homePageDisplayPointsLifetimeEarnedText.setTextColor(Utility.getColor(homeScreenSetting.getHomePageDisplayPointsTextColor()));
                 homePageDisplayPointsLifetimeEarned.setTextColor(Utility.getColor(homeScreenSetting.getHomePageDisplayPointsTextColor()));
                 homePageDisplayPointsLifetimeEarned.setText(String.valueOf(data.getLifeTimePoints()));
-
                 linearHomePageDisplayPointsLifetimeEarnedTop.setVisibility(View.VISIBLE);
                 homePageDisplayPointsLifetimeEarnedTextTop.setText(homeScreenSetting.getHomePageDisplayPointsLifetimeEarnedText());
                 homePageDisplayPointsLifetimeEarnedTextTop.setTextColor(Utility.getColor(homeScreenSetting.getHomePageDisplayPointsTextColor()));
                 homePageDisplayPointsLifetimeEarnedTop.setTextColor(Utility.getColor(homeScreenSetting.getHomePageDisplayPointsTextColor()));
                 homePageDisplayPointsLifetimeEarnedTop.setText(String.valueOf(data.getLifeTimePoints()));
-
-
             } else {
                 linearHomePageDisplayPointsLifetimeEarned.setVisibility(View.GONE);
                 linearHomePageDisplayPointsLifetimeEarnedTop.setVisibility(View.GONE);
-
             }
-
-
         }
     }
 
@@ -779,9 +659,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 i.putExtra("url", homeScreenModel.getHomePageTopButtonLinkExternal());
                 startActivity(i);
             }
-
         }
     }
-
-
 }

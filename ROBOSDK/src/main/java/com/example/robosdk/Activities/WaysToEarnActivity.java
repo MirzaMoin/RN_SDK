@@ -1,10 +1,12 @@
 package com.example.robosdk.Activities;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -49,6 +51,7 @@ public class WaysToEarnActivity extends AppCompatActivity implements View.OnClic
     TableLayout tableLayoutWTE;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.myLibTheme);
@@ -61,6 +64,8 @@ public class WaysToEarnActivity extends AppCompatActivity implements View.OnClic
 
     }
 
+    @SuppressLint("SetTextI18n")
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void init() {
         if (Build.VERSION.SDK_INT >= 21) {
             Window window = getWindow();
@@ -84,37 +89,12 @@ public class WaysToEarnActivity extends AppCompatActivity implements View.OnClic
         textPointWaysToEarn.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
         textPointWaysToEarn.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance())+ " PTS");
 
-
         imgBackWaysToEarn.setOnClickListener(this);
 
-
-
-        setFooter();
-    }
-
-    private void setFooter() {
-        AppColorModel appColor = Utility.response.responsedata.appColor;
-
-        HomeScreenModel homeScreenModel = Utility.response.responsedata.homeScreen;
-        if (homeScreenModel.isHomePageDisplayFooter()) {
-            rvFooterUploadWaysToEarn.setVisibility(View.VISIBLE);
-            rvFooterUploadWaysToEarn.setBackgroundColor(Utility.getColor(appColor.getFooterBarColor()));
-
-            FooterAdapter adapter = new FooterAdapter(this, homeScreenModel.footerLinks, "waysToEarn");
-            rvFooterUploadWaysToEarn.setHasFixedSize(true);
-
-
-            rvFooterUploadWaysToEarn.setLayoutManager(new GridLayoutManager(this, homeScreenModel.footerLinks.size()));
-
-            rvFooterUploadWaysToEarn.setAdapter(adapter);
-        } else {
-            rvFooterUploadWaysToEarn.setVisibility(View.GONE);
-
-
-        }
-
+        Utility.setFooter(WaysToEarnActivity.this,rvFooterUploadWaysToEarn,"waysToEarn6");
 
     }
+
 
     @Override
     public void onClick(View v) {
@@ -132,7 +112,7 @@ public class WaysToEarnActivity extends AppCompatActivity implements View.OnClic
         ResponsedataModel responseData = Utility.response.responsedata;
 
         GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
-        Log.e("Request", "RP Token: " + Utility.RPToken +
+        Log.e("Request", "/api/UserAccountProfile/WayToEarnScreenData \nRP Token: " + Utility.RPToken +
                 ", WebFormID: " + responseData.appDetails.webFormID+
                 ", Contact ID: " + responseData.contactData.contactID);
 
@@ -168,41 +148,25 @@ public class WaysToEarnActivity extends AppCompatActivity implements View.OnClic
                         waysList.add(data.getSurveys());
                         waysList.add(data.getCompleteProfile());
 
-
                         WaysToEarnAdapter adapter = new WaysToEarnAdapter(WaysToEarnActivity.this,waysList);
                         rvList.setHasFixedSize(true);
                         rvList.setLayoutManager(new LinearLayoutManager(WaysToEarnActivity.this));
                         rvList.setAdapter(adapter);
-
-
-
                     }
                     else
                     {
                         Utility.showAlertDialog(WaysToEarnActivity.this,"Oops...","Something went wrong");
                     }
-
-
-
-
-
                 } else {
                     Utility.showAlertDialog(WaysToEarnActivity.this,"Oops...","Something went wrong");
-
-                    Log.e("Test Error: ", "" + response.message());
-
-
+                    Log.e("Ways to Earn: ", "" + response.message());
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseModel> call, Throwable t) {
                 relLoadingWTE.setVisibility(View.GONE);
                 Utility.showAlertDialog(WaysToEarnActivity.this,"Oops...","Something went wrong");
-
-                Log.e("Test Error: ", "" + t.getMessage());
-
-
+                Log.e("Ways to Earn ", "" + t.getMessage());
             }
         });
     }

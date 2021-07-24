@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
@@ -77,13 +78,6 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
 
     TableLayout tableLayoutContactUs;
 
-
-
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.myLibTheme);
@@ -93,6 +87,7 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapContactUs);
+        assert mapFragment != null;
         mapFragment.getMapAsync(this);
 
         init();
@@ -102,13 +97,13 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(37.78825, -122.4324);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Primary Location"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
+    @SuppressLint("SetTextI18n")
     private void init() {
         if (Build.VERSION.SDK_INT >= 21) {
             Window window = getWindow();
@@ -141,7 +136,6 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
         btnSendMessage = findViewById(R.id.btnSendMessage);
         textPointContactUs = findViewById(R.id.textPointContactUs);
 
-
         textPointContactUs.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
 
         textPointContactUs.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
@@ -151,12 +145,10 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             toolbar.setTitle("");
             setSupportActionBar(toolbar);
-
-
         }
         AppColorModel color = Utility.response.responsedata.appColor;
         btnSendMessage.setBackgroundColor(Utility.getColor(color.getPrimaryButtonColor()));
-        setFooter();
+        Utility.setFooter(ContactUsActivity.this,rvFooterContactUs,"contactUs");
 
         btnSendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,7 +162,6 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() <= 0) {
@@ -186,14 +177,11 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
 
             }
         });
-
-
         etLNameCU.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() <= 0) {
@@ -203,9 +191,7 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
                     isLastNameError = false;
                     removeError(etLLNameCU);
                 }
-
             }
-
             @Override
             public void afterTextChanged(Editable s) {
 
@@ -230,7 +216,6 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
                     } else {
                         isEmailError = true;
                         setETError("Please Enter Valid Email", etLEmailCU);
-
                     }
                 }
             }
@@ -256,7 +241,6 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
                     isMessageError = false;
                     removeError(etLMessageCU);
                 }
-
             }
 
             @Override
@@ -286,7 +270,6 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
 
                     }
                 }
-
             }
 
             @Override
@@ -304,7 +287,6 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
         email = etEmailCU.getText().toString().trim();
         message = etMessageCU.getText().toString().trim();
         mobile = etMobileCU.getText().toString().trim();
-
 
         if (fName.isEmpty()) {
             isFirstNameError = true;
@@ -339,7 +321,6 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
             if (mobile.length() == 10) {
                 isMobileError = false;
                 removeError(etLMobileCU);
-
             } else {
                 isMobileError = true;
                 removeError(etLMobileCU);
@@ -353,7 +334,6 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
             removeError(etLMessageCU);
         }
 
-
         if (!isMessageError && !isMobileError && !isEmailError && !isLastNameError && !isFirstNameError) {
             UploadData(fName,
                     lName,
@@ -361,8 +341,6 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
                     message,
                     mobile);
         }
-
-
     }
 
     private void setETError(String error, TextInputLayout textInputLayout) {
@@ -394,7 +372,6 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
                 message
         ));
 
-
         callContactUs.enqueue(new Callback<ResponseModel>() {
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
@@ -424,7 +401,6 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
                     } else {
                         Utility.showAlertDialog(ContactUsActivity.this,"Oops...",response.message());
                         Log.e("Test", "Response : " + response.body().getStatusMessage());
-
                     }
 
                 } else {
@@ -443,7 +419,6 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
     }
 
     private boolean isValidEmailId(String email) {
-
         return Pattern.compile("^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
                 + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
                 + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
@@ -452,29 +427,6 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
                 + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$").matcher(email).matches();
     }
 
-    private void setFooter() {
-        AppColorModel appColor = Utility.response.responsedata.appColor;
-
-        HomeScreenModel homeScreenModel = Utility.response.responsedata.homeScreen;
-        if (homeScreenModel.isHomePageDisplayFooter()) {
-            rvFooterContactUs.setVisibility(View.VISIBLE);
-            rvFooterContactUs.setBackgroundColor(Utility.getColor(appColor.getFooterBarColor()));
-
-            FooterAdapter adapter = new FooterAdapter(this, homeScreenModel.footerLinks, "contactUs");
-            rvFooterContactUs.setHasFixedSize(true);
-
-
-            rvFooterContactUs.setLayoutManager(new GridLayoutManager(this, homeScreenModel.footerLinks.size()));
-
-            rvFooterContactUs.setAdapter(adapter);
-        } else {
-            rvFooterContactUs.setVisibility(View.GONE);
-
-
-        }
-
-
-    }
 
     @Override
     public void onClick(View v) {
@@ -483,10 +435,8 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
         }
     }
 
-
     private JsonObject ApiJsonMap(String rewardProgramID, String webFormID, String contactID, String firstName
             , String lastName, String emailId, String mobileNo, String message) {
-
 
         JsonObject gsonObject = new JsonObject();
         try {
@@ -500,7 +450,6 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
             jsonObj_.put("mobileNo", mobileNo);
             jsonObj_.put("message", message);
 
-
             JsonParser jsonParser = new JsonParser();
             gsonObject = (JsonObject) jsonParser.parse(jsonObj_.toString());
 
@@ -510,11 +459,6 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         return gsonObject;
     }
-
-
-
-
 }

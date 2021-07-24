@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,30 +37,25 @@ import retrofit2.Response;
 
 public class OfferActivity extends AppCompatActivity implements View.OnClickListener {
     RecyclerView rvOffer, rvFooterOffers;
-    LinearLayout linearHome, linearRPG, linearCashback;
     ImageView ivBack,
             imageOffers,
             imageLogoOffers;
     TextView textPointOffers;
-
     RelativeLayout relLoadingOffers;
-
     TableLayout tableLayoutOffer;
+
     @Override
     protected void onResume() {
         super.onResume();
-
         if(Constants.isOfferRedeem)
         {
             Constants.isOfferRedeem = false;
             getData();
         }
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.myLibTheme);
-
         super.onCreate(savedInstanceState);
         setContentView(R
                 .layout.activity_offer);
@@ -69,13 +65,10 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
         getData();
 
     }
-
     private void getData() {
         relLoadingOffers.setVisibility(View.VISIBLE);
         Glide.with(this).load(Utility.response.responsedata.appIntakeImages.loadingImages.get(0).imageUrl).into(imageOffers);
         Glide.with(this).load(Utility.response.responsedata.appIntakeImages.companyLogo).into(imageLogoOffers);
-
-
 
         GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
         Log.e("Request", "RP ID: " + Utility.response.responsedata.appDetails.rewardProgramId + ", Contact ID: " + Utility.response.responsedata.contactData.contactID);
@@ -148,8 +141,6 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void getLocations() {
-
-
         GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
 
         Log.e("Request GetLocationData", "RP ID: " + Utility.response.responsedata.appDetails.rewardProgramId + ", Contact ID: " + Utility.response.responsedata.contactData.contactID);
@@ -166,7 +157,6 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
                     {
                         if(response.body() != null)
                         {
-
                             ResponseModel responseModel = response.body();
                             ResponsedataModel responseData = Utility.response.responsedata;
 
@@ -180,7 +170,6 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
                         {
                             Utility.showAlertDialog(OfferActivity.this,"Oops...", "Something went wrong");
                         }
-
                     }
                     else
                     {
@@ -194,11 +183,9 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
                 } else {
                     relLoadingOffers.setVisibility(View.GONE);
 
-                    Log.e("Test Error: ", "" + response.message());
-
+                    Log.e("Offer Error: ", "" + response.message());
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseModel> call, Throwable t) {
                 relLoadingOffers.setVisibility(View.GONE);
@@ -209,10 +196,10 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
             }
         });
     }
+    @SuppressLint("SetTextI18n")
     private void setLayout() {
         textPointOffers.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
         textPointOffers.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
-
         OffersAdapter adapter = new OffersAdapter(this, Utility.response.responsedata.offerList);
         rvOffer.setHasFixedSize(true);
         rvOffer.setLayoutManager(new LinearLayoutManager(this));
@@ -237,27 +224,8 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
         relLoadingOffers = findViewById(R.id.relLoadingOffers);
         tableLayoutOffer = findViewById(R.id.tableLayoutOffer);
         tableLayoutOffer.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
-
         ivBack.setOnClickListener(this);
-
-        setFooter();
-    }
-    private void setFooter() {
-        AppColorModel appColor = Utility.response.responsedata.appColor;
-        HomeScreenModel homeScreenModel = Utility.response.responsedata.homeScreen;
-        if (homeScreenModel.isHomePageDisplayFooter()) {
-            rvFooterOffers.setVisibility(View.VISIBLE);
-            rvFooterOffers.setBackgroundColor(Utility.getColor(appColor.getFooterBarColor()));
-
-            FooterAdapter adapter = new FooterAdapter(this, homeScreenModel.footerLinks, "offer");
-            rvFooterOffers.setHasFixedSize(true);
-
-            rvFooterOffers.setLayoutManager(new GridLayoutManager(this, homeScreenModel.footerLinks.size()));
-
-            rvFooterOffers.setAdapter(adapter);
-        } else {
-            rvFooterOffers.setVisibility(View.GONE);
-        }
+        Utility.setFooter(OfferActivity.this,rvFooterOffers,"offer");
     }
     @Override
     public void onClick(View v) {

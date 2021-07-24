@@ -1,6 +1,7 @@
 package com.example.robosdk.Activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
@@ -94,7 +96,6 @@ import retrofit2.Response;
 public class UploadReceiptActivity extends AppCompatActivity implements View.OnClickListener {
 
     Toolbar toolbar;
-    List<SliderItem> mSliderItems = new ArrayList<>();
     ImageView imgBack,
             imageUploadImage1,
             imageAddImage1,
@@ -104,12 +105,9 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
             imageAddImage3,
             imageUR,
             imageLogoUR;
-
     TableLayout tableLayoutTP;
-
     String image1 = "", image2 = "", image3 = "";
     Button btnSubmit;
-
     TextInputLayout etlUrSubTotalBeforeTax,
             etlUrReceiptNumber;
     TextInputEditText etUrSubTotalBeforeTax,
@@ -122,32 +120,24 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
             textUrReceiptType,
             textUrPrimaryLocation,
             textUrReceiptDate;
-    private static final int MY_PERMISSIONS_REQUEST_CODE = 123;
 
-    boolean isOpen = false;
     private static final int CAMERA_REQUEST_1 = 1777;
     private static final int CAMERA_REQUEST_2 = 1888;
     private static final int CAMERA_REQUEST_3 = 1999;
     private static final int PICK_IMAGE_1 = 777;
     private static final int PICK_IMAGE_2 = 888;
     private static final int PICK_IMAGE_3 = 999;
-    private ImageView imageView;
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 100;
     private static final int STORAGE_PERMISSION_REQUEST_CODE = 101;
 
     AlertDialog imagePickerDialog;
     String sLocationID = "", sReceiptTypeID = "", sReceiptDate = "";
-    boolean isError = false;
     int sReceiptTypeIndex = -1;
     int selectedImageIndex = 0;
 
     RecyclerView rvFooterUploadReceipt;
 
-    AlertDialog dialogReceiptType, dialogLocation;
-
-    LinearLayout linearRPGCashback, linearHome;
-
-
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.myLibTheme);
@@ -158,9 +148,10 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
         init();
         getData();
 
-
     }
 
+    @SuppressLint("SetTextI18n")
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void init() {
         if (Build.VERSION.SDK_INT >= 21) {
             Window window = getWindow();
@@ -186,14 +177,12 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
         imageLogoUR = findViewById(R.id.imageLogoUR);
         tableLayoutTP = findViewById(R.id.tableLayoutTP);
         tableLayoutTP.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
-
         textPointUploadReceipt = findViewById(R.id.textPointUploadReceipt);
         etUrSubTotalBeforeTax = findViewById(R.id.etUrSubTotalBeforeTax);
         etUrReceiptNumber = findViewById(R.id.etUrReceiptNumber);
         textUrReceiptType = findViewById(R.id.textUrReceiptType);
         textUrReceiptDate = findViewById(R.id.textUrReceiptDate);
         textUrPrimaryLocation = findViewById(R.id.textUrPrimaryLocation);
-
         etlUrSubTotalBeforeTax = findViewById(R.id.etlUrSubTotalBeforeTax);
         etlUrReceiptNumber = findViewById(R.id.etlUrReceiptNumber);
         imageUploadImage1 = findViewById(R.id.imageUploadImage1);
@@ -202,7 +191,6 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
         imageAddImage2 = findViewById(R.id.imageAddImage2);
         imageUploadImage3 = findViewById(R.id.imageUploadImage3);
         imageAddImage3 = findViewById(R.id.imageAddImage3);
-
 
         textPointUploadReceipt.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
         textPointUploadReceipt.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
@@ -216,14 +204,12 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
         cardUploadImage2.setOnClickListener(this);
         cardUploadImage3.setOnClickListener(this);
 
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             toolbar.setTitle("");
             setSupportActionBar(toolbar);
 
         }
         ChildPageSettingModel childPageSettings = Utility.response.responsedata.childPageSetting;
-
         if (childPageSettings.isChildPageUploadReceipt()) {
 
             List<ChildPageModel> childPage = new ArrayList<>();
@@ -248,8 +234,7 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
         }
         AppColorModel color = Utility.response.responsedata.appColor;
         btnSubmit.setBackgroundColor(Utility.getColor(color.getPrimaryButtonColor()));
-
-        setFooter();
+        Utility.setFooter(UploadReceiptActivity.this,rvFooterUploadReceipt,"transferPoint");
     }
 
     @Override
@@ -257,23 +242,20 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
 
         if (v.getId() == R.id.relReceiptType) {
             showLocationDialog(false);
-
         } else if (v.getId() == R.id.relLocation) {
             if (sReceiptTypeIndex == -1) {
                 Toast.makeText(this, "Please select receipt type", Toast.LENGTH_SHORT).show();
             } else {
                 showLocationDialog(true);
             }
-
         } else if (v.getId() == R.id.relReceiptDate) {
             Date c = Calendar.getInstance().getTime();
             System.out.println("Current time => " + c);
-
             SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
-            String formattedDate = df.format(c);
 
             DatePickerDialog datePickerDialog = new DatePickerDialog(UploadReceiptActivity.this,
                     new DatePickerDialog.OnDateSetListener() {
+                        @SuppressLint("SetTextI18n")
                         @Override
                         public void onDateSet(DatePicker datePicker, int year, int month, int day) {
 
@@ -295,23 +277,23 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
                     }, 2021, c.getMonth(), c.getDay());
 
             datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
-            if (Utility.response.responsedata.dateDetails.getReceiptsCountType().equals("Day")) {
-                datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - TimeUnit.DAYS.toMillis(Utility.response.responsedata.dateDetails.getReceiptsCount()));
-            } else if (Utility.response.responsedata.dateDetails.getReceiptsCountType().equals("Month")) {
-                datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - TimeUnit.DAYS.toMillis(Utility.response.responsedata.dateDetails.getReceiptsCount() * 30));
-            } else if (Utility.response.responsedata.dateDetails.getReceiptsCountType().equals("Week")) {
-                datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - TimeUnit.DAYS.toMillis(Utility.response.responsedata.dateDetails.getReceiptsCount() * 7));
+            switch (Utility.response.responsedata.dateDetails.getReceiptsCountType()) {
+                case "Day":
+                    datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - TimeUnit.DAYS.toMillis(Utility.response.responsedata.dateDetails.getReceiptsCount()));
+                    break;
+                case "Month":
+                    datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - TimeUnit.DAYS.toMillis(Utility.response.responsedata.dateDetails.getReceiptsCount() * 30));
+                    break;
+                case "Week":
+                    datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - TimeUnit.DAYS.toMillis(Utility.response.responsedata.dateDetails.getReceiptsCount() * 7));
+                    break;
             }
             datePickerDialog.show();
         } else if (v.getId() == R.id.cardUploadImage1) {
-//           showLocationDialog();;
-
             showImagePicker(1);
         } else if (v.getId() == R.id.cardUploadImage2) {
-//           showLocationDialog();;
             showImagePicker(2);
         } else if (v.getId() == R.id.cardUploadImage3) {
-//           showLocationDialog();;
             showImagePicker(3);
         } else if (v.getId() == R.id.imgBackUploadReceipt) {
             super.onBackPressed();
@@ -323,7 +305,6 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
     protected void checkCameraPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager
                 .PERMISSION_GRANTED) {
-
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (PermissionUtils.neverAskAgainSelected(this, Manifest.permission.CAMERA)) {
                     displayNeverAskAgainDialog(true);
@@ -344,14 +325,11 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
             } else if (selectedImageIndex == 3) {
                 startActivityForResult(cameraIntent, CAMERA_REQUEST_3);
             }
-
         }
     }
-
     protected void checkStoragePermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager
                 .PERMISSION_GRANTED) {
-
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (PermissionUtils.neverAskAgainSelected(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                     displayNeverAskAgainDialog(false);
@@ -367,23 +345,16 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
             Intent intent = new Intent();
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
-
             if (selectedImageIndex == 1) {
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_1);
-
             } else if (selectedImageIndex == 2) {
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_2);
-
             } else if (selectedImageIndex == 3) {
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_3);
-
             }
         }
     }
-
-
     private void displayNeverAskAgainDialog(boolean isCamera) {
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         if(isCamera)
         {
@@ -395,7 +366,6 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
             builder.setMessage("We need Storage permission for performing necessary task. Please permit the permission through "
                     + "Settings screen.\n\nSelect Permissions -> Enable permission");
         }
-
         builder.setCancelable(false);
         builder.setPositiveButton("Permit Manually", new DialogInterface.OnClickListener() {
             @Override
@@ -413,10 +383,8 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
         builder.show();
     }
 
-
-
     private void validate() {
-        Boolean isSubTotalBeforeTaxError = false,
+        boolean isSubTotalBeforeTaxError = false,
                 isReceiptNumberError = false,
                 otherErrors = false;
 
@@ -424,12 +392,10 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
         urSubTotalBeforeTax = etUrSubTotalBeforeTax.getText().toString().trim();
         urReceiptNumber = etUrReceiptNumber.getText().toString().trim();
 
-
         if (urSubTotalBeforeTax.isEmpty()) {
             isSubTotalBeforeTaxError = true;
             setETError("Please Enter Display Subtotal Before Tax", etlUrSubTotalBeforeTax);
         } else {
-            isSubTotalBeforeTaxError = false;
             removeError(etlUrSubTotalBeforeTax);
         }
         if (urReceiptNumber.isEmpty()) {
@@ -437,25 +403,18 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
             setETError("Please Enter Receipt Number", etlUrReceiptNumber);
 
         } else {
-            isReceiptNumberError = false;
             removeError(etlUrReceiptNumber);
-
         }
         if (sReceiptTypeIndex == -1) {
             otherErrors = true;
-
             Toast.makeText(this, "Please select receipt type", Toast.LENGTH_SHORT).show();
         } else if (sLocationID.isEmpty()) {
             otherErrors = true;
-
             Toast.makeText(this, "Please select location", Toast.LENGTH_SHORT).show();
         } else if (sReceiptDate.isEmpty()) {
             otherErrors = true;
-
             Toast.makeText(this, "Please select receipt date", Toast.LENGTH_SHORT).show();
         }
-
-
         if (!isSubTotalBeforeTaxError && !isReceiptNumberError && !otherErrors) {
             if (isImage1 || isImage2 || isImage3) {
                 UploadReceipt();
@@ -463,38 +422,29 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
                 Toast.makeText(this, "please select at least one image to upload receipt", Toast.LENGTH_SHORT).show();
             }
         }
-
-
     }
-
     private void setETError(String error, TextInputLayout textInputLayout) {
         textInputLayout.setError(error);
         textInputLayout.setDefaultHintTextColor(ColorStateList.valueOf(Utility.getColor("#ff0000ff")));
         textInputLayout.setStartIconTintList(ColorStateList.valueOf(Utility.getColor("#ff0000ff")));
     }
-
     private void removeError(TextInputLayout textInputLayout) {
         textInputLayout.setDefaultHintTextColor(ColorStateList.valueOf(Utility.getColor("#8f8f8fff")));
         textInputLayout.setStartIconTintList(ColorStateList.valueOf(Utility.getColor("#8f8f8fff")));
         textInputLayout.setErrorEnabled(false);
     }
-
     void showLocationDialog(boolean isLocation) {
-        // create an alert builder
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        // set the custom layout
         final View customLayout = getLayoutInflater().inflate(R.layout.content_location_dialog, null);
         builder.setView(customLayout);
-        // add a button
-        // create and show the alert dialog
         final AlertDialog dialog = builder.create();
         dialog.show();
         Button btnConfirmLocation = dialog.findViewById(R.id.btnConfirmLocation);
         RecyclerView rv = dialog.findViewById(R.id.rvLocationDialog);
         EditText etSearchLocation = dialog.findViewById(R.id.etSearchLocation);
-
         if (isLocation) {
             final DialogListAdapter adapter = new DialogListAdapter(UploadReceiptActivity.this, "URLocation", sReceiptTypeIndex);
+            assert rv != null;
             rv.setHasFixedSize(true);
             rv.setLayoutManager(new LinearLayoutManager(this));
             rv.setAdapter(adapter);
@@ -502,6 +452,7 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
             final List<URAddressModel> originalLocations = new ArrayList<>();
             originalLocations.addAll(Utility.response.responsedata.categories.get(sReceiptTypeIndex).addresses);
 
+            assert etSearchLocation != null;
             etSearchLocation.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -517,11 +468,8 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
                         adapter.notifyDataSetChanged();
 
                     } else {
-
                         List<URAddressModel> locations = new ArrayList<>();
-
                         for (URAddressModel l : originalLocations) {
-
                             if (l.getLocationName().toLowerCase().contains(s.toString().toLowerCase())) {
                                 locations.add(l);
                             }
@@ -529,28 +477,23 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
                         Utility.response.responsedata.categories.get(sReceiptTypeIndex).addresses.clear();
                         Utility.response.responsedata.categories.get(sReceiptTypeIndex).addresses.addAll(locations);
                         adapter.notifyDataSetChanged();
-                        Log.e("Test", "Result : " + locations.size());
+                        Log.e("Upload Receipt", "Result : " + locations.size());
                     }
-
-
                 }
-
                 @Override
                 public void afterTextChanged(Editable s) {
 
                 }
             });
-
             etSearchLocation.setHint("Search location");
+            assert btnConfirmLocation != null;
             btnConfirmLocation.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     for (URAddressModel data : Utility.response.responsedata.categories.get(sReceiptTypeIndex).addresses) {
                         if (data.isSelected()) {
                             textUrPrimaryLocation.setText(data.getLocationName());
-
                             sLocationID = data.getAddressID();
-
                             dialog.dismiss();
                         }
                     }
@@ -560,18 +503,16 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
                         Utility.response.responsedata.categories.get(sReceiptTypeIndex).addresses.clear();
                         Utility.response.responsedata.categories.get(sReceiptTypeIndex).addresses.addAll(originalLocations);
                     }
-
                 }
             });
-
         } else {
             final DialogListAdapter adapter = new DialogListAdapter(UploadReceiptActivity.this, "URReceipt", -1);
+            assert rv != null;
             rv.setHasFixedSize(true);
             rv.setLayoutManager(new LinearLayoutManager(this));
             rv.setAdapter(adapter);
-
+            assert etSearchLocation != null;
             etSearchLocation.setHint("Search category");
-
             final List<URCategoryModel> originalCategories = new ArrayList<>();
             originalCategories.addAll(Utility.response.responsedata.categories);
 
@@ -580,17 +521,13 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
                 }
-
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-
                     if (s.toString().isEmpty()) {
                         Utility.response.responsedata.categories.clear();
                         Utility.response.responsedata.categories.addAll(originalCategories);
                         adapter.notifyDataSetChanged();
-
                     } else {
-
                         List<URCategoryModel> category = new ArrayList<>();
                         for (URCategoryModel l : originalCategories) {
                             if (l.getName().toLowerCase().contains(s.toString().toLowerCase())) {
@@ -602,13 +539,12 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
                         adapter.notifyDataSetChanged();
                     }
                 }
-
                 @Override
                 public void afterTextChanged(Editable s) {
                 }
             });
 
-
+            assert btnConfirmLocation != null;
             btnConfirmLocation.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -618,7 +554,6 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
                             sReceiptTypeID = data.getId();
                             sReceiptTypeIndex = Utility.response.responsedata.categories.indexOf(data);
                             dialog.dismiss();
-
                         }
                     }
                     if (dialog.isShowing()) {
@@ -626,25 +561,17 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
                     } else {
                         Utility.response.responsedata.categories.clear();
                         Utility.response.responsedata.categories.addAll(originalCategories);
-
                     }
                 }
             });
-
         }
-
-
     }
 
     void showImagePicker(int imageIndex) {
         selectedImageIndex = imageIndex;
-        // create an alert builder
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        // set the custom layout
         final View customLayout = getLayoutInflater().inflate(R.layout.content_upload_image, null);
         builder.setView(customLayout);
-        // add a button
-        // create and show the alert dialog
           imagePickerDialog = builder.create();
         imagePickerDialog.show();
         imagePickerDialog.setCancelable(false);
@@ -652,10 +579,10 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
         textTakePhotoUI = imagePickerDialog.findViewById(R.id.textTakePhotoUI);
         textChooseFromLibraryUI = imagePickerDialog.findViewById(R.id.textChooseFromLibraryUI);
         textCancelUI = imagePickerDialog.findViewById(R.id.textCancelUI);
+        assert textTakePhotoUI != null;
         textTakePhotoUI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                      checkCameraPermission();
                 }
@@ -670,10 +597,10 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
                     } else if (selectedImageIndex == 3) {
                         startActivityForResult(cameraIntent, CAMERA_REQUEST_3);
                     }
-
                 }
                 }
         });
+        assert textCancelUI != null;
         textCancelUI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -681,6 +608,7 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
             }
         });
 
+        assert textChooseFromLibraryUI != null;
         textChooseFromLibraryUI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -696,18 +624,12 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
 
                     if (selectedImageIndex == 1) {
                         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_1);
-
                     } else if (selectedImageIndex == 2) {
                         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_2);
-
                     } else if (selectedImageIndex == 3) {
                         startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_3);
-
                     }
-
                 }
-
-
         /*        Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
                 getIntent.setType("image/*");
 
@@ -720,7 +642,6 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
                 startActivityForResult(chooserIntent, PICK_IMAGE_1);*/
             }
         });
-
     }
 
     @Override
@@ -728,8 +649,7 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (CAMERA_PERMISSION_REQUEST_CODE == requestCode) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Log.i("TEST", "Permission granted successfully");
-
+                Log.i("Upload Receipt", "Permission granted successfully");
                 imagePickerDialog.dismiss();
                 Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 if (selectedImageIndex == 1) {
@@ -739,31 +659,24 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
                 } else if (selectedImageIndex == 3) {
                     startActivityForResult(cameraIntent, CAMERA_REQUEST_3);
                 }
-
             } else {
                 PermissionUtils.setShouldShowStatus(this, Manifest.permission.CAMERA);
             }
         }
         else if (STORAGE_PERMISSION_REQUEST_CODE == requestCode) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Log.i("TEST", "Permission granted successfully");
-
+                Log.i("Upload Receipt", "Permission granted successfully");
                 imagePickerDialog.dismiss();
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-
                 if (selectedImageIndex == 1) {
                     startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_1);
-
                 } else if (selectedImageIndex == 2) {
                     startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_2);
-
                 } else if (selectedImageIndex == 3) {
                     startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_3);
-
                 }
-
             } else {
                 PermissionUtils.setShouldShowStatus(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
             }
@@ -780,12 +693,10 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
             } else {
                 isImage1 = true;
                 Glide.with(this).load(bitmap).into(imageUploadImage1);
-
                 saveImage(bitmap, 1);
                 imageUploadImage1.setVisibility(View.VISIBLE);
                 imageAddImage1.setVisibility(View.GONE);
             }
-
         } else if (requestCode == CAMERA_REQUEST_2 && resultCode == Activity.RESULT_OK) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             if (bitmap == null) {
@@ -793,13 +704,10 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
             } else {
                 isImage2 = true;
                 Glide.with(this).load(bitmap).into(imageUploadImage2);
-
                 saveImage(bitmap, 2);
-
                 imageUploadImage2.setVisibility(View.VISIBLE);
                 imageAddImage2.setVisibility(View.GONE);
             }
-
         } else if (requestCode == CAMERA_REQUEST_3 && resultCode == Activity.RESULT_OK) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             if (bitmap == null) {
@@ -808,55 +716,39 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
                 isImage3 = true;
                 Glide.with(this).load(bitmap).into(imageUploadImage3);
                 saveImage(bitmap, 3);
-
                 imageUploadImage3.setVisibility(View.VISIBLE);
                 imageAddImage3.setVisibility(View.GONE);
             }
-
         } else if (requestCode == PICK_IMAGE_1 && resultCode == Activity.RESULT_OK) {
             Uri selectedImageURI = data.getData();
-
             if (selectedImageURI != null) {
                 isImage1 = true;
                 Glide.with(this).load(selectedImageURI).into(imageUploadImage1);
-
                 saveURIImage(selectedImageURI, 1);
-
                 imageUploadImage1.setVisibility(View.VISIBLE);
                 imageAddImage1.setVisibility(View.GONE);
             }
-
         } else if (requestCode == PICK_IMAGE_2 && resultCode == Activity.RESULT_OK) {
             Uri selectedImageURI = data.getData();
             if (selectedImageURI != null) {
                 isImage2 = true;
-
                 Glide.with(this).load(selectedImageURI).into(imageUploadImage2);
-
                 saveURIImage(selectedImageURI, 2);
-
                 imageUploadImage2.setVisibility(View.VISIBLE);
                 imageAddImage2.setVisibility(View.GONE);
             }
-
         } else if (requestCode == PICK_IMAGE_3 && resultCode == Activity.RESULT_OK) {
             Uri selectedImageURI = data.getData();
             if (selectedImageURI != null) {
                 isImage3 = true;
                 Glide.with(this).load(selectedImageURI).into(imageUploadImage3);
-
                 saveURIImage(selectedImageURI, 3);
-
                 imageUploadImage3.setVisibility(View.VISIBLE);
                 imageAddImage3.setVisibility(View.GONE);
             }
-
-
         }
     }
-
     private void saveImage(Bitmap bitmap, int image) {
-
         if (bitmap != null) {
             File saveFile = ScreenshotUtils.getMainDirectoryName(this);//get the path to save screenshot
             Date d = new Date();
@@ -870,7 +762,6 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
                 } else {
                     image3 = file1.getAbsolutePath();
                 }
-
             } else {
                 Toast.makeText(this, "Please re upload image", Toast.LENGTH_SHORT).show();
             }
@@ -886,7 +777,6 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         if (b != null) {
             File saveFile = ScreenshotUtils.getMainDirectoryName(this);//get the path to save screenshot
             Date d = new Date();
@@ -900,7 +790,6 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
                 } else {
                     image3 = file1.getAbsolutePath();
                 }
-
             } else {
                 Toast.makeText(this, "Please re upload image", Toast.LENGTH_SHORT).show();
             }
@@ -910,11 +799,8 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
     }
 
     private void UploadReceipt() {
-
         Utility.showLoader(UploadReceiptActivity.this);
-
         GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
-
         ResponsedataModel responseData = Utility.response.responsedata;
         Log.e("Requested API: ", "/api/UserProfile/UploadReceipts");
         Call<JsonObject> callUploadReceipt = service.UploadReceipts(ApiJsonMap(responseData.contactData.contactID,
@@ -925,8 +811,6 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
                 sReceiptDate,
                 etUrReceiptNumber.getText().toString().trim()
         ));
-
-
         callUploadReceipt.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -936,46 +820,33 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
 
                         Log.e("Test", "Response : " + response.body().get("statusMessage").getAsString());
                         Log.e("Test", "Response : " + response.body().get("statusMessage").getAsString());
-
                         if (response.body().get("statusCode").getAsInt() == 1 && response.body() != null) {
                             JsonElement responsedata = response.body().get("responsedata");
-
                             UploadImage(responsedata.getAsJsonObject().get("receiptUploadID").getAsString());
-
                         } else {
-
                             Utility.showAlertDialog(UploadReceiptActivity.this, "Oops...", response.body().get("statusMessage").getAsString());
                             // duplicate entry
                             Log.e("Test", "Response : " + response.body().get("statusMessage").getAsString());
-
                         }
-
                     } else {
                         Utility.dialog.dismiss();
                         Utility.showAlertDialog(UploadReceiptActivity.this, "Oops...", response.body().get("statusMessage").getAsString());
-
                         Log.e("Test", "Response : " + response.body().get("statusMessage").getAsString());
                     }
                 } else {
                     Utility.showAlertDialog(UploadReceiptActivity.this, "Oops...", "Something went wrong");
-
                     Log.e("TEST", "Error: " + response.message());
                 }
             }
-
             @Override
             public void onFailure(Call<JsonObject> call, Throwable test) {
                 Utility.dialog.dismiss();
-
                 Utility.showAlertDialog(UploadReceiptActivity.this, "Oops...", "Something went wrong");
-
                 Log.e("Test:::", test.getMessage().toString());
             }
         });
     }
-
     private void UploadImage(String receiptUploadID) {
-
         ArrayList<String> filePaths = new ArrayList<>();
         if (!image1.isEmpty()) {
             filePaths.add(image1);
@@ -986,14 +857,10 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
         if (!image3.isEmpty()) {
             filePaths.add(image3);
         }
-
-
         MultipartBody.Builder builder = new MultipartBody.Builder();
         builder.setType(MultipartBody.FORM);
-
         builder.addFormDataPart("RewardProgramID", Utility.response.responsedata.appDetails.rewardProgramId);
         builder.addFormDataPart("ReceiptUploadID", receiptUploadID);
-
         // Map is used to multipart the file using okhttp3.RequestBody
         // Multiple Images
         for (int i = 0; i < filePaths.size(); i++) {
@@ -1001,16 +868,12 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
             builder.addFormDataPart("files", file.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), file));
         }
         GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
-
-
         MultipartBody requestBody = builder.build();
         Call<ResponseModel> call = service.uploadReceiptImage(requestBody);
         call.enqueue(new Callback<ResponseModel>() {
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
-
                 Utility.dialog.dismiss();
-
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
                         if (response.body().getStatusCode() == 1) {
@@ -1024,36 +887,26 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
                                 if (file2.exists())
                                     file2.delete();
                             }
-
                             if (!image3.isEmpty()) {
                                 File file3 = new File(image3);
                                 if (file3.exists())
                                     file3.delete();
                             }
                             setLayout();
-
                             Utility.showAlertDialog(UploadReceiptActivity.this, "Success", response.body().getStatusMessage());
                         } else {
-
                             Utility.showAlertDialog(UploadReceiptActivity.this, "Oops...", response.body().getStatusMessage());
-
                         }
                     }
-
                 }
-
             }
-
             @Override
             public void onFailure(Call<ResponseModel> call, Throwable t) {
                 Utility.dialog.dismiss();
-
                 Utility.showAlertDialog(UploadReceiptActivity.this, "Oops...", "Something went wrong");
-
                 Log.d("TEST", "Error " + t.getMessage());
             }
         });
-
     }
 
     private JsonObject ApiJsonMap(String contactID, String rewardProgramID, String addressID, String receiptCategoryID, double amount,
@@ -1070,62 +923,30 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
             jsonObj_.put("receiptDate", receiptDate);
             jsonObj_.put("receiptNumber", receiptNumber);
             jsonObj_.put("checkStatusCode5", true);
-
             JsonParser jsonParser = new JsonParser();
             gsonObject = (JsonObject) jsonParser.parse(jsonObj_.toString());
-
             //print parameter
             Log.e("Request Body:  ", "" + gsonObject);
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         return gsonObject;
-    }
-
-    private void setFooter() {
-        AppColorModel appColor = Utility.response.responsedata.appColor;
-
-        HomeScreenModel homeScreenModel = Utility.response.responsedata.homeScreen;
-        if (homeScreenModel.isHomePageDisplayFooter()) {
-            rvFooterUploadReceipt.setVisibility(View.VISIBLE);
-            rvFooterUploadReceipt.setBackgroundColor(Utility.getColor(appColor.getFooterBarColor()));
-
-            FooterAdapter adapter = new FooterAdapter(this, homeScreenModel.footerLinks, "transferPoint");
-            rvFooterUploadReceipt.setHasFixedSize(true);
-
-
-            rvFooterUploadReceipt.setLayoutManager(new GridLayoutManager(this, homeScreenModel.footerLinks.size()));
-
-            rvFooterUploadReceipt.setAdapter(adapter);
-        } else {
-            rvFooterUploadReceipt.setVisibility(View.GONE);
-
-
-        }
-
-
     }
 
     private void getData() {
         relLoadingUR.setVisibility(View.VISIBLE);
         Glide.with(this).load(Utility.response.responsedata.appIntakeImages.loadingImages.get(0).imageUrl).into(imageUR);
         Glide.with(this).load(Utility.response.responsedata.appIntakeImages.companyLogo).into(imageLogoUR);
-
-
         GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
         Log.e("Request", "RP ID: " + Utility.response.responsedata.appDetails.rewardProgramId + ", Contact ID: " + Utility.response.responsedata.contactData.contactID);
         Call<ResponseModel> call =
                 service.getUploadReceiptsScreenData(Utility.response.responsedata.appDetails.rewardProgramId
                         , Utility.response.responsedata.appDetails.webFormID);
         call.enqueue(new Callback<ResponseModel>() {
-
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
-                if (response.isSuccessful()) {
-
-                    if (response.code() == 200) {
+                if (response.isSuccessful() && response.body() != null) {
+                    if (response.body().statusCode == 1) {
                         relLoadingUR.setVisibility(View.GONE);
 
                         if (response.body() != null) {
@@ -1139,36 +960,27 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
                             if (Utility.response.responsedata.settingsDetails != null) {
                                 setLayout();
                             } else {
-                                Utility.showAlertDialog(UploadReceiptActivity.this, "Oops...", "Something went wrong");
-
+                                Utility.showAlertDialog(UploadReceiptActivity.this, "Oops...", response.body().statusMessage);
                                 Log.e("Setting Details", " Setting Data is null");
                             }
-                            Log.e("Test", "onResponse: " + responseModel.getStatusCode());
-
+                            Log.e("Upload Receipt", "onResponse: " + responseModel.getStatusCode());
                         }
                     } else {
                         Utility.showAlertDialog(UploadReceiptActivity.this, "Oops...", "Something went wrong");
                     }
                 } else {
                     relLoadingUR.setVisibility(View.GONE);
-
                     Utility.showAlertDialog(UploadReceiptActivity.this, "Oops...", "Something went wromg");
-
                     Log.e("URScreenData Error: ", "" + response.message());
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseModel> call, Throwable t) {
                 relLoadingUR.setVisibility(View.GONE);
-
                 Log.e("Test Error: ", "" + t.getMessage());
-
-
             }
         });
     }
-
     private void setLayout() {
         URSettingsDetailsModel setting = Utility.response.responsedata.settingsDetails;
 
@@ -1197,11 +1009,9 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
         } else {
             etlUrReceiptNumber.setHint(setting.getUrReceiptNumber());
         }
-
         image1 = "";
         image2 = "";
         image3 = "";
-
         imageUploadImage1.setVisibility(View.GONE);
         imageAddImage1.setVisibility(View.VISIBLE);
 
@@ -1213,9 +1023,5 @@ public class UploadReceiptActivity extends AppCompatActivity implements View.OnC
 
         etUrReceiptNumber.setText("");
         etUrSubTotalBeforeTax.setText("");
-
-
     }
-
-
 }

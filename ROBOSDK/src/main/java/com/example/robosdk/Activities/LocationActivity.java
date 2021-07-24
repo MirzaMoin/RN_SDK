@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -55,7 +56,6 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
 
     private GoogleMap mMap;
     CardView cardLocation;
-    BottomSheetBehavior bottomSheetBehavior;
     RecyclerView rvFooterLocation;
     ImageView imgBackLocation,
             imageLocation,
@@ -66,7 +66,6 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
     RecyclerView rvLocationBottomsheet;
 
     boolean isExpanded = false;
-    boolean isOpen = false;
     List<LocationDataModel> originalLocations = new ArrayList<>();
     RelativeLayout relLoadingLocation;
 
@@ -83,15 +82,12 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-
         init();
         getLocations();
-
-
     }
 
+    @SuppressLint("SetTextI18n")
     private void init() {
-
 
         if (Build.VERSION.SDK_INT >= 21) {
             Window window = getWindow();
@@ -114,53 +110,23 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         tableLayoutLocation = findViewById(R.id.tableLayoutLocation);
         tableLayoutLocation.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
 
-
         imgBackLocation.setOnClickListener(this);
         cardLocation.setOnClickListener(this);
 
         textPointLocation.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
         textPointLocation.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance())+ " PTS");
 
-
-        setFooter();
+        Utility.setFooter(LocationActivity.this,rvFooterLocation,"locations");
     }
 
-    private void setFooter() {
-        AppColorModel appColor = Utility.response.responsedata.appColor;
-
-        HomeScreenModel homeScreenModel = Utility.response.responsedata.homeScreen;
-        if(homeScreenModel.isHomePageDisplayFooter())
-        {
-            rvFooterLocation.setVisibility(View.VISIBLE);
-            rvFooterLocation.setBackgroundColor(Utility.getColor(appColor.getFooterBarColor()));
-
-            FooterAdapter adapter = new FooterAdapter(this,homeScreenModel.footerLinks,"locations");
-            rvFooterLocation.setHasFixedSize(true);
-
-
-            rvFooterLocation.setLayoutManager(new GridLayoutManager(this,homeScreenModel.footerLinks.size()));
-
-            rvFooterLocation.setAdapter(adapter);
-        }
-        else
-        {
-            rvFooterLocation.setVisibility(View.GONE);
-
-
-        }
-
-
-    }
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
         LatLng sydney = new LatLng(37.78825, -122.4324);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Primary Location"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 13));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
-
 
     private void showBottomsheet() {
         Utility.response.responsedata.locationData.clear();
@@ -169,10 +135,8 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         final BottomSheetDialog dialog = new BottomSheetDialog(this, R.style.BottomSheetStyle);
         // set the custom layout
         final View customLayout = getLayoutInflater().inflate(R.layout.content_location_list, null);
-
         dialog.setContentView(customLayout);
         dialog.show();
-
 
         ((View) customLayout.getParent()).setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
         TextView textLocation = dialog.findViewById(R.id.textLocation);
@@ -180,7 +144,9 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         final RecyclerView rvLocation = dialog.findViewById(R.id.rvLocationBottomsheet);
 
         if (Utility.response.responsedata.locationData.size() > 0) {
+            assert rvLocation != null;
             rvLocation.setVisibility(View.VISIBLE);
+            assert textNoLocation != null;
             textNoLocation.setVisibility(View.GONE);
             final LocationBottomsheetAdapter adapter = new LocationBottomsheetAdapter(this,LocationActivity.this);
             rvLocation.setHasFixedSize(true);
@@ -277,67 +243,44 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
             rvLocation.setVisibility(View.GONE);
             textNoLocation.setVisibility(View.VISIBLE);
         }
-
-
-        // add a button
-        // create and show the alert dialog
-
     }
     private void getLocations() {
-
         relLoadingLocation.setVisibility(View.VISIBLE);
         Glide.with(this).load(Utility.response.responsedata.appIntakeImages.loadingImages.get(0).imageUrl).into(imageLocation);
         Glide.with(this).load(Utility.response.responsedata.appIntakeImages.companyLogo).into(imageLogoLocation);
-
-
-
         GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
-
         Log.e("Request GetLocationData", "RP ID: " + Utility.response.responsedata.appDetails.rewardProgramId);
         Call<ResponseModel> callGetLocation =
                 service.getLocationData(Utility.response.responsedata.appDetails.rewardProgramId);
         callGetLocation.enqueue(new Callback<ResponseModel>() {
-
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                 if (response.isSuccessful()) {
                     relLoadingLocation.setVisibility(View.GONE);
                     cardLocation.setVisibility(View.VISIBLE);
-
-
                     if(response.code() == 200)
                     {
                         if(response.body() != null)
                         {
-
                             ResponseModel responseModel = response.body();
                             ResponsedataModel responseData = Utility.response.responsedata;
-
                             responseData.locationData = responseModel.responsedata.getLocationData();
-
                             originalLocations.addAll(responseData.locationData);
                             Log.e("GetLocationData", "onResponse - Location List Size: " + responseModel.responsedata.locationData.size());
-
                         }
                         else
                         {
                             Log.e("GetLocationData", "Status code - Location List Size: " + response.code() );
-
                             Utility.showAlertDialog(LocationActivity.this,"Oops...",""+response.message());
                         }
-
                     }
                     else
                     {
                         Utility.showAlertDialog(LocationActivity.this,"Oops...","Something went wrong");
-
                         Log.e("GetLocationData", "Status code - Location List Size: " + response.code() );
-
                     }
-
                 } else {
                     relLoadingLocation.setVisibility(View.GONE);
-
                     Utility.showAlertDialog(LocationActivity.this,"Oops...","Something went wrong");
                     Log.e("Test Error: ", "" + response.message());
                 }
@@ -346,10 +289,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
             public void onFailure(Call<ResponseModel> call, Throwable t) {
                 relLoadingLocation.setVisibility(View.GONE);
                 Utility.showAlertDialog(LocationActivity.this,"Oops...","Something went wrong");
-
                 Log.e("Test Error: ", "" + t.getMessage());
-
-
             }
         });
     }

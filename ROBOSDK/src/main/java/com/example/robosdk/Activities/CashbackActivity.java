@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -47,6 +48,7 @@ import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnima
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -60,35 +62,28 @@ import retrofit2.Response;
 public class CashbackActivity extends AppCompatActivity implements View.OnClickListener {
 
     Toolbar toolbar;
-    List<SliderItem> mSliderItems = new ArrayList<>();
     ImageView imgBack,
             imageCashback,
             imageLogoCashback;
-    LinearLayout linearRPGCashback, linearHome,
-            linearAmountRC;
+    LinearLayout linearAmountRC;
     RecyclerView rvFooterCashback;
     TextView textPointCashback,
             textBalanceRC;
-    public static EditText etAmountRC;
     SwipeButton swipeButtonRC;
-
     RelativeLayout relLoadingCashback;
-    double amount = 0;
-    boolean isAllowPartialCashbackRedemption = true,
-            isRequireWholeNumberRedemption = true;
-
     RecyclerView rvCashback;
     TableLayout tableLayoutCashback;
-    boolean isTap = false;
-
     CardView cardTapRC;
 
-
+    public static EditText etAmountRC;
+    double amount = 0;
+    boolean isAllowPartialCashbackRedemption = true,
+    isRequireWholeNumberRedemption = true;
+    boolean isTap = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.myLibTheme);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cashback);
         init();
@@ -116,10 +111,6 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
         imageCashback = findViewById(R.id.imageCashback);
         imageLogoCashback = findViewById(R.id.imageLogoCashback);
         tableLayoutCashback = findViewById(R.id.tableLayoutCashback);
-
-        tableLayoutCashback.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
-
-
         cardTapRC = findViewById(R.id.cardTapRC);
         rvFooterCashback = findViewById(R.id.rvFooterCashback);
         textBalanceRC = findViewById(R.id.textBalanceRC);
@@ -127,12 +118,15 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
         swipeButtonRC = findViewById(R.id.swipeBtnRC);
         linearAmountRC = findViewById(R.id.linearAmountRC);
         rvCashback = findViewById(R.id.rvCashback);
+        SliderView sliderView = findViewById(R.id.imageSliderCashback);
+
         imgBack.setOnClickListener(this);
+
+        tableLayoutCashback.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             toolbar.setTitle("");
             setSupportActionBar(toolbar);
-
         }
 
         textPointCashback.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
@@ -145,10 +139,6 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
             for (RedeemCashBackChildPageDataModel cashback : childPageSettings.redeemCashBackChildPageData) {
                 childPage.add(new ChildPageModel(cashback.image, cashback.opacity, cashback.isClickable, cashback.linkType, cashback.internalLink, cashback.externalLink));
             }
-
-
-            SliderView sliderView = findViewById(R.id.imageSliderCashback);
-
             sliderView.setVisibility(View.VISIBLE);
             CashbackImageSliderAdapter adapter = new CashbackImageSliderAdapter(this, childPage);
 
@@ -162,10 +152,10 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
             sliderView.setScrollTimeInSec(4); //set scroll delay in seconds :
             sliderView.startAutoCycle();
         }
-        setFooter();
+        Utility.setFooter(CashbackActivity.this,rvFooterCashback,"redeemCashback");
+
         AppColorModel color = Utility.response.responsedata.appColor;
         swipeButtonRC.setBackgroundColor(Utility.getColor(color.getPrimaryButtonColor()));
-
 
         swipeButtonRC.setOnStateChangeListener(new OnStateChangeListener() {
             @Override
@@ -176,14 +166,13 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
                     {
                         if (otherAmount.isEmpty()) {
                             swipeButtonRC.toggleState();
-                            Log.e("Test", "Please enter other amount");
+                            Log.e("Cashback", "Please enter other amount");
                             Toast.makeText(CashbackActivity.this, "Please enter other amount", Toast.LENGTH_SHORT).show();
                         } else {
                             if (isRequireWholeNumberRedemption) {
                                 if (otherAmount.contains(".")) {
                                     swipeButtonRC.toggleState();
-
-                                    Log.e("Test", "Please enter valid amount");
+                                    Log.e("Cashback", "Please enter valid amount");
 
                                     Toast.makeText(CashbackActivity.this, "Please enter valid amount", Toast.LENGTH_SHORT).show();
                                 } else {
@@ -205,23 +194,20 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
                             else {
                                 swipeButtonRC.toggleState();
 
-                                Log.e("Test", "You don't have enough amount to redeem");
+                                Log.e("Cashback", "You don't have enough amount to redeem");
 
                                 Toast.makeText(CashbackActivity.this, "You don't have enough amount to redeem", Toast.LENGTH_SHORT).show();
-
                             }
                         }
                         else
                         {
                             swipeButtonRC.toggleState();
 
-                            Log.e("Test", "Tap to redeem maximum cashback amount");
+                            Log.e("Cashback", "Tap to redeem maximum cashback amount");
 
                             Toast.makeText(CashbackActivity.this, "Tap to redeem maximum cashback amount", Toast.LENGTH_SHORT).show();
-
                         }
                     }
-
                 }
             }
         });
@@ -233,13 +219,11 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
                 isTap = true;
             }
         });
-
-
     }
 
     private void setCashbackSuggetion() {
 
-        if(isAllowPartialCashbackRedemption)
+        if(isAllowPartialCashbackRedemption && amount > 10)
         {
             rvCashback.setVisibility(View.VISIBLE);
             ArrayList<String> list = new ArrayList<>();
@@ -247,27 +231,26 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
             double newValue = finalValue;
             for(int i = 0;i<5;i++)
             {
-
                 list.add(Utility.getRoundData(Math.round(finalValue)));
                 Log.e("TEST",String.valueOf(Math.floor(finalValue)));
                 finalValue += newValue;
-
             }
 
             RedeemCashbackAdapter adapter = new RedeemCashbackAdapter(this,list);
             rvCashback.setHasFixedSize(true);
 
-
             rvCashback.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
 
             rvCashback.setAdapter(adapter);
         }
-
+        else{
+            rvCashback.setVisibility(View.GONE);
+        }
     }
 
     private void makeCashback(String otherAmount) {
 
-       Utility.showLoader(CashbackActivity.this);
+        Utility.showLoader(CashbackActivity.this);
 
         GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
 
@@ -278,7 +261,6 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
                 responseData.contactData.contactID,
                 Double.parseDouble(otherAmount)
         ));
-
 
         callCashbackRedeem.enqueue(new Callback<JsonObject>() {
             @Override
@@ -291,78 +273,44 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
                     String statusMessage = response.body().get("statusMessage").getAsString();
                     JsonElement responsedata = response.body().get("responsedata");
 
-
                     if (statusCode == 1) {
 
-                        Log.e("Test", "Response : " + response.body().toString());
+                        Log.e("Cashback", "Response : " + response.body().toString());
                         Utility.showAlertDialog(CashbackActivity.this,"Success", statusMessage);
                         etAmountRC.setText("");
                         Utility.response.responsedata.contactData.setPointBalance(responsedata.getAsJsonObject().get("reedemablePoints").getAsDouble());
                         Utility.response.responsedata.contactData.setReedemablePoints(responsedata.getAsJsonObject().get("reedemablePoints").getAsDouble());
                         textPointCashback.setText(Utility.getRoundData(responsedata.getAsJsonObject().get("reedemablePoints").getAsDouble()) + " PTS");
 
-
                         getData();
 
                     } else {
-                        Log.e("Test", "Response : " + response.body().toString());
+                        Log.e("Cashback", "Response : " + response.body().toString());
 
                         Utility.showAlertDialog(CashbackActivity.this,"Oh no...", statusMessage);
-
                     }
-
                 } else {
-                    Log.e("TEST", "Error: " + response.message());
+                    Log.e("Cashback", "Error: " + response.message());
                 }
             }
-
             @Override
             public void onFailure(Call<JsonObject> call, Throwable test) {
                 Utility.dialog.dismiss();
 
-
-                Log.e("Test:::", test.getMessage().toString());
+                Log.e("Cashback", test.getMessage().toString());
             }
         });
     }
 
-    private void setFooter() {
-        AppColorModel appColor = Utility.response.responsedata.appColor;
 
-        HomeScreenModel homeScreenModel = Utility.response.responsedata.homeScreen;
-        if (homeScreenModel.isHomePageDisplayFooter()) {
-            rvFooterCashback.setVisibility(View.VISIBLE);
-            rvFooterCashback.setBackgroundColor(Utility.getColor(appColor.getFooterBarColor()));
-
-            FooterAdapter adapter = new FooterAdapter(this, homeScreenModel.footerLinks, "redeemCashback");
-            rvFooterCashback.setHasFixedSize(true);
-
-
-            rvFooterCashback.setLayoutManager(new GridLayoutManager(this, homeScreenModel.footerLinks.size()));
-
-            rvFooterCashback.setAdapter(adapter);
-        } else {
-            rvFooterCashback.setVisibility(View.GONE);
-
-
-        }
-
-
-    }
 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.imgBackRedeemCashback) {
             super.onBackPressed();
         }
-
     }
-
     private void getData() {
-
-
-
-
         final GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
         Log.e("Request", "RP ID: " + Utility.response.responsedata.appDetails.rewardProgramId + ", Contact ID: " + Utility.response.responsedata.contactData.contactID);
         Call<JsonObject> call =
@@ -370,6 +318,7 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
                         , Utility.response.responsedata.contactData.contactID);
         call.enqueue(new Callback<JsonObject>() {
 
+            @SuppressLint("SetTextI18n")
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 relLoadingCashback.setVisibility(View.GONE);
@@ -377,10 +326,11 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
 
                 if (response.isSuccessful()) {
 
+                    assert response.body() != null;
                     JsonElement responseModel = response.body().get("responsedata");
                     Log.e("Response: ", "" + String.valueOf(responseModel.getAsJsonObject().get("amount")));
                     amount = responseModel.getAsJsonObject().get("amount").getAsDouble();
-                    textBalanceRC.setText("$ " + String.valueOf(Utility.getRoundData(amount)));
+                    textBalanceRC.setText("$ " + Utility.getRoundData(amount));
                     isAllowPartialCashbackRedemption = responseModel.getAsJsonObject().get("isAllowPartialCashbackRedemption").getAsBoolean();
                     isRequireWholeNumberRedemption = responseModel.getAsJsonObject().get("isRequireWholeNumberRedemption").getAsBoolean();
                     setCashbackSuggetion();
@@ -393,21 +343,18 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
                             Utility.response.responsedata.contactData.getContactID()
                     );
 
-
                     callGetContactData.enqueue(new Callback<ResponseModel>() {
                         @Override
-                        public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                        public void onResponse(@NotNull Call<ResponseModel> call, @NotNull Response<ResponseModel> response) {
                             if (response.isSuccessful()) {
 
-
                                 Log.e("Response - getAllPoints", "Response : "+response.body());
+                                assert response.body() != null;
                                 Utility.response.responsedata.totalEarnedThisMonth = response.body().responsedata.getTotalEarnedThisMonth();
                                 Utility.response.responsedata.totalReedemed = response.body().responsedata.getTotalReedemed();
                                 Utility.response.responsedata.lifeTimePoints = response.body().responsedata.getLifeTimePoints();
                                 Utility.response.responsedata.pointBalance = response.body().responsedata.getPointBalance();
                                 Utility.response.responsedata.pointBalance = response.body().responsedata.getPointBalance();
-
-
 
                             } else {
                                 Log.e("Response - getAllPoints", "Response : "+ response.message());
@@ -422,15 +369,12 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
 
                         }
                     });
-
-                    Log.e("Test", "Response: " + response.body());
-
+                    Log.e("Cashback", "Response: " + response.body());
 
                 } else {
 
                     Utility.showAlertDialog(CashbackActivity.this,"Oops...","Something went wrong");
-                    Log.e("Test Error: ", "" + response.message());
-
+                    Log.e("Cashback Error: ", "" + response.message());
 
                 }
             }
@@ -442,11 +386,8 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
                 Log.e("Test Error: ", "" + t.getMessage());
                 Utility.showAlertDialog(CashbackActivity.this,"Oops...","Something went wrong");
 
-
-
             }
         });
-
     }
 
     private JsonObject ApiJsonMap(String rewardProgramID, String webFormID, String contactID, double cashbackAmount
@@ -460,19 +401,15 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
             jsonObj_.put("contactID", contactID);
             jsonObj_.put("cashbackAmount", cashbackAmount);
 
-
             JsonParser jsonParser = new JsonParser();
             gsonObject = (JsonObject) jsonParser.parse(jsonObj_.toString());
 
-            //print parameter
+            //print Request Body
             Log.e("Request Body:  ", "" + gsonObject);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         return gsonObject;
     }
-
-
 }

@@ -110,7 +110,6 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
         tableLayoutLeaderboard = findViewById(R.id.tableLayoutLeaderboard);
         textNoWinnerFound = findViewById(R.id.textNoWinnerFound);
 
-
         tableLayoutLeaderboard.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
 
         winnerImage = findViewById(R.id.winnerImage);
@@ -118,7 +117,6 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
         relOne = findViewById(R.id.relLBOne);
         textName = findViewById(R.id.textName);
         textPoint = findViewById(R.id.textPoint);
-
 
         winnerImageTwo = findViewById(R.id.winnerImageTwo);
         imgAwardTwo = findViewById(R.id.imgAwardTwo);
@@ -134,7 +132,8 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
 
         imgFilter.setOnClickListener(this);
         imgBackLeaderboard.setOnClickListener(this);
-        setFooter();
+        Utility.setFooter(LeaderboardActivity.this,rvFooterLeaderboard,"leaderboard");
+
     }
 
     @Override
@@ -150,34 +149,9 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
                 Toast.makeText(this, "No Winner Found", Toast.LENGTH_SHORT).show();
             }
 
-
         } else if (v.getId() == R.id.imgBackLeaderboard) {
             super.onBackPressed();
         }
-    }
-
-    private void setFooter() {
-        AppColorModel appColor = Utility.response.responsedata.appColor;
-
-        HomeScreenModel homeScreenModel = Utility.response.responsedata.homeScreen;
-        if (homeScreenModel.isHomePageDisplayFooter()) {
-            rvFooterLeaderboard.setVisibility(View.VISIBLE);
-            rvFooterLeaderboard.setBackgroundColor(Utility.getColor(appColor.getFooterBarColor()));
-
-            FooterAdapter adapter = new FooterAdapter(this, homeScreenModel.footerLinks, "leaderboard");
-            rvFooterLeaderboard.setHasFixedSize(true);
-
-
-            rvFooterLeaderboard.setLayoutManager(new GridLayoutManager(this, homeScreenModel.footerLinks.size()));
-
-            rvFooterLeaderboard.setAdapter(adapter);
-        } else {
-            rvFooterLeaderboard.setVisibility(View.GONE);
-
-
-        }
-
-
     }
 
     void showMonthDialog() {
@@ -274,7 +248,7 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
                         responsedata.filters = responseModel.responsedata.filters;
                         responsedata.qualificationCriteria = responseModel.responsedata.qualificationCriteria;
                         responsedata.leaderBoardReport = responseModel.responsedata.leaderBoardReport;
-                        
+
                         Log.e("Test", "onResponse: " + responsedata.qualificationCriteria.noOfWinners);
 
                         setLayout();
@@ -296,7 +270,6 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
             public void onFailure(Call<ResponseModel> call, Throwable t) {
                 relLoadingLeaderboard.setVisibility(View.GONE);
                 Utility.showAlertDialog(LeaderboardActivity.this,"Oops...", "Something went wrong, contact support");
-
 
                 Log.e("Test Error: ", "" + t.getMessage());
 
@@ -342,7 +315,6 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
                                     model.getAsJsonObject().get("profilePitcure").getAsString(),
                                     model.getAsJsonObject().get("fullName").getAsString()
                             );
-
                             if(rank <= 3)
                             {
                                 if(responsedata.leaderBoardReport != null)
@@ -373,7 +345,7 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
                         adapter.notifyDataSetChanged();
 
                         }
-                        setFooter();
+
 
                     } else {
                         Utility.showAlertDialog(LeaderboardActivity.this,"Oops...", response.message());
@@ -434,8 +406,6 @@ if(responsedata.leaderBoardReport != null)
         relativeParams.topMargin=50;
         relThree.setLayoutParams(relativeParams);
 
-
-
         textNameTwo.setText(responsedata.leaderBoardReport.get(1).getFullName());
         textPointTwo.setText("Point: " + String.valueOf(responsedata.leaderBoardReport.get(1).getTotalPoints()));
         Glide.with(this).load(responsedata.leaderBoardReport.get(1).getProfilePitcure()).into(winnerImageTwo);
@@ -454,27 +424,17 @@ if(responsedata.leaderBoardReport != null)
         textName.setText(responsedata.leaderBoardReport.get(0).getFullName());
         textPoint.setText("Point: " + String.valueOf(responsedata.leaderBoardReport.get(0).getTotalPoints()));
         Glide.with(this).load(responsedata.leaderBoardReport.get(0).getProfilePitcure()).into(winnerImage);
-
-
         textNameTwo.setText(responsedata.leaderBoardReport.get(1).getFullName());
         textPointTwo.setText("Point: " + String.valueOf(responsedata.leaderBoardReport.get(1).getTotalPoints()));
         Glide.with(this).load(responsedata.leaderBoardReport.get(1).getProfilePitcure()).into(winnerImageTwo);
-
-
         textNameThree.setText(responsedata.leaderBoardReport.get(2).getFullName());
         textPointThree.setText("Point: " + String.valueOf(responsedata.leaderBoardReport.get(2).getTotalPoints()));
         Glide.with(this).load(responsedata.leaderBoardReport.get(2).getProfilePitcure()).into(winnerImageThree);
-
-
     }
 }
 else
 {
     textNoWinnerFound.setVisibility(View.VISIBLE);
 }
-
-
     }
-
-
 }

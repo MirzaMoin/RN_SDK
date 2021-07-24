@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -50,7 +51,6 @@ import retrofit2.Response;
 
 public class TransactionHistoryActivity extends AppCompatActivity implements View.OnClickListener {
 
-    List<SliderItem> mSliderItems = new ArrayList<>();
     RecyclerView rvTransactionHistory, rvFooterTransactionHistory;
 
     TextView textPointTransactionHistory,
@@ -61,7 +61,6 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
             imageTH,
             imageLogoTH;
 
-
     ResponseModelTransactionHistory responseModel;
     EditText etLocationNameSearchTH;
     RelativeLayout relImagePreview,
@@ -69,29 +68,19 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
 
     TableLayout tableLayoutTH;
 
-    boolean isOpen = false;
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.myLibTheme);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_history);
 
         init();
         getData();
-
-
     }
-
-
     private void getData() {
         relLoadingTH.setVisibility(View.VISIBLE);
         Glide.with(this).load(Utility.response.responsedata.appIntakeImages.loadingImages.get(0).imageUrl).into(imageTH);
         Glide.with(this).load(Utility.response.responsedata.appIntakeImages.companyLogo).into(imageLogoTH);
-
 
         GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
         Log.e("Request", "RP ID: " + Utility.response.responsedata.appDetails.rewardProgramId + ", Contact ID: " + Utility.response.responsedata.contactData.contactID);
@@ -143,9 +132,8 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
             }
         });
     }
-
+    @SuppressLint("SetTextI18n")
     private void init() {
-
 
         if (Build.VERSION.SDK_INT >= 21) {
             Window window = getWindow();
@@ -156,7 +144,6 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
         if (Utility.response.responsedata.appColor.getPhoneNotificationBarTextColor().equals("Black")) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
-
         tableLayoutTH = findViewById(R.id.tableLayoutTH);
         textNoData = findViewById(R.id.textNoData);
         tableLayoutTH.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
@@ -202,21 +189,18 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
         imageLogoTH = findViewById(R.id.imageLogoTH);
 
         imgBackTransactionHistory.setOnClickListener(this);
-        setFooter();
+        Utility.setFooter(TransactionHistoryActivity.this,rvFooterTransactionHistory,"transactionHistory");
 
         etLocationNameSearchTH.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-
                 filterLocation(s);
                 Log.e("Test", "onTextChanged: " + s.toString());
-
 
             }
 
@@ -225,49 +209,22 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
 
             }
         });
-
     }
-
     private void filterLocation(CharSequence s) {
         List<TransactionHistoryModel> filterData = new ArrayList<TransactionHistoryModel>();
         for (TransactionHistoryModel history : responseModel.responsedata) {
             if (history.locationName.toLowerCase().contains(s.toString().toLowerCase())) {
-                Log.e("Test", "filterLocation: " + history.locationName);
+                Log.e("Transaction History", "filterLocation: " + history.locationName);
                 filterData.add(history);
             }
         }
-        Log.e("Test", "Filter Size" + filterData.size());
+        Log.e("Transaction History", "Filter Size" + filterData.size());
         if (filterData != null) {
             TransactionHistoryAdapter adapter = new TransactionHistoryAdapter(TransactionHistoryActivity.this, filterData, relImagePreview, imgPreview, imgPreview);
             rvTransactionHistory.setHasFixedSize(true);
             rvTransactionHistory.setLayoutManager(new LinearLayoutManager(TransactionHistoryActivity.this));
             rvTransactionHistory.setAdapter(adapter);
         }
-    }
-
-    private void setFooter() {
-        Log.e("Test","SetFooter Called");
-        AppColorModel appColor = Utility.response.responsedata.appColor;
-
-        HomeScreenModel homeScreenModel = Utility.response.responsedata.homeScreen;
-        if (homeScreenModel.isHomePageDisplayFooter()) {
-            rvFooterTransactionHistory.setVisibility(View.VISIBLE);
-            rvFooterTransactionHistory.setBackgroundColor(Utility.getColor(appColor.getFooterBarColor()));
-
-            FooterAdapter adapter = new FooterAdapter(this, homeScreenModel.footerLinks, "transactionHistory");
-            rvFooterTransactionHistory.setHasFixedSize(true);
-
-
-            rvFooterTransactionHistory.setLayoutManager(new GridLayoutManager(this, homeScreenModel.footerLinks.size()));
-
-            rvFooterTransactionHistory.setAdapter(adapter);
-        } else {
-            rvFooterTransactionHistory.setVisibility(View.GONE);
-
-
-        }
-
-
     }
 
     @Override

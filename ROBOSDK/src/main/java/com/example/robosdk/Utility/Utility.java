@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.robosdk.Activities.CashbackActivity;
 import com.example.robosdk.Activities.ContactUsActivity;
@@ -24,6 +26,9 @@ import com.example.robosdk.Activities.TransactionHistoryActivity;
 import com.example.robosdk.Activities.TransferPointActivity;
 import com.example.robosdk.Activities.UploadReceiptActivity;
 import com.example.robosdk.Activities.WaysToEarnActivity;
+import com.example.robosdk.Adapter.FooterAdapter;
+import com.example.robosdk.Models.AppColorModel;
+import com.example.robosdk.Models.HomeScreenModel;
 import com.example.robosdk.Models.ResponseModel;
 import com.example.robosdk.R;
 
@@ -36,22 +41,18 @@ public class Utility {
 
   public static int  getColor(String color){
 
-
-    String colorCode = color.substring(1,color.length());
+    String colorCode = color.substring(1);
 
     String alpha  = colorCode.substring(colorCode.length()-2);
     String finalColor = "#"+alpha +  colorCode.substring(0,colorCode.length()-2);
 
    return  Color.parseColor(finalColor);
-
-
   }
 
   public static void openNewActivity(Context context, String menuInternalLinkUrl, int id, String rpID)
   {
     switch (menuInternalLinkUrl)
     {
-
       case "refereFriend":
       case "Refer Friend":
         context.startActivity(new Intent(context, ReferFriendActivity.class));
@@ -108,8 +109,6 @@ public class Utility {
       case "locations":
         context.startActivity(new Intent(context, LocationActivity.class));
         break;
-
-
     }
   }
 
@@ -542,5 +541,23 @@ public class Utility {
     });
 
 
+  }
+
+  public static void setFooter(Context context, RecyclerView rv,String activity) {
+    AppColorModel appColor = Utility.response.responsedata.appColor;
+    HomeScreenModel homeScreenModel = Utility.response.responsedata.homeScreen;
+    if (homeScreenModel.isHomePageDisplayFooter()) {
+      rv.setVisibility(View.VISIBLE);
+      rv.setBackgroundColor(Utility.getColor(appColor.getFooterBarColor()));
+
+      FooterAdapter adapter = new FooterAdapter(context, homeScreenModel.footerLinks, activity);
+      rv.setHasFixedSize(true);
+
+      rv.setLayoutManager(new GridLayoutManager(context, homeScreenModel.footerLinks.size()));
+
+      rv.setAdapter(adapter);
+    } else {
+      rv.setVisibility(View.GONE);
+    }
   }
 }

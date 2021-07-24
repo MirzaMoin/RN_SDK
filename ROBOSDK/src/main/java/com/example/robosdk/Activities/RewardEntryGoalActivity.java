@@ -50,11 +50,8 @@ public class RewardEntryGoalActivity extends AppCompatActivity implements View.O
             imageRPG,
             imageLogoRPG;
     RelativeLayout relLoadingRPG;
-    LinearLayout linearCashbackRPG, linearHome;
     TextView textPointRPG;
-
     TableLayout tableLayoutRPG;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,30 +84,20 @@ public class RewardEntryGoalActivity extends AppCompatActivity implements View.O
         imageLogoRPG = findViewById(R.id.imageLogoRPG);
         relLoadingRPG = findViewById(R.id.relLoadingRPG);
         tableLayoutRPG = findViewById(R.id.tableLayoutRPG);
-
-
         tableLayoutRPG.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
-
         textPointRPG.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
         textPointRPG.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
-
         imgBack.setOnClickListener(this);
-
         SliderView sliderView = findViewById(R.id.imageSliderRPG);
         ChildPageSettingModel childPageSettings = Utility.response.responsedata.childPageSetting;
         if (childPageSettings.isChildPageRpg()) {
             sliderView.setVisibility(View.VISIBLE);
-
             List<ChildPageModel> childPage = new ArrayList<>();
             for (RPGChildPageDataModel rpg : childPageSettings.rpgChildPageData) {
                 childPage.add(new ChildPageModel(rpg.image, rpg.opacity, rpg.isClickable, rpg.linkType, rpg.internalLink, rpg.externalLink));
             }
-
-
             CashbackImageSliderAdapter adapter = new CashbackImageSliderAdapter(this, childPage);
-
             sliderView.setSliderAdapter(adapter);
-
             sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM); //set indicator animation by using IndicatorAnimationType. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
             sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
             sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
@@ -119,37 +106,8 @@ public class RewardEntryGoalActivity extends AppCompatActivity implements View.O
             sliderView.setScrollTimeInSec(4); //set scroll delay in seconds :
             sliderView.startAutoCycle();
         }
-
-
-        setFooter();
-
-
+        Utility.setFooter(RewardEntryGoalActivity.this,rvFooterRPG,"rpg");
     }
-
-    private void setFooter() {
-        AppColorModel appColor = Utility.response.responsedata.appColor;
-
-        HomeScreenModel homeScreenModel = Utility.response.responsedata.homeScreen;
-        if (homeScreenModel.isHomePageDisplayFooter()) {
-            rvFooterRPG.setVisibility(View.VISIBLE);
-            rvFooterRPG.setBackgroundColor(Utility.getColor(appColor.getFooterBarColor()));
-
-            FooterAdapter adapter = new FooterAdapter(this, homeScreenModel.footerLinks, "rpg");
-            rvFooterRPG.setHasFixedSize(true);
-
-
-            rvFooterRPG.setLayoutManager(new GridLayoutManager(this, homeScreenModel.footerLinks.size()));
-
-            rvFooterRPG.setAdapter(adapter);
-        } else {
-            rvFooterRPG.setVisibility(View.GONE);
-
-
-        }
-
-
-    }
-
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.imgBackRPG) {
@@ -158,18 +116,12 @@ public class RewardEntryGoalActivity extends AppCompatActivity implements View.O
     }
 
     private void getData() {
-
         relLoadingRPG.setVisibility(View.VISIBLE);
         Glide.with(this).load(Utility.response.responsedata.appIntakeImages.loadingImages.get(0).imageUrl).into(imageRPG);
         Glide.with(this).load(Utility.response.responsedata.appIntakeImages.companyLogo).into(imageLogoRPG);
-
-
-
-
         GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
         Log.e("Request - getRPGList", "RP Token: " + Utility.RPToken +
                 ", Contact ID: " + Utility.response.responsedata.contactData.contactID);
-
         Call<ResponseModel> call = service.getRPGList(Utility.RPToken
                 , Utility.response.responsedata.contactData.contactID);
         call.enqueue(new Callback<ResponseModel>() {
@@ -177,36 +129,25 @@ public class RewardEntryGoalActivity extends AppCompatActivity implements View.O
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                 relLoadingRPG.setVisibility(View.GONE);
 
-
                 if (response.isSuccessful()) {
-
                     Utility.response.responsedata.lstRPG = response.body().responsedata.lstRPG;
-
-
                     Log.e("Response - getRPGList", "onResponse: " + Utility.response.responsedata.lstRPG.size());
-
                     RewardEntryPointAdapter adapter = new RewardEntryPointAdapter(RewardEntryGoalActivity.this, Utility.response.responsedata.lstRPG);
                     rvRPG.setHasFixedSize(true);
                     rvRPG.setLayoutManager(new LinearLayoutManager(RewardEntryGoalActivity.this));
                     rvRPG.setAdapter(adapter);
-
-
                 } else {
                     Utility.showAlertDialog(RewardEntryGoalActivity.this,"Oops...","Something went wrong");
                     Log.e("TEST", "Error Sub: " + response.message());
                 }
             }
-
             @Override
             public void onFailure(Call<ResponseModel> call, Throwable test) {
                 relLoadingRPG.setVisibility(View.GONE);
-
                 Utility.showAlertDialog(RewardEntryGoalActivity.this,"Oops...","Something went wrong");
-
                 test.printStackTrace();
-                Log.e("Test", "Error Main: " + test.toString());
+                Log.e("Reward Entry Goal", "Error Main: " + test.toString());
             }
         });
-
     }
 }

@@ -92,12 +92,8 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
             textWebsiteURL;
     DialogListAdapter adapter;
     View viewOfferDetail;
-
     ConstraintLayout rootLayout;
-
     TableLayout tableLayoutOfferDetails;
-
-
     OfferListModel currentOffer = null;
     List<LocationDataModel> originalLocations = new ArrayList<>();
 
@@ -105,10 +101,8 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.myLibTheme);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offers_detail);
-
         init();
     }
 
@@ -149,7 +143,6 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
         tableLayoutOfferDetails = findViewById(R.id.tableLayoutOfferDetails);
         tableLayoutOfferDetails.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
 
-
         imgback.setOnClickListener(this);
         textPointOfferDetail.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
         textPointOfferDetail.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
@@ -164,16 +157,12 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
         if (hasFocus) {
             barCode(barcodeData);
         }
-
     }
 
+    @SuppressLint("SetTextI18n")
     private void setLayout() {
         Intent i = getIntent();
         String offerSendID = i.getStringExtra("offerSendID");
-
-
-        Log.e("Test", "Offer Send ID: " + offerSendID);
-
 
         for (OfferListModel offer : Utility.response.responsedata.offerList) {
             if (offer.getOfferSendID().equals(offerSendID)) {
@@ -183,7 +172,6 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
         }
         AppColorModel color = Utility.response.responsedata.appColor;
         final OfferUserDetailsModel userDetails = Utility.response.responsedata.getUserDetails();
-
 
         Glide.with(this).load(currentOffer.getOfferImage()).into(imageOfferImageDetail);
         textOfferTitleDetail.setText(currentOffer.getOfferTitle());
@@ -203,14 +191,12 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
         textOfferIDDetail.setText("Offer ID: " + String.valueOf(currentOffer.getOfferID()));
         textOfferIDDetail.setTextColor(Utility.getColor(color.getTitleTextColor()));
 
-
         textNameDetail.setTextColor(Utility.getColor(color.getTitleTextColor()));
         textAddressDetail.setTextColor(Utility.getColor(color.getTitleTextColor()));
         textCityStateZip.setTextColor(Utility.getColor(color.getTitleTextColor()));
         textBusinessPhone.setTextColor(Utility.getColor(color.getLocationsLinkColor()));
 
         textWebsiteURL.setTextColor(Utility.getColor(color.getLocationsLinkColor()));
-
 
         final OfferAddressDetailsModel addressDetails = Utility.response.responsedata.getAddressDetails();
 
@@ -219,7 +205,6 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
         textCityStateZip.setText(addressDetails.getCity() + " " + addressDetails.getState() + " " + addressDetails.getZipCode());
         textBusinessPhone.setText(addressDetails.getBusinessPhone());
         textWebsiteURL.setText(addressDetails.getWebsiteURL());
-
 
         if (currentOffer.isDisplayPrintButton()) {
             textPrintOfferDetail.setVisibility(View.VISIBLE);
@@ -258,13 +243,11 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
                 showAlertDialog(Utility.response.responsedata.redeemSetting.getRedeemOfferInstruction(), currentOffer.getOfferID(), currentOffer.getOfferSendID(), userDetails.getAddressID());
             }
         });
-
     }
-
     public void barCode(String data) {
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
 
-        Log.e("Test", "Height: " + imageBarcode.getHeight() + ", Width: " + imageBarcode.getWidth());
+        Log.e("Barcode", "Height: " + imageBarcode.getHeight() + ", Width: " + imageBarcode.getWidth());
         try {
             BitMatrix bitMatrix = multiFormatWriter.encode(data, BarcodeFormat.CODE_128, imageBarcode.getWidth(), imageBarcode.getHeight());
             Bitmap bitmap = Bitmap.createBitmap(imageBarcode.getWidth(), imageBarcode.getHeight(), Bitmap.Config.RGB_565);
@@ -278,7 +261,6 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
             e.printStackTrace();
         }
     }
-
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.imgBackOfferDetail) {
@@ -290,51 +272,6 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
-    protected File screenshot(View view, String filename) {
-        Date date = new Date();
-        Log.e("Test", "reach 0");
-
-        // Here we are initialising the format of our image name
-        CharSequence format = android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", date);
-        try {
-            Log.e("Test", "reach 1");
-
-            // Initialising the directory of storage
-            String dirpath = /*Environment.getExternalStorageDirectory().getParent()*/ "/storage/emulated/0/DCIM/" + "";
-            File file = new File(dirpath);
-            if (!file.exists()) {
-                boolean mkdir = file.mkdir();
-            }
-            Log.e("Test", "reach 2");
-
-            // File name
-            String path = dirpath + "/" + filename + "-" + format + ".jpeg";
-            view.setDrawingCacheEnabled(true);
-            Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache());
-            view.setDrawingCacheEnabled(false);
-            File imageurl = new File(path);
-            FileOutputStream outputStream = new FileOutputStream(imageurl);
-            Log.e("Test", "reach 3");
-
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, outputStream);
-            Log.e("Test", "reach 4");
-
-            outputStream.flush();
-            outputStream.close();
-            Log.e("Test", "reach 5");
-
-            Toast.makeText(this, "Offer save to gallery", Toast.LENGTH_SHORT).show();
-            return imageurl;
-
-        } catch (FileNotFoundException io) {
-            io.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    /*  Method which will take screenshot on Basis of Screenshot Type ENUM  */
     private void takeScreenshot() {
         Bitmap b = null;
 
@@ -342,7 +279,6 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
 
         //If bitmap is not null
         if (b != null) {
-            showScreenShotImage(b);//show bitmap over imageview
 
             File saveFile = ScreenshotUtils.getMainDirectoryName(this);//get the path to save screenshot
             Date d = new Date();
@@ -357,11 +293,6 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
         } else
             //If bitmap is null show toast message
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
-    }
-
-    /*  Show screenshot Bitmap */
-    private void showScreenShotImage(Bitmap b) {
-//        imageView.setImageBitmap(b);
     }
 
     void showAlertDialog(String message, final int offerID, final String offerSendID, final String addressID) {
@@ -391,9 +322,7 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
             textCancel.setVisibility(View.VISIBLE);
         } else {
             textOk.setText("OKAY");
-
         }
-
         textMessage.setText(message);
 
         textCancel.setOnClickListener(new View.OnClickListener() {
@@ -407,11 +336,9 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-
                 if (!offerSendID.isEmpty()) {
                     if (Utility.response.responsedata.redeemSetting.isAskWhereAreYou()) {
                         originalLocations.addAll(Utility.response.responsedata.locationData);
-
                         showLocationDialog(offerID, offerSendID);
                     } else {
                         RedeemOffer(offerID, offerSendID, addressID);
@@ -422,36 +349,26 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
                     Constants.isOfferRedeem = true;
                     OffersDetailActivity.super.onBackPressed();
                 }
-
             }
         });
-
-
     }
 
     private void showLocationDialog(final int offerID, final String offerSendID) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
         final View customLayout = getLayoutInflater().inflate(R.layout.content_location_dialog, null);
         builder.setView(customLayout);
-
         final AlertDialog dialog = builder.create();
         dialog.setCancelable(false);
         dialog.show();
-
-
         EditText etSearchLocation = dialog.findViewById(R.id.etSearchLocation);
         RecyclerView rvLocationDialog = dialog.findViewById(R.id.rvLocationDialog);
         Button btnConfirmLocation = dialog.findViewById(R.id.btnConfirmLocation);
-
-
         etSearchLocation.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
@@ -459,13 +376,9 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
                     Utility.response.responsedata.locationData.clear();
                     Utility.response.responsedata.locationData.addAll(originalLocations);
                     adapter.notifyDataSetChanged();
-
                 } else {
-
                     List<LocationDataModel> locations = new ArrayList<>();
-
                     for (LocationDataModel l : originalLocations) {
-
                         if (l.getLocationName().toLowerCase().contains(s.toString().toLowerCase())) {
                             locations.add(l);
                         }
@@ -475,23 +388,16 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
                     adapter.notifyDataSetChanged();
                     Log.e("Test", "Result : " + locations.size());
                 }
-
-
             }
-
             @Override
             public void afterTextChanged(Editable s) {
 
             }
         });
-
-
         etSearchLocation.setHint("Search Location");
-
         adapter = new DialogListAdapter(this, "Location", -1);
         rvLocationDialog.setLayoutManager(new LinearLayoutManager(this));
         rvLocationDialog.setAdapter(adapter);
-
         btnConfirmLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -506,15 +412,10 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
                 }
             }
         });
-
-
     }
-
     private void RedeemOffer(int offerID, String offerSendID, String addressID) {
         Utility.showLoader(OffersDetailActivity.this);
-
         GetAPIData service = RetrofitClientInstance.getRetrofitInstance().create(GetAPIData.class);
-
         ResponsedataModel responseData = Utility.response.responsedata;
         Call<JsonObject> callRedeemOffer = service.RedeemOffer(ApiJsonMap(responseData.appDetails.rewardProgramId,
                 responseData.appDetails.webFormID,
@@ -522,44 +423,33 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
                 offerID,
                 offerSendID,
                 addressID
-
         ));
-
-
         callRedeemOffer.enqueue(new Callback<JsonObject>() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-
                 Utility.dialog.dismiss();
                 if (response.isSuccessful()) {
                     assert response.body() != null;
                     if (response.body().get("statusCode").getAsInt() == 1) {
-
-                        Log.e("Test", "Response : " + response.body().get("statusMessage").getAsString());
+                        Log.e("Offer Details", "Response : " + response.body().get("statusMessage").getAsString());
                         JsonElement responsedata = response.body().get("responsedata").getAsJsonObject();
-//
                         Utility.response.responsedata.contactData.setPointBalance(responsedata.getAsJsonObject().get("reedemablePoints").getAsDouble());
                         Utility.response.responsedata.contactData.setReedemablePoints(responsedata.getAsJsonObject().get("reedemablePoints").getAsDouble());
                         textPointOfferDetail.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
-
                         showAlertDialog(response.body().get("statusMessage").getAsString(), 0, "", "");
-
                     } else {
                         showAlertDialog(response.body().get("statusMessage").getAsString(), -1, "", "");
-                        Log.e("Test", "Response : " + response.body().get("statusMessage").getAsString());
-
+                        Log.e("Offer Details", "Response : " + response.body().get("statusMessage").getAsString());
                     }
-
-
                 } else {
-                    Log.e("TEST", "Error: " + response.message());
+                    Log.e("Offer Details", "Error: " + response.message());
                 }
             }
-
             @Override
             public void onFailure(Call<JsonObject> call, Throwable test) {
                 Utility.dialog.dismiss();
-                Log.e("Test:::", test.getMessage().toString());
+                Log.e("Offer Details", test.getMessage().toString());
             }
         });
     }
@@ -575,39 +465,23 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
             jsonObj_.put("contactID", contactID);
             jsonObj_.put("addressID", addressID);
             jsonObj_.put("webFormID", webFormID);
-
             JsonParser jsonParser = new JsonParser();
             gsonObject = (JsonObject) jsonParser.parse(jsonObj_.toString());
-
             //print parameter
             Log.e("Request Body:  ", "" + gsonObject);
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         return gsonObject;
     }
 
-/*
-    // verifying if storage permission is given or not
-    public static void verifystoragepermissions(Activity activity) {
-
-        int permissions = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-
-        // If storage permission is not given then request for External Storage Permission
-        if (permissions != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(activity, permissionstorage, REQUEST_EXTERNAL_STORAGE);
-        }
-    }*/
     private void moveImage(String inputPath, String inputFile, String outputPath) {
 
-        Log.e("Test", "Input Path: " + inputPath + ", File Name: " + inputFile + ", Output Path: " + outputPath);
+        Log.e("Offer Details", "Input Path: " + inputPath + ", File Name: " + inputFile + ", Output Path: " + outputPath);
 
         InputStream in = null;
         OutputStream out = null;
         try {
-
             //create output directory if it doesn't exist
             File dir = new File(outputPath);
             if (!dir.exists()) {
@@ -616,11 +490,8 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
                     Log.e("Test", "Dir not created");
                 }
             }
-
-
             in = new FileInputStream(inputPath + inputFile);
             out = new FileOutputStream(outputPath + inputFile);
-
             byte[] buffer = new byte[1024];
             int read;
             while ((read = in.read(buffer)) != -1) {
@@ -628,15 +499,12 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
             }
             in.close();
             in = null;
-
             // write the output file
             out.flush();
             out.close();
             out = null;
-
             // delete the original file
             new File(inputPath + inputFile).delete();
-
         } catch (FileNotFoundException fnfe1) {
             Log.e("tag", fnfe1.getMessage());
         } catch (Exception e) {
