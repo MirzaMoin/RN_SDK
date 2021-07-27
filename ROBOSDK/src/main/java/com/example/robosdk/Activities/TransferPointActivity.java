@@ -69,6 +69,8 @@ public class TransferPointActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_transfer_point);
         init();
 
+
+
         swipeBtnTransferPoint.setOnStateChangeListener(new OnStateChangeListener() {
             @Override
             public void onStateChange(boolean active) {

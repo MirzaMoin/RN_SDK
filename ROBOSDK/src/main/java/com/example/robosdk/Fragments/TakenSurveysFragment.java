@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.robosdk.Adapter.TakeSurveyAdapter;
@@ -25,6 +26,8 @@ public class TakenSurveysFragment extends Fragment {
 
     RecyclerView rvFragmentTakenSurvey;
     TextView textNoSurveyFoundTaken;
+    LinearLayout linearNoSurvey;
+
 
 
     @Override
@@ -46,12 +49,12 @@ public class TakenSurveysFragment extends Fragment {
             rvFragmentTakenSurvey.setLayoutManager(new LinearLayoutManager(getContext()));
 
             rvFragmentTakenSurvey.setAdapter(adapter);
-            textNoSurveyFoundTaken.setVisibility(View.GONE);
+            linearNoSurvey.setVisibility(View.GONE);
 
         }
         else
         {
-            textNoSurveyFoundTaken.setVisibility(View.VISIBLE);
+            linearNoSurvey.setVisibility(View.VISIBLE);
         }
 
         return view;
@@ -60,6 +63,7 @@ public class TakenSurveysFragment extends Fragment {
     private void init(View view) {
         rvFragmentTakenSurvey = view.findViewById(R.id.rvFragmentTakenSurvey);
         textNoSurveyFoundTaken = view.findViewById(R.id.textNoSurveyFoundTaken);
+        linearNoSurvey = view.findViewById(R.id.linearNoSurvey);
 
     }
 }

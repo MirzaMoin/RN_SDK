@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -29,6 +30,7 @@ import com.example.robosdk.API.GetAPIData;
 import com.example.robosdk.API.RetrofitClientInstance;
 import com.example.robosdk.Adapter.FooterAdapter;
 import com.example.robosdk.Adapter.LocationBottomsheetAdapter;
+import com.example.robosdk.Adapter.LocationFilterAdapter;
 import com.example.robosdk.Models.AppColorModel;
 import com.example.robosdk.Models.HomeScreenModel;
 import com.example.robosdk.Models.LocationDataModel;
@@ -59,8 +61,12 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
     RecyclerView rvFooterLocation;
     ImageView imgBackLocation,
             imageLocation,
-            imageLogoLocation;
+            imageLogoLocation,
+            imageFilter;
     TextView textPointLocation;
+
+    boolean isFilderVisible = false;
+    LinearLayout linearFilter;
 
     LinearLayout bottomsheetLocation;
     RecyclerView rvLocationBottomsheet;
@@ -142,6 +148,17 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         TextView textLocation = dialog.findViewById(R.id.textLocation);
         final TextView textNoLocation = dialog.findViewById(R.id.textNoLocation);
         final RecyclerView rvLocation = dialog.findViewById(R.id.rvLocationBottomsheet);
+        final RecyclerView rvFilter = dialog.findViewById(R.id.rvFilter);
+        imageFilter = dialog.findViewById(R.id.imageFilter);
+        linearFilter = dialog.findViewById(R.id.linearFilter);
+
+        imageFilter.setOnClickListener(this);
+
+
+        final LocationFilterAdapter filterAdapter = new LocationFilterAdapter(this);
+        rvFilter.setHasFixedSize(true);
+        rvFilter.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        rvFilter.setAdapter(filterAdapter);
 
         if (Utility.response.responsedata.locationData.size() > 0) {
             assert rvLocation != null;
@@ -300,6 +317,25 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         }
         else if(v.getId() == R.id.cardLocation){
             showBottomsheet();
+        }
+        else if(v.getId() == R.id.imageFilter)
+        {
+            if(linearFilter.isShown()){
+                linearFilter.setVisibility(View.GONE);
+
+                imageFilter.setBackground(ContextCompat.getDrawable(this,R.drawable.edit_text_border));
+                imageFilter.setColorFilter(ContextCompat.getColor(this,
+                        R.color.grey));
+
+
+
+            }
+            else{
+                linearFilter.setVisibility(View.VISIBLE);
+                imageFilter.setBackground(ContextCompat.getDrawable(this,R.drawable.background_selected_filter));
+                imageFilter.setColorFilter(ContextCompat.getColor(this,
+                        R.color.white));
+            }
         }
     }
 }

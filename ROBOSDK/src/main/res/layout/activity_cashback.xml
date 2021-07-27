@@ -221,6 +221,9 @@
                 app:button_background="@drawable/shape_button_background"
                 app:initial_state="disabled"
                 app:has_activate_state="true"
+                app:button_trail_enabled="true"
+                app:button_trail_drawable="@drawable/background_trailing"
+
                 />
         </androidx.cardview.widget.CardView>
 

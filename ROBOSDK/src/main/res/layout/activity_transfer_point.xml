@@ -199,31 +199,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
-
                 app:cardCornerRadius="@dimen/_10sdp"
+                android:background="@drawable/shape_button_background"
                 android:layout_marginHorizontal="@dimen/_10sdp"
 
                 >
+
                 <com.ebanx.swipebtn.SwipeButton
                     android:id="@+id/swipeBtnTransferPoint"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:inner_text="Slide to transfer"
-                    app:inner_text_color="@android:color/white"
-                    app:inner_text_size="@dimen/_12ssp"
-                    app:inner_text_top_padding="@dimen/_10sdp"
-                    app:inner_text_bottom_padding="@dimen/_10sdp"
-
-                    app:button_image_width="@dimen/_45sdp"
+                    app:button_background="@drawable/shape_button_background"
+                    app:button_bottom_padding="@dimen/_10sdp"
                     app:button_image_disabled="@drawable/ic_baseline_arrow_forward_ios_24"
                     app:button_image_enabled="@drawable/ic_baseline_arrow_back_24"
+                    app:button_image_width="@dimen/_45sdp"
                     app:button_left_padding="20dp"
                     app:button_right_padding="20dp"
                     app:button_top_padding="@dimen/_10sdp"
-                    app:button_bottom_padding="@dimen/_10sdp"
-                    app:button_background="@drawable/shape_button_background"
-                    app:initial_state="disabled"
                     app:has_activate_state="true"
+                    app:initial_state="disabled"
+                    app:inner_text="Slide to transfer"
+                    app:inner_text_bottom_padding="@dimen/_10sdp"
+                    app:inner_text_color="@android:color/white"
+                    app:inner_text_size="@dimen/_12ssp"
+                    app:inner_text_top_padding="@dimen/_10sdp"
+                    app:button_trail_enabled="true"
+                    app:button_trail_drawable="@drawable/background_trailing"
+
                     />
             </androidx.cardview.widget.CardView>
 

@@ -81,7 +81,7 @@ public class LocationBottomsheetAdapter extends RecyclerView.Adapter<LocationBot
         if (data.getLogoImage() != null && data.getLogoImage() != null) {
             Glide.with(context).load(data.getLogoImage()).into(holder.imageLocationBottom);
         } else {
-            Glide.with(context).load(R.drawable.ic_location).into(holder.imageLocationBottom);
+//            Glide.with(context).load(R.drawable.ic_location).into(holder.imageLocationBottom);
 
         }
 
@@ -160,6 +160,8 @@ public class LocationBottomsheetAdapter extends RecyclerView.Adapter<LocationBot
         ImageView imageLocationBottom,
                 imgExpandLocation;
 
+       int nullCount = 0;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -176,6 +178,16 @@ public class LocationBottomsheetAdapter extends RecyclerView.Adapter<LocationBot
             imageLocationBottom = itemView.findViewById(R.id.imageLocationBottom);
             imgExpandLocation = itemView.findViewById(R.id.imgExpandLocation);
 
+            for(LocationDataModel location : Utility.response.responsedata.locationData){
+                if(location.logoImage == null)
+                {
+                    nullCount++;
+                }
+            }
+            if(nullCount == Utility.response.responsedata.locationData.size())
+            {
+                imageLocationBottom.setVisibility(View.GONE);
+            }
 
         }
     }

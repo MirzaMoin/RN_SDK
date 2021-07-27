@@ -27,17 +27,18 @@ import java.util.List;
 
 import info.androidhive.fontawesome.FontDrawable;
 
-public class HomeMenuLinkListAdapter extends RecyclerView.Adapter<HomeMenuLinkListAdapter.ViewHolder>{
+public class HomeMenuLinkListAdapter extends RecyclerView.Adapter<HomeMenuLinkListAdapter.ViewHolder> {
 
     List<MenuLinkModel> menuLinks;
     static boolean isList;
     boolean isFirst;
     Context context;
-   public HomeMenuLinkListAdapter(Context context, List<MenuLinkModel> menuLinks, boolean isList,boolean isFirst){
-       this.menuLinks = menuLinks;
-       this.context = context;
-       HomeMenuLinkListAdapter.isList = isList;
-       this.isFirst = isFirst;
+
+    public HomeMenuLinkListAdapter(Context context, List<MenuLinkModel> menuLinks, boolean isList, boolean isFirst) {
+        this.menuLinks = menuLinks;
+        this.context = context;
+        HomeMenuLinkListAdapter.isList = isList;
+        this.isFirst = isFirst;
 
     }
 
@@ -50,17 +51,16 @@ public class HomeMenuLinkListAdapter extends RecyclerView.Adapter<HomeMenuLinkLi
     public int getItemViewType(int position) {
         return position;
     }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View listItem;
-        if(isList)
-        {
-             listItem= layoutInflater.inflate(R.layout.content_list_home_menu_link, parent, false);
+        if (isList) {
+            listItem = layoutInflater.inflate(R.layout.content_list_home_menu_link, parent, false);
 
-        }
-        else{
-             listItem= layoutInflater.inflate(R.layout.content_grid_menu_link, parent, false);
+        } else {
+            listItem = layoutInflater.inflate(R.layout.content_grid_menu_link, parent, false);
 
         }
         return new ViewHolder(listItem);
@@ -71,141 +71,115 @@ public class HomeMenuLinkListAdapter extends RecyclerView.Adapter<HomeMenuLinkLi
         holder.setIsRecyclable(false);
         final MenuLinkModel menu;
 
-       if(!isFirst)
-       {
-           if(menuLinks.size()>6)
-           {
-               menu = menuLinks.get(position+6);
-           }
-           else
-           {
-               menu = menuLinks.get(position);
-           }
-       }
-       else
-       {
-           menu = menuLinks.get(position);
-       }
+        if (!isFirst) {
+            if (menuLinks.size() > 6) {
+                menu = menuLinks.get(position + 6);
+            } else {
+                menu = menuLinks.get(position);
+            }
+        } else {
+            menu = menuLinks.get(position);
+        }
         HomeScreenModel home = Utility.response.responsedata.homeScreen;
 
-       if(home.isHomePageBottomDisplayIcon())
-       {
+        if (home.isHomePageBottomDisplayIcon()) {
 
+            FontDrawable drawable = new FontDrawable(context, Utility.getIcon(menu.getIcon()), true, false);
+            drawable.setColorFilter(Utility.getColor(home.getHomePageBottomIconColor()), PorterDuff.Mode.SCREEN);
+            Glide.with(context).load(drawable).into(holder.icMenuLinkIcon);
 
-
-           FontDrawable drawable = new FontDrawable(context, Utility.getIcon(menu.getIcon()), true, false);
-           drawable.setColorFilter(Utility.getColor(home.getHomePageBottomIconColor()), PorterDuff.Mode.SCREEN);
-           Glide.with(context).load(drawable).into(holder.icMenuLinkIcon);
-
-           //.getView().setColorFilter(Utility.getColor(home.getHomePageBottomIconColor()));
+            //.getView().setColorFilter(Utility.getColor(home.getHomePageBottomIconColor()));
 //           holder.icMenuLinkIcon.setImageDrawable(drawable);
 
-           Log.e("Color",""+ home.getHomePageBottomIconColor());
+            Log.e("Color", "" + home.getHomePageBottomIconColor());
 
 
 //           holder.icMenuLinkIcon.setColorFilter(Utility.getColor(home.getHomePageBottomIconColor()));
-           holder.cardMenuLink.setVisibility(View.VISIBLE);
-           holder.cardMenuLink.setCardBackgroundColor(Utility.getColor(home.getHomePageBottomIconBackgroundColor()));
+            holder.cardMenuLink.setVisibility(View.VISIBLE);
+            holder.cardMenuLink.setCardBackgroundColor(Utility.getColor(home.getHomePageBottomIconBackgroundColor()));
 
-           if(home.getHomePageBottomIconShape().equals("square"))
-           {
-               Log.e("Test","Called Square");
-               holder.cardMenuLink.setRadius(20);
-           }
-           else if(home.getHomePageBottomIconShape().equals("none"))
-           {
-               holder.cardMenuLink.setCardBackgroundColor(Utility.getColor("#FFFFFF00"));
-               holder.cardMenuLink.setBackgroundColor(Utility.getColor("#FFFFFF00"));
-               holder.cardMenuLink.setCardElevation(0);
+            if (home.getHomePageBottomIconShape().equals("square")) {
+                Log.e("Test", "Called Square");
+                holder.cardMenuLink.setRadius(20);
+            } else if (home.getHomePageBottomIconShape().equals("none")) {
+                holder.cardMenuLink.setCardBackgroundColor(Utility.getColor("#FFFFFF00"));
+                holder.cardMenuLink.setBackgroundColor(Utility.getColor("#FFFFFF00"));
+                holder.cardMenuLink.setCardElevation(0);
 
-           }
+            }
 
-       }
+        }
 
-       holder.textMenuLink.setTextColor(Utility.getColor(menu.getMenuTextColor()));
+        holder.textMenuLink.setTextColor(Utility.getColor(menu.getMenuTextColor()));
 
-       if(isList)
-       {
-           if(home.getHomePageBottomTextAlign().equals("Center")) {
-               RelativeLayout.LayoutParams params =
-                       new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
-                               RelativeLayout.LayoutParams.WRAP_CONTENT);
-               params.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
-               holder.textMenuLink.setLayoutParams(params);
-           }
-           else if(home.getHomePageBottomTextAlign().equals("Right")){
-               if(home.isHomePageBottomDisplayArrowIcon())
-               {
-                   RelativeLayout.LayoutParams params =
-                           new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
-                                   RelativeLayout.LayoutParams.WRAP_CONTENT);
-                   params.addRule(RelativeLayout.LEFT_OF,R.id.icNextIconList);
-                   params.addRule(RelativeLayout.CENTER_VERTICAL,RelativeLayout.TRUE);
-                   holder.textMenuLink.setLayoutParams(params);
-               }
-               else
-               {
-                   RelativeLayout.LayoutParams params =
-                           new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
-                                   RelativeLayout.LayoutParams.WRAP_CONTENT);
-                   params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
-                   holder.textMenuLink.setLayoutParams(params);
-               }
+        if (isList) {
+            if (home.getHomePageBottomTextAlign().equals("Center")) {
+                RelativeLayout.LayoutParams params =
+                        new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                                RelativeLayout.LayoutParams.WRAP_CONTENT);
+                params.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+                holder.textMenuLink.setLayoutParams(params);
+            } else if (home.getHomePageBottomTextAlign().equals("Right")) {
+                if (home.isHomePageBottomDisplayArrowIcon()) {
+                    RelativeLayout.LayoutParams params =
+                            new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                                    RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    params.addRule(RelativeLayout.LEFT_OF, R.id.icNextIconList);
+                    params.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
+                    holder.textMenuLink.setLayoutParams(params);
+                } else {
+                    RelativeLayout.LayoutParams params =
+                            new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                                    RelativeLayout.LayoutParams.WRAP_CONTENT);
+                    params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
+                    holder.textMenuLink.setLayoutParams(params);
+                }
 
-           }
+            }
 
-               holder.textMenuLink.setText(menu.menuText);
-           Glide.with(context).load(menu.getMenuBackgroudImage()).into(holder.imgListMenuLinkBackground);
-           if(home.isHomePageBottomDisplayArrowIcon())
-           {
-               holder.icNextIcon.setVisibility(View.VISIBLE);
-               holder.icNextIcon.setColorFilter(Utility.getColor(home.getHomePageBottomArrowColor()));
-           }
+            holder.textMenuLink.setText(menu.menuText);
+            Glide.with(context).load(menu.getMenuBackgroudImage()).into(holder.imgListMenuLinkBackground);
+            if (home.isHomePageBottomDisplayArrowIcon()) {
+                holder.icNextIcon.setVisibility(View.VISIBLE);
+                holder.icNextIcon.setColorFilter(Utility.getColor(home.getHomePageBottomArrowColor()));
+            }
 
 
+            int[] colors = {Utility.getColor(menu.getMenuTopColor()),
+                    Utility.getColor(menu.getMenuBottomColor())};
 
-           int[] colors = {Utility.getColor(menu.getMenuTopColor()),
-                   Utility.getColor(menu.getMenuBottomColor())};
+            //create a new gradient color
+            GradientDrawable gd = new GradientDrawable(
+                    GradientDrawable.Orientation.TOP_BOTTOM, colors);
 
-           //create a new gradient color
-           GradientDrawable gd = new GradientDrawable(
-                   GradientDrawable.Orientation.TOP_BOTTOM, colors);
+            //apply the button background to newly created drawable gradient
+            holder.relMenuLinkList.setBackground(gd);
 
-           //apply the button background to newly created drawable gradient
-           holder.relMenuLinkList.setBackground(gd);
+        } else {
+            if (isFirst) {
+                if (position <= 5) {
+                    holder.textMenuLink.setText(menu.menuText);
 
-       }
-       else{
-           if(isFirst)
-           {
-               if(position <=5)
-               {
-                   holder.textMenuLink.setText(menu.menuText);
-
-               }
-           }
-           else
-           {
+                }
+            } else {
 
 
-                   holder.textMenuLink.setText(menu.menuText);
+                holder.textMenuLink.setText(menu.menuText);
 
-           }
+            }
 
-       }
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(menu.getMenuLinkType().equals("internal")){
-                    Utility.openNewActivity(context,menu.getMenuInternalLinkUrl(),menu.getId(),menu.getRewardProgramId());
-                }
-                else
-                {
+                if (menu.getMenuLinkType().equals("internal")) {
+                    Utility.openNewActivity(context, menu.getMenuInternalLinkUrl(), menu.getId(), menu.getRewardProgramId());
+                } else {
                     Intent i = new Intent(context, WebViewActivity.class);
-                    i.putExtra("url",menu.getMenuExternalLinkUrl());
-                    i.putExtra("id",menu.getId());
-                    i.putExtra("rewardProgramId",menu.getRewardProgramId());
+                    i.putExtra("url", menu.getMenuExternalLinkUrl());
+                    i.putExtra("id", menu.getId());
+                    i.putExtra("rewardProgramId", menu.getRewardProgramId());
 
                     context.startActivity(i);
                     //open URL
@@ -215,61 +189,48 @@ public class HomeMenuLinkListAdapter extends RecyclerView.Adapter<HomeMenuLinkLi
         });
 
 
-
-
     }
 
 
     @Override
     public int getItemCount() {
-       if(isList)
-       {
-           return menuLinks.size();
+        if (isList) {
+            return menuLinks.size();
 
-       }
-       else
-       {
-           if(isFirst)
-           {
-               if(menuLinks.size() > 6)
-               {
-                   return 6;
-               }
-               else
-               {
-               return menuLinks.size();
-               }
+        } else {
+            if (isFirst) {
+                if (menuLinks.size() > 6) {
+                    return 6;
+                } else {
+                    return menuLinks.size();
+                }
 
-           }
-           else
-           {
-               if(menuLinks.size() > 6)
-               {
-                   return menuLinks.size() - 6;
-               }
-               else{
-                   return 0;
-               }
-           }
+            } else {
+                if (menuLinks.size() > 6) {
+                    return menuLinks.size() - 6;
+                } else {
+                    return 0;
+                }
+            }
 
-       }
+        }
 
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-       TextView textMenuLink;
-       ImageView icMenuLinkIcon,icNextIcon,imgListMenuLinkBackground;
-       CardView cardMenuLink;
-       RelativeLayout relMenuLinkList;
+        TextView textMenuLink;
+        ImageView icMenuLinkIcon, icNextIcon, imgListMenuLinkBackground;
+        CardView cardMenuLink;
+        RelativeLayout relMenuLinkList;
+
         public ViewHolder(View itemView) {
             super(itemView);
 
             textMenuLink = itemView.findViewById(R.id.textMenuLinkText);
             icMenuLinkIcon = itemView.findViewById(R.id.icMenuLinkIcon);
             cardMenuLink = itemView.findViewById(R.id.cardMenuList);
-            if(isList)
-            {
+            if (isList) {
                 icNextIcon = itemView.findViewById(R.id.icNextIconList);
                 relMenuLinkList = itemView.findViewById(R.id.relMenuLinkList);
                 imgListMenuLinkBackground = itemView.findViewById(R.id.imgListMenuLinkBackground);

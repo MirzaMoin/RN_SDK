@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottomsheetLocation"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_location_list"
-    android:padding="@dimen/_10sdp"
 
-    android:id="@+id/bottomsheetLocation"
-    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical"
+    android:padding="@dimen/_10sdp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginHorizontal="@dimen/_5sdp"
+        android:orientation="horizontal"
 
         >
+
         <TextView
             android:id="@+id/textLocation"
             android:layout_width="wrap_content"
@@ -27,51 +28,119 @@
             android:text="Locations"
             android:textColor="#000"
             android:textSize="@dimen/_16ssp" />
+
         <ImageView
             android:id="@+id/imageExpand"
             android:layout_width="@dimen/_25sdp"
             android:layout_height="@dimen/_25sdp"
-            android:padding="@dimen/_5sdp"
-            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:padding="@dimen/_5sdp"
             android:rotation="-90"
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
             app:tint="#000" />
     </RelativeLayout>
 
 
-    <EditText
-        android:id="@+id/etSearchLocationBottom"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_35sdp"
-        android:layout_marginVertical="@dimen/_10sdp"
-        android:hint="Location Name"
-        android:background="@drawable/edit_text_border"
-        android:paddingLeft="@dimen/_10sdp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+
+            android:id="@+id/etSearchLocationBottom"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:layout_marginVertical="@dimen/_10sdp"
+            android:background="@drawable/edit_text_border"
+            android:drawableStart="@drawable/ic_baseline_search_24"
+            android:drawableLeft="@drawable/ic_baseline_search_24"
+            android:drawablePadding="@dimen/_10sdp"
+            android:drawableTint="#CCCCCC"
+            android:hint="Location Name"
+            android:imeOptions="actionSearch"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/_10sdp"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageFilter"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageFilter"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:background="@drawable/edit_text_border"
+            android:paddingVertical="@dimen/_10sdp"
+            android:src="@drawable/ic_baseline_filter_alt_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="#BABABA" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/linearFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:text="Filter"
+            android:textSize="@dimen/_14sdp"
+
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvFilter"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:orientation="horizontal"
+
+
+            />
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_5sdp"
-        android:drawableStart="@drawable/ic_baseline_search_24"
-        android:drawablePadding="@dimen/_10sdp"
-        android:imeOptions="actionSearch"
-        android:maxLines="1"
-        android:textSize="@dimen/_12ssp"
-        android:drawableTint="#CCCCCC"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:text="Locations"
+        android:textSize="@dimen/_14sdp"
 
-        android:drawableLeft="@drawable/ic_baseline_search_24" />
-  <androidx.recyclerview.widget.RecyclerView
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:id="@+id/rvLocationBottomsheet"
-      android:layout_marginHorizontal="@dimen/_5sdp"
+        />
 
 
-      />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvLocationBottomsheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginHorizontal="@dimen/_5sdp"
+
+
+        />
+
     <TextView
         android:id="@+id/textNoLocation"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="No Location Found"
         android:gravity="center"
-        android:visibility="gone"
-        />
+        android:text="No Location Found"
+        android:visibility="gone" />
 
 </LinearLayout>

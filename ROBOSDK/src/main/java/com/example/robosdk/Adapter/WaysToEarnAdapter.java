@@ -120,7 +120,7 @@ public class WaysToEarnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
             if(position % 2 == 0)
             {
-                holder.linearContent.setBackgroundColor(Color.parseColor("#ececec"));
+                holder.linearContent.setBackgroundColor(Color.parseColor("#f0f5f5"));
             }
             else
             {

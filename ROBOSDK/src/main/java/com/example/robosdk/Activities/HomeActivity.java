@@ -139,6 +139,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_home);
 
         homeScreenModel = Utility.response.responsedata.homeScreen;
+
+
         init();
         getData();
     }

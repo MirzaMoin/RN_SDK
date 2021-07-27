@@ -39,7 +39,8 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
     RecyclerView rvOffer, rvFooterOffers;
     ImageView ivBack,
             imageOffers,
-            imageLogoOffers;
+            imageLogoOffers,
+            imageNoOffer;
     TextView textPointOffers;
     RelativeLayout relLoadingOffers;
     TableLayout tableLayoutOffer;
@@ -113,8 +114,9 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
                     else
                     {
                         relLoadingOffers.setVisibility(View.GONE);
+                        imageNoOffer.setVisibility(View.VISIBLE);
 
-                        Utility.showAlertDialog(OfferActivity.this,"Oops...", response.body().statusMessage);
+                        Utility.showAlertDialog(OfferActivity.this,"Hmmm...", response.body().statusMessage);
                     }
 
 
@@ -223,6 +225,7 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
         imageLogoOffers = findViewById(R.id.imageLogoOffers);
         relLoadingOffers = findViewById(R.id.relLoadingOffers);
         tableLayoutOffer = findViewById(R.id.tableLayoutOffer);
+        imageNoOffer = findViewById(R.id.imageNoOffer);
         tableLayoutOffer.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
         ivBack.setOnClickListener(this);
         Utility.setFooter(OfferActivity.this,rvFooterOffers,"offer");

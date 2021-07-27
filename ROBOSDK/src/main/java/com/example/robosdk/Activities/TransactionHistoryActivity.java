@@ -18,6 +18,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
@@ -53,8 +54,7 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
 
     RecyclerView rvTransactionHistory, rvFooterTransactionHistory;
 
-    TextView textPointTransactionHistory,
-            textNoData;
+    TextView textPointTransactionHistory;
     ImageView imgBackTransactionHistory,
             imgPreview,
             imgPreviewClose,
@@ -67,6 +67,8 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
             relLoadingTH;
 
     TableLayout tableLayoutTH;
+
+    LinearLayout linearTH;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +112,8 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
                         Log.e("Test","History Size: "+response.body().responsedata.size());
 
                     } else {
-                        textNoData.setVisibility(View.VISIBLE);
+                        etLocationNameSearchTH.setVisibility(View.GONE);
+                        linearTH.setVisibility(View.VISIBLE);
                         Log.e("Test", "No Transaction Found");
                     }
 
@@ -145,7 +148,7 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
         tableLayoutTH = findViewById(R.id.tableLayoutTH);
-        textNoData = findViewById(R.id.textNoData);
+        linearTH = findViewById(R.id.linearTH);
         tableLayoutTH.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
 
         textPointTransactionHistory = findViewById(R.id.textPointTransactionHistory);

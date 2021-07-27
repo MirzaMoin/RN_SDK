@@ -3,19 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#fff"
     android:layout_height="match_parent"
     tools:context=".Activities.TransactionHistoryActivity">
 
-    <TextView
-        android:id="@+id/textNoData"
+    <LinearLayout
         android:visibility="gone"
+        android:id="@+id/linearTH"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="No Transaction Found"
-        android:textSize="@dimen/_14sdp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp"
+            android:src="@drawable/image_th"
+            />
+        <TextView
+            android:id="@+id/textNoData"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="No Transaction Found"
+            android:textSize="@dimen/_14sdp"
 
-        />
+            />
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/linearTopTransactionHistory"
         android:layout_width="match_parent"

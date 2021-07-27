@@ -4,9 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+ 
+    android:background="#fff"
     android:forceDarkAllowed="false"
     tools:context=".Activities.OfferActivity">
 
+    <ImageView
+        android:id="@+id/imageNoOffer"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:src="@drawable/image_no_offer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
     <LinearLayout
         android:id="@+id/linearTopOffer"
         android:layout_width="match_parent"

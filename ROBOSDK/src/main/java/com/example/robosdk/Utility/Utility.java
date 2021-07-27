@@ -53,10 +53,10 @@ public class Utility {
   {
     switch (menuInternalLinkUrl)
     {
-      case "refereFriend":
+    /*  case "refereFriend":
       case "Refer Friend":
         context.startActivity(new Intent(context, ReferFriendActivity.class));
-        break;
+        break;*/
       case "offer":
       case "Offers":
         context.startActivity(new Intent(context, OfferActivity.class));
@@ -69,10 +69,10 @@ public class Utility {
       case "Ways To Earn":
         context.startActivity(new Intent(context, WaysToEarnActivity.class));
         break;
-      case "profileScreen":
+    /*  case "profileScreen":
       case "Update Profile":
         context.startActivity(new Intent(context, ProfileActivity.class));
-        break;
+        break;*/
       case "uploadReceipt":
       case "Upload Receipt":
         context.startActivity(new Intent(context, UploadReceiptActivity.class));
@@ -488,7 +488,7 @@ public class Utility {
         return R.string.fa_zhihu;
 
       default:
-        return R.string.fa_clock;
+        return R.string.fa_font_awesome_alt;
     }
   }
 

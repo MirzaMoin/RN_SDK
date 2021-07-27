@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     tools:context=".Fragments.UnTakenSurveysFragment">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -11,16 +12,28 @@
         android:id="@+id/rvFragmentUnTakenSurvey"
 
         />
-    <TextView
-        android:id="@+id/textNoSurveyFoundUntaken"
-        android:layout_width="match_parent"
-        android:visibility="gone"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:textSize="@dimen/_12ssp"
 
-        android:text="No Survey Found"
-        />
+    <LinearLayout
+        android:id="@+id/linearNoSurveyUntaken"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/image_survey"
+            />
+        <TextView
+            android:id="@+id/textNoSurveyFoundTaken"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/_14ssp"
+            android:gravity="center"
+            android:text="No Survey Found"
+            />
+    </LinearLayout>
 
 
 </FrameLayout>
