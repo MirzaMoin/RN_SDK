@@ -125,15 +125,18 @@
         />
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvLocationBottomsheet"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
 
-        android:layout_marginHorizontal="@dimen/_5sdp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvLocationBottomsheet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+
+            />
 
 
-        />
 
     <TextView
         android:id="@+id/textNoLocation"

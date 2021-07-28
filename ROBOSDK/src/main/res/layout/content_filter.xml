@@ -28,6 +28,7 @@
             android:paddingHorizontal="@dimen/_10sdp"
             android:paddingVertical="@dimen/_2sdp"
             android:text="Hotel"
+            android:textColor="#888888"
             android:textSize="@dimen/_12ssp"
               />
         </LinearLayout>

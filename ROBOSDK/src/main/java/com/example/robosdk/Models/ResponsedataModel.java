@@ -50,6 +50,7 @@ public class ResponsedataModel {
 
     //Location Data
     public List<LocationDataModel> locationData;
+    public List<String> categoryList;
 
     //Upload Receipt Model
     public URDateDetailsModel dateDetails;
@@ -63,7 +64,7 @@ public class ResponsedataModel {
     public double pointBalance;
 
 
-    public ResponsedataModel(HomeScreenModel homeScreen, AppColorModel appColor, MenuPermissionModel menuPermission, AppIntakeImagesModel appIntakeImages, AppDetailsModel appDetails, ChildPageSettingModel childPageSetting, ContactData contactData, Object webFormData, TransactionHistoryModel transactionHistoryModel, List<TransactionHistoryModel> responsedata, OfferRedeemSettingModel redeemSetting, OfferAddressDetailsModel addressDetails, OfferUserDetailsModel userDetails, List<OfferListModel> offerList, List<SurveysUnTakenModel> unTaken, List<SurveysUnTakenModel> completed, List<RPGListModel> lstRPG, WaysToEarnModel totalPoints, WaysToEarnModel purchasePoints, WaysToEarnModel socialShare, WaysToEarnModel referFriends, WaysToEarnModel leaderboard, WaysToEarnModel surveys, WaysToEarnModel completeProfile, LBQualificationCriteriaModel qualificationCriteria, List<LBFilterModel> filters, List<LBLeaderBoardReportModel> leaderBoardReport, List<LocationDataModel> locationData, URDateDetailsModel dateDetails, List<URCategoryModel> categories, URSettingsDetailsModel settingsDetails, double totalEarnedThisMonth, double totalReedemed, double lifeTimePoints, double pointBalance, double notificationCount) {
+    public ResponsedataModel(HomeScreenModel homeScreen, AppColorModel appColor, MenuPermissionModel menuPermission, AppIntakeImagesModel appIntakeImages, AppDetailsModel appDetails, ChildPageSettingModel childPageSetting, ContactData contactData, Object webFormData, TransactionHistoryModel transactionHistoryModel, List<TransactionHistoryModel> responsedata, OfferRedeemSettingModel redeemSetting, OfferAddressDetailsModel addressDetails, OfferUserDetailsModel userDetails, List<OfferListModel> offerList, List<SurveysUnTakenModel> unTaken, List<SurveysUnTakenModel> completed, List<RPGListModel> lstRPG, WaysToEarnModel totalPoints, WaysToEarnModel purchasePoints, WaysToEarnModel socialShare, WaysToEarnModel referFriends, WaysToEarnModel leaderboard, WaysToEarnModel surveys, WaysToEarnModel completeProfile, LBQualificationCriteriaModel qualificationCriteria, List<LBFilterModel> filters, List<LBLeaderBoardReportModel> leaderBoardReport, List<LocationDataModel> locationData, List<String> categoryList, URDateDetailsModel dateDetails, List<URCategoryModel> categories, URSettingsDetailsModel settingsDetails, double totalEarnedThisMonth, double totalReedemed, double lifeTimePoints, double pointBalance) {
         this.homeScreen = homeScreen;
         this.appColor = appColor;
         this.menuPermission = menuPermission;
@@ -92,6 +93,7 @@ public class ResponsedataModel {
         this.filters = filters;
         this.leaderBoardReport = leaderBoardReport;
         this.locationData = locationData;
+        this.categoryList = categoryList;
         this.dateDetails = dateDetails;
         this.categories = categories;
         this.settingsDetails = settingsDetails;
@@ -383,5 +385,11 @@ public class ResponsedataModel {
         this.pointBalance = pointBalance;
     }
 
+    public List<String> getCategoryList() {
+        return categoryList;
+    }
 
+    public void setCategoryList(List<String> categoryList) {
+        this.categoryList = categoryList;
+    }
 }

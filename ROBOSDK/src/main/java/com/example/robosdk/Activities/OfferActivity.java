@@ -116,7 +116,7 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
                         relLoadingOffers.setVisibility(View.GONE);
                         imageNoOffer.setVisibility(View.VISIBLE);
 
-                        Utility.showAlertDialog(OfferActivity.this,"Hmmm...", response.body().statusMessage);
+//                        Utility.showAlertDialog(OfferActivity.this,"Hmmm...", response.body().statusMessage);
                     }
 
 

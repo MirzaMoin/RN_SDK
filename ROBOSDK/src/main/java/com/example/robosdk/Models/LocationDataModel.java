@@ -1,5 +1,7 @@
 package com.example.robosdk.Models;
 
+import java.util.List;
+
 public class LocationDataModel {
     public String addressId;
     public String locationName;
@@ -8,9 +10,10 @@ public class LocationDataModel {
     public String mobilePhone;
     public String websiteUrl;
     public String logoImage;
+    public List<String> locationCategory;
     public boolean isSelected;
 
-    public LocationDataModel(String addressId, String locationName, LocationStoreAddressModel storeAddress, String emailAddress, String mobilePhone, String websiteUrl, String logoImage) {
+    public LocationDataModel(String addressId, String locationName, LocationStoreAddressModel storeAddress, String emailAddress, String mobilePhone, String websiteUrl, String logoImage, List<String> locationCategory, boolean isSelected) {
         this.addressId = addressId;
         this.locationName = locationName;
         this.storeAddress = storeAddress;
@@ -18,6 +21,8 @@ public class LocationDataModel {
         this.mobilePhone = mobilePhone;
         this.websiteUrl = websiteUrl;
         this.logoImage = logoImage;
+        this.locationCategory = locationCategory;
+        this.isSelected = isSelected;
     }
 
     public String getAddressId() {
@@ -82,5 +87,14 @@ public class LocationDataModel {
 
     public void setSelected(boolean selected) {
         isSelected = selected;
+    }
+
+
+    public List<String> getLocationCategory() {
+        return locationCategory;
+    }
+
+    public void setLocationCategory(List<String> locationCategory) {
+        this.locationCategory = locationCategory;
     }
 }

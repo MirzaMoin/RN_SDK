@@ -50,6 +50,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.internal.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -64,18 +65,23 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
             imageLogoLocation,
             imageFilter;
     TextView textPointLocation;
+    public static LocationBottomsheetAdapter adapter;
 
     boolean isFilderVisible = false;
     LinearLayout linearFilter;
+    int selectedIndex = -1;
+
+    public static  EditText etSearchLocationBottom;
 
     LinearLayout bottomsheetLocation;
     RecyclerView rvLocationBottomsheet;
-
+   public static RecyclerView rvLocation;
     boolean isExpanded = false;
     List<LocationDataModel> originalLocations = new ArrayList<>();
     RelativeLayout relLoadingLocation;
 
     TableLayout tableLayoutLocation;
+    public static TextView textNoLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,8 +152,8 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
 
         ((View) customLayout.getParent()).setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
         TextView textLocation = dialog.findViewById(R.id.textLocation);
-        final TextView textNoLocation = dialog.findViewById(R.id.textNoLocation);
-        final RecyclerView rvLocation = dialog.findViewById(R.id.rvLocationBottomsheet);
+        textNoLocation = dialog.findViewById(R.id.textNoLocation);
+      rvLocation = dialog.findViewById(R.id.rvLocationBottomsheet);
         final RecyclerView rvFilter = dialog.findViewById(R.id.rvFilter);
         imageFilter = dialog.findViewById(R.id.imageFilter);
         linearFilter = dialog.findViewById(R.id.linearFilter);
@@ -160,12 +166,13 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         rvFilter.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         rvFilter.setAdapter(filterAdapter);
 
+
         if (Utility.response.responsedata.locationData.size() > 0) {
             assert rvLocation != null;
             rvLocation.setVisibility(View.VISIBLE);
             assert textNoLocation != null;
             textNoLocation.setVisibility(View.GONE);
-            final LocationBottomsheetAdapter adapter = new LocationBottomsheetAdapter(this,LocationActivity.this);
+              adapter = new LocationBottomsheetAdapter(this,LocationActivity.this);
             rvLocation.setHasFixedSize(true);
             rvLocation.setLayoutManager(new LinearLayoutManager(this));
             rvLocation.setAdapter(adapter);
@@ -197,17 +204,21 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
                         isExpanded = false;
                         BottomSheetBehavior.from(bottomSheet).setState(BottomSheetBehavior.STATE_COLLAPSED);
                         imageExpand.setRotation(-90);
+//                        rvLocation.setPadding(0,0,0,600);
+
                     } else {
                         isExpanded = true;
 
                         BottomSheetBehavior.from(bottomSheet)
                                 .setState(BottomSheetBehavior.STATE_EXPANDED);
                         imageExpand.setRotation(90);
+//                        rvLocation.setPadding(0,0,0,0);
+
                     }
                 }
             });
 
-            EditText etSearchLocationBottom = dialog.findViewById(R.id.etSearchLocationBottom);
+             etSearchLocationBottom = dialog.findViewById(R.id.etSearchLocationBottom);
             etSearchLocationBottom.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -216,22 +227,79 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    selectedIndex = -1;
+                    for(int i = 0; i < Utility.isSelected.size();i++)
+                    {
+                        if(Utility.isSelected.get(i))
+                        {
+                            selectedIndex = i;
+                        }
+                    }
 
                     if (s.toString().isEmpty()) {
-                        Utility.response.responsedata.locationData.clear();
-                        Utility.response.responsedata.locationData.addAll(originalLocations);
-                        adapter.notifyDataSetChanged();
-                        rvLocation.setVisibility(View.VISIBLE);
-                        textNoLocation.setVisibility(View.GONE);
+
+                        if(selectedIndex == -1)
+                        {
+                            Log.e("Location","No Filter Selected");
+                            Utility.response.responsedata.locationData.clear();
+                            Utility.response.responsedata.locationData.addAll(originalLocations);
+                            adapter.notifyDataSetChanged();
+                            rvLocation.setVisibility(View.VISIBLE);
+                            textNoLocation.setVisibility(View.GONE);
+                        }
+                        else
+                        {
+                            Log.e("Location","Selected Filter "+Utility.response.responsedata.categoryList.get(selectedIndex));
+
+                            List<LocationDataModel> locations = new ArrayList<>();
+
+                            for (LocationDataModel l : originalLocations) {
+
+                                if (l.getLocationName().toLowerCase().contains(s.toString().toLowerCase())) {
+                                    if(selectedIndex != -1)
+                                    {
+                                        if( l.locationCategory.contains(Utility.response.responsedata.categoryList.get(selectedIndex)))
+                                        {
+                                            locations.add(l);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        locations.add(l);
+                                    }
+                                }
+                            }
+                            Utility.response.responsedata.locationData.clear();
+                            Utility.response.responsedata.locationData.addAll(locations);
+                            adapter.notifyDataSetChanged();
+                            if(locations.size() > 0)
+                            {
+                                rvLocation.setVisibility(View.VISIBLE);
+                                textNoLocation.setVisibility(View.GONE);
+                            }
+
+                        }
+
 
                     } else {
 
                         List<LocationDataModel> locations = new ArrayList<>();
 
+
                         for (LocationDataModel l : originalLocations) {
 
                             if (l.getLocationName().toLowerCase().contains(s.toString().toLowerCase())) {
-                                locations.add(l);
+                                if(selectedIndex != -1)
+                                {
+                                    if( l.locationCategory.contains(Utility.response.responsedata.categoryList.get(selectedIndex)))
+                                    {
+                                        locations.add(l);
+                                    }
+                                }
+                                else
+                                {
+                                    locations.add(l);
+                                }
                             }
                         }
                         Utility.response.responsedata.locationData.clear();
@@ -282,6 +350,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
                             ResponseModel responseModel = response.body();
                             ResponsedataModel responseData = Utility.response.responsedata;
                             responseData.locationData = responseModel.responsedata.getLocationData();
+                            responseData.categoryList = responseModel.responsedata.getCategoryList();
                             originalLocations.addAll(responseData.locationData);
                             Log.e("GetLocationData", "onResponse - Location List Size: " + responseModel.responsedata.locationData.size());
                         }

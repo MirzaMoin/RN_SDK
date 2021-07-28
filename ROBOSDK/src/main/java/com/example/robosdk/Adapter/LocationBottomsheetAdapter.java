@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,7 @@ public class LocationBottomsheetAdapter extends RecyclerView.Adapter<LocationBot
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.imgExpandLocation.setRotation(0);
         final LocationDataModel data = Utility.response.responsedata.locationData.get(position);
+
 
         String address = "";
         if (data.storeAddress.getAddress() != null && !data.storeAddress.getAddress().isEmpty()) {
