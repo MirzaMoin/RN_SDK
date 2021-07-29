@@ -145,6 +145,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         getData();
     }
 
+   int getSVG(){
+      return R.drawable.ic_bacteria;
+    }
+
     private void initNavigationDrawer() {
 
         imgDrawer.setOnClickListener(new View.OnClickListener() {
@@ -408,6 +412,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                     Utility.response.responsedata.unTaken = response.body().responsedata.unTaken;
                     Utility.response.responsedata.completed = response.body().responsedata.completed;
+
 
                 } else {
                     Log.e("Home", "Error Sub: " + response.message());

@@ -3,6 +3,11 @@
   <component name="WizardSettings">
     <option name="children">
       <map>
+        <entry key="imageWizard">
+          <value>
+            <PersistentState />
+          </value>
+        </entry>
         <entry key="vectorWizard">
           <value>
             <PersistentState>
@@ -28,8 +33,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_baseline_filter_alt_24" />
-                            <entry key="sourceFile" value="C:\RNApp SDK\RNAppSDK-master" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_bacteria" />
+                            <entry key="sourceFile" value="C:\Users\admin\Downloads\fontawesome-pro-6.0.0-beta1-web\fontawesome-pro-6.0.0-beta1-web\svgs\regular\bacteria.svg" />
                           </map>
                         </option>
                       </PersistentState>

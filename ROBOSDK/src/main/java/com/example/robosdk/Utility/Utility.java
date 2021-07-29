@@ -264,7 +264,7 @@ public class Utility {
       case "cloud-sun-rain":
         return R.string.fa_cloud_sun_rain_solid;
       case "cloud-upload-alt":
-        return R.string.fa_cloud_upload_alt_solid;
+        return R.string.cin;
       case "cocktail":
         return R.string.fa_cocktail_solid;
       case "code":

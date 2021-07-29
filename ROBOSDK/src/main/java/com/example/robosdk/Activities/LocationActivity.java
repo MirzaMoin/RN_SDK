@@ -71,11 +71,11 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
     LinearLayout linearFilter;
     int selectedIndex = -1;
 
-    public static  EditText etSearchLocationBottom;
+    public static EditText etSearchLocationBottom;
 
     LinearLayout bottomsheetLocation;
     RecyclerView rvLocationBottomsheet;
-   public static RecyclerView rvLocation;
+    public static RecyclerView rvLocation;
     boolean isExpanded = false;
     List<LocationDataModel> originalLocations = new ArrayList<>();
     RelativeLayout relLoadingLocation;
@@ -107,7 +107,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.setStatusBarColor(Utility.getColor(Utility.response.responsedata.appColor.getPhoneNotificationBar()));
         }
-        if(Utility.response.responsedata.appColor.getPhoneNotificationBarTextColor().equals("Black")){
+        if (Utility.response.responsedata.appColor.getPhoneNotificationBarTextColor().equals("Black")) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
         cardLocation = findViewById(R.id.cardLocation);
@@ -126,9 +126,9 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         cardLocation.setOnClickListener(this);
 
         textPointLocation.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
-        textPointLocation.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance())+ " PTS");
+        textPointLocation.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
 
-        Utility.setFooter(LocationActivity.this,rvFooterLocation,"locations");
+        Utility.setFooter(LocationActivity.this, rvFooterLocation, "locations");
     }
 
     @Override
@@ -153,7 +153,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         ((View) customLayout.getParent()).setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
         TextView textLocation = dialog.findViewById(R.id.textLocation);
         textNoLocation = dialog.findViewById(R.id.textNoLocation);
-      rvLocation = dialog.findViewById(R.id.rvLocationBottomsheet);
+        rvLocation = dialog.findViewById(R.id.rvLocationBottomsheet);
         final RecyclerView rvFilter = dialog.findViewById(R.id.rvFilter);
         imageFilter = dialog.findViewById(R.id.imageFilter);
         linearFilter = dialog.findViewById(R.id.linearFilter);
@@ -163,7 +163,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
 
         final LocationFilterAdapter filterAdapter = new LocationFilterAdapter(this);
         rvFilter.setHasFixedSize(true);
-        rvFilter.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        rvFilter.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         rvFilter.setAdapter(filterAdapter);
 
 
@@ -172,7 +172,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
             rvLocation.setVisibility(View.VISIBLE);
             assert textNoLocation != null;
             textNoLocation.setVisibility(View.GONE);
-              adapter = new LocationBottomsheetAdapter(this,LocationActivity.this);
+            adapter = new LocationBottomsheetAdapter(this, LocationActivity.this);
             rvLocation.setHasFixedSize(true);
             rvLocation.setLayoutManager(new LinearLayoutManager(this));
             rvLocation.setAdapter(adapter);
@@ -202,7 +202,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
 
                     if (isExpanded) {
                         isExpanded = false;
-                        BottomSheetBehavior.from(bottomSheet).setState(BottomSheetBehavior.STATE_COLLAPSED);
+                        BottomSheetBehavior.from(bottomSheet).setState(BottomSheetBehavior.STATE_HIDDEN);
                         imageExpand.setRotation(-90);
 //                        rvLocation.setPadding(0,0,0,600);
 
@@ -218,7 +218,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
                 }
             });
 
-             etSearchLocationBottom = dialog.findViewById(R.id.etSearchLocationBottom);
+            etSearchLocationBottom = dialog.findViewById(R.id.etSearchLocationBottom);
             etSearchLocationBottom.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -228,43 +228,34 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
                     selectedIndex = -1;
-                    for(int i = 0; i < Utility.isSelected.size();i++)
-                    {
-                        if(Utility.isSelected.get(i))
-                        {
+                    for (int i = 0; i < Utility.isSelected.size(); i++) {
+                        if (Utility.isSelected.get(i)) {
                             selectedIndex = i;
                         }
                     }
 
                     if (s.toString().isEmpty()) {
 
-                        if(selectedIndex == -1)
-                        {
-                            Log.e("Location","No Filter Selected");
+                        if (selectedIndex == -1) {
+                            Log.e("Location", "No Filter Selected");
                             Utility.response.responsedata.locationData.clear();
                             Utility.response.responsedata.locationData.addAll(originalLocations);
                             adapter.notifyDataSetChanged();
                             rvLocation.setVisibility(View.VISIBLE);
                             textNoLocation.setVisibility(View.GONE);
-                        }
-                        else
-                        {
-                            Log.e("Location","Selected Filter "+Utility.response.responsedata.categoryList.get(selectedIndex));
+                        } else {
+                            Log.e("Location", "Selected Filter " + Utility.response.responsedata.categoryList.get(selectedIndex));
 
                             List<LocationDataModel> locations = new ArrayList<>();
 
                             for (LocationDataModel l : originalLocations) {
 
                                 if (l.getLocationName().toLowerCase().contains(s.toString().toLowerCase())) {
-                                    if(selectedIndex != -1)
-                                    {
-                                        if( l.locationCategory.contains(Utility.response.responsedata.categoryList.get(selectedIndex)))
-                                        {
+                                    if (selectedIndex != -1) {
+                                        if (l.locationCategory.contains(Utility.response.responsedata.categoryList.get(selectedIndex))) {
                                             locations.add(l);
                                         }
-                                    }
-                                    else
-                                    {
+                                    } else {
                                         locations.add(l);
                                     }
                                 }
@@ -272,8 +263,7 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
                             Utility.response.responsedata.locationData.clear();
                             Utility.response.responsedata.locationData.addAll(locations);
                             adapter.notifyDataSetChanged();
-                            if(locations.size() > 0)
-                            {
+                            if (locations.size() > 0) {
                                 rvLocation.setVisibility(View.VISIBLE);
                                 textNoLocation.setVisibility(View.GONE);
                             }
@@ -289,15 +279,11 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
                         for (LocationDataModel l : originalLocations) {
 
                             if (l.getLocationName().toLowerCase().contains(s.toString().toLowerCase())) {
-                                if(selectedIndex != -1)
-                                {
-                                    if( l.locationCategory.contains(Utility.response.responsedata.categoryList.get(selectedIndex)))
-                                    {
+                                if (selectedIndex != -1) {
+                                    if (l.locationCategory.contains(Utility.response.responsedata.categoryList.get(selectedIndex))) {
                                         locations.add(l);
                                     }
-                                }
-                                else
-                                {
+                                } else {
                                     locations.add(l);
                                 }
                             }
@@ -307,28 +293,26 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
                         adapter.notifyDataSetChanged();
                         Log.e("Test", "Result : " + locations.size());
                     }
-                    if(Utility.response.responsedata.locationData.size() == 0)
-                    {
+                    if (Utility.response.responsedata.locationData.size() == 0) {
                         rvLocation.setVisibility(View.GONE);
                         textNoLocation.setVisibility(View.VISIBLE);
-                    }
-                    else
-                    {
+                    } else {
                         rvLocation.setVisibility(View.VISIBLE);
                         textNoLocation.setVisibility(View.GONE);
                     }
                 }
+
                 @Override
                 public void afterTextChanged(Editable s) {
 
                 }
             });
-        } else
-        {
+        } else {
             rvLocation.setVisibility(View.GONE);
             textNoLocation.setVisibility(View.VISIBLE);
         }
     }
+
     private void getLocations() {
         relLoadingLocation.setVisibility(View.VISIBLE);
         Glide.with(this).load(Utility.response.responsedata.appIntakeImages.loadingImages.get(0).imageUrl).into(imageLocation);
@@ -343,65 +327,56 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
                 if (response.isSuccessful()) {
                     relLoadingLocation.setVisibility(View.GONE);
                     cardLocation.setVisibility(View.VISIBLE);
-                    if(response.code() == 200)
-                    {
-                        if(response.body() != null)
-                        {
+                    if (response.code() == 200) {
+                        if (response.body() != null) {
                             ResponseModel responseModel = response.body();
                             ResponsedataModel responseData = Utility.response.responsedata;
                             responseData.locationData = responseModel.responsedata.getLocationData();
                             responseData.categoryList = responseModel.responsedata.getCategoryList();
                             originalLocations.addAll(responseData.locationData);
                             Log.e("GetLocationData", "onResponse - Location List Size: " + responseModel.responsedata.locationData.size());
+                        } else {
+                            Log.e("GetLocationData", "Status code - Location List Size: " + response.code());
+                            Utility.showAlertDialog(LocationActivity.this, "Oops...", "" + response.message());
                         }
-                        else
-                        {
-                            Log.e("GetLocationData", "Status code - Location List Size: " + response.code() );
-                            Utility.showAlertDialog(LocationActivity.this,"Oops...",""+response.message());
-                        }
-                    }
-                    else
-                    {
-                        Utility.showAlertDialog(LocationActivity.this,"Oops...","Something went wrong");
-                        Log.e("GetLocationData", "Status code - Location List Size: " + response.code() );
+                    } else {
+                        Utility.showAlertDialog(LocationActivity.this, "Oops...", "Something went wrong");
+                        Log.e("GetLocationData", "Status code - Location List Size: " + response.code());
                     }
                 } else {
                     relLoadingLocation.setVisibility(View.GONE);
-                    Utility.showAlertDialog(LocationActivity.this,"Oops...","Something went wrong");
+                    Utility.showAlertDialog(LocationActivity.this, "Oops...", "Something went wrong");
                     Log.e("Test Error: ", "" + response.message());
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseModel> call, Throwable t) {
                 relLoadingLocation.setVisibility(View.GONE);
-                Utility.showAlertDialog(LocationActivity.this,"Oops...","Something went wrong");
+                Utility.showAlertDialog(LocationActivity.this, "Oops...", "Something went wrong");
                 Log.e("Test Error: ", "" + t.getMessage());
             }
         });
     }
+
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.imgBackLocation){
+        if (v.getId() == R.id.imgBackLocation) {
             super.onBackPressed();
-        }
-        else if(v.getId() == R.id.cardLocation){
+        } else if (v.getId() == R.id.cardLocation) {
             showBottomsheet();
-        }
-        else if(v.getId() == R.id.imageFilter)
-        {
-            if(linearFilter.isShown()){
+        } else if (v.getId() == R.id.imageFilter) {
+            if (linearFilter.isShown()) {
                 linearFilter.setVisibility(View.GONE);
 
-                imageFilter.setBackground(ContextCompat.getDrawable(this,R.drawable.edit_text_border));
+                imageFilter.setBackground(ContextCompat.getDrawable(this, R.drawable.edit_text_border));
                 imageFilter.setColorFilter(ContextCompat.getColor(this,
                         R.color.grey));
 
 
-
-            }
-            else{
+            } else {
                 linearFilter.setVisibility(View.VISIBLE);
-                imageFilter.setBackground(ContextCompat.getDrawable(this,R.drawable.background_selected_filter));
+                imageFilter.setBackground(ContextCompat.getDrawable(this, R.drawable.background_selected_filter));
                 imageFilter.setColorFilter(ContextCompat.getColor(this,
                         R.color.white));
             }
