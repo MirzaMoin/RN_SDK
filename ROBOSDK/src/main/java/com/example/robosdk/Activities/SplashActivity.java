@@ -33,9 +33,7 @@ public class SplashActivity extends AppCompatActivity {
     ImageView imageSplash,
             imageLogoSplash;
     int errorCount = 0;
-    public  static  int getSVG(){
-        return  R.drawable.ic_bacteria;
-    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.myLibTheme);

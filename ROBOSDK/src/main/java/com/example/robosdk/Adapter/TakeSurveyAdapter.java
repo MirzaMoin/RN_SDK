@@ -49,7 +49,7 @@ public class TakeSurveyAdapter extends RecyclerView.Adapter<TakeSurveyAdapter.Vi
 
         if(isTaken)
         {
-            holder.linearAmountSurvey.setVisibility(View.VISIBLE);
+//            holder.linearAmountSurvey.setVisibility(View.VISIBLE);
             holder.linearStartSurvey.setVisibility(View.GONE);
 
         }

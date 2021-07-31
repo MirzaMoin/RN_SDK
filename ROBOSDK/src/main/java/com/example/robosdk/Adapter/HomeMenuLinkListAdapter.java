@@ -17,6 +17,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.fontawsomeicon.FontAwesomeIC;
 import com.example.robosdk.Activities.WebViewActivity;
 import com.example.robosdk.Models.HomeScreenModel;
 import com.example.robosdk.Models.MenuLinkModel;
@@ -84,9 +85,10 @@ public class HomeMenuLinkListAdapter extends RecyclerView.Adapter<HomeMenuLinkLi
 
         if (home.isHomePageBottomDisplayIcon()) {
 
-            FontDrawable drawable = new FontDrawable(context, Utility.getIcon(menu.getIcon()), true, false);
-            drawable.setColorFilter(Utility.getColor(home.getHomePageBottomIconColor()), PorterDuff.Mode.SCREEN);
-            Glide.with(context).load(drawable).into(holder.icMenuLinkIcon);
+//            FontDrawable drawable = new FontDrawable(context, Utility.getIcon(menu.getIcon()), true, false);
+            Glide.with(context).load(Utility.getIcon(menu.getIcon())).into(holder.icMenuLinkIcon);
+            holder.icMenuLinkIcon.setColorFilter(Utility.getColor(home.getHomePageBottomIconColor()));
+
 
             //.getView().setColorFilter(Utility.getColor(home.getHomePageBottomIconColor()));
 //           holder.icMenuLinkIcon.setImageDrawable(drawable);

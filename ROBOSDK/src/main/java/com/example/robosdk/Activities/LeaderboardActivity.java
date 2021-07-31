@@ -15,6 +15,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
@@ -59,6 +60,7 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
     public static int month, year;
     public static TextView textDateBottomSheetLeader;
     LeaderboardAdapter adapter;
+    LinearLayout linearNoWinnerFound;
 
     RelativeLayout relLoadingLeaderboard;
 
@@ -69,8 +71,7 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
             textNameTwo,
             textPointTwo,
             textNameThree,
-            textPointThree,
-            textNoWinnerFound;
+            textPointThree;
 
     RelativeLayout relOne, relTwo, relThree;
 
@@ -108,7 +109,7 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
         imageLogoLeaderboard = findViewById(R.id.imageLogoLeaderboard);
         relLoadingLeaderboard = findViewById(R.id.relLoadingLeaderboard);
         tableLayoutLeaderboard = findViewById(R.id.tableLayoutLeaderboard);
-        textNoWinnerFound = findViewById(R.id.textNoWinnerFound);
+        linearNoWinnerFound = findViewById(R.id.linearNoWinnerFound);
 
         tableLayoutLeaderboard.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
 
@@ -434,7 +435,7 @@ if(responsedata.leaderBoardReport != null)
 }
 else
 {
-    textNoWinnerFound.setVisibility(View.VISIBLE);
+    linearNoWinnerFound.setVisibility(View.VISIBLE);
 }
     }
 }

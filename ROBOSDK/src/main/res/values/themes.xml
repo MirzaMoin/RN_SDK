@@ -1,9 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
 
-    <style name="Theme.RN_SDK.AppBarOverlay" parent="Theme.Design.Light.NoActionBar" />
-
-    <style name="Theme.RN_SDK.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
     <style name="BottomSheetStyle" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowSoftInputMode">adjustResize</item>
@@ -19,10 +16,5 @@
         <item name="colorOnSecondary">#FF6200EE</item>-->
         <!-- Status bar color. -->
         <!-- Customize your theme here. -->
-    </style>
-    <style name="CustomTheme" parent="Theme.AppCompat.Light">
-
-        <item name="contentInsetStart">0dp</item>
-        <item name="contentInsetEnd">0dp</item>
     </style>
 </resources>

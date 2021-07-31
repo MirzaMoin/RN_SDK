@@ -468,10 +468,11 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             if (homeScreenModel.isHomePageRibbonDisplayIcon()) {
                 imgHomePageRibbonIcon.setVisibility(View.VISIBLE);
 
-                imgHomePageRibbonIconTop.setVisibility(View.VISIBLE);
-                Drawable drawable = new FontDrawable(this, Utility.getIcon(homeScreenModel.getHomePageRibbonIcon()), true, false);
+            /*    imgHomePageRibbonIconTop.setVisibility(View.VISIBLE);
+                Drawable drawable = new FontDrawable(this, ), true, false);
                 imgHomePageRibbonIcon.setImageDrawable(drawable);
-                imgHomePageRibbonIcon.setImageDrawable(drawable);
+                imgHomePageRibbonIcon.setImageDrawable(drawable);*/
+                Glide.with(this).load(Utility.getIcon(homeScreenModel.getHomePageRibbonIcon())).into(imgHomePageRibbonIcon);
 
                 if (homeScreenModel.getHomePageRibbonIconPosition().equals("Left")) {
                     RelativeLayout.LayoutParams params =

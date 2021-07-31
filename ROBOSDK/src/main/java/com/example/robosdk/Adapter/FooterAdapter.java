@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.robosdk.Activities.WebViewActivity;
 import com.example.robosdk.Models.FooterLinkModel;
 import com.example.robosdk.R;
@@ -62,23 +63,26 @@ public class FooterAdapter extends RecyclerView.Adapter<FooterAdapter.ViewHolder
         holder.setIsRecyclable(false);
         final FooterLinkModel footer = footerLinks.get(position);
 
-        FontDrawable drawable = new FontDrawable(context, Utility.getIcon(footer.getFooterIcon()), true, false);
+//        FontDrawable drawable = new FontDrawable(context, , true, false);
 
 
         holder.textFooterLink.setText(footer.getFooterText());
         if (currentActivity.equals(footer.getFooterInternalLinkUrl())) {
             holder.textFooterLink.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarActionIconAndTextColor()));
 //            holder.icFooterLinkIcon.setColorFilter(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarActionIconAndTextColor()));
-            drawable.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarActionIconAndTextColor()));
+//            drawable.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarActionIconAndTextColor()));
+            holder.icFooterLinkIcon.setColorFilter(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarActionIconAndTextColor()));
 
-            holder.icFooterLinkIcon.setImageDrawable(drawable);
         } else {
             holder.textFooterLink.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarInactiveIconColor()));
 //            holder.icFooterLinkIcon.setColorFilter(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarInactiveIconColor()));
-            drawable.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarInactiveIconColor()));
+//            drawable.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarInactiveIconColor()));
 
-            holder.icFooterLinkIcon.setImageDrawable(drawable);
+            holder.icFooterLinkIcon.setColorFilter(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarInactiveIconColor()));
+
         }
+        Glide.with(context).load(Utility.getIcon(footer.getFooterIcon())).into(holder.icFooterLinkIcon);
+
         if (!currentActivity.equals(footer.getFooterInternalLinkUrl())) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
