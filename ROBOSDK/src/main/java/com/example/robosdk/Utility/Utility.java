@@ -59,10 +59,10 @@ public class Utility {
   {
     switch (menuInternalLinkUrl)
     {
-    /*  case "refereFriend":
+      case "refereFriend":
       case "Refer Friend":
         context.startActivity(new Intent(context, ReferFriendActivity.class));
-        break;*/
+        break;
       case "offer":
       case "Offers":
         context.startActivity(new Intent(context, OfferActivity.class));

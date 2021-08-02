@@ -23,6 +23,7 @@
             tools:targetApi="lollipop">
 
             <TableLayout
+                android:id="@+id/tableLayoutReferFriends"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#59062B8A"
@@ -45,7 +46,7 @@
                         android:background="@android:color/transparent"
                         android:scaleType="fitXY"
                         android:src="@drawable/ic_baseline_arrow_back_24"
-                        android:tint="#fff" />
+                        app:tint="#fff" />
 
 
                     <TextView
@@ -110,12 +111,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_10sdp"
-            android:text="Refer Friends and Get Rewards"
+            android:text="Refer Friends &amp; Get Rewards"
+            android:layout_marginTop="@dimen/_10sdp"
             android:textSize="@dimen/_15ssp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:layout_marginHorizontal="@dimen/_10sdp"
             android:layout_marginVertical="@dimen/_20sdp"
             android:text="Receive $10 for each friend who jins and make apurchase. Get the invite and share your favourite places."
@@ -141,7 +144,7 @@
             android:text="Share with Link"
             android:layout_centerHorizontal="true"
 
-            android:textColor="#4E4B4B"
+            android:textColor="#888181"
             android:textSize="@dimen/_15ssp"
             android:textStyle="bold" />
             <View
@@ -178,38 +181,52 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginVertical="@dimen/_10sdp"
+            android:layout_marginVertical="@dimen/_5sdp"
             >
             <ImageView
+                android:id="@+id/imageFacebook"
                 android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
-                android:src="@drawable/ic_facebook"
+                android:layout_height="@dimen/_35sdp"
+                android:src="@drawable/facebook"
                 android:layout_weight="1"
-                />
+                android:paddingVertical="@dimen/_5sdp"
+
+                app:tint="#3F51B5" />
             <ImageView
+                android:id="@+id/imageWhatsapp"
                 android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:src="@drawable/ic_whatsapp"
                 android:layout_weight="1"
+                android:paddingVertical="@dimen/_5sdp"
                 />
             <ImageView
+                android:id="@+id/imageEmail"
                 android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
-                android:src="@drawable/ic_email"
+                android:layout_height="@dimen/_35sdp"
+                android:src="@drawable/envelope"
                 android:layout_weight="1"
-                />
+                android:paddingVertical="@dimen/_5sdp"
+
+                app:tint="#C5461D" />
             <ImageView
+                android:id="@+id/imageTwitter"
                 android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:src="@drawable/ic_twitter"
                 android:layout_weight="1"
+                android:paddingVertical="@dimen/_5sdp"
+
                 />
             <ImageView
+                android:id="@+id/imageSMS"
                 android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
-                android:src="@drawable/ic_baseline_email_24"
+                android:layout_height="@dimen/_35sdp"
+                android:src="@drawable/comment_dots"
                 android:layout_weight="1"
-                app:tint="#000" />
+                android:paddingVertical="@dimen/_5sdp"
+
+                app:tint="#3F51B5" />
         </LinearLayout>
 
     </LinearLayout>

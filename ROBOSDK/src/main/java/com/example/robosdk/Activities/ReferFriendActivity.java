@@ -5,7 +5,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.example.robosdk.Adapter.CashbackImageSliderAdapter;
@@ -24,6 +27,9 @@ import com.example.robosdk.Models.HomeScreenModel;
 import com.example.robosdk.Models.ReferFriendChildPageDataModel;
 import com.example.robosdk.R;
 import com.example.robosdk.Utility.Utility;
+import com.facebook.CallbackManager;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -34,12 +40,21 @@ import java.util.List;
 public class ReferFriendActivity extends AppCompatActivity implements View.OnClickListener {
 
     Toolbar toolbar;
-    ImageView imgBackReferFriend;
+    ImageView imgBackReferFriend,
+            imageFacebook,
+            imageWhatsapp,
+            imageEmail,
+            imageTwitter,
+            imageSMS;
 
     TextView textPointReferFriend;
     Button btnGetInviteLink;
 
     RecyclerView rvFooterReferFriend;
+    TableLayout tableLayoutReferFriends;
+    CallbackManager callbackManager;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,12 +81,27 @@ public class ReferFriendActivity extends AppCompatActivity implements View.OnCli
         imgBackReferFriend = findViewById(R.id.imgBackReferFriend);
         btnGetInviteLink = findViewById(R.id.btnGetInviteLink);
         textPointReferFriend = findViewById(R.id.textPointReferFriend);
+        tableLayoutReferFriends = findViewById(R.id.tableLayoutReferFriends);
+
+        imageFacebook = findViewById(R.id.imageFacebook);
+        imageWhatsapp = findViewById(R.id.imageWhatsapp);
+        imageEmail = findViewById(R.id.imageEmail);
+        imageTwitter = findViewById(R.id.imageTwitter);
+        imageSMS = findViewById(R.id.imageSMS);
+
+
+        imageFacebook.setOnClickListener(this);
+        imageWhatsapp.setOnClickListener(this);
+        imageEmail.setOnClickListener(this);
+        imageTwitter.setOnClickListener(this);
+        imageSMS.setOnClickListener(this);
 
         textPointReferFriend.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
         textPointReferFriend.setText(String.valueOf(Utility.response.responsedata.contactData.getPointBalance())+ " PTS");
 
         imgBackReferFriend.setOnClickListener(this);
 
+        tableLayoutReferFriends.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -106,6 +136,7 @@ public class ReferFriendActivity extends AppCompatActivity implements View.OnCli
             sliderView.startAutoCycle();
         }
 
+        btnGetInviteLink.setOnClickListener(this);
         AppColorModel color = Utility.response.responsedata.appColor;
         btnGetInviteLink.setBackgroundColor(Utility.getColor(color.getPrimaryButtonColor()));
         setFooter();
@@ -139,8 +170,61 @@ public class ReferFriendActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.imgBackReferFriend){
+        int id = v.getId();
+        if(id == R.id.imgBackReferFriend){
             super.onBackPressed();
         }
+        else if(id == R.id.btnGetInviteLink)
+        {
+            Intent i = new Intent();
+            i.setAction(Intent.ACTION_SEND);
+            i.setType("text/plain");
+            i.putExtra(Intent.EXTRA_TEXT,"www.google.com");
+            startActivity(Intent.createChooser(i,"Share via"));
+        }
+        else if(id == R.id.imageFacebook){
+            callbackManager = CallbackManager.Factory.create();
+            ShareDialog shareDialog = new ShareDialog(this);
+
+            ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                    .setQuote("This is Link")
+                    .setContentUrl(Uri.parse("https://www.google.com")).build();
+
+            if(ShareDialog.canShow(ShareLinkContent.class))
+            {
+                shareDialog.show(linkContent);
+            }
+
+        }
+        else if(id == R.id.imageWhatsapp)
+        {
+            Intent i = new Intent(Intent.ACTION_SEND);
+            i.setType("text/plain");
+            i.putExtra(Intent.EXTRA_TEXT,"www.google.com");
+            i.setPackage("com.whatsapp");
+            startActivity(i);
+        }
+        else if(id == R.id.imageEmail){
+            Intent i = new Intent(Intent.ACTION_SENDTO);
+            i.setData(Uri.parse("mailto:"));
+            i.putExtra(Intent.EXTRA_EMAIL,new String[]{""});
+            i.putExtra(Intent.EXTRA_SUBJECT,"");
+            i.putExtra(Intent.EXTRA_TEXT,"www.google.com");
+            startActivity(i);
+
+        }
+        else if(id == R.id.imageTwitter)
+        {
+            Intent i = new Intent(Intent.ACTION_VIEW,Uri.parse("https://twitter.com/intent/tweet?text=Welcome to the app click the link to install app&url=www.google.com"));
+            startActivity(i);
+        }
+        else if(id == R.id.imageSMS)
+        {
+            Uri uri = Uri.parse("smsto:");
+            Intent i = new Intent(Intent.ACTION_SENDTO,uri);
+            i.putExtra("sms_body","www.google.com");
+            startActivity(i);
+        }
+
     }
 }

@@ -17,7 +17,6 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.fontawsomeicon.FontAwesomeIC;
 import com.example.robosdk.Activities.WebViewActivity;
 import com.example.robosdk.Models.HomeScreenModel;
 import com.example.robosdk.Models.MenuLinkModel;

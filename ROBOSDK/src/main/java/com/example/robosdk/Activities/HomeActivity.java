@@ -54,6 +54,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import info.androidhive.fontawesome.FontDrawable;
+import okhttp3.internal.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -472,7 +473,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 Drawable drawable = new FontDrawable(this, ), true, false);
                 imgHomePageRibbonIcon.setImageDrawable(drawable);
                 imgHomePageRibbonIcon.setImageDrawable(drawable);*/
+                Glide.with(this).load(Utility.getIcon(homeScreenModel.getHomePageRibbonIcon())).into(imgHomePageRibbonIconTop);
                 Glide.with(this).load(Utility.getIcon(homeScreenModel.getHomePageRibbonIcon())).into(imgHomePageRibbonIcon);
+                imgHomePageRibbonIconTop.setColorFilter(Utility.getColor(Utility.response.responsedata.appColor.getPrimaryColor()));
+                imgHomePageRibbonIcon.setColorFilter(Utility.getColor(Utility.response.responsedata.appColor.getPrimaryColor()));
 
                 if (homeScreenModel.getHomePageRibbonIconPosition().equals("Left")) {
                     RelativeLayout.LayoutParams params =
