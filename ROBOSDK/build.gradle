@@ -12,6 +12,7 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -64,8 +65,6 @@ dependencies {
     implementation 'com.google.zxing:core:3.4.0'
     implementation 'com.airbnb.android:lottie:3.7.0'
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
-
-    
 
     implementation 'com.facebook.android:facebook-share:[5,6)'
 

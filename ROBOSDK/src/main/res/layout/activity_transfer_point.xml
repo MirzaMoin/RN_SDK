@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.TransferPointActivity">
+
     <LinearLayout
         android:id="@+id/linearTopCashback"
         android:layout_width="match_parent"
@@ -14,53 +15,52 @@
 
         <androidx.appcompat.widget.Toolbar
 
-            app:contentInsetStart="0dp"
             android:id="@+id/toolbarCashback"
-            app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
+            app:contentInsetStart="0dp"
+            app:layout_constraintTop_toTopOf="parent"
             tools:targetApi="lollipop">
+
             <TableLayout
                 android:id="@+id/tableLayoutTP"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
                 android:background="#59062B8A"
-                >
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TableRow>
 
                     <ImageButton
 
-                        android:layout_width="wrap_content"
-                        android:scaleType="fitXY"
-                        android:layout_height="@dimen/_30sdp"
-                        android:src="@drawable/ic_baseline_arrow_back_24"
-                        android:layout_gravity="center_vertical"
-                        android:background="@android:color/transparent"
                         android:id="@+id/imgBackTransferPoints"
-                        android:tint="#fff"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginHorizontal="@dimen/_8sdp"
+                        android:background="@android:color/transparent"
                         android:padding="@dimen/_5sdp"
 
-                        android:layout_marginHorizontal="@dimen/_8sdp"
-                        android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true" />
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_baseline_arrow_back_24"
+                        android:tint="#fff" />
 
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Transfer Points"
+                        android:layout_alignParentTop="true"
 
 
-                        android:textSize="@dimen/_16sdp"
                         android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="Transfer Points"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:textColor="#fff"
-                        android:layout_alignParentTop="true"
-                        android:layout_weight="1"
-                        />
+                        android:textSize="@dimen/_16sdp" />
 
                     <TextView
                         android:id="@+id/textPointTransferPoints"
@@ -71,7 +71,8 @@
                         android:layout_marginRight="@dimen/_10sdp"
                         android:text="0 PTS"
                         android:textColor="#fff"
-                        android:textSize="@dimen/_14ssp" />
+                        android:textSize="@dimen/_14ssp"
+                        android:visibility="gone" />
 
 
                 </TableRow>
@@ -81,27 +82,27 @@
 
 
     </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/linearTopCashback"
-
         android:paddingBottom="@dimen/_100sdp"
-        >
+
+        app:layout_constraintTop_toBottomOf="@id/linearTopCashback">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
             <com.smarteist.autoimageslider.SliderView
                 android:id="@+id/imageSliderTransferPoints"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_130sdp"
+                android:visibility="gone"
                 app:sliderAnimationDuration="600"
                 app:sliderAutoCycleDirection="back_and_forth"
                 app:sliderAutoCycleEnabled="true"
-                android:visibility="gone"
                 app:sliderIndicatorAnimationDuration="600"
                 app:sliderIndicatorGravity="center_horizontal|bottom"
                 app:sliderIndicatorMargin="15dp"
@@ -118,69 +119,72 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_10sdp"
 
-                app:cardCornerRadius="@dimen/_10sdp"
-                >
+                app:cardCornerRadius="@dimen/_10sdp">
 
 
             </androidx.cardview.widget.CardView>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Enter Point Amount"
                 android:layout_marginHorizontal="@dimen/_10sdp"
-                android:textSize="@dimen/_12sdp"/>
+                android:text="Enter Point Amount"
+                android:textSize="@dimen/_12sdp" />
+
             <EditText
                 android:id="@+id/etPointAmountTP"
                 android:layout_width="match_parent"
-                android:layout_marginHorizontal="@dimen/_10sdp"
                 android:layout_height="@dimen/_35sdp"
-                android:hint="Enter point amount"
+                android:layout_marginHorizontal="@dimen/_10sdp"
                 android:layout_marginVertical="@dimen/_10sdp"
-                android:paddingLeft="@dimen/_10sdp"
                 android:background="@drawable/edit_text_border"
                 android:drawablePadding="@dimen/_10sdp"
-                android:textSize="@dimen/_12ssp"
+                android:hint="Enter point amount"
                 android:inputType="numberDecimal"
-                />
+                android:paddingLeft="@dimen/_10sdp"
+                android:textSize="@dimen/_12ssp" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
 
-                android:layout_marginVertical="@dimen/_10sdp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/_10sdp">
+
                 <View
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_1sdp"
-                    android:layout_toLeftOf="@+id/textShare"
-                    android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_centerVertical="true"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_toLeftOf="@+id/textShare"
                     android:background="#888181" />
+
                 <TextView
                     android:id="@+id/textShare"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_10sdp"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Transfering to"
                     android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:text="Transfering to"
 
                     android:textColor="#9F9F9F"
-                    android:textSize="@dimen/_12ssp"
-                   />
+                    android:textSize="@dimen/_12ssp" />
+
                 <View
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_1sdp"
-                    android:layout_toRightOf="@+id/textShare"
-                    android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_centerVertical="true"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_toRightOf="@+id/textShare"
                     android:background="#888181" />
             </RelativeLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Enter User Details"
                 android:layout_marginHorizontal="@dimen/_10sdp"
-                android:textSize="@dimen/_12sdp"/>
+                android:text="Enter User Details"
+                android:textSize="@dimen/_12sdp" />
 
             <EditText
                 android:id="@+id/etUserDetailsTP"
@@ -198,10 +202,10 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                app:cardCornerRadius="@dimen/_10sdp"
-                android:background="@drawable/shape_button_background"
                 android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/shape_button_background"
+                app:cardCornerRadius="@dimen/_10sdp"
 
                 >
 
@@ -217,6 +221,8 @@
                     app:button_left_padding="20dp"
                     app:button_right_padding="20dp"
                     app:button_top_padding="@dimen/_10sdp"
+                    app:button_trail_drawable="@drawable/background_trailing"
+                    app:button_trail_enabled="true"
                     app:has_activate_state="true"
                     app:initial_state="disabled"
                     app:inner_text="Slide to transfer"
@@ -224,28 +230,27 @@
                     app:inner_text_color="@android:color/white"
                     app:inner_text_size="@dimen/_12ssp"
                     app:inner_text_top_padding="@dimen/_10sdp"
-                    app:button_trail_enabled="true"
-                    app:button_trail_drawable="@drawable/background_trailing"
 
                     />
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>
     </ScrollView>
+
     <LinearLayout
         android:id="@+id/bottomNavBarHome"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
 
-        android:orientation="horizontal">
+        app:layout_constraintBottom_toBottomOf="parent">
+
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvFooterTransferPoint"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
 
-            android:id="@+id/rvFooterTransferPoint"
-            />
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

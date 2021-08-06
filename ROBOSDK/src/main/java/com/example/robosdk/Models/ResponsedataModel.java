@@ -11,8 +11,9 @@ public class ResponsedataModel {
     public AppIntakeImagesModel appIntakeImages;
     public AppDetailsModel appDetails;
     public ChildPageSettingModel childPageSetting;
+
     public ContactData contactData;
-    public Object webFormData;
+//    public String webFormData;
 
     //Transaction History Models
     public TransactionHistoryModel transactionHistoryModel;
@@ -64,7 +65,7 @@ public class ResponsedataModel {
     public double pointBalance;
 
 
-    public ResponsedataModel(HomeScreenModel homeScreen, AppColorModel appColor, MenuPermissionModel menuPermission, AppIntakeImagesModel appIntakeImages, AppDetailsModel appDetails, ChildPageSettingModel childPageSetting, ContactData contactData, Object webFormData, TransactionHistoryModel transactionHistoryModel, List<TransactionHistoryModel> responsedata, OfferRedeemSettingModel redeemSetting, OfferAddressDetailsModel addressDetails, OfferUserDetailsModel userDetails, List<OfferListModel> offerList, List<SurveysUnTakenModel> unTaken, List<SurveysUnTakenModel> completed, List<RPGListModel> lstRPG, WaysToEarnModel totalPoints, WaysToEarnModel purchasePoints, WaysToEarnModel socialShare, WaysToEarnModel referFriends, WaysToEarnModel leaderboard, WaysToEarnModel surveys, WaysToEarnModel completeProfile, LBQualificationCriteriaModel qualificationCriteria, List<LBFilterModel> filters, List<LBLeaderBoardReportModel> leaderBoardReport, List<LocationDataModel> locationData, List<String> categoryList, URDateDetailsModel dateDetails, List<URCategoryModel> categories, URSettingsDetailsModel settingsDetails, double totalEarnedThisMonth, double totalReedemed, double lifeTimePoints, double pointBalance) {
+    public ResponsedataModel(HomeScreenModel homeScreen, AppColorModel appColor, MenuPermissionModel menuPermission, AppIntakeImagesModel appIntakeImages, AppDetailsModel appDetails, ChildPageSettingModel childPageSetting, ContactData contactData, TransactionHistoryModel transactionHistoryModel, List<TransactionHistoryModel> responsedata, OfferRedeemSettingModel redeemSetting, OfferAddressDetailsModel addressDetails, OfferUserDetailsModel userDetails, List<OfferListModel> offerList, List<SurveysUnTakenModel> unTaken, List<SurveysUnTakenModel> completed, List<RPGListModel> lstRPG, WaysToEarnModel totalPoints, WaysToEarnModel purchasePoints, WaysToEarnModel socialShare, WaysToEarnModel referFriends, WaysToEarnModel leaderboard, WaysToEarnModel surveys, WaysToEarnModel completeProfile, LBQualificationCriteriaModel qualificationCriteria, List<LBFilterModel> filters, List<LBLeaderBoardReportModel> leaderBoardReport, List<LocationDataModel> locationData, List<String> categoryList, URDateDetailsModel dateDetails, List<URCategoryModel> categories, URSettingsDetailsModel settingsDetails, double totalEarnedThisMonth, double totalReedemed, double lifeTimePoints, double pointBalance) {
         this.homeScreen = homeScreen;
         this.appColor = appColor;
         this.menuPermission = menuPermission;
@@ -72,7 +73,7 @@ public class ResponsedataModel {
         this.appDetails = appDetails;
         this.childPageSetting = childPageSetting;
         this.contactData = contactData;
-        this.webFormData = webFormData;
+//        this.webFormData = webFormData;
         this.transactionHistoryModel = transactionHistoryModel;
         this.responsedata = responsedata;
         this.redeemSetting = redeemSetting;
@@ -159,14 +160,14 @@ public class ResponsedataModel {
         this.contactData = contactData;
     }
 
-    public Object getWebFormData() {
-        return contactData;
+  /*  public String getWebFormData() {
+        return webFormData;
     }
 
-    public void setWebFormData(Object webFormData) {
+    public void setWebFormData(String webFormData) {
         this.webFormData = webFormData;
     }
-
+*/
     public TransactionHistoryModel getTransactionHistoryModel() {
         return transactionHistoryModel;
     }

@@ -85,8 +85,13 @@ public class RewardEntryGoalActivity extends AppCompatActivity implements View.O
         relLoadingRPG = findViewById(R.id.relLoadingRPG);
         tableLayoutRPG = findViewById(R.id.tableLayoutRPG);
         tableLayoutRPG.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
-        textPointRPG.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
-        textPointRPG.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
+        if(Utility.response.responsedata.contactData.getPointBalance() > 0)
+        {
+            textPointRPG.setVisibility(View.VISIBLE);
+            textPointRPG.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
+            textPointRPG.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
+        }
+
         imgBack.setOnClickListener(this);
         SliderView sliderView = findViewById(R.id.imageSliderRPG);
         ChildPageSettingModel childPageSettings = Utility.response.responsedata.childPageSetting;
@@ -129,7 +134,7 @@ public class RewardEntryGoalActivity extends AppCompatActivity implements View.O
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                 relLoadingRPG.setVisibility(View.GONE);
 
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     Utility.response.responsedata.lstRPG = response.body().responsedata.lstRPG;
                     Log.e("Response - getRPGList", "onResponse: " + Utility.response.responsedata.lstRPG.size());
                     RewardEntryPointAdapter adapter = new RewardEntryPointAdapter(RewardEntryGoalActivity.this, Utility.response.responsedata.lstRPG);

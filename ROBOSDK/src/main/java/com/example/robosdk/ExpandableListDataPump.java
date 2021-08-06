@@ -34,8 +34,8 @@ public class ExpandableListDataPump {
             EARN_POINTS.add("Ways To Earn");
         if(menu.isVisibleMenuTakeSurvey())
             EARN_POINTS.add("Take Survey");
-       /* if(menu.isVisibleMenuReferFriends())
-            EARN_POINTS.add("Refer Friend");*/
+        if(menu.isVisibleMenuReferFriends())
+            EARN_POINTS.add("Refer Friend");
         if(menu.isVisibleMenuUploadReciepts())
             EARN_POINTS.add("Upload Receipt");
         expandableListDetail.put("EARN POINTS", EARN_POINTS);

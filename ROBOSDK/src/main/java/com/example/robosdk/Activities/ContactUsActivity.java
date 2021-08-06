@@ -136,9 +136,14 @@ public class ContactUsActivity extends AppCompatActivity implements OnMapReadyCa
         btnSendMessage = findViewById(R.id.btnSendMessage);
         textPointContactUs = findViewById(R.id.textPointContactUs);
 
-        textPointContactUs.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
+        if(Utility.response.responsedata.contactData.getPointBalance() > 0)
+        {
+            textPointContactUs.setVisibility(View.VISIBLE);
+            textPointContactUs.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
 
-        textPointContactUs.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
+            textPointContactUs.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
+
+        }
 
         imgBackContactUs.setOnClickListener(this);
 

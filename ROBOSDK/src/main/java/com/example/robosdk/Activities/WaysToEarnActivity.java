@@ -86,8 +86,13 @@ public class WaysToEarnActivity extends AppCompatActivity implements View.OnClic
         relLoadingWTE = findViewById(R.id.relLoadingWTE);
         imageWTE = findViewById(R.id.imageWTE);
         imageLogoWTE = findViewById(R.id.imageLogoWTE);
-        textPointWaysToEarn.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
-        textPointWaysToEarn.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance())+ " PTS");
+        if(Utility.response.responsedata.contactData.getPointBalance() > 0)
+        {
+            textPointWaysToEarn.setVisibility(View.VISIBLE);
+            textPointWaysToEarn.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
+            textPointWaysToEarn.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance())+ " PTS");
+
+        }
 
         imgBackWaysToEarn.setOnClickListener(this);
 

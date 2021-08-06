@@ -104,8 +104,15 @@ public class TakeSurveyActivity extends AppCompatActivity implements View.OnClic
         mPager = findViewById(R.id.viewPagerTakeSurvey);
         tableLayoutSurveys = findViewById(R.id.tableLayoutSurveys);
         tableLayoutSurveys.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
-        textPointSurvey.setTextColor(Utility.getColor(responseData.appColor.getHeaderPointDigitColor()));
-        textPointSurvey.setText(Utility.getRoundData(responseData.contactData.getPointBalance())+ " PTS");
+
+        if(responseData.contactData.getPointBalance() > 0)
+        {
+            textPointSurvey.setVisibility(View.VISIBLE);
+            textPointSurvey.setTextColor(Utility.getColor(responseData.appColor.getHeaderPointDigitColor()));
+            textPointSurvey.setText(Utility.getRoundData(responseData.contactData.getPointBalance())+ " PTS");
+        }
+
+
         imgBackSurvey.setOnClickListener(this);
         Utility.setFooter(TakeSurveyActivity.this,rvFooterTakeSurvey,"takeSurvey");
         createTabs();

@@ -129,8 +129,13 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
             setSupportActionBar(toolbar);
         }
 
-        textPointCashback.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
-        textPointCashback.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
+        if(Utility.response.responsedata.contactData.getPointBalance() > 0)
+        {
+            textPointCashback.setVisibility(View.VISIBLE);
+            textPointCashback.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
+            textPointCashback.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
+
+        }
 
         ChildPageSettingModel childPageSettings = Utility.response.responsedata.childPageSetting;
 
@@ -176,10 +181,28 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
 
                                     Toast.makeText(CashbackActivity.this, "Please enter valid amount", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    makeCashback(otherAmount);
+                                    if(Double.parseDouble(otherAmount) > 0)
+                                    {
+                                        makeCashback(otherAmount);
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(CashbackActivity.this, "Please enter valid amount", Toast.LENGTH_SHORT).show();
+                                        swipeButtonRC.toggleState();
+
+                                    }
                                 }
                             } else {
-                                makeCashback(otherAmount);
+                                if(Double.parseDouble(otherAmount) > 0)
+                                {
+                                    makeCashback(otherAmount);
+                                }
+                                else
+                                {
+                                    Toast.makeText(CashbackActivity.this, "Please enter valid amount", Toast.LENGTH_SHORT).show();
+                                    swipeButtonRC.toggleState();
+
+                                }
                             }
                         }
                     }
@@ -215,8 +238,12 @@ public class CashbackActivity extends AppCompatActivity implements View.OnClickL
         cardTapRC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                etAmountRC.setText(Utility.getRoundData(amount));
-                isTap = true;
+                if(amount > 0)
+                {
+                    etAmountRC.setText(Utility.getRoundData(amount));
+                    isTap = true;
+                }
+
             }
         });
     }

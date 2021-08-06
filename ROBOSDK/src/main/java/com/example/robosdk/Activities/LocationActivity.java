@@ -125,8 +125,12 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         imgBackLocation.setOnClickListener(this);
         cardLocation.setOnClickListener(this);
 
-        textPointLocation.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
-        textPointLocation.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
+        if (Utility.response.responsedata.contactData.getPointBalance() > 0) {
+            textPointLocation.setVisibility(View.VISIBLE);
+            textPointLocation.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
+            textPointLocation.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
+
+        }
 
         Utility.setFooter(LocationActivity.this, rvFooterLocation, "locations");
     }

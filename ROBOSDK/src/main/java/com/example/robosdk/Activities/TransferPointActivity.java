@@ -144,7 +144,14 @@ public class TransferPointActivity extends AppCompatActivity implements View.OnC
                                                     Utility.response.responsedata.contactData = response.body().responsedata.contactData;
 
                                                     etPointAmountTP.setHint(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
-                                                    textPointTransferPoints.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
+                                                    if(Utility.response.responsedata.contactData.getPointBalance() > 0)
+                                                    {
+                                                        textPointTransferPoints.setVisibility(View.VISIBLE);
+                                                        textPointTransferPoints.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
+
+                                                        textPointTransferPoints.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
+
+                                                    }
 
                                                     Call<ResponseModel> callGetContactData = service.getAllPoints(Utility.response.responsedata.appDetails.rewardProgramId,
                                                             Utility.response.responsedata.contactData.getContactID()

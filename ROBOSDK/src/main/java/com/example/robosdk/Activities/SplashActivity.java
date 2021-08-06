@@ -45,8 +45,8 @@ public class SplashActivity extends AppCompatActivity {
 
 
         Intent i = getIntent();
-        String token = "UW5c2c0MTT43HbVcKeu54rh8Nf77Fu"; //i.getStringExtra("RPToken");
-        String username ="8238550059";// i.getStringExtra("username");
+        String token = Utility.RPToken; //i.getStringExtra("RPToken");
+        String username ="8888888888";// i.getStringExtra("username");
         String password ="123456"; // i.getStringExtra("password");
 
         callAPI(token, username, password);
@@ -68,8 +68,8 @@ public class SplashActivity extends AppCompatActivity {
                         Log.e("Response - getAllData", "" + response.body().statusMessage);
 
 
-                        ResponseModel responseModel = response.body();
-                        Utility.response = responseModel;
+
+                        Utility.response = response.body();
 
                         Glide.with(SplashActivity.this).load(Utility.response.responsedata.appIntakeImages.loadingImages.get(0).imageUrl).into(imageSplash);
                         Glide.with(SplashActivity.this).load(Utility.response.responsedata.appIntakeImages.companyLogo).into(imageLogoSplash);
@@ -85,10 +85,11 @@ public class SplashActivity extends AppCompatActivity {
                             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                                 if (response.isSuccessful()) {
                                     if (response.body().getStatusCode() == 1) {
-                                        Utility.response.responsedata.contactData = response.body().responsedata.contactData;
-                                        Utility.response.responsedata.webFormData = response.body().responsedata.webFormData;
-
                                         Log.e("Response - Login", "Response : " + response.body().responsedata.contactData.emailAddress);
+
+                                        Utility.response.responsedata.contactData = response.body().responsedata.contactData;
+//                                        Utility.response.responsedata.webFormData = response.body().responsedata.webFormData;
+
 
 
                                         Call<ResponseModel> callGetContactData = service.getContactData(Utility.response.responsedata.appDetails.rewardProgramId,
@@ -191,15 +192,11 @@ public class SplashActivity extends AppCompatActivity {
                     } else {
                         Log.e("Test", "Login : " + response.message()
                         );
-
-
                     }
 
 
                 } else {
-                    Log.e("Test", "Login : " + response.message());
-
-
+                    Log.e("Test", "Login : " + response.code());
                 }
 
 

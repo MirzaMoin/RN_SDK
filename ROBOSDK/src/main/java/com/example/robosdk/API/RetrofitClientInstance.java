@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClientInstance {
 
     private static Retrofit retrofit;
-    private static final String BASE_URL = "https://beta.roborewards.net";
+    private static final String BASE_URL = "https://v2.roborewards.net";
 
 
 

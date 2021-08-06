@@ -34,7 +34,6 @@
             android:gravity="center"
             android:textSize="@dimen/_12ssp"
             android:layout_marginTop="@dimen/_20sdp"
-            android:textColor="#000"
             />
     </LinearLayout>
 
@@ -95,6 +94,7 @@
                         android:textSize="@dimen/_16sdp" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/textPointOffers"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

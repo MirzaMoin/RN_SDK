@@ -147,7 +147,7 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
             }
             else
             {
-                Toast.makeText(this, "No Winner Found", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "No Stats Found", Toast.LENGTH_SHORT).show();
             }
 
         } else if (v.getId() == R.id.imgBackLeaderboard) {
@@ -256,9 +256,12 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
 
 
                     } else {
-                        Utility.showAlertDialog(LeaderboardActivity.this,"Oops...", "Something went wrong, contact support");
+                        linearNoWinnerFound.setVisibility(View.VISIBLE);
+//                        Utility.showAlertDialog(LeaderboardActivity.this,"Oops...", response.body().statusMessage);
                     }
                 } else {
+                    linearNoWinnerFound.setVisibility(View.VISIBLE);
+
                     Utility.showAlertDialog(LeaderboardActivity.this,"Oops...", "Something went wrong, contact support");
 
                     Log.e("Test Error: ", "" + response.message());
@@ -351,7 +354,8 @@ public class LeaderboardActivity extends AppCompatActivity implements View.OnCli
                     } else {
                         Utility.showAlertDialog(LeaderboardActivity.this,"Oops...", response.message());
                     }
-                } else {
+                }
+                else {
 
                     Utility.showAlertDialog(LeaderboardActivity.this,"Oops...", "Something went wrong");
 

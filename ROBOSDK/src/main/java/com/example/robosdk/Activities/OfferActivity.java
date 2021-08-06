@@ -200,8 +200,13 @@ public class OfferActivity extends AppCompatActivity implements View.OnClickList
     }
     @SuppressLint("SetTextI18n")
     private void setLayout() {
-        textPointOffers.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
-        textPointOffers.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
+        if(Utility.response.responsedata.contactData.getPointBalance() > 0)
+        {
+            textPointOffers.setVisibility(View.VISIBLE);
+            textPointOffers.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
+            textPointOffers.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
+        }
+
         OffersAdapter adapter = new OffersAdapter(this, Utility.response.responsedata.offerList);
         rvOffer.setHasFixedSize(true);
         rvOffer.setLayoutManager(new LinearLayoutManager(this));

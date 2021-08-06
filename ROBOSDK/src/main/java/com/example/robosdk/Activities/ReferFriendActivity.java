@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.robosdk.Adapter.CashbackImageSliderAdapter;
 import com.example.robosdk.Adapter.FooterAdapter;
@@ -27,6 +29,7 @@ import com.example.robosdk.Models.HomeScreenModel;
 import com.example.robosdk.Models.ReferFriendChildPageDataModel;
 import com.example.robosdk.R;
 import com.example.robosdk.Utility.Utility;
+
 import com.facebook.CallbackManager;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
@@ -54,8 +57,6 @@ public class ReferFriendActivity extends AppCompatActivity implements View.OnCli
     TableLayout tableLayoutReferFriends;
     CallbackManager callbackManager;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.myLibTheme);
@@ -73,7 +74,7 @@ public class ReferFriendActivity extends AppCompatActivity implements View.OnCli
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.setStatusBarColor(Utility.getColor(Utility.response.responsedata.appColor.getPhoneNotificationBar()));
         }
-        if(Utility.response.responsedata.appColor.getPhoneNotificationBarTextColor().equals("Black")){
+        if (Utility.response.responsedata.appColor.getPhoneNotificationBarTextColor().equals("Black")) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
         toolbar = findViewById(R.id.toolbarReferFriend);
@@ -96,9 +97,12 @@ public class ReferFriendActivity extends AppCompatActivity implements View.OnCli
         imageTwitter.setOnClickListener(this);
         imageSMS.setOnClickListener(this);
 
-        textPointReferFriend.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
-        textPointReferFriend.setText(String.valueOf(Utility.response.responsedata.contactData.getPointBalance())+ " PTS");
+        if (Utility.response.responsedata.contactData.getPointBalance() > 0) {
+            textPointReferFriend.setVisibility(View.VISIBLE);
+            textPointReferFriend.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
+            textPointReferFriend.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
 
+        }
         imgBackReferFriend.setOnClickListener(this);
 
         tableLayoutReferFriends.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
@@ -112,7 +116,7 @@ public class ReferFriendActivity extends AppCompatActivity implements View.OnCli
 
         ChildPageSettingModel childPageSettings = Utility.response.responsedata.childPageSetting;
 
-        if(childPageSettings.isChildPageReferFriend()) {
+        if (childPageSettings.isChildPageReferFriend()) {
             List<ChildPageModel> childPage = new ArrayList<>();
             for (ReferFriendChildPageDataModel refer : childPageSettings.referFriendChildPageData) {
                 childPage.add(new ChildPageModel(refer.image, refer.opacity, refer.isClickable, refer.linkType, refer.internalLink, refer.externalLink));
@@ -123,7 +127,6 @@ public class ReferFriendActivity extends AppCompatActivity implements View.OnCli
             sliderView.setVisibility(View.VISIBLE);
 
             CashbackImageSliderAdapter adapter = new CashbackImageSliderAdapter(this, childPage);
-
 
             sliderView.setSliderAdapter(adapter);
 
@@ -141,88 +144,76 @@ public class ReferFriendActivity extends AppCompatActivity implements View.OnCli
         btnGetInviteLink.setBackgroundColor(Utility.getColor(color.getPrimaryButtonColor()));
         setFooter();
     }
+
     private void setFooter() {
         AppColorModel appColor = Utility.response.responsedata.appColor;
 
         HomeScreenModel homeScreenModel = Utility.response.responsedata.homeScreen;
-        if(homeScreenModel.isHomePageDisplayFooter())
-        {
+        if (homeScreenModel.isHomePageDisplayFooter()) {
             rvFooterReferFriend.setVisibility(View.VISIBLE);
             rvFooterReferFriend.setBackgroundColor(Utility.getColor(appColor.getFooterBarColor()));
 
-            FooterAdapter adapter = new FooterAdapter(this,homeScreenModel.footerLinks,"profileScreen");
+            FooterAdapter adapter = new FooterAdapter(this, homeScreenModel.footerLinks, "profileScreen");
             rvFooterReferFriend.setHasFixedSize(true);
 
 
-            rvFooterReferFriend.setLayoutManager(new GridLayoutManager(this,homeScreenModel.footerLinks.size()));
+            rvFooterReferFriend.setLayoutManager(new GridLayoutManager(this, homeScreenModel.footerLinks.size()));
 
             rvFooterReferFriend.setAdapter(adapter);
-        }
-        else
-        {
+        } else {
             rvFooterReferFriend.setVisibility(View.GONE);
-
-
         }
-
-
     }
-
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if(id == R.id.imgBackReferFriend){
+        if (id == R.id.imgBackReferFriend) {
             super.onBackPressed();
-        }
-        else if(id == R.id.btnGetInviteLink)
-        {
+        } else if (id == R.id.btnGetInviteLink) {
             Intent i = new Intent();
             i.setAction(Intent.ACTION_SEND);
             i.setType("text/plain");
-            i.putExtra(Intent.EXTRA_TEXT,"www.google.com");
-            startActivity(Intent.createChooser(i,"Share via"));
-        }
-        else if(id == R.id.imageFacebook){
+            i.putExtra(Intent.EXTRA_TEXT, "www.google.com");
+            startActivity(Intent.createChooser(i, "Share via"));
+        } else if (id == R.id.imageFacebook) {
             callbackManager = CallbackManager.Factory.create();
             ShareDialog shareDialog = new ShareDialog(this);
 
             ShareLinkContent linkContent = new ShareLinkContent.Builder()
-                    .setQuote("This is Link")
+                    .setQuote("Welcome to the app click the link to install app")
                     .setContentUrl(Uri.parse("https://www.google.com")).build();
 
-            if(ShareDialog.canShow(ShareLinkContent.class))
-            {
+            if (ShareDialog.canShow(ShareLinkContent.class)) {
                 shareDialog.show(linkContent);
             }
 
-        }
-        else if(id == R.id.imageWhatsapp)
-        {
-            Intent i = new Intent(Intent.ACTION_SEND);
-            i.setType("text/plain");
-            i.putExtra(Intent.EXTRA_TEXT,"www.google.com");
-            i.setPackage("com.whatsapp");
-            startActivity(i);
-        }
-        else if(id == R.id.imageEmail){
+        } else if (id == R.id.imageWhatsapp) {
+            try {
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("text/plain");
+                i.putExtra(Intent.EXTRA_TEXT, "Welcome to the app click the link to install app www.google.com");
+                i.setPackage("com.whatsapp");
+                startActivity(i);
+            } catch (ActivityNotFoundException e) {
+
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://wa.me/?text=Welcome to the app click the link to install app&url=www.google.com"));
+                startActivity(i);
+            }
+        } else if (id == R.id.imageEmail) {
             Intent i = new Intent(Intent.ACTION_SENDTO);
             i.setData(Uri.parse("mailto:"));
-            i.putExtra(Intent.EXTRA_EMAIL,new String[]{""});
-            i.putExtra(Intent.EXTRA_SUBJECT,"");
-            i.putExtra(Intent.EXTRA_TEXT,"www.google.com");
+            i.putExtra(Intent.EXTRA_EMAIL, new String[]{""});
+            i.putExtra(Intent.EXTRA_SUBJECT, "");
+            i.putExtra(Intent.EXTRA_TEXT, "www.google.com");
             startActivity(i);
 
-        }
-        else if(id == R.id.imageTwitter)
-        {
-            Intent i = new Intent(Intent.ACTION_VIEW,Uri.parse("https://twitter.com/intent/tweet?text=Welcome to the app click the link to install app&url=www.google.com"));
+        } else if (id == R.id.imageTwitter) {
+            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/intent/tweet?text=Welcome to the app click the link to install app&url=www.google.com"));
             startActivity(i);
-        }
-        else if(id == R.id.imageSMS)
-        {
+        } else if (id == R.id.imageSMS) {
             Uri uri = Uri.parse("smsto:");
-            Intent i = new Intent(Intent.ACTION_SENDTO,uri);
-            i.putExtra("sms_body","www.google.com");
+            Intent i = new Intent(Intent.ACTION_SENDTO, uri);
+            i.putExtra("sms_body", "www.google.com");
             startActivity(i);
         }
 

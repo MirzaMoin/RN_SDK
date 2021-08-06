@@ -144,8 +144,13 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
         tableLayoutOfferDetails.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
 
         imgback.setOnClickListener(this);
-        textPointOfferDetail.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
-        textPointOfferDetail.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
+        if(Utility.response.responsedata.contactData.getPointBalance() > 0)
+        {
+            textPointOfferDetail.setVisibility(View.VISIBLE);
+            textPointOfferDetail.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
+            textPointOfferDetail.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
+
+        }
 
         setLayout();
 

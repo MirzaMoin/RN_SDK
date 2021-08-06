@@ -152,8 +152,13 @@ public class TransactionHistoryActivity extends AppCompatActivity implements Vie
         tableLayoutTH.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
 
         textPointTransactionHistory = findViewById(R.id.textPointTransactionHistory);
-        textPointTransactionHistory.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
-        textPointTransactionHistory.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
+        if(Utility.response.responsedata.contactData.getPointBalance() > 0)
+        {
+            textPointTransactionHistory.setVisibility(View.VISIBLE);
+            textPointTransactionHistory.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
+            textPointTransactionHistory.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
+
+        }
 
         ChildPageSettingModel childPageSettings = Utility.response.responsedata.childPageSetting;
 
