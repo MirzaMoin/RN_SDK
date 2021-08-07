@@ -1,9 +1,9 @@
 package com.example.robosdk.Models;
 
 public class OfferUserDetailsModel {
-    public String mobilePhone;
-    public String memberCardID;
-    public String addressID;
+    public String mobilePhone,
+            memberCardID,
+            addressID;
 
     public OfferUserDetailsModel(String mobilePhone, String memberCardID, String addressID) {
         this.mobilePhone = mobilePhone;

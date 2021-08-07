@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.robosdk.Activities.WebViewActivity;
@@ -15,23 +14,18 @@ import com.example.robosdk.R;
 import com.example.robosdk.Utility.Utility;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CashbackImageSliderAdapter extends
         SliderViewAdapter<CashbackImageSliderAdapter.SliderAdapterVH> {
 
-    private Context context;
-    private List<ChildPageModel> mSliderItems = new ArrayList<>();
+    private final Context context;
+    private final List<ChildPageModel> mSliderItems;
 
     public CashbackImageSliderAdapter(Context context,List<ChildPageModel> mSliderItems) {
         this.context = context;
         this.mSliderItems = mSliderItems;
-
     }
-
-
-
     @Override
     public SliderAdapterVH onCreateViewHolder(ViewGroup parent) {
         View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.image_slider_layout_item, null);
@@ -52,8 +46,6 @@ public class CashbackImageSliderAdapter extends
             viewHolder.imageViewBackground.setAlpha(child.getOpacity());
 
         }
-
-
         if(child.isClickable()) {
             viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -77,16 +69,13 @@ public class CashbackImageSliderAdapter extends
 
     @Override
     public int getCount() {
-        //slider view count could be dynamic size
         return mSliderItems.size();
     }
 
-    class SliderAdapterVH extends SliderViewAdapter.ViewHolder {
+    static class SliderAdapterVH extends SliderViewAdapter.ViewHolder {
 
         View itemView;
         ImageView imageViewBackground;
-        ImageView imageGifContainer;
-        TextView textViewDescription;
 
         public SliderAdapterVH(View itemView) {
             super(itemView);

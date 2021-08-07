@@ -3,10 +3,10 @@ package com.example.robosdk.Models;
 import java.util.List;
 
 public class URCategoryModel {
-    public String id;
-    public String name;
-    boolean isSelected;
+    public String id,
+            name;
     public List<URAddressModel> addresses;
+    boolean isSelected;
 
     public URCategoryModel(String id, String name, List<URAddressModel> addresses) {
         this.id = id;

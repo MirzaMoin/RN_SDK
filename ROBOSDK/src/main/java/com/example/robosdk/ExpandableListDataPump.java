@@ -16,7 +16,6 @@ public class ExpandableListDataPump {
         List<String> HOME = new ArrayList<String>();
         expandableListDetail.put("HOME", HOME);
 
-
         List<String> USE_POINTS = new ArrayList<String>();
         USE_POINTS.add("Offers");
         if(menu.isVisibleMenuRPGoal())
@@ -27,7 +26,6 @@ public class ExpandableListDataPump {
             USE_POINTS.add("Transfer Points");
 
         expandableListDetail.put("USE POINTS", USE_POINTS);
-
 
         List<String> EARN_POINTS = new ArrayList<String>();
         if(menu.isVisibleMenuWaysToEarnPoints())
@@ -65,8 +63,6 @@ public class ExpandableListDataPump {
      /*   if(menu.isVisibleMenuAppointment())
             CONTACT.add("Appointment");*/
         expandableListDetail.put("CONTACT", CONTACT);
-
-
 
         return expandableListDetail;
     }

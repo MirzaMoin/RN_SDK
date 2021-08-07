@@ -1,5 +1,6 @@
 package com.example.robosdk.Models;
-public class LoadingImageModel{
+
+public class LoadingImageModel {
     public String imageUrl;
 
     public LoadingImageModel(String imageUrl) {

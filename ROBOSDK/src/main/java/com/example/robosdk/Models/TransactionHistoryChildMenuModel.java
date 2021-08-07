@@ -3,9 +3,8 @@ package com.example.robosdk.Models;
 import java.util.List;
 
 public class TransactionHistoryChildMenuModel {
-    public String name;
+    public String name,stringValue;
     public Object value;
-    public String stringValue;
     public List<String> images;
 
     public TransactionHistoryChildMenuModel(String name, Object value, String stringValue, List<String> images) {

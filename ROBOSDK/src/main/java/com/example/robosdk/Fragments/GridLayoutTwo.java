@@ -18,20 +18,16 @@ public class GridLayoutTwo extends Fragment {
 
     RecyclerView rvGrid2;
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_grid_layout_two, container, false);
-
         rvGrid2 = view.findViewById(R.id.rvGrid2);
         HomeMenuLinkListAdapter adapter = new HomeMenuLinkListAdapter(getContext(), Utility.response.responsedata.homeScreen.menuLinks,false,false);
         rvGrid2.setHasFixedSize(true);
         rvGrid2.setLayoutManager(new GridLayoutManager(getContext(),3));
         rvGrid2.setAdapter(adapter);
-
         return view;
     }
 }

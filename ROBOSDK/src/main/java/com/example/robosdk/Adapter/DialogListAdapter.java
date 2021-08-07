@@ -24,7 +24,6 @@ public class DialogListAdapter extends RecyclerView.Adapter<DialogListAdapter.Vi
 
     Context context;
     String activity;
-    String selectedAddressID = "";
     int selectedReceiptIndex;
 
     public DialogListAdapter(Context context, String activity, int selectedReceiptIndex) {
@@ -91,22 +90,12 @@ public class DialogListAdapter extends RecyclerView.Adapter<DialogListAdapter.Vi
 
                     for(LocationDataModel location : Utility.response.responsedata.locationData)
                     {
-                        if(location.getAddressId() == data.getAddressId())
-                        {
-                            location.setSelected(true);
-                        }
-                        else
-                        {
-                            location.setSelected(false);
-                        }
+                        location.setSelected(location.getAddressId().equals(data.getAddressId()));
                     }
-
-
                     notifyDataSetChanged();
 
                 }
             });
-
         }
         else if(activity.equals("URReceipt"))
         {
@@ -129,14 +118,7 @@ public class DialogListAdapter extends RecyclerView.Adapter<DialogListAdapter.Vi
 
                     for(URCategoryModel categoryModel : Utility.response.responsedata.categories)
                     {
-                        if(categoryModel.getId() == data.getId())
-                        {
-                            categoryModel.setSelected(true);
-                        }
-                        else
-                        {
-                            categoryModel.setSelected(false);
-                        }
+                        categoryModel.setSelected(categoryModel.getId().equals(data.getId()));
                     }
                     notifyDataSetChanged();
                 }
@@ -165,14 +147,7 @@ public class DialogListAdapter extends RecyclerView.Adapter<DialogListAdapter.Vi
 
                     for(URAddressModel addressModel : Utility.response.responsedata.categories.get(selectedReceiptIndex).addresses)
                     {
-                        if(addressModel.getAddressID() == data.getAddressID())
-                        {
-                            addressModel.setSelected(true);
-                        }
-                        else
-                        {
-                            addressModel.setSelected(false);
-                        }
+                        addressModel.setSelected(addressModel.getAddressID().equals(data.getAddressID()));
                     }
                     notifyDataSetChanged();
                 }
@@ -186,7 +161,6 @@ public class DialogListAdapter extends RecyclerView.Adapter<DialogListAdapter.Vi
                     holder.ivCorrect.setVisibility(View.VISIBLE);
                 }
             });
-
         }
 
     }
@@ -210,8 +184,6 @@ public class DialogListAdapter extends RecyclerView.Adapter<DialogListAdapter.Vi
         else {
             return 28;
         }
-
-
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -220,14 +192,12 @@ public class DialogListAdapter extends RecyclerView.Adapter<DialogListAdapter.Vi
         TextView textTitleListDialog;
         View viewContentLocationDialog;
 
-
         public ViewHolder(View itemView) {
             super(itemView);
 
             ivCorrect = itemView.findViewById(R.id.imageCorrect);
             textTitleListDialog = itemView.findViewById(R.id.textTitleListDialog);
             viewContentLocationDialog = itemView.findViewById(R.id.viewContentLocationDialog);
-
         }
     }
 }

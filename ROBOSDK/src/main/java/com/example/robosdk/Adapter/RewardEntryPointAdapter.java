@@ -16,9 +16,11 @@ import com.example.robosdk.Models.RPGListModel;
 import com.example.robosdk.R;
 import com.example.robosdk.Utility.Utility;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
-public class RewardEntryPointAdapter extends RecyclerView.Adapter<RewardEntryPointAdapter.ViewHolder>{
+public class RewardEntryPointAdapter extends RecyclerView.Adapter<RewardEntryPointAdapter.ViewHolder> {
 
     Context context;
     List<RPGListModel> lstRPG;
@@ -28,12 +30,12 @@ public class RewardEntryPointAdapter extends RecyclerView.Adapter<RewardEntryPoi
         this.lstRPG = lstRPG;
     }
 
+    @NotNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View listItem= layoutInflater.inflate(R.layout.content_rewards_entry_goal, parent, false);
-        ViewHolder viewHolder = new ViewHolder(listItem);
-        return viewHolder;
+        View listItem = layoutInflater.inflate(R.layout.content_rewards_entry_goal, parent, false);
+        return new ViewHolder(listItem);
     }
 
     @Override
@@ -46,18 +48,8 @@ public class RewardEntryPointAdapter extends RecyclerView.Adapter<RewardEntryPoi
         holder.textDigitPointRPG.setText(String.valueOf(rpg.getPointValue()));
         Glide.with(context).load(rpg.getImage()).into(holder.imageRPG);
 
-
-        if(rpg.isActive())
-        {
-            holder.linearPointRPG.setBackgroundColor(Utility.getColor("#1dc916ff"));
-        }
-        else
-        {
-            holder.linearPointRPG.setBackgroundColor(Utility.getColor("#999999ff"));
-
-        }
+        holder.linearPointRPG.setBackgroundColor(Utility.getColor(rpg.isActive() ? "#1dc916ff" : "#999999ff"));
     }
-
 
     @Override
     public int getItemCount() {
@@ -68,7 +60,7 @@ public class RewardEntryPointAdapter extends RecyclerView.Adapter<RewardEntryPoi
 
         LinearLayout linearPointRPG;
         ImageView imageRPG;
-        TextView textTitleRPG,textDescRPG,textDigitPointRPG;
+        TextView textTitleRPG, textDescRPG, textDigitPointRPG;
 
 
         public ViewHolder(View itemView) {

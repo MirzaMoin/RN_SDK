@@ -1,24 +1,23 @@
 package com.example.robosdk.Models;
 
 
-
 public class MenuPermissionModel {
-    public boolean isVisibleMenuCashbackRedemption;
-    public boolean isVisibleMenuTransferPoints;
-    public boolean isVisibleMenuRPGoal;
-    public boolean isVisibleMenuStoreRewards;
-    public boolean isVisibleMenuWaysToEarnPoints;
-    public boolean isVisibleMenuTakeSurvey;
-    public boolean isVisibleMenuReferFriends;
-    public boolean isVisibleMenuUploadReciepts;
-    public boolean isVisibleMenuTxHistory;
-    public boolean isVisibleMenuShareReferral;
-    public boolean isVisibleMenuContactUs;
-    public boolean isVisibleMenuAppointment;
-    public boolean isVisibleMenuLocation;
-    public boolean isVisibleUpdatePassword;
-    public boolean isVisibleChangePassword;
-    public boolean isVisibleSignOut;
+    public boolean isVisibleMenuCashbackRedemption,
+            isVisibleMenuTransferPoints,
+            isVisibleMenuRPGoal,
+            isVisibleMenuStoreRewards,
+            isVisibleMenuWaysToEarnPoints,
+            isVisibleMenuTakeSurvey,
+            isVisibleMenuReferFriends,
+            isVisibleMenuUploadReciepts,
+            isVisibleMenuTxHistory,
+            isVisibleMenuShareReferral,
+            isVisibleMenuContactUs,
+            isVisibleMenuAppointment,
+            isVisibleMenuLocation,
+            isVisibleUpdatePassword,
+            isVisibleChangePassword,
+            isVisibleSignOut;
 
     public MenuPermissionModel(boolean isVisibleMenuCashbackRedemption, boolean isVisibleMenuTransferPoints, boolean isVisibleMenuRPGoal, boolean isVisibleMenuStoreRewards, boolean isVisibleMenuWaysToEarnPoints, boolean isVisibleMenuTakeSurvey, boolean isVisibleMenuReferFriends, boolean isVisibleMenuUploadReciepts, boolean isVisibleMenuTxHistory, boolean isVisibleMenuShareReferral, boolean isVisibleMenuContactUs, boolean isVisibleMenuAppointment, boolean isVisibleMenuLocation, boolean isVisibleUpdatePassword, boolean isVisibleChangePassword, boolean isVisibleSignOut) {
         this.isVisibleMenuCashbackRedemption = isVisibleMenuCashbackRedemption;

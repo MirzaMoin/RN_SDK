@@ -3,11 +3,11 @@ package com.example.robosdk.Models;
 import java.util.List;
 
 public class TransactionHistoryModel {
-    public String transactionDate;
-    public String locationName;
-    public String type;
-    public String transactionStatus;
-    public String points;
+    public String transactionDate,
+            locationName,
+            type,
+            transactionStatus,
+            points;
     public double balance;
     public List<TransactionHistoryChildMenuModel> childMenus;
     public boolean isExpanded;
@@ -77,7 +77,6 @@ public class TransactionHistoryModel {
     public void setChildMenus(List<TransactionHistoryChildMenuModel> childMenus) {
         this.childMenus = childMenus;
     }
-
 
     public boolean isExpanded() {
         return isExpanded;

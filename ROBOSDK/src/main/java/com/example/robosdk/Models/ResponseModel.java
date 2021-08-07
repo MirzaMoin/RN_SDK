@@ -1,6 +1,6 @@
 package com.example.robosdk.Models;
 
-public class ResponseModel{
+public class ResponseModel {
     public int statusCode;
     public String statusMessage;
     public ResponsedataModel responsedata;

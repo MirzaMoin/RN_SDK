@@ -2,14 +2,14 @@ package com.example.robosdk.Models;
 
 public class LocationStoreAddressModel {
 
-    public String address;
-    public String address2;
-    public String address3;
-    public String city;
-    public String zipCode;
-    public String state;
-    public String latitude;
-    public String longitude;
+    public String address,
+            address2,
+            address3,
+            city,
+            zipCode,
+            state,
+            latitude,
+            longitude;
 
     public LocationStoreAddressModel(String address, String address2, String address3, String city, String zipCode, String state, String latitude, String longitude) {
         this.address = address;

@@ -3,9 +3,9 @@ package com.example.robosdk.Models;
 public class LBLeaderBoardReportModel {
     public int rank;
     public int totalPoints;
-    public String contactID;
-    public String profilePitcure;
-    public String fullName;
+    public String contactID,
+            profilePitcure,
+            fullName;
 
     public LBLeaderBoardReportModel(int rank, int totalPoints, String contactID, String profilePitcure, String fullName) {
         this.rank = rank;

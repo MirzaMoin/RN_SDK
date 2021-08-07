@@ -23,10 +23,8 @@ public class RedeemCashbackAdapter extends RecyclerView.Adapter<RedeemCashbackAd
     ArrayList<String> list;
 
    public RedeemCashbackAdapter(Context context, ArrayList<String> list){
-
        this.context = context;
        this.list= list;
-
     }
 
     @NotNull
@@ -41,7 +39,6 @@ public class RedeemCashbackAdapter extends RecyclerView.Adapter<RedeemCashbackAd
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
-
        holder.textTitle.setText(list.get(position));
        holder.textTitle.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -52,7 +49,6 @@ public class RedeemCashbackAdapter extends RecyclerView.Adapter<RedeemCashbackAd
 
     }
 
-
     @Override
     public int getItemCount() {
         return list.size() - 1;
@@ -62,12 +58,9 @@ public class RedeemCashbackAdapter extends RecyclerView.Adapter<RedeemCashbackAd
 
        TextView textTitle;
 
-
         public ViewHolder(View itemView) {
             super(itemView);
             textTitle = itemView.findViewById(R.id.textTitleCashback);
-
-
         }
     }
 }

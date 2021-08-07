@@ -2,108 +2,9 @@ package com.example.robosdk.Models;
 
 
 public class ContactData {
-    public String contactID;
+    public String contactID, firstName, lastName, mobilePhone, memberCardID, emailAddress, profilePitcure, contactListVisibleName, contactListName, contactListID, address, city, state, zipCode, gender, rootID, phone, emailFormat, confirmationStatus, activityStatus, customFiledsValue, birthDate, anniversary, lastVisitDate, familyMemberBDay, overrideTriggerID, createdBy, modifiedBy, createdDate, modifiedDate, subscribeKey, subscribeDate, additionalBirthDates, isAddToAutoresponder, preferredMediaType, referelContactID, userName, password, listJoinDate, fbUserId, fbUserAccessToken, fbTokenExpirationDate, fbMessageIndex, pointBalanceAtImport, rqp, vipLevel, contactLevelExpirationDigit, contactLevelExpirationWord, contactLevelExpirationTotal, vipMemberJoiningDate, vipLevelColour, sharedContactID, driverLicense, addressID, lastSentRotateNumber, smsConfirmationStatus, hasReferredFriendJoined, signUpWebform, isNoNeedToSetAutoresponder, languageID, rewardProgramIDNew, address2, address3, leaderBoardName, profileCompletionPoints, vistaPassword, gcmDeviceToken, deviceType, hubSpotId, amountSum, fullName, country, countryID, rewardProgramName, facebookReferralPoints;
 
-    public String firstName;
-    public String lastName;
-    public String mobilePhone;
-    public String memberCardID;
-    public String emailAddress;
-    public String profilePitcure;
-    public String contactListVisibleName;
-    public String contactListName;
-    public String contactListID;
-    public String address;
-    public String city;
-    public String state;
-    public String zipCode;
-    public String gender;
-    public String rootID;
-    public String phone;
-    public String emailFormat;
-    public String confirmationStatus;
-    public String activityStatus;
-    public String customFiledsValue;
-    public String birthDate;
-    public String anniversary;
-    public String lastVisitDate;
-    public String familyMemberBDay;
-    public String overrideTriggerID;
-    public String createdBy;
-    public String modifiedBy;
-    public String createdDate;
-    public String modifiedDate;
-    public String subscribeKey;
-    public String subscribeDate;
-    public String additionalBirthDates;
-    public String isAddToAutoresponder;
-    public String preferredMediaType;
-    public String referelContactID;
-    public String userName;
-    public String password;
-    public String listJoinDate;
-    public String fbUserId;
-    public String fbUserAccessToken;
-    public String fbTokenExpirationDate;
-    public String fbMessageIndex;
-    public String pointBalanceAtImport;
-    public String rqp;
-    public String vipLevel;
-    public String contactLevelExpirationDigit;
-    public String contactLevelExpirationWord;
-    public String contactLevelExpirationTotal;
-    public String vipMemberJoiningDate;
-    public String vipLevelColour;
-    public String sharedContactID;
-    public String driverLicense;
-    public String addressID;
-    public String lastSentRotateNumber;
-    public String smsConfirmationStatus;
-    public String hasReferredFriendJoined;
-    public String signUpWebform;
-    public String isNoNeedToSetAutoresponder;
-    public String languageID;
-    public String rewardProgramIDNew;
-    public String address2;
-    public String address3;
-    public String leaderBoardName;
-    public String profileCompletionPoints;
-    public String vistaPassword;
-    public String gcmDeviceToken;
-    public String deviceType;
-    public String hubSpotId;
-    public String amountSum;
-    public String fullName;
-    public String country;
-    public String countryID;
-    public String rewardProgramName;
-    public String facebookReferralPoints;
-
-    public Boolean isRequiredPasswordChanged;
-    public Boolean isBeaconAppLogin;
-    public boolean isActive;
-    public boolean isDelete;
-    public boolean isProfileComplete;
-    public boolean isAllowEmail;
-    public boolean isAllowSMS;
-    public boolean isAllowPostalMail;
-    public boolean isOverrideSent;
-    public boolean isFBUser;
-    public boolean isAllowFacebookBonusPoints;
-    public boolean isThankYouEmailByWeForm;
-    public boolean isImported;
-    public boolean isAfterImportShowRPG;
-    public boolean isVIPLevelExpired;
-    public boolean isPrimaryContact;
-    public boolean isAfterReferDoAnyTx;
-    public boolean isBirthdayDayEdited;
-    public boolean isAnniversaryEdited;
-    public boolean isOptOut;
-    public boolean isAddressVerify;
-    public boolean isAllowPush;
-    public boolean isMultiTieredRewardsType;
-    public boolean isPaidVIPRewardsType;
-    public boolean isAllowCheckInPoints;
+    public boolean isRequiredPasswordChanged, isBeaconAppLogin, isActive, isDelete, isProfileComplete, isAllowEmail, isAllowSMS, isAllowPostalMail, isOverrideSent, isFBUser, isAllowFacebookBonusPoints, isThankYouEmailByWeForm, isImported, isAfterImportShowRPG, isVIPLevelExpired, isPrimaryContact, isAfterReferDoAnyTx, isBirthdayDayEdited, isAnniversaryEdited, isOptOut, isAddressVerify, isAllowPush, isMultiTieredRewardsType, isPaidVIPRewardsType, isAllowCheckInPoints;
 
     public double pointBalance;
     public double reedemablePoints;
@@ -114,7 +15,6 @@ public class ContactData {
     public int signupType;
     public int contactListPointValue;
     public int txCount;
-
 
 
     public ContactData(String contactID, double pointBalance, double reedemablePoints, String firstName, String lastName, String mobilePhone, String memberCardID, String emailAddress, Boolean isBeaconAppLogin, String profilePitcure, Boolean isRequiredPasswordChanged, String contactListVisibleName, String contactListName, String contactListID, String address, String city, String state, String zipCode, String gender, String rootID, String phone, String emailFormat, String confirmationStatus, String activityStatus, String customFiledsValue, String birthDate, String anniversary, double totalSpent, String lastVisitDate, String familyMemberBDay, String overrideTriggerID, boolean isActive, boolean isDelete, String createdBy, String modifiedBy, String createdDate, String modifiedDate, String subscribeKey, String subscribeDate, boolean isProfileComplete, String additionalBirthDates, String isAddToAutoresponder, boolean isAllowEmail, boolean isAllowSMS, boolean isAllowPostalMail, String preferredMediaType, String referelContactID, boolean isOverrideSent, boolean isFBUser, String userName, String password, String listJoinDate, double qualificationPoints, boolean isAllowFacebookBonusPoints, String fbUserId, String fbUserAccessToken, String fbTokenExpirationDate, String fbMessageIndex, boolean isThankYouEmailByWeForm, boolean isImported, boolean isAfterImportShowRPG, String pointBalanceAtImport, String rqp, String vipLevel, String contactLevelExpirationDigit, String contactLevelExpirationWord, String contactLevelExpirationTotal, String vipMemberJoiningDate, boolean isVIPLevelExpired, String sharedContactID, boolean isPrimaryContact, boolean isAfterReferDoAnyTx, String vipLevelColour, String driverLicense, String addressID, String lastSentRotateNumber, String smsConfirmationStatus, int limeOptionStatus, String hasReferredFriendJoined, boolean isBirthdayDayEdited, boolean isAnniversaryEdited, String isNoNeedToSetAutoresponder, int signupType, String signUpWebform, boolean isOptOut, String languageID, String rewardProgramIDNew, String address2, String address3, String leaderBoardName, String profileCompletionPoints, boolean isAddressVerify, String vistaPassword, boolean isAllowPush, String gcmDeviceToken, String deviceType, String hubSpotId, String amountSum, String fullName, String country, String countryID, int contactListPointValue, String rewardProgramName, boolean isMultiTieredRewardsType, boolean isPaidVIPRewardsType, boolean isAllowCheckInPoints, String facebookReferralPoints, int txCount) {

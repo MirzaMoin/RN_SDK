@@ -1,9 +1,9 @@
 package com.example.robosdk.Models;
 
 public class RPGListModel {
-    public String title;
-    public String details;
-    public String image;
+    public String title,
+            details,
+            image;
     public int pointValue;
     public boolean isActive;
 

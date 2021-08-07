@@ -35,13 +35,13 @@ public class ResponsedataModel {
 
 
     //Ways to earn models
-    public WaysToEarnModel totalPoints;
-    public WaysToEarnModel purchasePoints;
-    public WaysToEarnModel socialShare;
-    public WaysToEarnModel referFriends;
-    public WaysToEarnModel leaderboard;
-    public WaysToEarnModel surveys;
-    public WaysToEarnModel completeProfile;
+    public WaysToEarnModel totalPoints,
+            purchasePoints,
+            socialShare,
+            referFriends,
+            leaderboard,
+            surveys,
+            completeProfile;
 
 
     //Leaderboard Models
@@ -59,10 +59,10 @@ public class ResponsedataModel {
     public URSettingsDetailsModel settingsDetails;
 
     //All point data
-    public double totalEarnedThisMonth;
-    public double totalReedemed;
-    public double lifeTimePoints;
-    public double pointBalance;
+    public double totalEarnedThisMonth,
+            totalReedemed,
+            lifeTimePoints,
+            pointBalance;
 
 
     public ResponsedataModel(HomeScreenModel homeScreen, AppColorModel appColor, MenuPermissionModel menuPermission, AppIntakeImagesModel appIntakeImages, AppDetailsModel appDetails, ChildPageSettingModel childPageSetting, ContactData contactData, TransactionHistoryModel transactionHistoryModel, List<TransactionHistoryModel> responsedata, OfferRedeemSettingModel redeemSetting, OfferAddressDetailsModel addressDetails, OfferUserDetailsModel userDetails, List<OfferListModel> offerList, List<SurveysUnTakenModel> unTaken, List<SurveysUnTakenModel> completed, List<RPGListModel> lstRPG, WaysToEarnModel totalPoints, WaysToEarnModel purchasePoints, WaysToEarnModel socialShare, WaysToEarnModel referFriends, WaysToEarnModel leaderboard, WaysToEarnModel surveys, WaysToEarnModel completeProfile, LBQualificationCriteriaModel qualificationCriteria, List<LBFilterModel> filters, List<LBLeaderBoardReportModel> leaderBoardReport, List<LocationDataModel> locationData, List<String> categoryList, URDateDetailsModel dateDetails, List<URCategoryModel> categories, URSettingsDetailsModel settingsDetails, double totalEarnedThisMonth, double totalReedemed, double lifeTimePoints, double pointBalance) {
@@ -160,14 +160,14 @@ public class ResponsedataModel {
         this.contactData = contactData;
     }
 
-  /*  public String getWebFormData() {
-        return webFormData;
-    }
+    /*  public String getWebFormData() {
+          return webFormData;
+      }
 
-    public void setWebFormData(String webFormData) {
-        this.webFormData = webFormData;
-    }
-*/
+      public void setWebFormData(String webFormData) {
+          this.webFormData = webFormData;
+      }
+  */
     public TransactionHistoryModel getTransactionHistoryModel() {
         return transactionHistoryModel;
     }

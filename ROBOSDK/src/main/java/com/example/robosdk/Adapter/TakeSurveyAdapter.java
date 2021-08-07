@@ -1,6 +1,7 @@
 package com.example.robosdk.Adapter;
 
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.robosdk.Activities.WebViewActivity;
 import com.example.robosdk.Models.SurveysUnTakenModel;
 import com.example.robosdk.R;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,24 +37,23 @@ public class TakeSurveyAdapter extends RecyclerView.Adapter<TakeSurveyAdapter.Vi
         this.isTaken = isTaken;
     }
 
+    @NotNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View listItem = layoutInflater.inflate(R.layout.content_survey_list, parent, false);
-        ViewHolder viewHolder = new ViewHolder(listItem);
-        return viewHolder;
+        return new ViewHolder(listItem);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(@NotNull ViewHolder holder, int position) {
 
         final SurveysUnTakenModel survey = surveyList.get(position);
 
         if(isTaken)
         {
-//            holder.linearAmountSurvey.setVisibility(View.VISIBLE);
             holder.linearStartSurvey.setVisibility(View.GONE);
-
         }
         else
         {
@@ -59,37 +61,25 @@ public class TakeSurveyAdapter extends RecyclerView.Adapter<TakeSurveyAdapter.Vi
 
             holder.linearStartSurvey.setVisibility(View.VISIBLE);
         }
-
         holder.textTitleSurvey.setText(survey.getSurveyTitle());
-
         holder.textAmountSurvey.setText( String.valueOf(survey.getSurveyPoints()));
-//        holder.textDateSurvey.setText(survey.surveySendDate);
-
-
         Date date = null;
-
         String dtStart = survey.getSurveySendDate();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-        SimpleDateFormat formatterOut = new SimpleDateFormat("dd MMM yyyy");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat formatterOut = new SimpleDateFormat("dd MMM yyyy");
         try {
             date = format.parse(dtStart);
+            assert date != null;
             formatterOut.format(date);
             holder.textDateSurvey.setText("" + formatterOut.format(date));
-
-
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-
-
-
         if(!isTaken) {
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     ProgressDialog progressDialog;
                     progressDialog = new ProgressDialog(context);
                     progressDialog.setTitle("Loading...");
@@ -98,19 +88,12 @@ public class TakeSurveyAdapter extends RecyclerView.Adapter<TakeSurveyAdapter.Vi
                     Intent i = new Intent(context, WebViewActivity.class);
                     i.putExtra("url",survey.getSurveyLink());
                     i.putExtra("isSurvey",true);
-
                     context.startActivity(i);
-
-
-
-
                     progressDialog.dismiss();
                 }
             });
         }
     }
-
-
     @Override
     public int getItemCount() {
         return surveyList.size();

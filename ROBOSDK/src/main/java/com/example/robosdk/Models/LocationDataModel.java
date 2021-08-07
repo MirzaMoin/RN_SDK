@@ -3,13 +3,13 @@ package com.example.robosdk.Models;
 import java.util.List;
 
 public class LocationDataModel {
-    public String addressId;
-    public String locationName;
+    public String addressId,
+            locationName,
+            emailAddress,
+            mobilePhone,
+            websiteUrl,
+            logoImage;
     public LocationStoreAddressModel storeAddress;
-    public String emailAddress;
-    public String mobilePhone;
-    public String websiteUrl;
-    public String logoImage;
     public List<String> locationCategory;
     public boolean isSelected;
 

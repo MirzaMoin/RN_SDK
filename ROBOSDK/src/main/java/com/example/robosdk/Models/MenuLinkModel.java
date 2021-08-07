@@ -1,17 +1,17 @@
 package com.example.robosdk.Models;
 
-public class MenuLinkModel{
+public class MenuLinkModel {
     public int id;
-    public String rewardProgramId;
-    public String menuText;
-    public String menuTextColor;
-    public String menuLinkType;
-    public String menuInternalLinkUrl;
-    public String menuExternalLinkUrl;
-    public String icon;
-    public String menuTopColor;
-    public String menuBottomColor;
-    public String menuBackgroudImage;
+    public String rewardProgramId,
+            menuText,
+            menuTextColor,
+            menuLinkType,
+            menuInternalLinkUrl,
+            menuExternalLinkUrl,
+            icon,
+            menuTopColor,
+            menuBottomColor,
+            menuBackgroudImage;
 
     public MenuLinkModel(int id, String rewardProgramId, String menuText, String menuTextColor, String menuLinkType, String menuInternalLinkUrl, String menuExternalLinkUrl, String icon, String menuTopColor, String menuBottomColor, String menuBackgroudImage) {
         this.id = id;

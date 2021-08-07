@@ -3,7 +3,7 @@
     package="com.example.robosdk">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-feature android:name="android.hardware.camera"></uses-feature>
+    <uses-feature android:name="android.hardware.camera" />
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -12,7 +12,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application android:requestLegacyExternalStorage="true" android:theme="@style/myLibTheme">
-        <activity android:name="com.example.robosdk.Activities.WebViewActivity"></activity>
+        <activity android:name="com.example.robosdk.Activities.WebViewActivity" />
         <activity android:name="com.example.robosdk.Activities.TakeSurveyActivity" />
 
         <meta-data

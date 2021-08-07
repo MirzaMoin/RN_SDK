@@ -7,7 +7,6 @@ public class ResponseModelTransactionHistory {
     public String statusMessage;
     public List<TransactionHistoryModel> responsedata;
 
-
     public ResponseModelTransactionHistory(int statusCode, String statusMessage, List<TransactionHistoryModel> responsedata) {
         this.statusCode = statusCode;
         this.statusMessage = statusMessage;

@@ -28,6 +28,8 @@ import com.example.robosdk.R;
 import com.example.robosdk.Utility.PermissionUtils;
 import com.example.robosdk.Utility.Utility;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Locale;
 
 public class LocationBottomsheetAdapter extends RecyclerView.Adapter<LocationBottomsheetAdapter.ViewHolder> {
@@ -35,26 +37,22 @@ public class LocationBottomsheetAdapter extends RecyclerView.Adapter<LocationBot
     Context context;
     Activity activity;
 
-
     public LocationBottomsheetAdapter(Context context, Activity activity) {
         this.context = context;
         this.activity = activity;
-
     }
-
+    @NotNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View listItem = layoutInflater.inflate(R.layout.content_location_bottomsheet, parent, false);
-        ViewHolder viewHolder = new ViewHolder(listItem);
-        return viewHolder;
+        return new ViewHolder(listItem);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.imgExpandLocation.setRotation(0);
         final LocationDataModel data = Utility.response.responsedata.locationData.get(position);
-
 
         String address = "";
         if (data.storeAddress.getAddress() != null && !data.storeAddress.getAddress().isEmpty()) {
@@ -78,7 +76,6 @@ public class LocationBottomsheetAdapter extends RecyclerView.Adapter<LocationBot
         holder.textAddressLocationBottom.setText(address);
         if (data.getLocationName() != null && !data.getLocationName().isEmpty()) {
             holder.textLocationTitleBottom.setText(data.getLocationName());
-
         }
         if (data.getLogoImage() != null && data.getLogoImage() != null) {
             Glide.with(context).load(data.getLogoImage()).into(holder.imageLocationBottom);
@@ -164,7 +161,6 @@ public class LocationBottomsheetAdapter extends RecyclerView.Adapter<LocationBot
 
        int nullCount = 0;
 
-
         public ViewHolder(View itemView) {
             super(itemView);
 
@@ -193,7 +189,6 @@ public class LocationBottomsheetAdapter extends RecyclerView.Adapter<LocationBot
 
         }
     }
-
     private static final int PHONE_PERMISSION_REQUEST_CODE = 888;
 
 
@@ -222,7 +217,6 @@ public class LocationBottomsheetAdapter extends RecyclerView.Adapter<LocationBot
 
         builder.setMessage("We need phone permission for performing necessary task. Please permit the permission through "
                 + "Settings screen.\n\nSelect Permissions -> Enable permission");
-
 
         builder.setCancelable(false);
         builder.setPositiveButton("Permit Manually", new DialogInterface.OnClickListener() {

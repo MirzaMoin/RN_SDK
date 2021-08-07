@@ -23,7 +23,7 @@ public class ChildPageSettingModel {
     public boolean isChildPageRpg;
     public List<RPGChildPageDataModel> rpgChildPageData;
     public boolean isChildPageChangePassword;
-    public List<ChangePasswordChildPageDataModel>  changePasswordChildPageData;
+    public List<ChangePasswordChildPageDataModel> changePasswordChildPageData;
     public boolean isChildPageTransaferPoint;
     public List<TransaferPointChildPageDataModel> transaferPointChildPageData;
 

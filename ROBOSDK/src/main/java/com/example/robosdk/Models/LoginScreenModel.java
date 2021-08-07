@@ -1,6 +1,6 @@
 package com.example.robosdk.Models;
 
-public class LoginScreenModel{
+public class LoginScreenModel {
 /*    public String logInLogoImage;
     public String logInBackgroundImage;
     public String logInBackgroundVideo;

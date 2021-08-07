@@ -30,30 +30,22 @@ public class UnTakenSurveysFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_un_taken_surveys, container, false);
 
-
         init(view);
 
         List<SurveysUnTakenModel> survey = Utility.response.responsedata.getUnTaken();
-
 
         if(survey != null && survey.size() > 0)
         {
             TakeSurveyAdapter adapter = new TakeSurveyAdapter(getContext(), survey, false);
             rvFragmentUnTakenSurvey.setHasFixedSize(true);
-
-
             rvFragmentUnTakenSurvey.setLayoutManager(new LinearLayoutManager(getContext()));
-
             rvFragmentUnTakenSurvey.setAdapter(adapter);
             linearNoSurveyUntaken.setVisibility(View.GONE);
-
         }
         else
         {
             linearNoSurveyUntaken.setVisibility(View.VISIBLE);
         }
-
-
         return view;
     }
 

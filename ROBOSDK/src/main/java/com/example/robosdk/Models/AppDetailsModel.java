@@ -1,10 +1,7 @@
 package com.example.robosdk.Models;
 
-public class AppDetailsModel{
-    public String rewardProgramId;
-    public String webFormID;
-    public String tosLink;
-    public String privacyPolicyLink;
+public class AppDetailsModel {
+    public String rewardProgramId, webFormID, tosLink, privacyPolicyLink;
 
     public AppDetailsModel(String rewardProgramId, String webFormID, String tosLink, String privacyPolicyLink) {
         this.rewardProgramId = rewardProgramId;

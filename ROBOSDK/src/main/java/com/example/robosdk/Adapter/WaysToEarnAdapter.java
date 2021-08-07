@@ -1,6 +1,7 @@
 package com.example.robosdk.Adapter;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -28,39 +29,38 @@ import com.smarteist.autoimageslider.SliderView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WaysToEarnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class WaysToEarnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private static final int LAYOUT_ONE= 0;
-    private static final int LAYOUT_TWO= 1;
+    private static final int LAYOUT_ONE = 0;
+    private static final int LAYOUT_TWO = 1;
     Context context;
     List<WaysToEarnModel> waysList;
-   public WaysToEarnAdapter(Context context, List<WaysToEarnModel> waysList){
-       this.context = context;
-       this.waysList = waysList;
+
+    public WaysToEarnAdapter(Context context, List<WaysToEarnModel> waysList) {
+        this.context = context;
+        this.waysList = waysList;
     }
+
     @Override
-    public int getItemViewType(int position)
-    {
-        if(position==0)
+    public int getItemViewType(int position) {
+        if (position == 0)
             return LAYOUT_ONE;
         else
             return LAYOUT_TWO;
     }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view =null;
+        View view = null;
         RecyclerView.ViewHolder viewHolder = null;
 
-        if(viewType==LAYOUT_ONE)
-        {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.content_sliderview,parent,false);
+        if (viewType == LAYOUT_ONE) {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.content_sliderview, parent, false);
             viewHolder = new ViewHolderOne(view);
-        }
-        else
-        {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.content_ways_to_earn,parent,false);
-            viewHolder= new ViewHolderTwo(view);
+        } else {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.content_ways_to_earn, parent, false);
+            viewHolder = new ViewHolderTwo(view);
         }
 
         return viewHolder;
@@ -68,12 +68,11 @@ public class WaysToEarnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
 
-
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, final int position) {
 
-        if(viewHolder.getItemViewType()== LAYOUT_ONE)
-        {
+        if (viewHolder.getItemViewType() == LAYOUT_ONE) {
             ViewHolderOne holder = (ViewHolderOne) viewHolder;
 
             ChildPageSettingModel childPageSettings = Utility.response.responsedata.childPageSetting;
@@ -86,9 +85,7 @@ public class WaysToEarnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 }
 
                 CashbackImageSliderAdapter adapter = new CashbackImageSliderAdapter(context, childPage);
-
                 holder.sliderView.setSliderAdapter(adapter);
-
                 holder.sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM); //set indicator animation by using IndicatorAnimationType. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
                 holder.sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
                 holder.sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
@@ -98,32 +95,25 @@ public class WaysToEarnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 holder.sliderView.startAutoCycle();
             }
 
-        }
-        else {
-            WaysToEarnModel ways = waysList.get(position-1);
+        } else {
+            WaysToEarnModel ways = waysList.get(position - 1);
             ViewHolderTwo holder = (ViewHolderTwo) viewHolder;
             holder.expTv.setText(ways.getDescription());
             holder.textTitleWaysToEarnContent.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getTitleTextColor()));
             holder.textTitleWaysToEarnContent.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getTitleTextColor()));
             holder.textTitleWaysToEarnContent.setText(ways.getTitle());
             holder.textSubTitleWaysToEarnContent.setText(ways.getSubtitle());
-            holder.textPointWaysToEarnContent.setText(String.valueOf(ways.getPoints())+" ");
-            if(ways.getImageURL() != null)
-            {
+            holder.textPointWaysToEarnContent.setText(ways.getPoints() + " ");
+            if (ways.getImageURL() != null) {
                 holder.imageWaysToEarnContent.setVisibility(View.VISIBLE);
                 Glide.with(context).load(ways.getImageURL()).into(holder.imageWaysToEarnContent);
-            }
-            else
-            {
+            } else {
                 holder.buttonRecentActivityWTE.setVisibility(View.GONE);
             }
 
-            if(position % 2 == 0)
-            {
+            if (position % 2 == 0) {
                 holder.linearContent.setBackgroundColor(Color.parseColor("#f0f5f5"));
-            }
-            else
-            {
+            } else {
                 holder.linearContent.setBackgroundColor(Color.parseColor("#ffffff"));
 
             }
@@ -133,11 +123,11 @@ public class WaysToEarnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public int getItemCount() {
-        return waysList.size()+1;
+        return waysList.size() + 1;
     }
 
 
-    public class ViewHolderOne extends RecyclerView.ViewHolder {
+    public static class ViewHolderOne extends RecyclerView.ViewHolder {
         SliderView sliderView;
 
         public ViewHolderOne(View itemView) {
@@ -146,7 +136,7 @@ public class WaysToEarnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
-    public class ViewHolderTwo extends RecyclerView.ViewHolder{
+    public static class ViewHolderTwo extends RecyclerView.ViewHolder {
         LinearLayout linearContent;
 
 

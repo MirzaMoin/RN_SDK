@@ -28,20 +28,14 @@ public class TakenSurveysFragment extends Fragment {
     TextView textNoSurveyFoundTaken;
     LinearLayout linearNoSurvey;
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_taken_surveys, container, false);
-
         init(view);
-
         List<SurveysUnTakenModel> survey = Utility.response.responsedata.getCompleted();
-
         if(survey != null && survey.size() > 0)
         {
-
             TakeSurveyAdapter adapter = new TakeSurveyAdapter(getContext(), survey, true);
             rvFragmentTakenSurvey.setHasFixedSize(true);
 
@@ -50,13 +44,11 @@ public class TakenSurveysFragment extends Fragment {
 
             rvFragmentTakenSurvey.setAdapter(adapter);
             linearNoSurvey.setVisibility(View.GONE);
-
         }
         else
         {
             linearNoSurvey.setVisibility(View.VISIBLE);
         }
-
         return view;
     }
 
@@ -64,6 +56,5 @@ public class TakenSurveysFragment extends Fragment {
         rvFragmentTakenSurvey = view.findViewById(R.id.rvFragmentTakenSurvey);
         textNoSurveyFoundTaken = view.findViewById(R.id.textNoSurveyFoundTaken);
         linearNoSurvey = view.findViewById(R.id.linearNoSurvey);
-
     }
 }

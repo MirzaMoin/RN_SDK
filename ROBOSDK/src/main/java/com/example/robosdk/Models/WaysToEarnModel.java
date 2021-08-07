@@ -1,12 +1,12 @@
 package com.example.robosdk.Models;
 
 public class WaysToEarnModel {
-    public boolean isVisible;
-    public String imageURL;
-    public String title;
-    public String description;
-    public String subtitle;
+    public String imageURL,
+            title,
+            description,
+            subtitle;
     public double points;
+    public boolean isVisible;
 
     public WaysToEarnModel(boolean isVisible, String imageURL, String title, String description, String subtitle, double points) {
         this.isVisible = isVisible;

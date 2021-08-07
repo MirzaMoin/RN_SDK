@@ -1,13 +1,13 @@
 package com.example.robosdk.Models;
 
 public class SurveysCompletedModel {
-    public String surveyTitle;
-    public String surveySendDate;
-    public String surveyID;
-    public String surveySendID;
-    public String respondDate;
+    public String surveyTitle,
+            surveySendDate,
+            surveyID,
+            surveySendID,
+            respondDate,
+            surveyLink;
     public int surveyPoints;
-    public String surveyLink;
 
     public SurveysCompletedModel(String surveyTitle, String surveySendDate, String surveyID, String surveySendID, String respondDate, int surveyPoints, String surveyLink) {
         this.surveyTitle = surveyTitle;
@@ -27,8 +27,6 @@ public class SurveysCompletedModel {
         this.surveyTitle = surveyTitle;
     }
 
-
-
     public String getSurveyID() {
         return surveyID;
     }
@@ -44,7 +42,6 @@ public class SurveysCompletedModel {
     public void setSurveySendID(String surveySendID) {
         this.surveySendID = surveySendID;
     }
-
 
     public String getSurveySendDate() {
         return surveySendDate;

@@ -1,8 +1,8 @@
 package com.example.robosdk.Models;
 
 public class LBFilterModel {
-    public int month;
-    public int year;
+    public int month,
+            year;
     public String display;
 
     public LBFilterModel(int month, int year, String display) {

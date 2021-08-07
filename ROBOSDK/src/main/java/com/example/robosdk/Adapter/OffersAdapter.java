@@ -19,6 +19,8 @@ import com.example.robosdk.Models.OfferListModel;
 import com.example.robosdk.R;
 import com.example.robosdk.Utility.Utility;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.ViewHolder>{
@@ -31,12 +33,12 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.ViewHolder
        this.offerList = offerList;
     }
 
+    @NotNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View listItem= layoutInflater.inflate(R.layout.content_offers, parent, false);
-        ViewHolder viewHolder = new ViewHolder(listItem);
-        return viewHolder;
+        return new ViewHolder(listItem);
     }
 
     @Override
@@ -64,9 +66,6 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.ViewHolder
 
         holder.textOfferExpire.setText(offer.getOfferExpire());
         holder.textOfferExpire.setTextColor(Utility.getColor(color.getTitleTextColor()));
-
-
-
 
 
        holder.itemView.setOnClickListener(new View.OnClickListener() {

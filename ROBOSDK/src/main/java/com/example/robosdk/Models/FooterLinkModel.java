@@ -1,13 +1,8 @@
 package com.example.robosdk.Models;
 
-public class FooterLinkModel{
+public class FooterLinkModel {
     public int id;
-    public String rewardProgramId;
-    public String footerText;
-    public String footerLinkType;
-    public String footerInternalLinkUrl;
-    public String footerExternalLinkUrl;
-    public String footerIcon;
+    public String rewardProgramId, footerText, footerLinkType, footerInternalLinkUrl, footerExternalLinkUrl, footerIcon;
     public boolean isActive;
 
 

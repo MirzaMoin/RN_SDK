@@ -1,8 +1,8 @@
 package com.example.robosdk.Models;
 
 public class URAddressModel {
-    public String addressID;
-    public String locationName;
+    public String addressID,
+            locationName;
     public boolean isSelected;
 
     public URAddressModel(String addressID, String locationName) {

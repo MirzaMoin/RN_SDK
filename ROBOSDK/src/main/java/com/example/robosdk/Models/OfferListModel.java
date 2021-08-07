@@ -2,19 +2,19 @@ package com.example.robosdk.Models;
 
 public class OfferListModel {
     public int offerID;
-    public String offerSendID;
-    public String offerTitle;
-    public String titleColor;
-    public String offerDescription;
-    public String descColor;
-    public String offerType;
-    public String offerImage;
-    public String offerImagelabel;
-    public String offerBarcode;
-    public String offerExpire;
-    public boolean displayPrintButton;
-    public boolean displayBarcode;
-    public boolean allowContactRedeemOffer;
+    public String offerSendID,
+            offerTitle,
+            titleColor,
+            offerDescription,
+            descColor,
+            offerType,
+            offerImage,
+            offerImagelabel,
+            offerBarcode,
+            offerExpire;
+    public boolean displayPrintButton,
+            displayBarcode,
+            allowContactRedeemOffer;
 
     public OfferListModel(int offerID, String offerSendID, String offerTitle, String titleColor, String offerDescription, String descColor, String offerType, String offerImage, String offerImagelabel, String offerBarcode, String offerExpire, boolean displayPrintButton, boolean displayBarcode, boolean allowContactRedeemOffer) {
         this.offerID = offerID;

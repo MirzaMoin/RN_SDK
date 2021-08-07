@@ -14,8 +14,6 @@ public class RetrofitClientInstance {
     private static Retrofit retrofit;
     private static final String BASE_URL = "https://v2.roborewards.net";
 
-
-
     public static Retrofit getRetrofitInstance() {
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(100, TimeUnit.SECONDS)

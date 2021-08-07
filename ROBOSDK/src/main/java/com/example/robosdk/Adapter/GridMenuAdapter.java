@@ -7,13 +7,16 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import com.example.robosdk.Fragments.GridLayoutOne;
 import com.example.robosdk.Fragments.GridLayoutTwo;
 
- public class GridMenuAdapter extends FragmentStatePagerAdapter {
+import org.jetbrains.annotations.NotNull;
+
+public class GridMenuAdapter extends FragmentStatePagerAdapter {
      int size;
     public GridMenuAdapter(FragmentManager fm, int size) {
         super(fm);
         this.size = size;
     }
 
+    @NotNull
     @Override
     public Fragment getItem(int position) {
         if(position == 0)

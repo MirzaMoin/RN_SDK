@@ -1,13 +1,13 @@
 package com.example.robosdk.Models;
 
 public class OfferAddressDetailsModel {
-    public String name;
-    public String address;
-    public String city;
-    public String state;
-    public String zipCode;
-    public String businessPhone;
-    public String websiteURL;
+    public String name,
+            address,
+            city,
+            state,
+            zipCode,
+            businessPhone,
+            websiteURL;
 
     public OfferAddressDetailsModel(String name, String address, String city, String state, String zipCode, String businessPhone, String websiteURL) {
         this.name = name;

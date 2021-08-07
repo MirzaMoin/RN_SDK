@@ -69,14 +69,10 @@ public class FooterAdapter extends RecyclerView.Adapter<FooterAdapter.ViewHolder
         holder.textFooterLink.setText(footer.getFooterText());
         if (currentActivity.equals(footer.getFooterInternalLinkUrl())) {
             holder.textFooterLink.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarActionIconAndTextColor()));
-//            holder.icFooterLinkIcon.setColorFilter(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarActionIconAndTextColor()));
-//            drawable.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarActionIconAndTextColor()));
             holder.icFooterLinkIcon.setColorFilter(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarActionIconAndTextColor()));
 
         } else {
             holder.textFooterLink.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarInactiveIconColor()));
-//            holder.icFooterLinkIcon.setColorFilter(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarInactiveIconColor()));
-//            drawable.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarInactiveIconColor()));
 
             holder.icFooterLinkIcon.setColorFilter(Utility.getColor(Utility.response.responsedata.appColor.getFooterBarInactiveIconColor()));
 
@@ -110,14 +106,11 @@ public class FooterAdapter extends RecyclerView.Adapter<FooterAdapter.ViewHolder
 
         TextView textFooterLink;
         ImageView icFooterLinkIcon;
-        CardView cardMenuLink;
-        RelativeLayout relMenuLinkList;
 
         public ViewHolder(View itemView) {
             super(itemView);
             textFooterLink = itemView.findViewById(R.id.textFooterLink);
             icFooterLinkIcon = itemView.findViewById(R.id.icFooterLinkIcon);
-//            cardMenuLink = itemView.findViewById(R.id.cardMenuList);
 
         }
     }

@@ -4,9 +4,7 @@ import com.example.robosdk.Models.MenuPermissionModel;
 import com.example.robosdk.Utility.Utility;
 
 public class Constants {
-
     public static int[][] getDrawableIcons(){
-
         MenuPermissionModel menu = Utility.response.responsedata.menuPermission;
 
          int iconList[][] = {{ R.drawable.ic_baseline_menu_24},
@@ -34,13 +32,7 @@ public class Constants {
                         R.drawable.ic_baseline_menu_24,
                 }
         };
-
          return iconList;
-
     }
-
     public  static boolean isOfferRedeem = false;
-
-    public static String selectedAddressID = "";
-
 }

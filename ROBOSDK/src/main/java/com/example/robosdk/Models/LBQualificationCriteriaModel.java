@@ -1,9 +1,9 @@
 package com.example.robosdk.Models;
 
 public class LBQualificationCriteriaModel {
-    public int sharesToQualify;
-    public int referralToQualify;
-    public int noOfWinners;
+    public int sharesToQualify,
+            referralToQualify,
+            noOfWinners;
 
 
     public LBQualificationCriteriaModel(int sharesToQualify, int referralToQualify, int noOfWinners) {

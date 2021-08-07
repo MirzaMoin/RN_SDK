@@ -1,35 +1,8 @@
 package com.example.robosdk.Models;
 
 
-public class AppColorModel{
-    public String primaryColor;
-    public String secondaryColor;
-    public String tertiaryColor;
-    public String footerColor;
-    public String primaryButtonColor;
-    public String secondaryButtonColor;
-    public String phoneNotificationBar;
-    public String phoneNotificationBarTextColor;
-    public String headerBarColor;
-    public String headerTextColor;
-    public String headerPointDigitColor;
-    public String footerBarColor;
-    public String footerBarInactiveIconColor;
-    public String footerBarActionIconAndTextColor;
-    public String menuBackgroundColor;
-    public String menuIconColor;
-    public String menuTextColor;
-    public String titleTextColor;
-    public String titleBodyColor;
-    public String formFieldIconColor;
-    public String childPageTextColor;
-    public String surveyLinkColor;
-    public String locationsLinkColor;
-    public String editProfileBannerColor;
-    public String offerTopRibbonColor;
-    public String offerTopRibbonTextColor;
-    public String offerBootomRibbonColor;
-    public String offerBottomRibbonTextColor;
+public class AppColorModel {
+    public String primaryColor, secondaryColor, tertiaryColor, footerColor, primaryButtonColor, secondaryButtonColor, phoneNotificationBar, phoneNotificationBarTextColor, headerBarColor, headerTextColor, headerPointDigitColor, footerBarColor, footerBarInactiveIconColor, footerBarActionIconAndTextColor, menuBackgroundColor, menuIconColor, menuTextColor, titleTextColor, titleBodyColor, formFieldIconColor, childPageTextColor, surveyLinkColor, locationsLinkColor, editProfileBannerColor, offerTopRibbonColor, offerTopRibbonTextColor, offerBootomRibbonColor, offerBottomRibbonTextColor;
 
     public AppColorModel(String primaryColor, String secondaryColor, String tertiaryColor, String footerColor, String primaryButtonColor, String secondaryButtonColor, String phoneNotificationBar, String phoneNotificationBarTextColor, String headerBarColor, String headerTextColor, String headerPointDigitColor, String footerBarColor, String footerBarInactiveIconColor, String footerBarActionIconAndTextColor, String menuBackgroundColor, String menuIconColor, String menuTextColor, String titleTextColor, String titleBodyColor, String formFieldIconColor, String childPageTextColor, String surveyLinkColor, String locationsLinkColor, String editProfileBannerColor, String offerTopRibbonColor, String offerTopRibbonTextColor, String offerBootomRibbonColor, String offerBottomRibbonTextColor) {
         this.primaryColor = primaryColor;

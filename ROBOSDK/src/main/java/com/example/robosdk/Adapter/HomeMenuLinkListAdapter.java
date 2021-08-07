@@ -23,6 +23,8 @@ import com.example.robosdk.Models.MenuLinkModel;
 import com.example.robosdk.R;
 import com.example.robosdk.Utility.Utility;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 
@@ -52,6 +54,7 @@ public class HomeMenuLinkListAdapter extends RecyclerView.Adapter<HomeMenuLinkLi
         return position;
     }
 
+    @NotNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
@@ -106,11 +109,8 @@ public class HomeMenuLinkListAdapter extends RecyclerView.Adapter<HomeMenuLinkLi
                 holder.cardMenuLink.setCardBackgroundColor(Utility.getColor("#FFFFFF00"));
                 holder.cardMenuLink.setBackgroundColor(Utility.getColor("#FFFFFF00"));
                 holder.cardMenuLink.setCardElevation(0);
-
             }
-
         }
-
         holder.textMenuLink.setTextColor(Utility.getColor(menu.getMenuTextColor()));
 
         if (isList) {
@@ -135,40 +135,29 @@ public class HomeMenuLinkListAdapter extends RecyclerView.Adapter<HomeMenuLinkLi
                     params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
                     holder.textMenuLink.setLayoutParams(params);
                 }
-
             }
-
             holder.textMenuLink.setText(menu.menuText);
             Glide.with(context).load(menu.getMenuBackgroudImage()).into(holder.imgListMenuLinkBackground);
             if (home.isHomePageBottomDisplayArrowIcon()) {
                 holder.icNextIcon.setVisibility(View.VISIBLE);
                 holder.icNextIcon.setColorFilter(Utility.getColor(home.getHomePageBottomArrowColor()));
             }
-
-
             int[] colors = {Utility.getColor(menu.getMenuTopColor()),
                     Utility.getColor(menu.getMenuBottomColor())};
 
-            //create a new gradient color
             GradientDrawable gd = new GradientDrawable(
                     GradientDrawable.Orientation.TOP_BOTTOM, colors);
 
-            //apply the button background to newly created drawable gradient
             holder.relMenuLinkList.setBackground(gd);
 
         } else {
             if (isFirst) {
                 if (position <= 5) {
                     holder.textMenuLink.setText(menu.menuText);
-
                 }
             } else {
-
-
                 holder.textMenuLink.setText(menu.menuText);
-
             }
-
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -183,16 +172,10 @@ public class HomeMenuLinkListAdapter extends RecyclerView.Adapter<HomeMenuLinkLi
                     i.putExtra("rewardProgramId", menu.getRewardProgramId());
 
                     context.startActivity(i);
-                    //open URL
                 }
-
             }
         });
-
-
     }
-
-
     @Override
     public int getItemCount() {
         if (isList) {
@@ -213,11 +196,8 @@ public class HomeMenuLinkListAdapter extends RecyclerView.Adapter<HomeMenuLinkLi
                     return 0;
                 }
             }
-
         }
-
     }
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView textMenuLink;

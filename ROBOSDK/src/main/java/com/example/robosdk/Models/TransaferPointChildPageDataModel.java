@@ -1,12 +1,12 @@
 package com.example.robosdk.Models;
 
-public class TransaferPointChildPageDataModel{
-    public String image;
+public class TransaferPointChildPageDataModel {
+    public String image,
+            linkType,
+            internalLink,
+            externalLink;
     public float opacity;
     public boolean isClickable;
-    public String linkType;
-    public String internalLink;
-    public String externalLink;
 
     public TransaferPointChildPageDataModel(String image, float opacity, boolean isClickable, String linkType, String internalLink, String externalLink) {
         this.image = image;

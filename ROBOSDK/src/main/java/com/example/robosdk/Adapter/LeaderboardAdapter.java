@@ -24,11 +24,9 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
     Context context;
     List<LBLeaderBoardReportModel> leaderBoardReport;
    public LeaderboardAdapter(Context context, List<LBLeaderBoardReportModel> leaderBoardReport){
-
        this.context = context;
        this.leaderBoardReport = leaderBoardReport;
     }
-
     @NotNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -36,7 +34,6 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         View listItem= layoutInflater.inflate(R.layout.content_leaderboard_list, parent, false);
         return new ViewHolder(listItem);
     }
-
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
@@ -45,9 +42,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
        holder.textNameContentLeaderBoard.setText(data.getFullName());
        holder.textPointContentLeaderBoard.setText(String.valueOf(data.getTotalPoints()));
         Glide.with(context).load(data.getProfilePitcure()).into(holder.winnerImageContentLeaderBoard);
-
     }
-
 
     @Override
     public int getItemCount() {
@@ -67,9 +62,6 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
             winnerImageContentLeaderBoard = itemView.findViewById(R.id.winnerImageContentLeaderBoard);
             textNameContentLeaderBoard = itemView.findViewById(R.id.textNameContentLeaderBoard);
             textPointContentLeaderBoard = itemView.findViewById(R.id.textPointContentLeaderBoard);
-
-
-
         }
     }
 }

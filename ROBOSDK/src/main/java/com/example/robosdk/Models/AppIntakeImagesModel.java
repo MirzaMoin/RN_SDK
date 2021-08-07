@@ -2,10 +2,9 @@ package com.example.robosdk.Models;
 
 import java.util.List;
 
-public class AppIntakeImagesModel{
+public class AppIntakeImagesModel {
     public List<LoadingImageModel> loadingImages;
-    public String appIcon;
-    public String companyLogo;
+    public String appIcon, companyLogo;
 
     public AppIntakeImagesModel(List<LoadingImageModel> loadingImages, String appIcon, String companyLogo) {
         this.loadingImages = loadingImages;

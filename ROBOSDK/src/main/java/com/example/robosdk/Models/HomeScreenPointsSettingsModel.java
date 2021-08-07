@@ -9,10 +9,10 @@ public class HomeScreenPointsSettingsModel {
     public boolean homePageDisplayPointsTotalRedeemed;
     public String homePageDisplayPointsTotalRedeemedText;
     public boolean homePageDisplayPointsLifetimeEarned;
-    public String homePageDisplayPointsLifetimeEarnedText;
-    public String homePageDisplayPointsBackgroundColor;
-    public String homePageDisplayPointsTextColor;
-    public String homePageDisplayPointsPosition;
+    public String homePageDisplayPointsLifetimeEarnedText,
+            homePageDisplayPointsBackgroundColor,
+            homePageDisplayPointsTextColor,
+            homePageDisplayPointsPosition;
 
     public HomeScreenPointsSettingsModel(boolean homePageDisplayPoints, boolean homePageDisplayPointsAvailable, String homePageDisplayPointsAvailableText, boolean homePageDisplayPointsThisMonth, String homePageDisplayPointsThisMonthText, boolean homePageDisplayPointsTotalRedeemed, String homePageDisplayPointsTotalRedeemedText, boolean homePageDisplayPointsLifetimeEarned, String homePageDisplayPointsLifetimeEarnedText, String homePageDisplayPointsBackgroundColor, String homePageDisplayPointsTextColor, String homePageDisplayPointsPosition) {
         this.homePageDisplayPoints = homePageDisplayPoints;

@@ -25,8 +25,11 @@ import com.example.robosdk.Activities.WebViewActivity;
 import com.example.robosdk.Models.HomeScreenModel;
 import com.example.robosdk.Models.LocationDataModel;
 import com.example.robosdk.Models.MenuLinkModel;
+import com.example.robosdk.Models.ResponsedataModel;
 import com.example.robosdk.R;
 import com.example.robosdk.Utility.Utility;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +47,6 @@ public class LocationFilterAdapter extends RecyclerView.Adapter<LocationFilterAd
     public List<LocationDataModel> originalLocationData = new ArrayList<>();
     public List<LocationDataModel> tempLocationData = new ArrayList<>();
 
-
-
     public LocationFilterAdapter(Context context) {
         this.context = context;
 
@@ -56,7 +57,6 @@ public class LocationFilterAdapter extends RecyclerView.Adapter<LocationFilterAd
 
         originalLocationData.clear();
         originalLocationData.addAll(Utility.response.responsedata.locationData);
-
     }
 
     @Override
@@ -69,20 +69,19 @@ public class LocationFilterAdapter extends RecyclerView.Adapter<LocationFilterAd
         return position;
     }
 
+    @NotNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View listItem;
-
-            listItem = layoutInflater.inflate(R.layout.content_filter, parent, false);
-
+        View listItem = layoutInflater.inflate(R.layout.content_filter, parent, false);
 
         return new ViewHolder(listItem);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-          final List<String> categoryList =Utility.response.responsedata.categoryList;
+        final ResponsedataModel responseData = Utility.response.responsedata;
+        final List<String> categoryList =responseData.categoryList;
 
         holder.textContentFilter.setText(categoryList.get(position));
 
@@ -106,12 +105,12 @@ public class LocationFilterAdapter extends RecyclerView.Adapter<LocationFilterAd
             @Override
             public void onClick(View v) {
 
-                for(int i=0;i<Utility.response.responsedata.categoryList.size();i++)
+                for(int i=0;i<categoryList.size();i++)
                 {
                     if(i == position && !isSelected.get(position))
                     {
                         isSelected.set(i,true);
-                        Log.e("Test","Selected : "+Utility.response.responsedata.categoryList.get(i));
+                        Log.e("Test","Selected : "+categoryList.get(i));
                         tempLocationData.clear();
                         LocationActivity.etSearchLocationBottom.setText("");
 
@@ -122,29 +121,27 @@ public class LocationFilterAdapter extends RecyclerView.Adapter<LocationFilterAd
                                 tempLocationData.add(l);
                             }
                         }
-                        Utility.response.responsedata.locationData.clear();
-                        Utility.response.responsedata.locationData.addAll(tempLocationData);
+                        responseData.locationData.clear();
+                        responseData.locationData.addAll(tempLocationData);
 
                     }
                     else if(i == position && isSelected.get(position))
                     {
                         isSelected.set(i,false);
                         LocationActivity.etSearchLocationBottom.setText("");
-                        Utility.response.responsedata.locationData.clear();
-                        Utility.response.responsedata.locationData.addAll(originalLocationData);
+                        responseData.locationData.clear();
+                        responseData.locationData.addAll(originalLocationData);
                         Log.e("Test","Original Location Data List : "+originalLocationData.size());
                     }
                     else
                     {
                         isSelected.set(i,false);
-
-                        Log.e("Test","Unselected : "+Utility.response.responsedata.categoryList.get(i));
-
+                        Log.e("Test","Unselected : "+categoryList.get(i));
                     }
                 }
                 notifyDataSetChanged();
                 LocationActivity.adapter.notifyDataSetChanged();
-                    if(Utility.response.responsedata.locationData.size() == 0)
+                if(responseData.locationData.size() == 0)
         {
             LocationActivity.rvLocation.setVisibility(View.GONE);
             LocationActivity.textNoLocation.setVisibility(View.VISIBLE);
@@ -156,12 +153,8 @@ public class LocationFilterAdapter extends RecyclerView.Adapter<LocationFilterAd
         }
             }
         });
-
         Log.e("IsSelected",isSelected.toString());
-
-
     }
-
 
     @Override
     public int getItemCount() {
@@ -169,7 +162,6 @@ public class LocationFilterAdapter extends RecyclerView.Adapter<LocationFilterAd
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-
 
         TextView textContentFilter;
         CardView cardFilter;
@@ -180,8 +172,6 @@ public class LocationFilterAdapter extends RecyclerView.Adapter<LocationFilterAd
             textContentFilter = itemView.findViewById(R.id.textContentFilter);
             cardFilter = itemView.findViewById(R.id.cardFilter);
             linearFilter = itemView.findViewById(R.id.linearFilter);
-
-
         }
     }
 }
