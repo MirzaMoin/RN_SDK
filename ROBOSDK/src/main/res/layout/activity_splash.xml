@@ -27,7 +27,6 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:paddingHorizontal="@dimen/_60sdp"
-
         />
 
 </RelativeLayout>

@@ -10,7 +10,7 @@
         android:layout_marginBottom="@dimen/_2sdp"
 
 
-        android:layout_height="@dimen/_35sdp">
+        android:layout_height="@dimen/_42sdp">
         <TextView
             android:id="@+id/textTitleTabBar"
             android:layout_width="match_parent"
@@ -18,7 +18,7 @@
 
             android:layout_gravity="center_horizontal"
             android:gravity="center"
-
+            android:textStyle="bold"
             android:textSize="@dimen/_12ssp"
 
             />

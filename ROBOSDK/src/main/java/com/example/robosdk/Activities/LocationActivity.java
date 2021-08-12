@@ -159,17 +159,30 @@ public class LocationActivity extends FragmentActivity implements OnMapReadyCall
         textNoLocation = dialog.findViewById(R.id.textNoLocation);
         rvLocation = dialog.findViewById(R.id.rvLocationBottomsheet);
         final RecyclerView rvFilter = dialog.findViewById(R.id.rvFilter);
+        final TextView textLocationListNoFound = dialog.findViewById(R.id.textLocationListNoFound);
         imageFilter = dialog.findViewById(R.id.imageFilter);
         linearFilter = dialog.findViewById(R.id.linearFilter);
 
         imageFilter.setOnClickListener(this);
 
 
-        final LocationFilterAdapter filterAdapter = new LocationFilterAdapter(this);
-        rvFilter.setHasFixedSize(true);
-        rvFilter.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        rvFilter.setAdapter(filterAdapter);
+        final ResponsedataModel responseData = Utility.response.responsedata;
+        final List<String> categoryList =responseData.categoryList;
+        if(categoryList.size() > 0)
+        {
 
+            final LocationFilterAdapter filterAdapter = new LocationFilterAdapter(this);
+            rvFilter.setHasFixedSize(true);
+            rvFilter.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+            rvFilter.setAdapter(filterAdapter);
+
+
+        }
+        else
+        {
+            rvFilter.setVisibility(View.GONE);
+            textLocationListNoFound.setVisibility(View.VISIBLE);
+        }
 
         if (Utility.response.responsedata.locationData.size() > 0) {
             assert rvLocation != null;

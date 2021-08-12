@@ -27,9 +27,7 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-
             <androidx.appcompat.widget.Toolbar
-
                 android:id="@+id/toolbarHome"
                 app:contentInsetStart="0dp"
                 app:layout_constraintTop_toTopOf="parent"
@@ -48,12 +46,9 @@
                     <TableRow>
 
                         <ImageButton
-
                             android:id="@+id/imgDrawer"
                             android:layout_width="@dimen/_22sdp"
                             android:layout_height="@dimen/_22sdp"
-                            android:layout_alignParentTop="true"
-                            android:layout_centerHorizontal="true"
                             android:layout_gravity="center_vertical"
                             android:layout_marginHorizontal="@dimen/_8sdp"
                             android:background="@android:color/transparent"
@@ -61,14 +56,10 @@
                             app:srcCompat="@drawable/ic_baseline_menu_24"
                             android:tint="#fff" />
 
-
                         <TextView
                             android:id="@+id/textHomePageHeaderMenuText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-
-
                             android:layout_gravity="center_vertical"
                             android:layout_weight="1"
                             android:text=""
@@ -79,14 +70,11 @@
                             android:id="@+id/imgProfileHome"
                             android:layout_width="@dimen/_30sdp"
                             android:layout_height="@dimen/_30sdp"
-                            android:layout_alignParentTop="true"
-                            android:layout_centerHorizontal="true"
                             android:layout_gravity="center_vertical"
                             android:layout_marginHorizontal="@dimen/_10sdp"
                             android:layout_marginVertical="@dimen/_5sdp"
                             android:background="@android:color/transparent"
                             android:src="@drawable/image_login_bg" />
-
 
                     </TableRow>
 
@@ -97,7 +85,6 @@
                 android:id="@+id/linearPointHomeTop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:background="#000"
                 android:orientation="horizontal"
                 android:visibility="gone">
@@ -117,23 +104,17 @@
                         android:layout_height="wrap_content"
                         android:text="x"
                         android:textColor="#fff"
-
                         android:textSize="@dimen/_12ssp" />
 
                     <TextView
                         android:id="@+id/textHomePageDisplayPointsAvailableTextTop"
                         android:layout_width="wrap_content"
-
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:singleLine="true"
-
                         android:text=""
-
                         android:textColor="#fff"
                         android:textSize="@dimen/_11ssp"
-
-
                         />
 
                 </LinearLayout>
@@ -143,17 +124,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="@dimen/_5sdp">
 
                     <TextView
                         android:id="@+id/textHomePageDisplayPointsThisMonthTop"
-
                         android:layout_width="wrap_content"
-
-
                         android:layout_height="wrap_content"
                         android:text="x"
                         android:textColor="#fff"
@@ -163,15 +140,11 @@
                         android:id="@+id/textHomePageDisplayPointsThisMonthTextTop"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
                         android:gravity="center"
                         android:singleLine="true"
                         android:text=""
                         android:textColor="#fff"
-
                         android:textSize="@dimen/_11ssp"
-
-
                         />
 
                 </LinearLayout>
@@ -184,26 +157,20 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="@dimen/_5sdp"
-
                     >
 
                     <TextView
                         android:id="@+id/textHomePageDisplayPointsTotalRedeemedTop"
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="x"
                         android:textColor="#fff"
-
                         android:textSize="@dimen/_12ssp" />
 
                     <TextView
                         android:id="@+id/textHomePageDisplayPointsTotalRedeemedTextTop"
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
-
                         android:gravity="center"
                         android:singleLine="true"
                         android:text=""
@@ -220,37 +187,27 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-
                     android:orientation="vertical"
-
                     android:padding="@dimen/_5sdp">
 
                     <TextView
                         android:id="@+id/homePageDisplayPointsLifetimeEarnedTop"
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="x"
                         android:textColor="#fff"
                         android:textSize="@dimen/_12ssp"
-
                         />
 
                     <TextView
                         android:id="@+id/homePageDisplayPointsLifetimeEarnedTextTop"
                         android:layout_width="wrap_content"
-
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:singleLine="true"
-
-
                         android:text=""
-
                         android:textColor="#fff"
-
                         android:textSize="@dimen/_11ssp"
-
                         />
 
                 </LinearLayout>
@@ -287,10 +244,8 @@
                         android:layout_width="@dimen/_20sdp"
                         android:layout_height="@dimen/_20sdp"
                         android:layout_alignParentEnd="true"
-
                         android:layout_alignParentRight="true"
                         android:padding="@dimen/_3sdp"
-
                         app:tint="#000" />
                 </RelativeLayout>
 
@@ -311,9 +266,8 @@
                         android:id="@+id/linearTopContainer"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
+                        android:layout_marginTop="@dimen/_15sdp"
                         android:orientation="vertical"
-
                         >
 
                         <TextView
@@ -321,7 +275,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:textSize="@dimen/_20sdp" />
+                            android:textStyle="bold"
+                            android:textSize="@dimen/_25sdp" />
 
                         <View
                             android:id="@+id/viewHomePageTopTextUnderLine1"
@@ -330,7 +285,6 @@
                             android:layout_gravity="center"
                             android:layout_marginHorizontal="@dimen/_20sdp"
                             android:layout_marginTop="@dimen/_10sdp"
-
                             android:visibility="gone"
 
                             />
@@ -341,7 +295,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/_10sdp"
                             android:gravity="center"
-                            android:textSize="@dimen/_20sdp" />
+                            android:textStyle="bold"
+
+                            android:textSize="@dimen/_28sdp" />
 
                         <View
                             android:id="@+id/viewHomePageTopTextUnderLine2"
@@ -357,6 +313,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="@dimen/_10sdp"
                             android:capitalize="none"
+                            android:textStyle="bold"
+
                             android:gravity="center"
                             android:paddingHorizontal="@dimen/_25sdp"
                             android:text=""
@@ -368,7 +326,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="@dimen/_20sdp"
-
                             android:layout_gravity="center"
                             android:layout_marginVertical="@dimen/_10sdp"
                             android:paddingHorizontal="@dimen/_25sdp"
@@ -396,28 +353,21 @@
 
                         <TextView
                             android:id="@+id/textHomePageDisplayPointsAvailable"
-
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="x"
                             android:textColor="#fff"
-
                             android:textSize="@dimen/_12ssp" />
 
                         <TextView
                             android:id="@+id/textHomePageDisplayPointsAvailableText"
                             android:layout_width="wrap_content"
-
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:singleLine="true"
-
                             android:text=""
-
                             android:textColor="#fff"
                             android:textSize="@dimen/_11ssp"
-
-
                             />
 
                     </LinearLayout>
@@ -427,17 +377,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-
                         android:gravity="center"
                         android:orientation="vertical"
                         android:padding="@dimen/_5sdp">
 
                         <TextView
                             android:id="@+id/textHomePageDisplayPointsThisMonth"
-
                             android:layout_width="wrap_content"
-
-
                             android:layout_height="wrap_content"
                             android:text="x"
                             android:textColor="#fff"
@@ -447,15 +393,11 @@
                             android:id="@+id/textHomePageDisplayPointsThisMonthText"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-
                             android:gravity="center"
                             android:singleLine="true"
                             android:text=""
                             android:textColor="#fff"
-
                             android:textSize="@dimen/_11ssp"
-
-
                             />
 
                     </LinearLayout>
@@ -468,32 +410,25 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         android:padding="@dimen/_5sdp"
-
                         >
 
                         <TextView
                             android:id="@+id/textHomePageDisplayPointsTotalRedeemed"
-
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="x"
                             android:textColor="#fff"
-
                             android:textSize="@dimen/_12ssp" />
 
                         <TextView
                             android:id="@+id/textHomePageDisplayPointsTotalRedeemedText"
-
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-
-
                             android:gravity="center"
                             android:singleLine="true"
                             android:text=""
                             android:textColor="#fff"
                             android:textSize="@dimen/_11ssp"
-
                             />
 
                     </LinearLayout>
@@ -504,14 +439,11 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
-
                         android:orientation="vertical"
-
                         android:padding="@dimen/_5sdp">
 
                         <TextView
                             android:id="@+id/homePageDisplayPointsLifetimeEarned"
-
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="x"
@@ -523,34 +455,22 @@
                         <TextView
                             android:id="@+id/homePageDisplayPointsLifetimeEarnedText"
                             android:layout_width="wrap_content"
-
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:singleLine="true"
-
-
                             android:text=""
-
                             android:textColor="#fff"
-
                             android:textSize="@dimen/_11ssp"
-
                             />
-
                     </LinearLayout>
                 </LinearLayout>
-
             </RelativeLayout>
-
-
         </LinearLayout>
-
         <RelativeLayout
             android:id="@+id/relHomePageRibbon"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_18sdp"
             android:background="#fff"
-
             android:orientation="horizontal"
             android:visibility="gone">
 
@@ -575,8 +495,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:padding="@dimen/_3sdp"
-                android:src="@drawable/ic_baseline_share_24"
-
+                app:srcCompat="@drawable/ic_baseline_share_24"
                 android:visibility="gone"
                 app:tint="#000" />
         </RelativeLayout>
@@ -599,18 +518,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/_20sdp"
-
                 >
                 <!-- activity_screen_slide.xml -->
-                <androidx.viewpager.widget.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+                <androidx.viewpager.widget.ViewPager
                     android:id="@+id/viewPagerHome"
-
-
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-
-                </androidx.viewpager.widget.ViewPager>
+                    android:layout_height="wrap_content"
+                    />
 
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tablayoutHome"
@@ -619,8 +533,8 @@
                     android:layout_alignParentBottom="true"
                     android:layout_marginBottom="@dimen/_41sdp"
                     app:tabBackground="@drawable/tab_selector"
-
                     app:tabGravity="center"
+
                     app:tabIndicatorHeight="0dp" />
 
             </RelativeLayout>
@@ -633,33 +547,26 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvHomeMenuLink"
                     android:layout_width="match_parent"
-
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/_40sdp"
 
-                    ></androidx.recyclerview.widget.RecyclerView>
+                    />
             </RelativeLayout>
-
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true">
-
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvFooterHome"
+
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
-
                     app:layout_constraintBottom_toBottomOf="parent" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </RelativeLayout>
 
     </LinearLayout>
-
-
     <LinearLayout
         android:id="@+id/linearDrawerHome"
         android:layout_width="@dimen/_220sdp"
@@ -670,7 +577,6 @@
         android:paddingVertical="@dimen/_30sdp"
         android:focusable="true"
         android:focusableInTouchMode="true"
-
         >
 
         <ExpandableListView
@@ -678,14 +584,11 @@
             android:layout_width="@dimen/_190sdp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-
             android:groupIndicator="@null"
             android:layout_marginTop="@dimen/_20sdp"
             android:divider="@android:color/darker_gray"
             android:dividerHeight="0.5dp"
             android:foregroundTint="#fff"
-
-
             />
 
         <ImageView
@@ -718,10 +621,8 @@
                 android:layout_height="wrap_content"
                 android:text="TERMS OF SERVICE"
                 android:paddingVertical="@dimen/_5sdp"
-
                 android:textColor="#fff"
                 android:textSize="@dimen/_12sdp" />
-
         </LinearLayout>
     </LinearLayout>
 

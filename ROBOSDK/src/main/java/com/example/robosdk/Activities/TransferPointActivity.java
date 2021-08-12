@@ -144,14 +144,6 @@ public class TransferPointActivity extends AppCompatActivity implements View.OnC
                                                     Utility.response.responsedata.contactData = response.body().responsedata.contactData;
 
                                                     etPointAmountTP.setHint(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
-                                                    if(Utility.response.responsedata.contactData.getPointBalance() > 0)
-                                                    {
-                                                        textPointTransferPoints.setVisibility(View.VISIBLE);
-                                                        textPointTransferPoints.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
-
-                                                        textPointTransferPoints.setText(Utility.getRoundData(Utility.response.responsedata.contactData.getPointBalance()) + " PTS");
-
-                                                    }
 
                                                     Call<ResponseModel> callGetContactData = service.getAllPoints(Utility.response.responsedata.appDetails.rewardProgramId,
                                                             Utility.response.responsedata.contactData.getContactID()
@@ -239,9 +231,18 @@ public class TransferPointActivity extends AppCompatActivity implements View.OnC
         tableLayoutTP = findViewById(R.id.tableLayoutTP);
         tableLayoutTP.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
         etUserDetailsTP = findViewById(R.id.etUserDetailsTP);
-        textPointTransferPoints.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
         double balance = Utility.response.responsedata.contactData.getPointBalance();
-        textPointTransferPoints.setText(Utility.getRoundData(balance) + " PTS");
+
+        if(balance > 0)
+        {
+            textPointTransferPoints.setVisibility(View.VISIBLE);
+            textPointTransferPoints.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderPointDigitColor()));
+
+            textPointTransferPoints.setText(Utility.getRoundData(balance) + " PTS");
+
+        }
+
+
         etPointAmountTP.setHint(Utility.getRoundData(balance) + " PTS");
         AppColorModel color = Utility.response.responsedata.appColor;
         swipeBtnTransferPoint.setBackgroundColor(Utility.getColor(color.getPrimaryButtonColor()));

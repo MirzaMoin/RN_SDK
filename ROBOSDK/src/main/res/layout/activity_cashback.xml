@@ -14,7 +14,6 @@
         tools:ignore="MissingConstraints">
 
         <androidx.appcompat.widget.Toolbar
-
             android:id="@+id/toolbarCashback"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
@@ -33,7 +32,6 @@
                 <TableRow>
 
                     <ImageButton
-
                         android:id="@+id/imgBackRedeemCashback"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_30sdp"
@@ -44,7 +42,7 @@
                         android:background="@android:color/transparent"
                         android:padding="@dimen/_5sdp"
                         android:scaleType="fitXY"
-                        android:src="@drawable/ic_baseline_arrow_back_24"
+                        app:srcCompat="@drawable/ic_baseline_arrow_back_24"
                         android:tint="#fff" />
 
 
@@ -52,8 +50,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
-
-
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
                         android:text="Redeem Cashback"
@@ -73,20 +69,15 @@
                         android:textSize="@dimen/_14ssp"
                         android:visibility="gone" />
 
-
                 </TableRow>
-
             </TableLayout>
         </androidx.appcompat.widget.Toolbar>
-
-
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/_100sdp"
-
         app:layout_constraintTop_toBottomOf="@id/linearTopCashback">
 
         <LinearLayout
@@ -118,7 +109,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_10sdp"
-
                 app:cardCornerRadius="@dimen/_10sdp">
 
                 <RelativeLayout
@@ -158,10 +148,8 @@
                 android:id="@+id/rvCashback"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_40sdp"
-
                 android:layout_gravity="center_horizontal"
                 android:visibility="gone"
-
                 />
 
             <LinearLayout
@@ -197,10 +185,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_10sdp"
-
                 android:layout_marginTop="@dimen/_10sdp"
                 app:cardCornerRadius="@dimen/_10sdp"
-
                 >
 
                 <com.ebanx.swipebtn.SwipeButton
@@ -212,7 +198,6 @@
                     app:button_image_disabled="@drawable/ic_baseline_arrow_forward_ios_24"
                     app:button_image_enabled="@drawable/ic_baseline_arrow_back_24"
                     app:button_image_width="@dimen/_45sdp"
-
                     app:button_left_padding="20dp"
                     app:button_right_padding="20dp"
                     app:button_top_padding="@dimen/_10sdp"
@@ -225,7 +210,6 @@
                     app:inner_text_color="@android:color/white"
                     app:inner_text_size="@dimen/_12ssp"
                     app:inner_text_top_padding="@dimen/_10sdp"
-
                     />
             </androidx.cardview.widget.CardView>
 
@@ -258,13 +242,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearTopCashback">
 
-
         <ImageView
             android:id="@+id/imageCashback"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
-
             />
 
         <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -282,9 +264,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:paddingHorizontal="@dimen/_60sdp"
-
             />
     </RelativeLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

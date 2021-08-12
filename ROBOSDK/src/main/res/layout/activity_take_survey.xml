@@ -11,11 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-
         tools:ignore="MissingConstraints">
 
         <androidx.appcompat.widget.Toolbar
-
             android:id="@+id/toolbarCashback"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
@@ -34,11 +32,9 @@
                 <TableRow>
 
                     <ImageButton
-
                         android:id="@+id/imgBackSurvey"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_30sdp"
-
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
                         android:layout_gravity="center_vertical"
@@ -46,16 +42,13 @@
                         android:background="@android:color/transparent"
                         android:padding="@dimen/_5sdp"
                         android:scaleType="fitXY"
-                        android:src="@drawable/ic_baseline_arrow_back_24"
+                        app:srcCompat="@drawable/ic_baseline_arrow_back_24"
                         android:tint="#fff" />
-
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
-
-
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
                         android:text="Survey"
@@ -75,7 +68,6 @@
                         android:textSize="@dimen/_14ssp"
                         android:visibility="gone" />
 
-
                 </TableRow>
 
             </TableLayout>
@@ -89,13 +81,12 @@
             <com.smarteist.autoimageslider.SliderView
                 android:id="@+id/imageSliderSurvey"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_130sdp"
+                android:layout_height="@dimen/_110sdp"
                 android:visibility="gone"
                 app:sliderAnimationDuration="600"
                 app:sliderAutoCycleDirection="back_and_forth"
                 app:sliderAutoCycleEnabled="true"
                 app:sliderIndicatorAnimationDuration="600"
-
                 app:sliderIndicatorGravity="center_horizontal|bottom"
                 app:sliderIndicatorMargin="15dp"
                 app:sliderIndicatorOrientation="horizontal"
@@ -110,30 +101,25 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_35sdp"
+            android:layout_height="@dimen/_42sdp"
             android:layout_gravity="bottom"
-
             app:tabIndicatorHeight="0dp"
             app:tabMode="fixed"
-            app:tabPaddingBottom="-1dp"
+            app:tabPaddingBottom="-3dp"
             app:tabPaddingEnd="-1dp"
             app:tabPaddingStart="-1dp"
-            app:tabPaddingTop="-1dp"
-            app:tabSelectedTextColor="#14538e"
-
+            android:padding="0.4dp"
+            android:background="@drawable/survey_border"
+            app:tabSelectedTextColor="#0066b1"
 
             app:tabTextColor="#fff">
 
         </com.google.android.material.tabs.TabLayout>
 
-
-        <androidx.viewpager.widget.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+        <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPagerTakeSurvey"
-
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
 
         </androidx.viewpager.widget.ViewPager>
     </LinearLayout>
@@ -143,16 +129,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-
         app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvFooterTakeSurvey"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
-
             app:layout_constraintBottom_toBottomOf="parent" />
-
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

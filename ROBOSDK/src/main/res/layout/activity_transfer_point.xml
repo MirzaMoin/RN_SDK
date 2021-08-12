@@ -14,7 +14,6 @@
         tools:ignore="MissingConstraints">
 
         <androidx.appcompat.widget.Toolbar
-
             android:id="@+id/toolbarCashback"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
@@ -33,7 +32,6 @@
                 <TableRow>
 
                     <ImageButton
-
                         android:id="@+id/imgBackTransferPoints"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_30sdp"
@@ -43,18 +41,14 @@
                         android:layout_marginHorizontal="@dimen/_8sdp"
                         android:background="@android:color/transparent"
                         android:padding="@dimen/_5sdp"
-
                         android:scaleType="fitXY"
-                        android:src="@drawable/ic_baseline_arrow_back_24"
-                        android:tint="#fff" />
-
+                        android:tint="#fff"
+                        app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
-
-
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
                         android:text="Transfer Points"
@@ -74,12 +68,10 @@
                         android:textSize="@dimen/_14ssp"
                         android:visibility="gone" />
 
-
                 </TableRow>
 
             </TableLayout>
         </androidx.appcompat.widget.Toolbar>
-
 
     </LinearLayout>
 
@@ -87,7 +79,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/_100sdp"
-
         app:layout_constraintTop_toBottomOf="@id/linearTopCashback">
 
         <LinearLayout
@@ -114,39 +105,34 @@
                 app:sliderScrollTimeInSec="1"
                 app:sliderStartAutoCycle="true" />
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
-
-                app:cardCornerRadius="@dimen/_10sdp">
-
-
-            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:text="Enter Point Amount"
-                android:textSize="@dimen/_12sdp" />
+                android:textSize="@dimen/_12sdp"
+                android:textColor="#808080"/>
 
             <EditText
                 android:id="@+id/etPointAmountTP"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_35sdp"
+                android:layout_height="@dimen/_45sdp"
                 android:layout_marginHorizontal="@dimen/_10sdp"
-                android:layout_marginVertical="@dimen/_10sdp"
+                android:layout_marginVertical="@dimen/_5sdp"
                 android:background="@drawable/edit_text_border"
                 android:drawablePadding="@dimen/_10sdp"
                 android:hint="Enter point amount"
                 android:inputType="numberDecimal"
                 android:paddingLeft="@dimen/_10sdp"
-                android:textSize="@dimen/_12ssp" />
+                android:textColorHint="#9e9e9e"
+                android:textSize="@dimen/_12ssp"
+                android:textColor="#9a9a9a"
+                android:textStyle="bold" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
-
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/_10sdp">
 
@@ -156,7 +142,8 @@
                     android:layout_centerVertical="true"
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_toLeftOf="@+id/textShare"
-                    android:background="#888181" />
+                    android:background="#d1d1d1
+" />
 
                 <TextView
                     android:id="@+id/textShare"
@@ -166,9 +153,8 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     android:text="Transfering to"
-
-                    android:textColor="#9F9F9F"
-                    android:textSize="@dimen/_12ssp" />
+                    android:textColor="#848484"
+                    android:textSize="@dimen/_14ssp" />
 
                 <View
                     android:layout_width="wrap_content"
@@ -176,7 +162,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_toRightOf="@+id/textShare"
-                    android:background="#888181" />
+                    android:background="#d1d1d1" />
             </RelativeLayout>
 
             <TextView
@@ -184,30 +170,33 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 android:text="Enter User Details"
-                android:textSize="@dimen/_12sdp" />
+                android:textSize="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textColor="#808080"/>
 
             <EditText
                 android:id="@+id/etUserDetailsTP"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_35sdp"
+                android:layout_height="@dimen/_45sdp"
                 android:layout_marginHorizontal="@dimen/_10sdp"
-                android:layout_marginVertical="@dimen/_10sdp"
+                android:layout_marginVertical="@dimen/_5sdp"
                 android:background="@drawable/edit_text_border"
                 android:drawablePadding="@dimen/_10sdp"
                 android:hint="Email , Mobile number or Member CardID"
                 android:paddingLeft="@dimen/_10sdp"
-
-                android:textSize="@dimen/_12ssp" />
+                android:textColorHint="#9e9e9e"
+                android:textSize="@dimen/_12ssp"
+                android:textColor="#9a9a9a"
+                android:textStyle="bold" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/shape_button_background"
-                app:cardCornerRadius="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
 
-                >
+                android:background="@drawable/shape_button_background"
+                app:cardCornerRadius="@dimen/_10sdp">
 
                 <com.ebanx.swipebtn.SwipeButton
                     android:id="@+id/swipeBtnTransferPoint"
@@ -215,7 +204,7 @@
                     android:layout_height="wrap_content"
                     app:button_background="@drawable/shape_button_background"
                     app:button_bottom_padding="@dimen/_10sdp"
-                    app:button_image_disabled="@drawable/ic_baseline_arrow_forward_ios_24"
+                    app:button_image_disabled="@drawable/ic_baseline_arrow_tp"
                     app:button_image_enabled="@drawable/ic_baseline_arrow_back_24"
                     app:button_image_width="@dimen/_45sdp"
                     app:button_left_padding="20dp"
@@ -224,13 +213,13 @@
                     app:button_trail_drawable="@drawable/background_trailing"
                     app:button_trail_enabled="true"
                     app:has_activate_state="true"
+
                     app:initial_state="disabled"
                     app:inner_text="Slide to transfer"
-                    app:inner_text_bottom_padding="@dimen/_10sdp"
+                    app:inner_text_bottom_padding="@dimen/_12sdp"
                     app:inner_text_color="@android:color/white"
                     app:inner_text_size="@dimen/_12ssp"
-                    app:inner_text_top_padding="@dimen/_10sdp"
-
+                    app:inner_text_top_padding="@dimen/_11sdp"
                     />
             </androidx.cardview.widget.CardView>
 
@@ -242,14 +231,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-
         app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvFooterTransferPoint"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
-
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </LinearLayout>

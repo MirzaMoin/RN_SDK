@@ -57,8 +57,6 @@ public class TransactionHistoryAdapter extends RecyclerView.Adapter<TransactionH
         return super.getItemId(position);
     }
 
-
-
     @Override
     public int getItemViewType(int position) {
         return super.getItemViewType(position);
@@ -75,7 +73,6 @@ public class TransactionHistoryAdapter extends RecyclerView.Adapter<TransactionH
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NotNull final ViewHolder holder, int position) {
-
 
         holder.setIsRecyclable(false);
         if(position % 2 != 0){
@@ -100,13 +97,11 @@ public class TransactionHistoryAdapter extends RecyclerView.Adapter<TransactionH
             formatterOut.format(date);
             holder.textDate.setText("" + formatterOut.format(date));
 
-
         } catch (ParseException e) {
             e.printStackTrace();
         }
         holder.textBalance.setText("" + history.getBalance());
         holder.textLocation.setText("" + history.getLocationName());
-
 
 //        Double point = Double.parseDouble(history.getPoints());
         if (history.getPoints().charAt(0) == '-') {
@@ -119,10 +114,8 @@ public class TransactionHistoryAdapter extends RecyclerView.Adapter<TransactionH
         holder.textStatus.setText("" + history.getTransactionStatus());
         holder.textType.setText("" + history.getType());
 
-
         if(history.isExpanded())
         {
-
 
             holder.linearLocation.setVisibility(View.VISIBLE);
             holder.linearStatus.setVisibility(View.VISIBLE);
@@ -147,15 +140,12 @@ public class TransactionHistoryAdapter extends RecyclerView.Adapter<TransactionH
                         holder.cardFirstTH.setVisibility(View.VISIBLE);
                         Glide.with(context).load(s.getImages().get(0)).into(holder.imageFirstTH);
 
-
                         holder.cardSecondTH.setVisibility(View.VISIBLE);
                         Glide.with(context).load(s.getImages().get(1)).into(holder.imageSecondTH);
 
                         holder.cardThirdTH.setVisibility(View.VISIBLE);
                         Glide.with(context).load(s.getImages().get(2)).into(holder.imageThirdTH);
                     }
-
-
 
                 } else {
                     if (s.getName().equals("Total Spent")) {
@@ -193,14 +183,10 @@ public class TransactionHistoryAdapter extends RecyclerView.Adapter<TransactionH
                         Glide.with(context).load(s.getImages().get(2)).into(imgPreview);
                     }
                 });
-
             }
 
             holder.imageExpand.setRotation(0);
         }
-
-
-
 
         holder.linearCollEx.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -217,10 +203,7 @@ public class TransactionHistoryAdapter extends RecyclerView.Adapter<TransactionH
                     holder.imageExpand.setRotation(180);
 
                 } else {
-
                     history.setExpanded(true);
-
-
 
                     holder.linearLocation.setVisibility(View.VISIBLE);
                     holder.linearStatus.setVisibility(View.VISIBLE);
@@ -245,14 +228,12 @@ public class TransactionHistoryAdapter extends RecyclerView.Adapter<TransactionH
                                 holder.cardFirstTH.setVisibility(View.VISIBLE);
                                 Glide.with(context).load(s.getImages().get(0)).into(holder.imageFirstTH);
 
-
                                 holder.cardSecondTH.setVisibility(View.VISIBLE);
                                 Glide.with(context).load(s.getImages().get(1)).into(holder.imageSecondTH);
 
                                 holder.cardThirdTH.setVisibility(View.VISIBLE);
                                 Glide.with(context).load(s.getImages().get(2)).into(holder.imageThirdTH);
                             }
-
 
 //                            s.getImages().size()
                         } else {
@@ -293,17 +274,13 @@ public class TransactionHistoryAdapter extends RecyclerView.Adapter<TransactionH
                         });
 
                     }
-
                     holder.imageExpand.setRotation(0);
 
                 }
-
             }
         });
 
-
     }
-
 
     @Override
     public int getItemCount() {
@@ -336,7 +313,6 @@ public class TransactionHistoryAdapter extends RecyclerView.Adapter<TransactionH
 
         CardView cardFirstTH,cardSecondTH,cardThirdTH;
 
-
         public ViewHolder(View itemView) {
             super(itemView);
 
@@ -348,8 +324,8 @@ public class TransactionHistoryAdapter extends RecyclerView.Adapter<TransactionH
             linearImagesTH = itemView.findViewById(R.id.linearImagesTH);
             linearOfferNameTH = itemView.findViewById(R.id.linearOfferNameTH);
             linearContentTH = itemView.findViewById(R.id.linearContentTH);
-            imageExpand = itemView.findViewById(R.id.imgExpand);
 
+            imageExpand = itemView.findViewById(R.id.imgExpand);
 
             textDate = itemView.findViewById(R.id.textDateTH);
             textLocation = itemView.findViewById(R.id.textLocationTH);
@@ -368,7 +344,6 @@ public class TransactionHistoryAdapter extends RecyclerView.Adapter<TransactionH
             cardFirstTH = itemView.findViewById(R.id.cardFirstTH);
             cardSecondTH = itemView.findViewById(R.id.cardSecondTH);
             cardThirdTH = itemView.findViewById(R.id.cardThirdTH);
-
 
         }
     }

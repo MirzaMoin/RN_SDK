@@ -65,6 +65,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import okhttp3.internal.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -96,6 +97,8 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
     TableLayout tableLayoutOfferDetails;
     OfferListModel currentOffer = null;
     List<LocationDataModel> originalLocations = new ArrayList<>();
+
+    Button btnOfferImageLabelDetails;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -141,6 +144,7 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
         textWebsiteURL = findViewById(R.id.textWebsiteURL);
         imageBarcode = findViewById(R.id.imageBarcode);
         tableLayoutOfferDetails = findViewById(R.id.tableLayoutOfferDetails);
+        btnOfferImageLabelDetails = findViewById(R.id.btnOfferImageLabelDetails);
         tableLayoutOfferDetails.setBackgroundColor(Utility.getColor(Utility.response.responsedata.appColor.getHeaderBarColor()));
 
         imgback.setOnClickListener(this);
@@ -160,7 +164,11 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
         // TODO Auto-generated method stub
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus) {
-            barCode(barcodeData);
+            if(currentOffer.isDisplayBarcode()) {
+                imageBarcode.setVisibility(View.VISIBLE);
+                barCode(barcodeData);
+            }
+
         }
     }
 
@@ -175,6 +183,8 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
 
             }
         }
+
+
         AppColorModel color = Utility.response.responsedata.appColor;
         final OfferUserDetailsModel userDetails = Utility.response.responsedata.getUserDetails();
 
@@ -189,11 +199,11 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
         textInternalDetail.setText("Internal Use Only: " + currentOffer.getOfferBarcode());
         textInternalDetail.setTextColor(Utility.getColor(color.getTitleTextColor()));
 
-        textMobilePhoneDetail.setText("Mobile: " + userDetails.getMobilePhone());
+        textMobilePhoneDetail.setText("Mobile: " + (userDetails.getMobilePhone() != null ? userDetails.getMobilePhone() : ""));
         textMobilePhoneDetail.setTextColor(Utility.getColor(color.getTitleTextColor()));
-        textMemberCardID.setText("CardID: " + userDetails.getMemberCardID());
+        textMemberCardID.setText("CardID: " + (userDetails.getMemberCardID() != null ? userDetails.getMemberCardID() : ""));
         textMemberCardID.setTextColor(Utility.getColor(color.getTitleTextColor()));
-        textOfferIDDetail.setText("Offer ID: " + String.valueOf(currentOffer.getOfferID()));
+        textOfferIDDetail.setText("Offer ID: " + currentOffer.getOfferID());
         textOfferIDDetail.setTextColor(Utility.getColor(color.getTitleTextColor()));
 
         textNameDetail.setTextColor(Utility.getColor(color.getTitleTextColor()));
@@ -248,6 +258,11 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
                 showAlertDialog(Utility.response.responsedata.redeemSetting.getRedeemOfferInstruction(), currentOffer.getOfferID(), currentOffer.getOfferSendID(), userDetails.getAddressID());
             }
         });
+
+        btnOfferImageLabelDetails.setText(""+currentOffer.getOfferImagelabel());
+        btnOfferImageLabelDetails.setTextColor(Utility.getColor(color.getOfferTopRibbonTextColor()));
+        btnOfferImageLabelDetails.setBackgroundColor(Utility.getColor(color.getOfferTopRibbonColor()));
+        btnOfferImageLabelDetails.setText(""+currentOffer.getOfferImagelabel());
     }
     public void barCode(String data) {
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
@@ -262,6 +277,7 @@ public class OffersDetailActivity extends AppCompatActivity implements View.OnCl
                 }
             }
             imageBarcode.setImageBitmap(bitmap);
+
         } catch (WriterException e) {
             e.printStackTrace();
         }

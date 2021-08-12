@@ -437,6 +437,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         if (homeScreenModel.isHomePageGridMenuLayout()) {
             relativeBottomGridHome.setVisibility(View.VISIBLE);
+            if(homeScreenModel.menuLinks.size() <= 6)
+            {
+                tabLayout.setVisibility(View.GONE);
+            }
             relativeBottomListHome.setVisibility(View.GONE);
         } else {
             relativeBottomGridHome.setVisibility(View.GONE);

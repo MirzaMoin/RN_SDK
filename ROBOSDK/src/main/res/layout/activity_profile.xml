@@ -13,7 +13,6 @@
         tools:ignore="MissingConstraints">
 
         <androidx.appcompat.widget.Toolbar
-
             app:contentInsetStart="0dp"
             android:id="@+id/toolbarProfile"
             app:layout_constraintTop_toTopOf="parent"
@@ -27,32 +26,27 @@
                 android:orientation="horizontal"
                 android:background="#59062B8A"
                 >
-
                 <TableRow>
 
 
                     <ImageButton
-
                         android:id="@+id/imgBackProfile"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_30sdp"
                         android:layout_alignParentTop="true"
                         android:padding="@dimen/_5sdp"
-
                         android:layout_centerHorizontal="true"
                         android:layout_gravity="center_vertical"
                         android:layout_marginHorizontal="@dimen/_8sdp"
                         android:background="@android:color/transparent"
                         android:scaleType="fitXY"
-                        android:src="@drawable/ic_baseline_arrow_back_24"
+                        app:srcCompat="@drawable/ic_baseline_arrow_back_24"
                         android:tint="#fff" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Profile"
-
-
                         android:textSize="@dimen/_16sdp"
                         android:layout_gravity="center_vertical"
                         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -72,19 +66,15 @@
                         android:textColor="#fff"
                         android:textSize="@dimen/_14ssp" />
 
-
                 </TableRow>
-
             </TableLayout>
         </androidx.appcompat.widget.Toolbar>
-
 
     </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/linearTopCashback"
-
         android:paddingBottom="@dimen/_80sdp"
         >
 
@@ -99,8 +89,6 @@
                 android:layout_height="@dimen/_130sdp"
                 app:sliderAnimationDuration="600"
                 android:visibility="gone"
-
-
                 app:sliderAutoCycleDirection="back_and_forth"
                 app:sliderAutoCycleEnabled="true"
                 app:sliderIndicatorAnimationDuration="600"
@@ -121,11 +109,9 @@
                 android:text="Member Detail"
                 android:padding="@dimen/_3sdp"
                 android:textSize="@dimen/_13ssp"
-
                 android:gravity="center"
                 android:layout_marginBottom="@dimen/_10sdp"
                 />
-
          <androidx.constraintlayout.widget.ConstraintLayout
              android:layout_width="match_parent"
              android:layout_height="wrap_content"

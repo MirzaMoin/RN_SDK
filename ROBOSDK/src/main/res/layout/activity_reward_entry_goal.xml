@@ -15,7 +15,6 @@
         tools:ignore="MissingConstraints">
 
         <androidx.appcompat.widget.Toolbar
-
             android:id="@+id/toolbarRPG"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
@@ -37,9 +36,7 @@
 
                         android:id="@+id/imgBackRPG"
                         android:layout_width="wrap_content"
-
                         android:layout_height="@dimen/_30sdp"
-
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
                         android:layout_gravity="center_vertical"
@@ -47,16 +44,13 @@
                         android:background="@android:color/transparent"
                         android:padding="@dimen/_5sdp"
                         android:scaleType="fitXY"
-                        android:src="@drawable/ic_baseline_arrow_back_24"
+                        app:srcCompat="@drawable/ic_baseline_arrow_back_24"
                         android:tint="#fff" />
-
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
-
-
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
                         android:text="Rewards Entry Goal"
@@ -75,7 +69,6 @@
                         android:textColor="#fff"
                         android:textSize="@dimen/_14ssp"
                         android:visibility="gone" />
-
 
                 </TableRow>
 
@@ -116,19 +109,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-
         app:layout_constraintBottom_toBottomOf="parent">
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvFooterRPG"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
-
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </LinearLayout>
-
 
     <RelativeLayout
         android:id="@+id/relLoadingRPG"
@@ -139,13 +128,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearTopRPG">
 
-
         <ImageView
             android:id="@+id/imageRPG"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
-
             />
 
         <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"

@@ -108,7 +108,17 @@
             android:layout_marginHorizontal="@dimen/_5sdp"
             android:layout_marginBottom="@dimen/_5sdp"
             android:orientation="horizontal"
-
+            />
+        <TextView
+            android:id="@+id/textLocationListNoFound"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:text="No category is available"
+            android:gravity="center"
+            android:visibility="gone"
+            android:textSize="@dimen/_12sdp"
 
             />
     </LinearLayout>

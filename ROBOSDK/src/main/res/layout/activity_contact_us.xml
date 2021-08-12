@@ -14,7 +14,6 @@
         tools:ignore="MissingConstraints">
 
         <androidx.appcompat.widget.Toolbar
-
             android:id="@+id/toolbarContactUs"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
@@ -33,7 +32,6 @@
                 <TableRow>
 
                     <ImageButton
-
                         android:id="@+id/imgBackContactUs"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_30sdp"
@@ -44,17 +42,14 @@
                         android:background="@android:color/transparent"
                         android:padding="@dimen/_5sdp"
                         android:scaleType="fitXY"
-
-                        android:src="@drawable/ic_baseline_arrow_back_24"
-                        android:tint="#fff" />
+                        android:tint="#fff"
+                        app:srcCompat="@drawable/ic_baseline_arrow_back_24" />
 
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
-
-
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
                         android:text="Contact Us"
@@ -69,26 +64,20 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:layout_marginRight="@dimen/_10sdp"
-                        android:src="@drawable/ic_baseline_compare_arrows_24"
                         android:text="0 PTS"
                         android:textColor="#fff"
                         android:textSize="@dimen/_14ssp"
-                        android:visibility="gone" />
-
-
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_baseline_compare_arrows_24" />
                 </TableRow>
-
             </TableLayout>
         </androidx.appcompat.widget.Toolbar>
-
-
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavBarContactUs"
-
         app:layout_constraintTop_toBottomOf="@id/linearTopContactUs">
 
         <LinearLayout
@@ -101,7 +90,6 @@
                 android:layout_height="@dimen/_200sdp">
 
                 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-                    xmlns:map="http://schemas.android.com/apk/res-auto"
                     xmlns:tools="http://schemas.android.com/tools"
                     android:id="@+id/mapContactUs"
                     android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -127,27 +115,21 @@
                         android:id="@+id/etLFNameCU"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:layout_weight="1"
                         app:startIconDrawable="@drawable/ic_baseline_person_24"
-
-                        app:startIconTint="#8f8f8f"
-
-                        >
+                        app:startIconTint="#8f8f8f">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etFNameCU"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-
                             android:hint="First Name"
                             android:inputType="text"
                             android:textColorHint="#FF0000" />
                     </com.google.android.material.textfield.TextInputLayout>
-
 
                     <com.google.android.material.textfield.TextInputLayout xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/etLLNameCU"
@@ -155,7 +137,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:layout_marginRight="@dimen/_10sdp"
-
                         android:layout_weight="1"
                         app:startIconDrawable="@drawable/ic_baseline_person_24"
                         app:startIconTint="#8f8f8f">
@@ -168,7 +149,6 @@
                             android:inputType="text" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-
                 </LinearLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -177,7 +157,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_5sdp"
-
                     android:layout_weight="1"
                     app:startIconDrawable="@drawable/ic_baseline_email_24"
                     app:startIconTint="#8f8f8f">
@@ -195,9 +174,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_10sdp"
-
                     android:layout_marginTop="@dimen/_5sdp"
-
                     android:layout_weight="1"
                     app:startIconDrawable="@drawable/ic_baseline_local_phone_24"
                     app:startIconTint="#8f8f8f">
@@ -212,7 +189,6 @@
 
                 <com.google.android.material.textfield.TextInputLayout xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/etLMessageCU"
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/_10sdp"
@@ -236,16 +212,13 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginVertical="@dimen/_10sdp"
                     app:cardCornerRadius="@dimen/_7sdp"
-
                     >
-
                     <Button
                         android:id="@+id/btnSendMessage"
                         android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_35sdp"
-                        android:paddingHorizontal="@dimen/_50sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:paddingHorizontal="@dimen/_40sdp"
                         android:text="Send Message"
-
                         android:textAllCaps="false"
                         android:textColor="#fff"
                         android:textSize="@dimen/_12ssp" />
@@ -260,7 +233,6 @@
         android:id="@+id/bottomNavBarContactUs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
 
@@ -268,7 +240,6 @@
             android:id="@+id/rvFooterContactUs"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
-
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </LinearLayout>

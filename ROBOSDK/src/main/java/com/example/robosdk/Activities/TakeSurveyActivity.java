@@ -135,7 +135,7 @@ public class TakeSurveyActivity extends AppCompatActivity implements View.OnClic
                 View view = tab.getCustomView();
                 assert view != null;
                 TextView tv = view.findViewById(R.id.textTitleTabBar);
-                tv.setBackgroundColor(Utility.getColor("#14538eff"));
+                tv.setBackgroundColor(Utility.getColor("#0066b1ff"));
                 tv.setTextColor(Utility.getColor("#ffffffff"));
             }
             @Override
@@ -143,7 +143,7 @@ public class TakeSurveyActivity extends AppCompatActivity implements View.OnClic
                 View view = tab.getCustomView();
                 assert view != null;
                 TextView tv = view.findViewById(R.id.textTitleTabBar);
-                tv.setTextColor(Utility.getColor("#14538eff"));
+                tv.setTextColor(Utility.getColor("#0066b1ff"));
                 tv.setBackgroundColor(Utility.getColor("#ffffffff"));
             }
             @Override

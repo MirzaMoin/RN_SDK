@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-
     android:paddingBottom="@dimen/_10sdp"
     >
 
@@ -14,7 +13,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_10sdp"
-
         android:orientation="horizontal">
 
         <ImageView
@@ -38,7 +36,7 @@
             android:ellipsize="end"
             android:layout_marginRight="@dimen/_10sdp"
             android:text="Multiple Ways to Earn Points"
-            android:textSize="@dimen/_16sdp"
+            android:textSize="@dimen/_18sdp"
 
             />
     </LinearLayout>

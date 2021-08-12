@@ -6,7 +6,7 @@
     <com.smarteist.autoimageslider.SliderView
         android:id="@+id/imageContentSliderview"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_130sdp"
+        android:layout_height="@dimen/_110sdp"
         app:sliderAnimationDuration="600"
 
 

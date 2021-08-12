@@ -96,8 +96,14 @@ public class WaysToEarnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             }
 
         } else {
+
             WaysToEarnModel ways = waysList.get(position - 1);
             ViewHolderTwo holder = (ViewHolderTwo) viewHolder;
+
+            if(position == 1) {
+                holder.buttonRecentActivityWTE.setVisibility(View.GONE);
+            }
+
             holder.expTv.setText(ways.getDescription());
             holder.textTitleWaysToEarnContent.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getTitleTextColor()));
             holder.textTitleWaysToEarnContent.setTextColor(Utility.getColor(Utility.response.responsedata.appColor.getTitleTextColor()));
@@ -107,8 +113,6 @@ public class WaysToEarnAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             if (ways.getImageURL() != null) {
                 holder.imageWaysToEarnContent.setVisibility(View.VISIBLE);
                 Glide.with(context).load(ways.getImageURL()).into(holder.imageWaysToEarnContent);
-            } else {
-                holder.buttonRecentActivityWTE.setVisibility(View.GONE);
             }
 
             if (position % 2 == 0) {

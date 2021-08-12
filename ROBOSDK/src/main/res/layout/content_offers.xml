@@ -2,25 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_290sdp"
-    android:background="#DDDDDD"
-    android:paddingBottom="@dimen/_4sdp"
-    android:orientation="vertical">
+    android:layout_height="@dimen/_300sdp"
+    android:background="#d4d4d4"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/_4sdp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="@dimen/_5sdp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/_5sdp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_190sdp"
+                android:layout_height=                                                                                                                           "@dimen/_190sdp"
                 android:background="#000">
 
                 <ImageView
@@ -34,7 +33,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_10sdp"
-
                     app:cardCornerRadius="@dimen/_3sdp">
 
                     <Button
@@ -47,15 +45,12 @@
                 </androidx.cardview.widget.CardView>
 
                 <TextView
-
                     android:id="@+id/textOfferTitle"
-                    android:layout_width="@dimen/_90sdp"
+                    android:layout_width="wrap_content"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_alignParentBottom="true"
                     android:gravity="center"
-                    android:text=""
-
-
+                    android:paddingHorizontal="@dimen/_15sdp"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
 
@@ -72,14 +67,16 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_12sdp">
+                android:layout_marginHorizontal="@dimen/_12sdp"
+                android:layout_marginVertical="@dimen/_5sdp"
+                >
 
                 <ImageView
                     android:id="@+id/imgAward"
                     android:layout_width="@dimen/_18sdp"
                     android:layout_height="@dimen/_18sdp"
                     android:src="@drawable/ic_trophy"
-                    app:tint="#2179BF" />
+                    app:tint="#4793d8" />
 
                 <TextView
                     android:id="@+id/textOfferType"
@@ -88,9 +85,9 @@
                     android:layout_marginHorizontal="@dimen/_5sdp"
                     android:layout_toRightOf="@id/imgAward"
                     android:text=" "
-                    android:textColor="#2179BF"
+                    android:textColor="#4793d8
+"
                     android:textSize="@dimen/_12sdp"
-
                     android:textStyle="bold" />
 
                 <TextView
@@ -102,7 +99,6 @@
                     android:layout_marginHorizontal="@dimen/_5sdp"
                     android:text=" "
                     android:textColor="#5C6063"
-
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
             </RelativeLayout>

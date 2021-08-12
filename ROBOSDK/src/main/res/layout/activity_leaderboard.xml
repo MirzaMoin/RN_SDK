@@ -15,7 +15,6 @@
         tools:ignore="MissingConstraints">
 
         <androidx.appcompat.widget.Toolbar
-
             android:id="@+id/toolbarOffer"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
@@ -34,7 +33,6 @@
                 <TableRow>
 
                     <ImageButton
-
                         android:id="@+id/imgBackLeaderboard"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_30sdp"
@@ -45,8 +43,7 @@
                         android:background="@android:color/transparent"
                         android:padding="@dimen/_5sdp"
                         android:scaleType="fitXY"
-
-                        android:src="@drawable/ic_baseline_arrow_back_24"
+                        app:srcCompat="@drawable/ic_baseline_arrow_back_24"
                         app:tint="#fff" />
 
 
@@ -54,8 +51,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
-
-
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
                         android:text="Leaderboard"
@@ -72,7 +67,7 @@
                         android:paddingEnd="@dimen/_10sdp"
                         android:paddingRight="@dimen/_10sdp"
                         android:rotation="90"
-                        android:src="@drawable/ic_baseline_compare_arrows_24"
+                        app:srcCompat="@drawable/ic_baseline_compare_arrows_24"
                         app:tint="#fff" />
 
 
@@ -152,7 +147,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginVertical="@dimen/_2sdp"
                         android:layout_marginLeft="@dimen/_8sdp"
-                        android:src="@drawable/ic_baseline_share_24"
+                        app:srcCompat="@drawable/ic_baseline_share_24"
                         app:tint="#000" />
 
                     <TextView
@@ -177,9 +172,7 @@
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_10sdp"
                     android:background="@drawable/background_leaderboard_point"
-
                     android:orientation="horizontal"
-
                     android:paddingVertical="@dimen/_1sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/linearShare"
@@ -189,11 +182,10 @@
                         android:layout_width="@dimen/_16sdp"
                         android:layout_height="@dimen/_16sdp"
                         android:layout_alignParentStart="true"
-
                         android:layout_alignParentLeft="true"
                         android:layout_marginVertical="@dimen/_2sdp"
                         android:layout_marginLeft="@dimen/_8sdp"
-                        android:src="@drawable/ic_baseline_person_add_24"
+                        app:srcCompat="@drawable/ic_baseline_person_add_24"
                         app:tint="#000" />
 
                     <TextView
@@ -208,9 +200,7 @@
                         android:textColor="#000"
                         android:textSize="@dimen/_10ssp" />
 
-
                 </RelativeLayout>
-
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -221,7 +211,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/linearPoint"
                 android:layout_centerHorizontal="true"
-
                 >
 
                 <ImageView
@@ -361,7 +350,6 @@
 
             </RelativeLayout>
 
-
         </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -378,37 +366,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:translationY="-20dp"
+        android:translationY="-30dp"
         android:id="@+id/linearNoWinnerFound"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/conTopLeader"
 
+        app:layout_constraintTop_toBottomOf="@+id/conTopLeader"
 
         >
         <ImageView
             android:layout_width="wrap_content"
             android:paddingHorizontal="@dimen/_60sdp"
-            android:layout_height="@dimen/_200sdp"
+            android:layout_height="@dimen/_160sdp"
             android:src="@drawable/leaderboard"
-
             />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="No Stats Found"
             android:gravity="center"
-            android:textSize="@dimen/_12ssp"
-            android:layout_marginTop="@dimen/_10sdp"
+            android:textSize="@dimen/_18ssp"
+            android:layout_marginTop="@dimen/_15sdp"
             android:id="@+id/textNoWinnerFound"
             />
     </LinearLayout>
-
 
     <LinearLayout
         android:id="@+id/bottomNavBarLeaderboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
 
@@ -416,7 +400,6 @@
             android:id="@+id/rvFooterLeaderboard"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
-
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </LinearLayout>
@@ -432,13 +415,11 @@
         android:visibility="gone"
         >
 
-
         <ImageView
             android:id="@+id/imageLeaderboard"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
-
             />
         <com.github.ybq.android.spinkit.SpinKitView
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -455,7 +436,6 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:paddingHorizontal="@dimen/_60sdp"
-
             />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

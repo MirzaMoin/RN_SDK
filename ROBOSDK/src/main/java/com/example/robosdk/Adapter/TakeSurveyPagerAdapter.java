@@ -40,32 +40,19 @@ public class TakeSurveyPagerAdapter extends FragmentStatePagerAdapter {
         // Given you have a custom layout in `res/layout/custom_tab.xml` with a TextView and ImageView
         View v = LayoutInflater.from(context).inflate(R.layout.custom_tab, null);
 
-                TextView tv = (TextView) v.findViewById(R.id.textTitleTabBar);
+        TextView tv = (TextView) v.findViewById(R.id.textTitleTabBar);
 
         if(position == 0){
-            tv.setText("UnTaken");
+            tv.setText("Untaken");
         }
         else
         {
             tv.setText("Taken");
 
         }
-       /* TextView tv = (TextView) v.findViewById(R.id.item_name);
-        TextView textView = v.findViewById(R.id.item_count);
-        if (true) {
-            textView.setVisibility(View.VISIBLE);
-            textView.setText(String.valueOf("Text"));
-        } else {
-            textView.setVisibility(View.GONE);
-        }
-
-        tv.setText("Tab 1");
-        ImageView img = (ImageView) v.findViewById(R.id.item_icon);
-*/
-
 
         if (position == 0) {
-            tv.setBackgroundColor(Utility.getColor("#14538eff"));
+            tv.setBackgroundColor(Utility.getColor("#0066b1ff"));
             tv.setTextColor(Utility.getColor("#ffffffff"));
         }
         return v;

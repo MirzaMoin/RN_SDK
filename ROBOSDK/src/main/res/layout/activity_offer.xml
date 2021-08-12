@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
- 
     android:background="#fff"
     android:forceDarkAllowed="false"
     tools:context=".Activities.OfferActivity">
@@ -15,14 +14,15 @@
         android:orientation="vertical"
         android:id="@+id/linearNoOffer"
         android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/_25sdp"
+        app:layout_constraintTop_toBottomOf="@+id/linearTopOffer"
         app:layout_constraintBottom_toBottomOf="parent"
         >
         <ImageView
             android:id="@+id/imageNoOffer"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_200sdp"
 
+            android:layout_height="@dimen/_220sdp"
             android:src="@drawable/img_no_offer"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -30,9 +30,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="No Offer Available"
+            android:text="No Offers Available"
             android:gravity="center"
-            android:textSize="@dimen/_12ssp"
+            android:textSize="@dimen/_18ssp"
             android:layout_marginTop="@dimen/_20sdp"
             />
     </LinearLayout>
@@ -44,7 +44,6 @@
         android:orientation="vertical"
         tools:ignore="MissingConstraints">
         <androidx.appcompat.widget.Toolbar
-
             android:id="@+id/toolbarOffer"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
@@ -62,9 +61,7 @@
 
                 <TableRow>
 
-
                     <ImageButton
-
                         android:id="@+id/imgBackOffers"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_30sdp"
@@ -75,8 +72,7 @@
                         android:background="@android:color/transparent"
                         android:scaleType="fitXY"
                         android:padding="@dimen/_5sdp"
-
-                        android:src="@drawable/ic_baseline_arrow_back_24"
+                        app:srcCompat="@drawable/ic_baseline_arrow_back_24"
                         app:tint="#fff" />
 
 
@@ -84,8 +80,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
-
-
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
                         android:text="Offers"
@@ -105,12 +99,9 @@
                         android:textColor="#fff"
                         android:textSize="@dimen/_14ssp" />
 
-
                 </TableRow>
-
             </TableLayout>
         </androidx.appcompat.widget.Toolbar>
-
 
     </LinearLayout>
 
@@ -122,7 +113,6 @@
         app:layout_constraintBottom_toTopOf="@+id/bottomNavBarOffers"
         />
 
-
     <LinearLayout
         android:id="@+id/bottomNavBarOffers"
         android:layout_width="match_parent"
@@ -130,17 +120,14 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
 
-
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-
             android:id="@+id/rvFooterOffers"
             />
 
     </LinearLayout>
-
 
     <RelativeLayout
         android:id="@+id/relLoadingOffers"
@@ -152,16 +139,13 @@
         android:visibility="gone"
         >
 
-
         <ImageView
             android:id="@+id/imageOffers"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
-
             />
         <com.github.ybq.android.spinkit.SpinKitView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/spin_kit"
             style="@style/SpinKitView.Large.DoubleBounce"
             android:layout_width="match_parent"
@@ -175,7 +159,6 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:paddingHorizontal="@dimen/_60sdp"
-
             />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

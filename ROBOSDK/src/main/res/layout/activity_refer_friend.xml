@@ -33,13 +33,11 @@
                 <TableRow>
 
                     <ImageButton
-
                         android:id="@+id/imgBackReferFriend"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_30sdp"
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
-
                         android:layout_gravity="center_vertical"
                         android:layout_marginHorizontal="@dimen/_8sdp"
                         android:background="@android:color/transparent"
@@ -48,13 +46,10 @@
                         android:src="@drawable/ic_baseline_arrow_back_24"
                         app:tint="#fff" />
 
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
-
-
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
                         android:text="Refer Friend"
@@ -74,12 +69,10 @@
                         android:textSize="@dimen/_14ssp"
                         android:visibility="gone" />
 
-
                 </TableRow>
 
             </TableLayout>
         </androidx.appcompat.widget.Toolbar>
-
 
     </LinearLayout>
 
@@ -92,8 +85,7 @@
         <com.smarteist.autoimageslider.SliderView
             android:id="@+id/imageSliderReferFriend"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_130sdp"
-            android:visibility="gone"
+            android:layout_height="@dimen/_120sdp"
             app:sliderAnimationDuration="600"
             app:sliderAutoCycleDirection="back_and_forth"
             app:sliderAutoCycleEnabled="true"
@@ -114,7 +106,7 @@
             android:layout_marginHorizontal="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:text="Refer Friends &amp; Get Rewards"
-            android:textSize="@dimen/_15ssp" />
+            android:textSize="@dimen/_18ssp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -132,11 +124,11 @@
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/_2sdp"
+                android:layout_height="@dimen/_1sdp"
                 android:layout_centerVertical="true"
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 android:layout_toLeftOf="@+id/textShare"
-                android:background="#888181" />
+                android:background="#C5C1C1" />
 
             <TextView
                 android:id="@+id/textShare"
@@ -146,18 +138,17 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 android:text="Share with Link"
-
                 android:textColor="#888181"
                 android:textSize="@dimen/_15ssp"
                 android:textStyle="bold" />
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/_2sdp"
+                android:layout_height="@dimen/_1sdp"
                 android:layout_centerVertical="true"
                 android:layout_marginHorizontal="@dimen/_10sdp"
                 android:layout_toRightOf="@+id/textShare"
-                android:background="#888181" />
+                android:background="#C5C1C1" />
         </RelativeLayout>
 
         <androidx.cardview.widget.CardView
@@ -166,8 +157,6 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginVertical="@dimen/_10sdp"
             app:cardCornerRadius="@dimen/_7sdp"
-
-
             >
 
             <Button
@@ -176,10 +165,8 @@
                 android:layout_height="@dimen/_35sdp"
                 android:paddingHorizontal="@dimen/_50sdp"
                 android:text="Get Invite Link"
-
                 android:textAllCaps="false"
                 android:textColor="#fff"
-
                 android:textSize="@dimen/_12ssp" />
         </androidx.cardview.widget.CardView>
 
@@ -195,8 +182,7 @@
                 android:layout_height="@dimen/_35sdp"
                 android:layout_weight="1"
                 android:paddingVertical="@dimen/_5sdp"
-                android:src="@drawable/facebook"
-
+                app:srcCompat="@drawable/facebook"
                 app:tint="#3F51B5" />
 
             <ImageView
@@ -213,8 +199,7 @@
                 android:layout_height="@dimen/_35sdp"
                 android:layout_weight="1"
                 android:paddingVertical="@dimen/_5sdp"
-                android:src="@drawable/envelope"
-
+                app:srcCompat="@drawable/envelope"
                 app:tint="#C5461D" />
 
             <ImageView
@@ -224,7 +209,6 @@
                 android:layout_weight="1"
                 android:paddingVertical="@dimen/_5sdp"
                 android:src="@drawable/ic_twitter"
-
                 />
 
             <ImageView
@@ -233,8 +217,7 @@
                 android:layout_height="@dimen/_35sdp"
                 android:layout_weight="1"
                 android:paddingVertical="@dimen/_5sdp"
-                android:src="@drawable/comment_dots"
-
+                app:srcCompat="@drawable/comment_dots"
                 app:tint="#3F51B5" />
         </LinearLayout>
 
@@ -251,7 +234,6 @@
             android:id="@+id/rvFooterReferFriend"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
-
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </LinearLayout>

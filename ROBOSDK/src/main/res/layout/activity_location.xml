@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,7 +16,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".Activities.LocationActivity" />
-
 
     <LinearLayout
         android:id="@+id/linearTopCashback"
@@ -45,8 +43,7 @@
 
                 <TableRow>
 
-                    <ImageButton
-
+         1           <ImageButton
                         android:id="@+id/imgBackLocation"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_30sdp"
@@ -57,17 +54,13 @@
                         android:background="@android:color/transparent"
                         android:padding="@dimen/_5sdp"
                         android:scaleType="fitXY"
-
                         android:src="@drawable/ic_baseline_arrow_back_24"
-                        android:tint="#fff" />
-
+                        android:tint="#fff"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
-
-
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1"
                         android:text="Location"
@@ -87,12 +80,10 @@
                         android:textSize="@dimen/_14ssp"
                         android:visibility="gone" />
 
-
                 </TableRow>
 
             </TableLayout>
         </androidx.appcompat.widget.Toolbar>
-
 
     </LinearLayout>
 
@@ -107,7 +98,6 @@
             android:id="@+id/rvFooterLocation"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
-
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </LinearLayout>
@@ -127,7 +117,8 @@
             android:layout_height="match_parent"
             android:padding="@dimen/_6sdp"
             android:src="@drawable/ic_baseline_menu_24"
-            app:tint="#000" />
+            android:tint="#000"
+            />
     </androidx.cardview.widget.CardView>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -150,16 +141,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearTopCashback">
 
-
         <ImageView
             android:id="@+id/imageLocation"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitXY"
-
             />
 
-        <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
+        <com.github.ybq.android.spinkit.SpinKitView
             android:id="@+id/spin_kit"
             style="@style/SpinKitView.Large.DoubleBounce"
             android:layout_width="match_parent"
@@ -174,7 +163,6 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:paddingHorizontal="@dimen/_60sdp"
-
             />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
